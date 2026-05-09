@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cabina Pública SCI NaTech/HazMat V15.7 SCI Word</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+:root{--line:rgba(255,255,255,.16);--text:#eff8fb;--muted:#aec3d0;--accent:#31d0aa;--cyan:#31d7ff;--gold:#ffc247;--red:#ff6060;--green:#80dd55;--purple:#c86cff;--shadow:0 18px 62px rgba(0,0,0,.42)}
+*{box-sizing:border-box}body{margin:0;height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#050b14;overflow:hidden}
+header{height:80px;padding:14px 22px;border-bottom:1px solid var(--line);background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:1100;position:relative}.brand{display:flex;align-items:center;gap:14px;min-width:0}.logo{width:50px;height:50px;border-radius:16px;border:1px solid rgba(49,208,170,.55);display:grid;place-items:center;color:var(--accent);font-weight:900;background:rgba(0,0,0,.3);flex:0 0 auto}h1{margin:0;font-size:clamp(1.05rem,2vw,1.9rem);line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sub{color:var(--muted);font-size:.82rem;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+button,label.btn{cursor:pointer;border:1px solid transparent;border-radius:12px;padding:10px 12px;font-weight:900;font-size:.84rem;color:#06101c;background:var(--accent);text-align:center;display:inline-block}button:hover,label.btn:hover{opacity:.92}button:disabled{opacity:.38;cursor:not-allowed}.secondary{background:rgba(255,255,255,.07)!important;color:var(--text)!important;border-color:var(--line)!important}.gold{background:var(--gold)!important;color:#261800!important}.red{background:var(--red)!important;color:#230000!important}.cyan{background:var(--cyan)!important;color:#06101c!important}.green{background:var(--green)!important;color:#081b05!important}.purple{background:var(--purple)!important;color:#16001f!important}#fileFicha,#scenarioImageInput,#arcgisCaptureInput{display:none}
+.app{height:calc(100vh - 80px);position:relative}#mapShell{position:relative;height:100%;width:100%}#map{position:absolute;inset:0;z-index:1}.case-card{position:absolute;left:14px;top:14px;z-index:900;width:min(455px,calc(100vw - 28px));background:rgba(5,13,23,.82);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}.case-card strong{display:block;margin-bottom:4px;font-size:1.05rem}.case-card small{color:var(--muted)}.status-pill{display:inline-block;margin-top:9px;border:1px solid rgba(255,194,71,.45);color:var(--gold);padding:5px 8px;border-radius:999px;font-size:.75rem;font-weight:900}
+.toolbar{position:absolute;right:14px;top:14px;z-index:950;width:330px;background:rgba(5,13,23,.86);border:1px solid var(--line);border-radius:22px;padding:14px;box-shadow:var(--shadow);backdrop-filter:blur(10px);max-height:calc(100vh - 130px);overflow:auto}.icon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.icon-btn{border:1px solid var(--line);background:rgba(255,255,255,.06)!important;color:var(--text)!important;border-radius:16px;padding:9px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:74px}.icon-btn .ico{font-size:1.45rem;line-height:1}.icon-btn .lbl{font-size:.72rem;font-weight:800;text-align:center;line-height:1.1}.icon-btn.active{border-color:rgba(49,208,170,.85);box-shadow:0 0 0 3px rgba(49,208,170,.12)}
+.mini-title{font-size:.8rem;color:#dcecf3;font-weight:900;margin:8px 0 5px}.hint{font-size:.76rem;color:var(--muted);line-height:1.35;margin-top:8px}select,input,textarea{width:100%;border:1px solid rgba(255,255,255,.16);border-radius:11px;background:rgba(0,0,0,.30);color:var(--text);padding:9px 10px;outline:none;font-size:.86rem}textarea{min-height:72px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.legend-panel{position:absolute;left:14px;bottom:14px;z-index:960;width:min(520px,calc(100vw - 28px));max-height:42vh;overflow:auto;background:rgba(5,13,23,.86);border:1px solid var(--line);border-radius:20px;padding:14px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}.legend-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:10px}.legend-head strong{text-transform:uppercase}.legend-item{display:grid;grid-template-columns:28px 1fr auto auto;gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px;margin-bottom:7px;background:rgba(0,0,0,.18);font-size:.82rem}.legend-dot{width:18px;height:18px;border-radius:50%;display:inline-block;border:2px solid rgba(255,255,255,.45)}.legend-item small{display:block;color:var(--muted);font-size:.72rem;margin-top:2px}.legend-empty{color:var(--muted);font-size:.84rem}
+.drawer{position:absolute;right:14px;bottom:14px;top:14px;width:min(500px,calc(100vw - 28px));z-index:1000;background:linear-gradient(180deg,rgba(18,38,64,.98),rgba(9,22,36,.98));border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:16px;overflow:auto;transform:translateX(calc(100% + 30px));transition:.25s ease;backdrop-filter:blur(14px)}.drawer.open{transform:translateX(0)}.drawer h2{font-size:1rem;margin:0;text-transform:uppercase}.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}.check{display:flex;gap:8px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:8px;background:rgba(0,0,0,.18);color:var(--muted);font-size:.84rem;margin-bottom:7px}.check input{width:16px;min-width:16px;margin-top:1px;accent-color:var(--accent)}
+.download-panel{display:grid;grid-template-columns:1fr;gap:12px}.download-card{border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(0,0,0,.22)}.download-card h3{margin:0 0 6px;font-size:1rem}.download-card p{margin:0 0 10px;color:var(--muted);font-size:.82rem;line-height:1.35}.download-card button{width:100%}.preview-box,.layers-box{border:1px solid var(--line);border-radius:12px;padding:8px;background:rgba(0,0,0,.18);min-height:48px;color:var(--muted);font-size:.82rem;margin-bottom:10px}.layer-row{border:1px solid var(--line);border-radius:10px;padding:8px;margin:6px 0;background:rgba(255,255,255,.04)}
+.tabs{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:940;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.source{position:absolute;right:14px;bottom:14px;z-index:930;background:rgba(0,0,0,.70);border:1px solid var(--line);color:var(--muted);font-size:.78rem;padding:8px 10px;border-radius:12px;max-width:38%}.label-icon{background:transparent;border:none;color:white;text-shadow:0 2px 4px #000;font-weight:900;font-size:14px;white-space:nowrap}.label-icon span{background:rgba(0,0,0,.62);border:1px solid rgba(255,255,255,.25);padding:4px 7px;border-radius:8px}.leaflet-container{background:#07101c}.leaflet-control-attribution{font-size:10px}
+@media(max-width:1000px){body{overflow:auto}header{height:auto;align-items:flex-start;flex-direction:column}.app{height:calc(100vh - 160px);min-height:760px}.toolbar{left:14px;right:14px;top:auto;bottom:48vh;width:auto;max-height:36vh}.icon-grid{grid-template-columns:repeat(4,1fr)}.legend-panel{max-height:30vh}.source{display:none}.tabs{left:14px;right:14px;transform:none;bottom:8px}.grid2{grid-template-columns:1fr}}
+
+.capture-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:8px}
+
+</style>
+</head>
+<body>
+<header>
+<div class="brand"><div class="logo">SCI</div><div style="min-width:0"><h1>Cabina Pública SCI NaTech/HazMat V15.7 SCI Word</h1><div class="sub">Cabina vacía, carga JSON única, botones activos tras ficha, ArcGIS Online/REST y tres descargas.</div></div></div>
+<div class="top-actions">
+<button class="cyan" type="button" onclick="abrirSelectorFicha()">Cargar ficha operativa</button><input id="fileFicha" type="file" accept=".json,application/json"/>
+<button class="red" type="button" onclick="borrarDatosCabina()">Borrar datos / Nuevo caso</button>
+<button class="gold" type="button" onclick="openDrawer('panelDatos')">Datos</button><button class="purple" type="button" onclick="openDrawer('panelInsumos')">Insumos</button><button class="green" type="button" onclick="openDrawer('panelChecklist')">Checklist</button><button class="cyan" type="button" onclick="openDrawer('panelDescargas')">Descargas</button>
+</div>
+</header>
+<div class="app"><div id="mapShell"><div id="map"></div>
+<div class="case-card"><strong id="caseName">Cabina limpia: cargue una ficha operativa</strong><small id="caseLocation">Sin caso cargado. Los botones de dibujo se activan al cargar la ficha.</small><br><span class="status-pill" id="caseLevel">Sin datos</span></div>
+<div class="toolbar">
+<div class="icon-grid">
+<button class="icon-btn draw-tool" type="button" onclick="setMode('map')" id="btnMap"><span class="ico">🗺️</span><span class="lbl">Mapa</span></button>
+<button class="icon-btn draw-tool" type="button" onclick="setMode('point')" id="btnPoint"><span class="ico">📍</span><span class="lbl">Punto caso</span></button>
+<button class="icon-btn draw-tool" type="button" onclick="setMode('buffer')" id="btnBuffer"><span class="ico">⭕</span><span class="lbl">Buffer</span></button>
+<button class="icon-btn draw-tool" type="button" onclick="setMode('rect')" id="btnRect"><span class="ico">▭</span><span class="lbl">Rectángulo</span></button>
+<button class="icon-btn draw-tool" type="button" onclick="setMode('line')" id="btnLine"><span class="ico">〰️</span><span class="lbl">Línea</span></button>
+<button class="icon-btn draw-tool" type="button" onclick="setMode('text')" id="btnText"><span class="ico">🏷️</span><span class="lbl">Texto</span></button>
+<button class="icon-btn draw-tool" type="button" onclick="centerCase()"><span class="ico">🎯</span><span class="lbl">Centrar</span></button>
+<button class="icon-btn draw-tool" type="button" onclick="openDrawer('panelArcGIS')"><span class="ico">🛰️</span><span class="lbl">Capa GIS</span></button>
+<button class="icon-btn draw-tool" type="button" onclick="clearAllElements()"><span class="ico">🧽</span><span class="lbl">Limpiar</span></button>
+</div>
+<div class="mini-title">Botones bomberiles de la ficha</div><div class="icon-grid" id="fireButtons"></div>
+<div class="mini-title">Etiqueta / nombre del elemento</div><input id="elementLabel" value="Zona caliente / aislamiento"/>
+<div class="grid2"><div><div class="mini-title">Color</div><select id="elementColor"><option value="red">🔴 Rojo</option><option value="gold">🟡 Amarillo</option><option value="green">🟢 Verde</option><option value="cyan">🔵 Azul</option><option value="purple">🟣 Morado</option></select></div><div><div class="mini-title">Radio buffer m</div><input id="bufferRadius" type="number" value="100"/></div></div>
+<div class="hint" id="modeHint">Cargue una ficha operativa para activar dibujo.</div>
+</div>
+<div class="legend-panel"><div class="legend-head"><strong>🧭 Leyenda operativa</strong><button class="cyan" type="button" onclick="openDrawer('panelDescargas')">Descargas</button></div><div id="legendList" class="legend-empty">Aún no se han agregado elementos al mapa.</div></div>
+<div class="source">Mapa base: OpenStreetMap. ArcGIS Online se resuelve desde URL de contenido, webmap o REST público.</div>
+<div class="tabs"><button class="gold" type="button" onclick="openDrawer('panelDatos')">Datos</button><button class="green" type="button" onclick="openDrawer('panelChecklist')">Checklist</button><button class="purple" type="button" onclick="openDrawer('panelInsumos')">Insumos</button><button class="green" type="button" onclick="openDrawer('panelArcGIS')">ArcGIS</button><button class="cyan" type="button" onclick="openDrawer('panelDescargas')">Descargas</button></div>
+</div>
+<aside class="drawer" id="panelDatos"><div class="drawer-head"><h2>Datos operativos</h2><button class="secondary" type="button" onclick="closeDrawers()">Cerrar</button></div>
+<div class="mini-title">Caso</div><input id="caso"/><div class="mini-title">Ubicación</div><input id="ubicacion"/><div class="grid2"><div><div class="mini-title">Latitud</div><input id="latPunto"/></div><div><div class="mini-title">Longitud</div><input id="lonPunto"/></div></div>
+<div class="grid2"><button class="cyan" type="button" onclick="updateMarkerFromFields()">Actualizar punto</button><button class="secondary" type="button" onclick="centerCase()">Centrar</button></div><div class="grid2"><div><div class="mini-title">Fecha</div><input id="fecha" type="date"/></div><div><div class="mini-title">Hora</div><input id="hora" type="time"/></div></div>
+<div class="grid2"><div><div class="mini-title">Tipo</div><input id="tipo"/></div><div><div class="mini-title">Nivel</div><input id="nivel"/></div></div>
+<div class="mini-title">Amenaza / peligrosidad</div><textarea id="amenaza"></textarea><div class="mini-title">Fuente tecnológica probable</div><textarea id="fuente"></textarea><div class="mini-title">Ruta de exposición/dispersión</div><textarea id="ruta"></textarea><div class="mini-title">Receptor vulnerable</div><textarea id="receptor"></textarea><div class="mini-title">Elementos expuestos</div><textarea id="expuestos"></textarea><div class="mini-title">Acciones iniciales</div><textarea id="acciones"></textarea><div class="mini-title">Instituciones</div><textarea id="instituciones"></textarea><div class="mini-title">Observaciones</div><textarea id="observaciones"></textarea></aside>
+<aside class="drawer" id="panelChecklist"><div class="drawer-head"><h2>Checklist operativo</h2><button class="secondary" type="button" onclick="closeDrawers()">Cerrar</button></div><div id="checklist"></div></aside>
+<aside class="drawer" id="panelInsumos"><div class="drawer-head"><h2>Insumos y antecedentes</h2><button class="secondary" type="button" onclick="closeDrawers()">Cerrar</button></div>
+<div class="mini-title">Mapa SIG / enlace ArcGIS Online</div><input id="linkMapaSIG"/><div class="grid2"><button class="secondary" type="button" onclick="abrirArcGIS()">Abrir enlace</button><button class="cyan" type="button" onclick="resolverArcGISOnline()">Ver contenido</button></div>
+<div class="mini-title">URL REST ArcGIS</div><input id="arcgisUrl"/><div class="mini-title">Campo categoría</div><input id="arcgisRiskField" value="riesgo_cat"/><div class="mini-title">Campo numérico</div><input id="arcgisRiskNumField" value="riesgo_num"/>
+<div class="grid2"><button class="cyan" type="button" onclick="loadArcGISLayer()">Cargar capa REST</button><button class="secondary" type="button" onclick="clearArcGISLayer()">Quitar capa</button></div>
+<div class="mini-title">Particularidades</div><textarea id="particularidadesTexto"></textarea><div class="mini-title">Antecedentes externos / noticias</div><textarea id="antecedentesTexto"></textarea><div class="mini-title">Kobo</div><input id="linkKobo"/><div class="mini-title">Ficha PDF / video</div><input id="linkFichaPDF" placeholder="Ficha PDF"/><input id="linkVideo" placeholder="Video"/></aside>
+<aside class="drawer" id="panelArcGIS"><div class="drawer-head"><h2>ArcGIS Online / capa REST</h2><button class="secondary" type="button" onclick="closeDrawers()">Cerrar</button></div>
+<div class="mini-title">Enlace de contenido, webmap o REST</div><input id="arcgisUrl2" placeholder="https://.../FeatureServer/0 o enlace item/webmap"/><div class="grid2"><button class="cyan" type="button" onclick="setVal('linkMapaSIG', val('arcgisUrl2')); resolverArcGISOnline()">Ver contenido</button><button class="secondary" type="button" onclick="abrirArcGISDesdeCampo()">Abrir</button></div>
+<div id="arcgisLayerList" class="layers-box">Sin contenido ArcGIS resuelto.</div>
+<div class="mini-title">Campo categoría</div><input id="arcgisRiskField2" value="riesgo_cat"/><div class="mini-title">Campo numérico</div><input id="arcgisRiskNumField2" value="riesgo_num"/><div class="mini-title">WHERE</div><input id="arcgisWhere" value="1=1"/><div class="mini-title">Máximo</div><input id="arcgisMaxFeatures" value="2000"/>
+<div class="grid2"><button class="cyan" type="button" onclick="syncArcInputs();loadArcGISLayer()">Cargar capa REST</button><button class="secondary" type="button" onclick="clearArcGISLayer()">Quitar capa</button></div>
+<div class="grid2" style="margin-top:8px"><button class="green" type="button" onclick="zoomArcGISLayer()">Zoom capa</button><button class="gold" type="button" onclick="downloadCurrentFicha()">Guardar ficha JSON</button></div></aside>
+<aside class="drawer" id="panelDescargas"><div class="drawer-head"><h2>Descargas bomberiles</h2><button class="secondary" type="button" onclick="closeDrawers()">Cerrar</button></div>
+<div class="mini-title">Evidencia gráfica del escenario</div><button class="cyan" type="button" style="width:100%;margin-bottom:8px" onclick="document.getElementById('scenarioImageInput').click()">Cargar captura o imagen del escenario</button><input id="scenarioImageInput" type="file" accept="image/*"/>
+<div id="scenarioPreview" class="preview-box">Opcional: cargue una captura del escenario o imagen exportada para integrarla a la ficha e informe.</div>
+<div class="mini-title">Captura ArcGIS / visor SIG</div>
+<button class="purple" type="button" style="width:100%;margin-bottom:8px" onclick="document.getElementById('arcgisCaptureInput').click()">Cargar captura de ArcGIS</button>
+<input id="arcgisCaptureInput" type="file" accept="image/*"/>
+<div id="arcgisCapturePreview" class="preview-box">Opcional: cargue la captura del visor ArcGIS Online, atributos del punto o capa de riesgo.</div>
+<div class="download-panel"><div class="download-card"><h3>🗺️ GeoJSON de dibujos</h3><p>Exporta puntos, líneas, rectángulos y buffers creados en el mapa.</p><button class="cyan" type="button" onclick="exportGeoJSON()">Descargar GeoJSON operativo</button></div><div class="download-card"><h3>📋 Ficha bomberil SCI</h3><p>Ficha práctica de escenario: lectura rápida, zonas, croquis, acciones inmediatas y checklist operativo.</p><button class="green" type="button" onclick="descargarFichaBomberil()">Descargar ficha Word SCI</button></div><div class="download-card"><h3>📄 Informe bomberil SCI</h3><p>Informe técnico-operativo: antecedentes web, análisis, metodología, evidencias, limitaciones y recomendaciones.</p><button class="gold" type="button" onclick="descargarInformeBomberil()">Descargar informe Word SCI</button></div></div></aside>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const BLANK_FICHA = {"metadata": {"version": "V15-validada", "tipoFicha": "Ficha operativa bomberil NaTech/HazMat", "uso": "Formativo / análisis preliminar", "fecha": "AAAA-MM-DD", "fuenteDatos": "Captura SIG, GeoJSON, atributos del punto, antecedentes externos y criterios SCI/NaTech/HazMat", "responsableGeneracion": "GPT Generador de Fichas Operativas NaTech/HazMat", "advertencia": "No constituye declaratoria oficial de riesgo. Requiere verificación en campo, identificación técnica de sustancias, monitoreo ambiental y decisión de autoridad competente."}, "caso": {"nombre": "", "ubicacion": "", "tipo": "", "nivelPreliminar": "", "lat": null, "lon": null, "zoom": 16}, "enlaces": {"plataforma": "", "paso5": "", "paso6": "", "kobo": "", "mapaSIG": "", "fichaPDF": "", "video": ""}, "arcgis": {"featureLayerUrl": "", "arcgisOnlineUrl": "", "riskField": "riesgo_cat", "riskNumField": "riesgo_num", "where": "1=1", "maxFeatures": 2000, "notaUso": "Acepta URL REST pública /FeatureServer/0 o /MapServer/0. También puede intentar resolver enlaces públicos de contenido o webmap de ArcGIS Online."}, "geojsonAnalisis": {"archivoAnalizado": "", "totalEntidades": "", "tipoGeometria": "", "camposDisponibles": [], "conteoRiesgo": {}, "camposRelevantesDetectados": [], "observacion": ""}, "lecturaOperativa": {"amenaza": "", "fuente": "", "ruta": "", "receptor": "", "expuestos": "", "acciones": "", "instituciones": ""}, "particularidadesOperativas": [], "antecedentesExternos": [], "sintesisAntecedentes": {"lectura": "", "implicacionOperativa": ""}, "organizacionSCI": {"mando": "Establecer puesto de comando preliminar en zona fría.", "seguridad": "Priorizar seguridad de vida, control de accesos y protección del personal.", "operaciones": "Reconocer fuente probable, rutas de exposición, población sensible, accesos, drenajes y zonas preliminares.", "planificacion": "Registrar evidencias, capturas, leyenda operativa, antecedentes externos, parte y datos por verificar.", "logistica": "Definir área de espera, equipos de monitoreo si aplica, apoyo médico, transporte, comunicación y recursos interinstitucionales.", "enlaceInformacion": "Coordinar con Bomberos, SNGR, GAD/Municipio, MINEDUC, MSP, MAATE, Policía y responsables de instalaciones cercanas."}, "botonesBomberiles": [{"id": "centro_educativo", "texto": "Centro educativo", "icono": "🏫", "tipo": "punto", "color": "cyan", "textoMapa": "Centro educativo / población sensible"}, {"id": "fuente", "texto": "Fuente", "icono": "🏭", "tipo": "punto", "color": "purple", "textoMapa": "Posible fuente tecnológica"}, {"id": "zona_caliente", "texto": "Zona caliente", "icono": "🔥", "tipo": "buffer", "color": "red", "textoMapa": "Zona caliente / aislamiento"}, {"id": "zona_tibia", "texto": "Zona tibia", "icono": "🟡", "tipo": "buffer", "color": "gold", "textoMapa": "Zona tibia / control"}, {"id": "zona_fria", "texto": "Zona fría", "icono": "🟢", "tipo": "buffer", "color": "green", "textoMapa": "Zona fría / apoyo"}, {"id": "ruta_acceso", "texto": "Ruta acceso", "icono": "🛣️", "tipo": "linea", "color": "cyan", "textoMapa": "Ruta de acceso / evacuación"}, {"id": "drenaje", "texto": "Drenaje", "icono": "🌊", "tipo": "linea", "color": "gold", "textoMapa": "Drenaje / escorrentía"}, {"id": "bloqueo", "texto": "Bloqueo", "icono": "⛔", "tipo": "punto", "color": "red", "textoMapa": "Punto de bloqueo / control"}, {"id": "pc", "texto": "PC", "icono": "🚒", "tipo": "punto", "color": "green", "textoMapa": "Puesto de comando preliminar"}, {"id": "triage", "texto": "Triage", "icono": "🚑", "tipo": "punto", "color": "cyan", "textoMapa": "Punto de atención / triage"}, {"id": "area_espera", "texto": "Área espera", "icono": "🅿️", "tipo": "rectangulo", "color": "green", "textoMapa": "Área de espera de recursos"}, {"id": "monitoreo", "texto": "Monitoreo", "icono": "📡", "tipo": "punto", "color": "gold", "textoMapa": "Punto sugerido de monitoreo"}], "checklist": ["Ficha operativa cargada correctamente", "Marcador del caso ajustado sobre el punto real", "Centro educativo identificado", "Capa ArcGIS de edificaciones/riesgo NaTech cargada", "Antecedentes externos revisados", "Leyenda operativa generada", "Escenario dibujado o captura cargada como evidencia", "Zona caliente preliminar marcada", "Zona tibia preliminar marcada", "Zona fría preliminar marcada", "Ruta de acceso dibujada", "Puesto de comando preliminar señalado", "Área de espera o triage definido", "Puntos de bloqueo o control marcados", "Ficha e informe generados para SCI", "Hallazgos listos para ficha técnica final"], "datosPorVerificar": [], "observacionesMetodologicas": ["La ficha tiene uso formativo y preliminar.", "No constituye declaratoria oficial de riesgo.", "La identificación de sustancias requiere evaluación técnica especializada."], "evidenciasRequeridas": ["Captura del visor SIG", "Atributos del punto analizado", "GeoJSON de edificaciones/viviendas usado", "URL REST de la capa ArcGIS si aplica", "Fuentes externas consultadas", "Escenario dibujado o captura cargada en cabina", "Elementos operativos exportados en GeoJSON", "Ficha SCI generada", "Informe técnico-operativo generado"]};
+const colorMap={red:'#e53935',gold:'#fdd835',green:'#43a047',cyan:'#29b6f6',purple:'#8e24aa',eraser:'#111'};
+let fichaActual=BLANK_FICHA, map=null, mapMarker=null, arcgisLayer=null, arcgisLayerBounds=null, currentMode='map', tempStart=null, tempLine=null, drawnItems=[], itemId=1, scenarioImageDataUrl='', arcgisCaptureDataUrl='', fichaCargada=false;
+const defaultCenter=[-2.170998,-79.922359];
+function pad(n){return String(n).padStart(2,'0')} function today(){const d=new Date();return d.toISOString().slice(0,10)} function nowTime(){const d=new Date();return pad(d.getHours())+':'+pad(d.getMinutes())}
+function val(id){const el=document.getElementById(id);return el?(el.value.trim()||'No registrado'):'No registrado'} function setVal(id,v){const el=document.getElementById(id);if(el)el.value=(v===undefined||v===null)?'':v}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function downloadBlob(text,name,type){const blob=new Blob([text],{type:type||'application/octet-stream'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url)},700)}
+function setDrawingEnabled(enabled){document.querySelectorAll('.draw-tool').forEach(b=>b.disabled=!enabled);document.querySelectorAll('#fireButtons button').forEach(b=>b.disabled=!enabled);document.getElementById('modeHint').textContent=enabled?'Modo mapa: seleccione una herramienta para dibujar.':'Cargue una ficha operativa para activar dibujo.'}
+function abrirSelectorFicha(){const f=document.getElementById('fileFicha');if(f){f.value='';f.click();}}
+function leerFichaArchivo(file){const reader=new FileReader();reader.onload=function(ev){try{const data=JSON.parse(ev.target.result);if(fichaCargada&&(drawnItems.length||val('caso')!=='No registrado')){if(!confirm('Cargar una nueva ficha borrará datos, dibujos y capa actual. ¿Continuar?'))return;}cargarFicha(data);alert('Ficha operativa cargada correctamente.');}catch(err){alert('No se pudo leer la ficha JSON: '+err.message)}};reader.onerror=function(){alert('No se pudo abrir el archivo seleccionado.')};reader.readAsText(file,'UTF-8')}
+function initMap(lat=defaultCenter[0],lon=defaultCenter[1],zoom=12){if(map){map.remove()}map=L.map('map').setView([lat,lon],zoom);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap',maxZoom:20}).addTo(map);map.on('click',handleMapClick);map.on('mousemove',handleMapMove);setTimeout(()=>map.invalidateSize(),250)}
+function ensureMarker(lat,lon){if(mapMarker){map.removeLayer(mapMarker)}mapMarker=L.marker([lat,lon],{draggable:true}).addTo(map).bindPopup('Punto del caso');mapMarker.on('dragend',()=>{const p=mapMarker.getLatLng();updateCoordFields(p.lat,p.lng);marcarChecklist('Marcador del caso ajustado sobre el punto real')})}
+function resetVisual(){if(drawnItems.length&&map){drawnItems.forEach(it=>{try{map.removeLayer(it.layer)}catch(e){}})}drawnItems=[];itemId=1;renderLegend();clearArcGISLayer();scenarioImageDataUrl='';arcgisCaptureDataUrl='';const preview=document.getElementById('scenarioPreview');if(preview)preview.innerHTML='Opcional: cargue una captura del escenario o imagen exportada para integrarla a la ficha e informe.';const arcprev=document.getElementById('arcgisCapturePreview');if(arcprev)arcprev.innerHTML='Opcional: cargue la captura del visor ArcGIS Online, atributos del punto o capa de riesgo.'}
+function borrarDatosCabina(){if(!confirm('¿Borrar todos los datos, dibujos, checklist y capa cargada para iniciar un nuevo caso?'))return;initCabinaLimpia();alert('Cabina limpia. Ya puede cargar una nueva ficha.')}
+function initCabinaLimpia(){fichaActual=BLANK_FICHA;fichaCargada=false;initMap(defaultCenter[0],defaultCenter[1],12);['caso','ubicacion','latPunto','lonPunto','fecha','hora','tipo','nivel','amenaza','fuente','ruta','receptor','expuestos','acciones','instituciones','observaciones','linkMapaSIG','arcgisUrl','arcgisUrl2','linkKobo','linkFichaPDF','linkVideo','particularidadesTexto','antecedentesTexto'].forEach(id=>setVal(id,''));setVal('arcgisRiskField','riesgo_cat');setVal('arcgisRiskField2','riesgo_cat');setVal('arcgisRiskNumField','riesgo_num');setVal('arcgisRiskNumField2','riesgo_num');setVal('arcgisWhere','1=1');setVal('arcgisMaxFeatures','2000');setVal('bufferRadius','100');setVal('elementLabel','Zona caliente / aislamiento');document.getElementById('caseName').textContent='Cabina limpia: cargue una ficha operativa';document.getElementById('caseLocation').textContent='Sin caso cargado. Los botones de dibujo se activan al cargar la ficha.';document.getElementById('caseLevel').textContent='Sin datos';renderFireButtons(BLANK_FICHA.botonesBomberiles||[]);renderChecklist([]);resetVisual();setMode('map');setDrawingEnabled(false);document.getElementById('arcgisLayerList').innerHTML='Sin contenido ArcGIS resuelto.'}
+function cargarFicha(f){fichaActual=f||{};fichaCargada=true;const c=fichaActual.caso||{};const lat=Number(c.lat),lon=Number(c.lon);const valid=isFinite(lat)&&isFinite(lon);document.getElementById('caseName').textContent=c.nombre||'Caso sin nombre';document.getElementById('caseLocation').textContent=c.ubicacion||'Ubicación no definida';document.getElementById('caseLevel').textContent='Nivel preliminar: '+(c.nivelPreliminar||'Por verificar');setVal('caso',c.nombre);setVal('ubicacion',c.ubicacion);setVal('latPunto',valid?lat:'');setVal('lonPunto',valid?lon:'');setVal('tipo',c.tipo);setVal('nivel',c.nivelPreliminar);setVal('fecha',today());setVal('hora',nowTime());const l=fichaActual.lecturaOperativa||{};['amenaza','fuente','ruta','receptor','expuestos','acciones','instituciones'].forEach(k=>setVal(k,l[k]));const e=fichaActual.enlaces||{};setVal('linkMapaSIG',e.mapaSIG||fichaActual.arcgis?.arcgisOnlineUrl||'');setVal('linkKobo',e.kobo);setVal('linkFichaPDF',e.fichaPDF);setVal('linkVideo',e.video);const a=fichaActual.arcgis||{};setVal('arcgisUrl',a.featureLayerUrl);setVal('arcgisUrl2',a.featureLayerUrl||a.arcgisOnlineUrl||e.mapaSIG||'');setVal('arcgisRiskField',a.riskField||'riesgo_cat');setVal('arcgisRiskField2',a.riskField||'riesgo_cat');setVal('arcgisRiskNumField',a.riskNumField||'riesgo_num');setVal('arcgisRiskNumField2',a.riskNumField||'riesgo_num');setVal('arcgisWhere',a.where||'1=1');setVal('arcgisMaxFeatures',a.maxFeatures||2000);setVal('particularidadesTexto',(fichaActual.particularidadesOperativas||[]).map(x=>'- '+x).join('\\n'));setVal('antecedentesTexto',formatAntecedentes(fichaActual.antecedentesExternos||[]));resetVisual();renderFireButtons((fichaActual.botonesBomberiles&&fichaActual.botonesBomberiles.length)?fichaActual.botonesBomberiles:BLANK_FICHA.botonesBomberiles);renderChecklist(fichaActual.checklist||[]);initMap(valid?lat:defaultCenter[0],valid?lon:defaultCenter[1],c.zoom||16);if(valid){ensureMarker(lat,lon);updateCoordFields(lat,lon)}setDrawingEnabled(true);marcarChecklist('Ficha operativa cargada correctamente')}
+function formatAntecedentes(arr){return arr.map(a=>'- '+(a.fecha||'s/f')+' | '+(a.fuente||'Fuente por verificar')+' | '+(a.tipo||'Tipo por verificar')+': '+(a.descripcion||'Sin descripción')+(a.url?' | URL: '+a.url:'')).join('\\n')}
+function renderFireButtons(buttons){const box=document.getElementById('fireButtons');box.innerHTML='';buttons.forEach(b=>{const btn=document.createElement('button');btn.className='icon-btn';btn.type='button';btn.innerHTML='<span class="ico">'+(b.icono||'🔘')+'</span><span class="lbl">'+esc(b.texto||b.id)+'</span>';btn.onclick=()=>handleFireButton(b,btn);box.appendChild(btn)});setDrawingEnabled(fichaCargada)}
+function handleFireButton(b,btn){if(!fichaCargada)return;document.querySelectorAll('#fireButtons .icon-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');setVal('elementLabel',b.textoMapa||b.texto);setVal('elementColor',b.color==='eraser'?'red':b.color||'cyan');if(b.tipo==='buffer')setMode('buffer');else if(b.tipo==='rectangulo')setMode('rect');else if(b.tipo==='linea')setMode('line');else if(b.tipo==='punto')setMode('pointAdd');else if(b.tipo==='texto')setMode('text');else setMode('map')}
+function renderChecklist(items){const box=document.getElementById('checklist');box.innerHTML='';if(!items.length){box.innerHTML='<div class="check">Sin checklist cargado. Cargue una ficha operativa.</div>';return}items.forEach(item=>{const label=document.createElement('label');label.className='check';label.innerHTML='<input type="checkbox" data-check="'+esc(item)+'">'+esc(item);box.appendChild(label)})}
+function marcarChecklist(texto){const el=Array.from(document.querySelectorAll('[data-check]')).find(x=>x.dataset.check===texto);if(el)el.checked=true}
+function setMode(mode){if(!fichaCargada&&mode!=='map'){alert('Primero cargue una ficha operativa.');return}currentMode=mode;tempStart=null;if(tempLine&&map){map.removeLayer(tempLine);tempLine=null}document.querySelectorAll('.toolbar .icon-btn').forEach(b=>b.classList.remove('active'));const ids={map:'btnMap',point:'btnPoint',buffer:'btnBuffer',rect:'btnRect',line:'btnLine',text:'btnText'};if(document.getElementById(ids[mode]))document.getElementById(ids[mode]).classList.add('active');const msg={map:'Modo mapa: navegue el área.',point:'Modo punto del caso: haga clic sobre la ubicación exacta.',pointAdd:'Modo punto: haga clic para colocar el elemento.',buffer:'Modo buffer: haga clic en el centro. Se usará el radio en metros.',rect:'Modo rectángulo: haga clic en una esquina y luego en la opuesta.',line:'Modo línea: haga clic en inicio y final.',text:'Modo texto: haga clic donde desea colocar la etiqueta.'};document.getElementById('modeHint').textContent=msg[mode]||msg.map}
+function handleMapClick(e){if(!fichaCargada)return;const label=val('elementLabel'),color=val('elementColor'),latlng=e.latlng;if(currentMode==='point'){ensureMarker(latlng.lat,latlng.lng);updateCoordFields(latlng.lat,latlng.lng);marcarChecklist('Marcador del caso ajustado sobre el punto real');return}if(currentMode==='pointAdd'){const layer=L.circleMarker(latlng,{radius:8,color:colorMap[color],fillColor:colorMap[color],fillOpacity:.9,weight:2}).addTo(map);addItem('Punto',label,color,layer,{lat:latlng.lat,lng:latlng.lng});return}if(currentMode==='buffer'){const r=parseFloat(val('bufferRadius'))||100;const layer=L.circle(latlng,{radius:r,color:colorMap[color],fillColor:colorMap[color],fillOpacity:.18,weight:2}).addTo(map);addItem('Buffer',label,color,layer,{lat:latlng.lat,lng:latlng.lng,radio_m:r});return}if(currentMode==='rect'){if(!tempStart){tempStart=latlng;document.getElementById('modeHint').textContent='Rectángulo: seleccione la esquina opuesta.';return}const bounds=L.latLngBounds(tempStart,latlng);const layer=L.rectangle(bounds,{color:colorMap[color],fillColor:colorMap[color],fillOpacity:.16,weight:2}).addTo(map);addItem('Rectángulo',label,color,layer,{bounds:[[bounds.getSouth(),bounds.getWest()],[bounds.getNorth(),bounds.getEast()]]});tempStart=null;return}if(currentMode==='line'){if(!tempStart){tempStart=latlng;document.getElementById('modeHint').textContent='Línea: seleccione el punto final.';return}const layer=L.polyline([tempStart,latlng],{color:colorMap[color],weight:5,opacity:.9}).addTo(map);addItem('Línea',label,color,layer,{inicio:{lat:tempStart.lat,lng:tempStart.lng},fin:{lat:latlng.lat,lng:latlng.lng}});tempStart=null;return}if(currentMode==='text'){const icon=L.divIcon({className:'label-icon',html:'<span>'+esc(label)+'</span>',iconSize:null});const layer=L.marker(latlng,{icon,draggable:true}).addTo(map);addItem('Texto',label,color,layer,{lat:latlng.lat,lng:latlng.lng});return}}
+function handleMapMove(e){if(!fichaCargada||!tempStart)return;if(tempLine){map.removeLayer(tempLine);tempLine=null}const color=val('elementColor');if(currentMode==='line')tempLine=L.polyline([tempStart,e.latlng],{color:colorMap[color],weight:3,dashArray:'6,6'}).addTo(map);if(currentMode==='rect')tempLine=L.rectangle(L.latLngBounds(tempStart,e.latlng),{color:colorMap[color],weight:2,dashArray:'6,6',fillOpacity:.05}).addTo(map)}
+function addItem(tipo,label,color,layer,meta){const id=itemId++;layer._opId=id;drawnItems.push({id,tipo,label,color,layer,meta});layer.on('click',()=>highlightLegend(id));renderLegend();marcarChecklist('Leyenda operativa generada')}
+function renderLegend(){const list=document.getElementById('legendList');if(!drawnItems.length){list.className='legend-empty';list.innerHTML='Aún no se han agregado elementos al mapa.';return}list.className='';list.innerHTML=drawnItems.map(it=>'<div class="legend-item" id="legend-'+it.id+'"><span class="legend-dot" style="background:'+colorMap[it.color]+';"></span><div><b>'+it.tipo+': '+esc(it.label)+'</b><small>'+legendDetail(it)+'</small></div><button class="secondary" type="button" onclick="zoomItem('+it.id+')">Ver</button><button class="red" type="button" onclick="removeItem('+it.id+')">X</button></div>').join('')}
+function legendDetail(it){if(it.tipo==='Buffer')return 'Radio: '+it.meta.radio_m+' m';if(it.tipo==='Línea')return 'Ruta o trayectoria operativa';if(it.tipo==='Rectángulo')return 'Área operativa delimitada';if(it.tipo==='Punto')return Number(it.meta.lat).toFixed(5)+', '+Number(it.meta.lng).toFixed(5);if(it.tipo==='Texto')return 'Etiqueta colocada sobre mapa';return ''}
+function zoomItem(id){const it=drawnItems.find(x=>x.id===id);if(!it)return;if(it.layer.getBounds)map.fitBounds(it.layer.getBounds(),{padding:[40,40]});else if(it.layer.getLatLng)map.setView(it.layer.getLatLng(),18);highlightLegend(id)}
+function highlightLegend(id){document.querySelectorAll('.legend-item').forEach(e=>e.style.boxShadow='none');const el=document.getElementById('legend-'+id);if(el)el.style.boxShadow='0 0 0 3px rgba(49,215,255,.28)'}
+function removeItem(id){const i=drawnItems.findIndex(x=>x.id===id);if(i<0)return;map.removeLayer(drawnItems[i].layer);drawnItems.splice(i,1);renderLegend()}
+function clearAllElements(){if(!drawnItems.length){alert('No hay elementos dibujados.');return}if(!confirm('¿Eliminar todos los elementos operativos?'))return;drawnItems.forEach(it=>map.removeLayer(it.layer));drawnItems=[];renderLegend()}
+function legendText(){return drawnItems.map(it=>'- '+it.tipo+': '+it.label+' ('+legendDetail(it)+')').join('\\n')||'Sin elementos operativos dibujados'}
+function drawnItemsGeoJSON(){const features=[];drawnItems.forEach(it=>{if(it.tipo==='Punto'||it.tipo==='Texto')features.push({type:'Feature',properties:{id:it.id,tipo:it.tipo,label:it.label,color:it.color},geometry:{type:'Point',coordinates:[it.meta.lng,it.meta.lat]}});else if(it.tipo==='Línea')features.push({type:'Feature',properties:{id:it.id,tipo:it.tipo,label:it.label,color:it.color},geometry:{type:'LineString',coordinates:[[it.meta.inicio.lng,it.meta.inicio.lat],[it.meta.fin.lng,it.meta.fin.lat]]}});else if(it.tipo==='Rectángulo'){const b=it.meta.bounds,s=b[0][0],w=b[0][1],n=b[1][0],e=b[1][1];features.push({type:'Feature',properties:{id:it.id,tipo:it.tipo,label:it.label,color:it.color},geometry:{type:'Polygon',coordinates:[[[w,s],[e,s],[e,n],[w,n],[w,s]]]}})}else if(it.tipo==='Buffer')features.push({type:'Feature',properties:{id:it.id,tipo:it.tipo,label:it.label,color:it.color,radio_m:it.meta.radio_m},geometry:{type:'Point',coordinates:[it.meta.lng,it.meta.lat]}})});return {type:'FeatureCollection',features,metadata:{caso:val('caso'),fecha:val('fecha'),hora:val('hora'),uso:'Elementos operativos dibujados en Cabina SCI NaTech/HazMat V15 validada'}}}
+function exportGeoJSON(){downloadBlob(JSON.stringify(drawnItemsGeoJSON(),null,2),'elementos_operativos_bomberiles_SCI_NaTech.geojson','application/geo+json;charset=utf-8')}
+function updateCoordFields(lat,lon){setVal('latPunto',Number(lat).toFixed(6));setVal('lonPunto',Number(lon).toFixed(6));document.getElementById('caseLevel').textContent='Nivel preliminar: '+val('nivel')+' | Punto: '+Number(lat).toFixed(5)+', '+Number(lon).toFixed(5)}
+function updateMarkerFromFields(){const lat=parseFloat(val('latPunto')),lon=parseFloat(val('lonPunto'));if(!isFinite(lat)||!isFinite(lon))return alert('Ingrese coordenadas válidas');ensureMarker(lat,lon);map.setView([lat,lon],map.getZoom()||16);updateCoordFields(lat,lon)}
+function centerCase(){const lat=parseFloat(val('latPunto')),lon=parseFloat(val('lonPunto'));if(isFinite(lat)&&isFinite(lon))map.setView([lat,lon],17);else map.setView(defaultCenter,12)}
+function riskColor(value,num){const s=String(value||'').toUpperCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'');const n=Number(num);if(s.includes('MUY ALTA')||s.includes('MUY ALTO')||s==='ALTO'||s.includes('ALTA'))return'#e53935';if(s.includes('MEDIO ALTO'))return'#fb8c00';if(s.includes('MEDIO'))return'#fdd835';if(s.includes('BAJO'))return'#43a047';if(!isNaN(n)){if(n>=9)return'#e53935';if(n>=7)return'#fb8c00';if(n>=4)return'#fdd835';return'#43a047'}return'#29b6f6'}
+function syncArcInputs(){setVal('arcgisUrl',val('arcgisUrl2'));setVal('arcgisRiskField',val('arcgisRiskField2'));setVal('arcgisRiskNumField',val('arcgisRiskNumField2'))}
+function normalizeLayerUrl(url){if(!url)return'';url=url.trim().replace(/\/query.*$/i,'').replace(/\/+$/,'');if(/\/(FeatureServer|MapServer)$/i.test(url))url+='/0';return url}
+function extractItemId(url){const s=String(url||'');let m=s.match(/[?&](?:id|webmap)=([a-f0-9]{32})/i);if(m)return m[1];m=s.match(/\/items\/([a-f0-9]{32})/i);if(m)return m[1];return null}
+function abrirArcGIS(){const u=val('linkMapaSIG');if(u==='No registrado')return alert('No hay enlace.');window.open(u,'_blank')}
+function abrirArcGISDesdeCampo(){const u=val('arcgisUrl2');if(u==='No registrado')return alert('No hay enlace.');window.open(u,'_blank')}
+async function resolverArcGISOnline(){const input=val('arcgisUrl2')!=='No registrado'?val('arcgisUrl2'):val('linkMapaSIG');if(input==='No registrado')return alert('Pegue un enlace ArcGIS Online o REST.');if(/\/((FeatureServer)|(MapServer))(\/\d+)?/i.test(input)){const u=normalizeLayerUrl(input);setVal('arcgisUrl',u);setVal('arcgisUrl2',u);document.getElementById('arcgisLayerList').innerHTML='<div class="layer-row"><b>Capa REST detectada</b><br>'+esc(u)+'<br><button class="cyan" type="button" onclick="loadArcGISLayer()">Cargar esta capa</button></div>';return;}const id=extractItemId(input);if(!id){document.getElementById('arcgisLayerList').innerHTML='No pude extraer ID de item/webmap. Puede abrir el enlace o pegar una URL REST /FeatureServer/0.';return;}try{const itemRes=await fetch('https://www.arcgis.com/sharing/rest/content/items/'+id+'?f=json');const item=await itemRes.json();let layers=[];if(item.url&&/(FeatureServer|MapServer)/i.test(item.url)){layers.push({title:item.title||'Servicio ArcGIS',url:normalizeLayerUrl(item.url)});}try{const dataRes=await fetch('https://www.arcgis.com/sharing/rest/content/items/'+id+'/data?f=json');const data=await dataRes.json();(data.operationalLayers||[]).forEach(l=>{if(l.url)layers.push({title:l.title||l.id||'Capa',url:normalizeLayerUrl(l.url)});if(l.layerType&&l.itemId){/* no-op */}});}catch(e){}if(!layers.length){document.getElementById('arcgisLayerList').innerHTML='El item fue leído, pero no encontré capas REST públicas cargables. Abra el enlace para revisar contenido.';return;}document.getElementById('arcgisLayerList').innerHTML=layers.map((l,i)=>'<div class="layer-row"><b>'+esc(l.title)+'</b><br><small>'+esc(l.url)+'</small><br><button class="cyan" type="button" onclick="seleccionarArcLayer('+i+')">Usar esta capa</button></div>').join('');window.__arcLayers=layers;}catch(err){document.getElementById('arcgisLayerList').innerHTML='No se pudo resolver el contenido: '+esc(err.message)+'. Puede abrir el enlace o pegar una URL REST.';}}
+function seleccionarArcLayer(i){const l=(window.__arcLayers||[])[i];if(!l)return;setVal('arcgisUrl',l.url);setVal('arcgisUrl2',l.url);alert('Capa seleccionada. Ahora puede presionar “Cargar capa REST”.')}
+async function loadArcGISLayer(){let raw=val('arcgisUrl');if(raw==='No registrado')raw=val('arcgisUrl2');if(!raw.startsWith('http'))return alert('Pegue URL REST /FeatureServer/0 o /MapServer/0');const url=normalizeLayerUrl(raw);setVal('arcgisUrl',url);const where=encodeURIComponent(val('arcgisWhere')==='No registrado'?'1=1':val('arcgisWhere'));const max=parseInt(val('arcgisMaxFeatures'))||2000;const q=url+'/query?where='+where+'&outFields=*&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount='+max;try{const res=await fetch(q);if(!res.ok)throw new Error('HTTP '+res.status);const gj=await res.json();if(!gj.features||!gj.features.length)return alert('La consulta no devolvió entidades');clearArcGISLayer();const rf=val('arcgisRiskField'),nf=val('arcgisRiskNumField');arcgisLayer=L.geoJSON(gj,{pointToLayer:(f,ll)=>{const p=f.properties||{},col=riskColor(p[rf]||p.riesgo_cat||p.PELIGROSID,p[nf]||p.riesgo_num);return L.circleMarker(ll,{radius:5,color:col,fillColor:col,fillOpacity:.78,weight:1.4})},style:f=>{const p=f.properties||{},col=riskColor(p[rf]||p.riesgo_cat||p.PELIGROSID,p[nf]||p.riesgo_num);return{color:col,fillColor:col,fillOpacity:.45,weight:1.2}},onEachFeature:(f,l)=>{const p=f.properties||{};let h='<b>Edificación / riesgo NaTech</b><br>';[rf,nf,'riesgo_cat','riesgo_num','PELIGROSID','PGA','Rangos_sa','pel','vul','exp_2'].filter((v,i,a)=>a.indexOf(v)===i).forEach(k=>{if(p[k]!==undefined)h+='<b>'+k+':</b> '+p[k]+'<br>'});l.bindPopup(h)}}).addTo(map);arcgisLayerBounds=arcgisLayer.getBounds();if(arcgisLayerBounds.isValid())map.fitBounds(arcgisLayerBounds,{padding:[40,40]});marcarChecklist('Capa ArcGIS de edificaciones/riesgo NaTech cargada');alert('Capa cargada: '+gj.features.length+' entidades')}catch(e){alert('No se pudo cargar la capa: '+e.message)}}
+function clearArcGISLayer(){if(arcgisLayer&&map)map.removeLayer(arcgisLayer);arcgisLayer=null;arcgisLayerBounds=null}
+function zoomArcGISLayer(){if(arcgisLayerBounds&&arcgisLayerBounds.isValid())map.fitBounds(arcgisLayerBounds,{padding:[40,40]});else alert('Primero cargue la capa')}
+function openDrawer(id){closeDrawers();document.getElementById(id).classList.add('open')}
+function closeDrawers(){document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'))}
+function checks(){return Array.from(document.querySelectorAll('[data-check]:checked')).map(e=>'✓ '+e.dataset.check)}
+function getParticularidades(){return val('particularidadesTexto')==='No registrado'?'Por verificar.':val('particularidadesTexto')}
+function getAntecedentes(){return val('antecedentesTexto')==='No registrado'?'Sin antecedentes externos cargados.':val('antecedentesTexto')}
+function getSCI(){const sci=(fichaActual&&fichaActual.organizacionSCI)||{};return 'Mando: '+(sci.mando||'Establecer puesto de comando preliminar.')+'\\nSeguridad: '+(sci.seguridad||'Priorizar seguridad de vida y control de accesos.')+'\\nOperaciones: '+(sci.operaciones||'Reconocer fuente, rutas y zonas preliminares.')+'\\nPlanificación: '+(sci.planificacion||'Registrar evidencias, leyenda y datos por verificar.')+'\\nLogística: '+(sci.logistica||'Definir recursos y área de espera.')+'\\nEnlace/información: '+(sci.enlaceInformacion||'Coordinar con instituciones competentes.')}
+function docBody(tipo){return (tipo==='ficha'?'FICHA OPERATIVA BOMBERIL SCI/NATECH/HAZMAT':'INFORME TÉCNICO-OPERATIVO BOMBERIL SCI/NATECH/HAZMAT')+'\\n\\n1. DATOS GENERALES\\nCaso: '+val('caso')+'\\nFecha/hora: '+val('fecha')+' '+val('hora')+'\\nUbicación: '+val('ubicacion')+'\\nCoordenadas: '+val('latPunto')+', '+val('lonPunto')+'\\nTipo: '+val('tipo')+'\\nNivel: '+val('nivel')+'\\n\\n2. ESCENARIO Y LEYENDA OPERATIVA\\n'+legendText()+'\\n\\n3. PARTICULARIDADES\\n'+getParticularidades()+'\\n\\n4. ANTECEDENTES EXTERNOS / NOTICIAS\\n'+getAntecedentes()+'\\n\\n5. LECTURA FUENTE-RUTA-RECEPTOR\\nAmenaza: '+val('amenaza')+'\\nFuente: '+val('fuente')+'\\nRuta: '+val('ruta')+'\\nReceptor: '+val('receptor')+'\\nExpuestos: '+val('expuestos')+'\\n\\n6. ORGANIZACIÓN SCI\\n'+getSCI()+'\\n\\n7. ACCIONES E INSTITUCIONES\\nAcciones: '+val('acciones')+'\\nInstituciones: '+val('instituciones')+'\\n\\n8. CHECKLIST\\n'+(checks().length?checks().join('\\n'):'Sin verificaciones marcadas.')+'\\n\\n9. LIMITACIONES\\nDocumento de uso formativo y preliminar. No constituye declaratoria oficial de riesgo.'}
+function docHtml(tipo){const titulo=tipo==='ficha'?'Ficha Operativa Bomberil SCI/NaTech/HazMat':'Informe Técnico-Operativo Bomberil SCI/NaTech/HazMat';const img=scenarioImageDataUrl?'<img src="'+scenarioImageDataUrl+'" style="width:100%;max-height:420px;object-fit:contain;border:1px solid #999;border-radius:6px;margin:8px 0 12px;">':'<p><em>Imagen del escenario no cargada.</em></p>';return '<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+titulo+'</title><style>body{font-family:Arial,Helvetica,sans-serif;margin:34px;color:#111;line-height:1.45}h1{font-size:20px;border-bottom:2px solid #111;padding-bottom:8px;margin-bottom:14px}h2{font-size:14px;margin-top:18px;border-bottom:1px solid #bbb;padding-bottom:4px}.meta{font-size:11px;color:#444;margin-bottom:12px}pre{white-space:pre-wrap;font-family:Arial,Helvetica,sans-serif;font-size:12px}.box{border:1px solid #999;padding:10px;border-radius:6px;margin:10px 0}</style></head><body><h1>'+titulo+'</h1><div class="meta">Generado desde Cabina Pública SCI NaTech/HazMat V15.7 SCI Word. Uso formativo y preliminar.</div><h2>Escenario dibujado / evidencia gráfica</h2>'+img+'<h2>Contenido formal</h2><div class="box"><pre>'+esc(docBody(tipo))+'</pre></div></body></html>'}
+function descargarFichaBomberil(){downloadBlob(docHtml('ficha'),'Ficha_Bomberil_SCI_NaTech_HazMat.html','text/html;charset=utf-8');marcarChecklist('Ficha e informe generados para SCI')}
+function descargarInformeBomberil(){downloadBlob(docHtml('informe'),'Informe_Bomberil_SCI_NaTech_HazMat.html','text/html;charset=utf-8');marcarChecklist('Ficha e informe generados para SCI')}
+function getFichaFromForm(){const f=JSON.parse(JSON.stringify(fichaActual||BLANK_FICHA));f.caso=f.caso||{};f.caso.nombre=val('caso');f.caso.ubicacion=val('ubicacion');f.caso.lat=parseFloat(val('latPunto'));f.caso.lon=parseFloat(val('lonPunto'));f.caso.tipo=val('tipo');f.caso.nivelPreliminar=val('nivel');f.arcgis=f.arcgis||{};f.arcgis.featureLayerUrl=val('arcgisUrl');f.arcgis.arcgisOnlineUrl=val('linkMapaSIG');f.arcgis.riskField=val('arcgisRiskField');f.arcgis.riskNumField=val('arcgisRiskNumField');return f}
+function downloadCurrentFicha(){downloadBlob(JSON.stringify(getFichaFromForm(),null,2),'ficha_operativa_bomberil_ajustada_V15.json','application/json;charset=utf-8')}
+document.addEventListener('DOMContentLoaded',()=>{initCabinaLimpia();const input=document.getElementById('fileFicha');input.addEventListener('change',e=>{const file=e.target.files&&e.target.files[0];if(file)leerFichaArchivo(file)});const imgInput=document.getElementById('scenarioImageInput');imgInput.addEventListener('change',e=>{const file=e.target.files&&e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{scenarioImageDataUrl=ev.target.result;document.getElementById('scenarioPreview').innerHTML='<img src="'+scenarioImageDataUrl+'" style="width:100%;max-height:260px;object-fit:contain;border-radius:8px;">';marcarChecklist('Escenario dibujado o captura cargada como evidencia')};reader.readAsDataURL(file)});const arcInput=document.getElementById('arcgisCaptureInput');if(arcInput){arcInput.addEventListener('change',e=>{const file=e.target.files&&e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{arcgisCaptureDataUrl=ev.target.result;document.getElementById('arcgisCapturePreview').innerHTML='<img src="'+arcgisCaptureDataUrl+'" style="width:100%;max-height:260px;object-fit:contain;border-radius:8px;">';};reader.readAsDataURL(file)});} })
+
+/* --- V15.7 SCI Word: formato formal de ficha e informe tipo SCI/HazMat --- */
+function safeHtmlSCI(s){
+  return String(s || '').replace(/[&<>"']/g, function(m){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m];
+  });
+}
+function linesToHtmlSCI(s){ return safeHtmlSCI(s || '').replace(/\n/g,'<br>'); }
+function rowsSCI(obj){
+  return Object.entries(obj).map(function(entry){
+    return '<tr><th>'+safeHtmlSCI(entry[0])+'</th><td>'+linesToHtmlSCI(entry[1])+'</td></tr>';
+  }).join('');
+}
+function checklistHtmlSCI(){
+  const c = checks();
+  return c.length ? '<ul>'+c.map(function(x){return '<li>'+safeHtmlSCI(x.replace(/^✓\s*/,''))+'</li>';}).join('')+'</ul>' : '<em>Sin verificaciones marcadas.</em>';
+}
+function incidentImageSCI(){
+  if(scenarioImageDataUrl){
+    return '<img src="'+scenarioImageDataUrl+'" style="width:100%;max-height:430px;object-fit:contain;border:1px solid #777;border-radius:4px;margin:8px 0 12px;">';
+  }
+  return '<div class="placeholder">Sin imagen adjunta. Adjuntar captura del escenario dibujado, visor SIG o croquis operativo.</div>';
+}
+function styleDocumentoSCI(){
+  return '<style>'+
+  'body{font-family:Arial,Helvetica,sans-serif;margin:28px;color:#111;line-height:1.38;font-size:12px}'+
+  '.doc-header{display:flex;justify-content:space-between;gap:14px;border-bottom:3px solid #111;padding-bottom:10px;margin-bottom:14px}'+
+  'h1{font-size:20px;margin:0;text-transform:uppercase}h2{font-size:14px;margin:16px 0 6px;background:#efefef;border:1px solid #999;padding:6px;text-transform:uppercase}h3{font-size:12px;margin:10px 0 4px}'+
+  '.subdoc{font-size:11px;color:#444;margin-top:4px}.tag{border:2px solid #111;padding:8px;text-align:center;font-weight:bold;min-width:92px}'+
+  'table{width:100%;border-collapse:collapse;margin-bottom:8px}th,td{border:1px solid #777;padding:6px;vertical-align:top}th{width:28%;background:#f5f5f5;text-align:left}'+
+  'pre{white-space:pre-wrap;font-family:Arial,Helvetica,sans-serif;border:1px solid #777;padding:8px;background:#fafafa}'+
+  '.placeholder{border:1px dashed #777;padding:18px;text-align:center;color:#555;background:#fafafa}ul{margin:6px 0 6px 18px}footer{margin-top:18px;border-top:1px solid #777;padding-top:10px;font-size:11px}'+
+  '@media print{body{margin:15mm}.doc-header{break-inside:avoid}section{break-inside:avoid}}'+
+  '</style>';
+}
+function sciReferencesHtml(){
+  return '<p><b>Referencia de estructura:</b> formato adaptado de lógica SCI/ICS para briefing inicial, objetivos, seguridad y control de sitio. Uso formativo; no corresponde a un formulario oficial.</p>';
+}
+function htmlFichaSCI(){
+  const title = 'FICHA OPERATIVA SCI/NATECH/HAZMAT';
+  const data = {
+    'Nombre del incidente / caso': val('caso'),
+    'Fecha / hora de elaboración': val('fecha') + ' ' + val('hora'),
+    'Ubicación': val('ubicacion'),
+    'Coordenadas de referencia': val('latPunto') + ', ' + val('lonPunto'),
+    'Tipo de escenario': val('tipo'),
+    'Nivel preliminar': val('nivel')
+  };
+  const lectura = {
+    'Amenaza / peligrosidad': val('amenaza'),
+    'Fuente tecnológica probable': val('fuente'),
+    'Ruta de exposición o dispersión': val('ruta'),
+    'Receptor vulnerable': val('receptor'),
+    'Elementos expuestos': val('expuestos')
+  };
+  const org = fichaActual.organizacionSCI || {};
+  const sci = {
+    'Mando': org.mando || 'Por definir',
+    'Seguridad': org.seguridad || 'Por definir',
+    'Operaciones': org.operaciones || 'Por definir',
+    'Planificación': org.planificacion || 'Por definir',
+    'Logística': org.logistica || 'Por definir',
+    'Enlace / información': org.enlaceInformacion || 'Por definir'
+  };
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+title+'</title>'+styleDocumentoSCI()+'</head><body>'+
+    '<div class="doc-header"><div><h1>'+title+'</h1><div class="subdoc">Ficha rápida para briefing inicial, lectura fuente-ruta-receptor y organización operativa preliminar.</div></div><div class="tag">SCI-201 / 208HM<br>ADAPTADO</div></div>'+
+    '<section><h2>1. Identificación del incidente</h2><table>'+rowsSCI(data)+'</table></section>'+
+    '<section><h2>2. Captura del escenario / visor</h2>'+incidentImageSCI()+'<h3>Captura ArcGIS / visor SIG</h3>'+arcgisCaptureHtmlSCI()+'<h3>Croquis automático de entidades dibujadas</h3>'+autoCroquisSVG()+'<h3>Leyenda operativa tabulada</h3>'+legendTableSCI()+'</section>'+
+    '<section><h2>3. Situación actual y particularidades</h2><table>'+rowsSCI({'Particularidades del caso':getParticularidades(),'Antecedentes externos / noticias':getAntecedentes()})+'</table></section>'+
+    '<section><h2>4. Lectura fuente – ruta – receptor</h2><table>'+rowsSCI(lectura)+'</table></section>'+
+    '<section><h2>5. Objetivos iniciales y acciones planificadas</h2><table>'+rowsSCI({'Objetivo operacional inicial':'Proteger vida, controlar accesos, verificar fuente, delimitar zonas preliminares y documentar evidencias.','Acciones iniciales':val('acciones'),'Instituciones a coordinar':val('instituciones')})+'</table></section>'+
+    '<section><h2>6. Organización SCI preliminar</h2><table>'+rowsSCI(sci)+'</table></section>'+
+    '<section><h2>7. Control de zonas y recursos</h2><table>'+rowsSCI({'Zona caliente':'Por delimitar en cabina o campo según fuente, sustancia y condiciones.','Zona tibia':'Área de transición/control/descontaminación si aplica.','Zona fría':'Puesto de comando, triage, área de espera y logística.','Recursos iniciales':'Unidad HazMat, monitoreo, EPP, control de accesos, comunicación, apoyo médico y enlace institucional según disponibilidad.'})+'</table></section>'+
+    '<section><h2>8. Checklist operativo</h2>'+checklistHtmlSCI()+'</section>'+
+    '<section><h2>9. Evidencias y anexos</h2><table>'+rowsSCI({'GeoJSON operativo':'Exportar desde la cabina como evidencia espacial de dibujos.','Captura del escenario':'Adjuntar imagen del visor SIG o mapa dibujado.','Fuentes externas':'Registrar URL, fecha, tipo de antecedente y nivel de evidencia.'})+'</table></section>'+
+    '<section><h2>10. Validación y advertencia</h2><p>Documento de uso formativo y preliminar. No constituye declaratoria oficial de riesgo, no reemplaza inspección de campo, monitoreo ambiental, identificación técnica de sustancias ni decisiones de autoridad competente.</p>'+sciReferencesHtml()+'</section>'+
+    '<footer><b>Elaboró:</b> ____________________ &nbsp;&nbsp; <b>Función:</b> ____________________ &nbsp;&nbsp; <b>Hora:</b> __________</footer>'+
+    '</body></html>';
+}
+function htmlInformeSCI(){
+  const title = 'INFORME TÉCNICO-OPERATIVO SCI/NATECH/HAZMAT';
+  const org = fichaActual.organizacionSCI || {};
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+title+'</title>'+styleDocumentoSCI()+'</head><body>'+
+    '<div class="doc-header"><div><h1>'+title+'</h1><div class="subdoc">Informe preliminar de escenario NaTech/HazMat con soporte espacial y organización SCI.</div></div><div class="tag">INFORME<br>SCI</div></div>'+
+    '<section><h2>1. Resumen ejecutivo</h2><p>Se documenta el análisis preliminar del caso <b>'+safeHtmlSCI(val('caso'))+'</b>, ubicado en <b>'+safeHtmlSCI(val('ubicacion'))+'</b>. El escenario se interpreta con enfoque NaTech/HazMat, lectura fuente-ruta-receptor, registro de antecedentes externos y organización bajo lógica SCI.</p></section>'+
+    '<section><h2>2. Datos generales</h2><table>'+rowsSCI({'Caso':val('caso'),'Fecha/hora':val('fecha')+' '+val('hora'),'Ubicación':val('ubicacion'),'Coordenadas':val('latPunto')+', '+val('lonPunto'),'Tipo de escenario':val('tipo'),'Nivel preliminar':val('nivel')})+'</table></section>'+
+    '<section><h2>3. Evidencia gráfica del escenario</h2>'+incidentImageSCI()+'<h3>Captura ArcGIS / visor SIG</h3>'+arcgisCaptureHtmlSCI()+'<h3>Croquis automático de entidades dibujadas</h3>'+autoCroquisSVG()+'<h3>Leyenda operativa tabulada</h3>'+legendTableSCI()+'</section>'+
+    '<section><h2>4. Contexto y antecedentes</h2><table>'+rowsSCI({'Particularidades operativas':getParticularidades(),'Antecedentes externos / noticias':getAntecedentes()})+'</table></section>'+
+    '<section><h2>5. Análisis técnico-operativo fuente – ruta – receptor</h2><table>'+rowsSCI({'Amenaza / peligrosidad':val('amenaza'),'Fuente tecnológica probable':val('fuente'),'Ruta de exposición o dispersión':val('ruta'),'Receptor vulnerable':val('receptor'),'Elementos expuestos':val('expuestos')})+'</table></section>'+
+    '<section><h2>6. Organización SCI preliminar</h2><table>'+rowsSCI({'Mando':org.mando||'Por definir','Seguridad':org.seguridad||'Por definir','Operaciones':org.operaciones||'Por definir','Planificación':org.planificacion||'Por definir','Logística':org.logistica||'Por definir','Enlace / información':org.enlaceInformacion||'Por definir'})+'</table></section>'+
+    '<section><h2>7. Objetivos, acciones y coordinación</h2><table>'+rowsSCI({'Objetivo general operativo':'Orientar la priorización inicial, delimitación de zonas, control de accesos, verificación de fuente y protección de población expuesta.','Acciones iniciales propuestas':val('acciones'),'Instituciones a coordinar':val('instituciones')})+'</table></section>'+
+    '<section><h2>8. Seguridad, control de sitio y limitaciones</h2><table>'+rowsSCI({'Mensaje de seguridad':'No ingresar a zona caliente sin identificación de sustancia, monitoreo, EPP apropiado y autorización del mando.','Control de sitio':'Usar zonas caliente, tibia y fría como delimitación preliminar; ajustar con viento, sustancia, monitoreo y verificación de campo.','Limitaciones':'El análisis depende de la ficha JSON, capturas, capas SIG, antecedentes y dibujos del usuario. Requiere validación técnica institucional.'})+'</table></section>'+
+    '<section><h2>9. Checklist y trazabilidad</h2>'+checklistHtmlSCI()+'</section>'+
+    '<section><h2>10. Conclusión preliminar</h2><p>El escenario permite estructurar una lectura operativa inicial y generar evidencias para docencia, análisis territorial y preparación de fichas. La información no sustituye mando real, peritaje, monitoreo ni informe técnico oficial.</p>'+sciReferencesHtml()+'</section>'+
+    '<footer><b>Elaboró:</b> ____________________ &nbsp;&nbsp; <b>Revisó:</b> ____________________ &nbsp;&nbsp; <b>Fecha:</b> __________</footer>'+
+    '</body></html>';
+}
+function descargarFichaBomberil(){
+  downloadBlob(htmlFichaSCI(),'Ficha_Operativa_SCI_NaTech_HazMat.html','text/html;charset=utf-8');
+  marcarChecklist('Ficha e informe generados para SCI');
+}
+function descargarInformeBomberil(){
+  downloadBlob(htmlInformeSCI(),'Informe_Tecnico_Operativo_SCI_NaTech_HazMat.html','text/html;charset=utf-8');
+  marcarChecklist('Ficha e informe generados para SCI');
+}
+
+
+/* --- V15.7 SCI Word: descarga estable en HTML formal SCI --- */
+function descargaHTMLFormalSCI(contenido, nombreArchivo){
+  try{
+    const blob = new Blob([contenido], {type:'text/html;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nombreArchivo;
+    a.setAttribute('download', nombreArchivo);
+    a.style.display = 'none';
+    document.body.appendChild(a);
+
+    // MouseEvent es más confiable que a.click() en algunos navegadores.
+    a.dispatchEvent(new MouseEvent('click', {bubbles:true, cancelable:true, view:window}));
+
+    setTimeout(function(){
+      try{ document.body.removeChild(a); }catch(e){}
+      try{ URL.revokeObjectURL(url); }catch(e){}
+    }, 1200);
+  }catch(err){
+    alert('No se pudo descargar el documento. Se abrirá una vista para copiar/imprimir. Error: ' + err.message);
+    try{
+      const w = window.open('', '_blank');
+      if(w){
+        w.document.open();
+        w.document.write(contenido);
+        w.document.close();
+      }
+    }catch(e2){}
+  }
+}
+function descargarFichaBomberil(){
+  try{
+    const contenido = htmlFichaSCI();
+    descargaHTMLFormalSCI(contenido, 'Ficha_Operativa_SCI_NaTech_HazMat.html');
+    marcarChecklist('Ficha e informe generados para SCI');
+  }catch(err){
+    alert('Error generando la ficha SCI: ' + err.message);
+  }
+}
+function descargarInformeBomberil(){
+  try{
+    const contenido = htmlInformeSCI();
+    descargaHTMLFormalSCI(contenido, 'Informe_Tecnico_Operativo_SCI_NaTech_HazMat.html');
+    marcarChecklist('Ficha e informe generados para SCI');
+  }catch(err){
+    alert('Error generando el informe SCI: ' + err.message);
+  }
+}
+
+
+/* --- V15.7 SCI Word: parche estable para descargas de ficha/informe --- */
+function ensureSCITextSafe(s){
+  return String(s || '').replace(/[&<>"']/g, function(m){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m];
+  });
+}
+function ensureSCILines(s){
+  return ensureSCITextSafe(s || '').replace(/\n/g,'<br>');
+}
+function ensureSCIRows(obj){
+  return Object.entries(obj || {}).map(function(entry){
+    return '<tr><th>'+ensureSCITextSafe(entry[0])+'</th><td>'+ensureSCILines(entry[1])+'</td></tr>';
+  }).join('');
+}
+function ensureSCIChecklist(){
+  try{
+    const c = (typeof checks === 'function') ? checks() : [];
+    return c.length ? '<ul>'+c.map(function(x){return '<li>'+ensureSCITextSafe(x.replace(/^✓\s*/,''))+'</li>';}).join('')+'</ul>' : '<em>Sin verificaciones marcadas.</em>';
+  }catch(e){
+    return '<em>Sin verificaciones marcadas.</em>';
+  }
+}
+function ensureScenarioImageSCI(){
+  try{
+    if(typeof scenarioImageDataUrl !== 'undefined' && scenarioImageDataUrl){
+      return '<img src="'+scenarioImageDataUrl+'" style="width:100%;max-height:430px;object-fit:contain;border:1px solid #777;border-radius:4px;margin:8px 0 12px;">';
+    }
+  }catch(e){}
+  return '<div class="placeholder">Sin captura del escenario cargada. Adjuntar captura del mapa o croquis operativo si aplica.</div>';
+}
+
+/* Nombre exacto que estaba llamando el documento y que faltaba en esta versión */
+function arcgisCaptureHtmlSCI(){
+  try{
+    if(typeof arcgisCaptureDataUrl !== 'undefined' && arcgisCaptureDataUrl){
+      return '<img src="'+arcgisCaptureDataUrl+'" style="width:100%;max-height:430px;object-fit:contain;border:1px solid #777;border-radius:4px;margin:8px 0 12px;">';
+    }
+  }catch(e){}
+  return '<div class="placeholder">Sin captura ArcGIS cargada. Puede adjuntar captura del visor ArcGIS Online, atributos del punto o capa de riesgo.</div>';
+}
+
+/* Respaldo si la función del croquis automático no está disponible */
+if(typeof autoCroquisSVG !== 'function'){
+  function autoCroquisSVG(){
+    try{
+      if(!drawnItems || !drawnItems.length){
+        return '<div class="placeholder">No existen entidades dibujadas. Dibuje puntos, buffers, líneas, rectángulos o textos para generar el croquis.</div>';
+      }
+      let html = '<div class="placeholder"><b>Croquis automático simplificado</b><br>';
+      html += 'Elementos dibujados: '+drawnItems.length+'<br>';
+      html += ensureSCITextSafe((typeof legendText === 'function') ? legendText() : '');
+      html += '</div>';
+      return html;
+    }catch(e){
+      return '<div class="placeholder">Croquis automático no disponible.</div>';
+    }
+  }
+}
+
+/* Respaldo si la función de leyenda tabulada no está disponible */
+if(typeof legendTableSCI !== 'function'){
+  function legendTableSCI(){
+    try{
+      if(!drawnItems || !drawnItems.length){
+        return '<div class="placeholder">Sin leyenda operativa. Dibuje entidades para construir la leyenda.</div>';
+      }
+      let rows = '<tr><th>#</th><th>Tipo</th><th>Elemento</th><th>Detalle</th></tr>';
+      drawnItems.forEach(function(it, idx){
+        let det = '';
+        try{ det = (typeof legendDetail === 'function') ? legendDetail(it) : ''; }catch(e){}
+        rows += '<tr><td>'+(idx+1)+'</td><td>'+ensureSCITextSafe(it.tipo)+'</td><td>'+ensureSCITextSafe(it.label)+'</td><td>'+ensureSCITextSafe(det)+'</td></tr>';
+      });
+      return '<table>'+rows+'</table>';
+    }catch(e){
+      return '<div class="placeholder">Leyenda operativa no disponible.</div>';
+    }
+  }
+}
+
+function ensureSCIStyle(){
+  return '<style>'+
+  '@page{size:A4;margin:18mm}'+
+  'body{font-family:Arial,Helvetica,sans-serif;margin:28px;color:#111;line-height:1.38;font-size:12px}'+
+  '.doc-header{display:flex;justify-content:space-between;gap:14px;border-bottom:3px solid #111;padding-bottom:10px;margin-bottom:14px}'+
+  'h1{font-size:20px;margin:0;text-transform:uppercase}h2{font-size:14px;margin:16px 0 6px;background:#efefef;border:1px solid #999;padding:6px;text-transform:uppercase}h3{font-size:12px;margin:10px 0 4px}'+
+  '.subdoc{font-size:11px;color:#444;margin-top:4px}.tag{border:2px solid #111;padding:8px;text-align:center;font-weight:bold;min-width:92px}'+
+  'table{width:100%;border-collapse:collapse;margin-bottom:8px}th,td{border:1px solid #777;padding:6px;vertical-align:top}th{width:28%;background:#f5f5f5;text-align:left}'+
+  'pre{white-space:pre-wrap;font-family:Arial,Helvetica,sans-serif;border:1px solid #777;padding:8px;background:#fafafa}'+
+  '.placeholder{border:1px dashed #777;padding:18px;text-align:center;color:#555;background:#fafafa;margin:8px 0 12px}ul{margin:6px 0 6px 18px}footer{margin-top:18px;border-top:1px solid #777;padding-top:10px;font-size:11px}'+
+  '@media print{body{margin:0}.doc-header{break-inside:avoid}section{break-inside:avoid}}'+
+  '</style>';
+}
+
+/* Sobrescritura completa: no depende de funciones faltantes de versiones previas */
+function htmlFichaSCI(){
+  const org = (typeof fichaActual !== 'undefined' && fichaActual && fichaActual.organizacionSCI) ? fichaActual.organizacionSCI : {};
+  const title = 'FICHA OPERATIVA SCI/NATECH/HAZMAT';
+  const data = {
+    'Nombre del incidente / caso': val('caso'),
+    'Fecha / hora de elaboración': val('fecha') + ' ' + val('hora'),
+    'Ubicación': val('ubicacion'),
+    'Coordenadas de referencia': val('latPunto') + ', ' + val('lonPunto'),
+    'Tipo de escenario': val('tipo'),
+    'Nivel preliminar': val('nivel')
+  };
+  const lectura = {
+    'Amenaza / peligrosidad': val('amenaza'),
+    'Fuente tecnológica probable': val('fuente'),
+    'Ruta de exposición o dispersión': val('ruta'),
+    'Receptor vulnerable': val('receptor'),
+    'Elementos expuestos': val('expuestos')
+  };
+  const sci = {
+    'Mando': org.mando || 'Por definir',
+    'Seguridad': org.seguridad || 'Por definir',
+    'Operaciones': org.operaciones || 'Por definir',
+    'Planificación': org.planificacion || 'Por definir',
+    'Logística': org.logistica || 'Por definir',
+    'Enlace / información': org.enlaceInformacion || 'Por definir'
+  };
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+title+'</title>'+ensureSCIStyle()+'</head><body>'+
+    '<div class="doc-header"><div><h1>'+title+'</h1><div class="subdoc">Ficha rápida para briefing inicial, lectura fuente-ruta-receptor y organización operativa preliminar.</div></div><div class="tag">SCI-201 / 208HM<br>ADAPTADO</div></div>'+
+    '<section><h2>1. Identificación del incidente</h2><table>'+ensureSCIRows(data)+'</table></section>'+
+    '<section><h2>2. Captura del escenario / visor</h2>'+ensureScenarioImageSCI()+'<h3>Captura ArcGIS / visor SIG</h3>'+arcgisCaptureHtmlSCI()+'<h3>Croquis automático de entidades dibujadas</h3>'+autoCroquisSVG()+'<h3>Leyenda operativa tabulada</h3>'+legendTableSCI()+'</section>'+
+    '<section><h2>3. Situación actual y particularidades</h2><table>'+ensureSCIRows({'Particularidades del caso':getParticularidades(),'Antecedentes externos / noticias':getAntecedentes()})+'</table></section>'+
+    '<section><h2>4. Lectura fuente – ruta – receptor</h2><table>'+ensureSCIRows(lectura)+'</table></section>'+
+    '<section><h2>5. Objetivos iniciales y acciones planificadas</h2><table>'+ensureSCIRows({'Objetivo operacional inicial':'Proteger vida, controlar accesos, verificar fuente, delimitar zonas preliminares y documentar evidencias.','Acciones iniciales':val('acciones'),'Instituciones a coordinar':val('instituciones')})+'</table></section>'+
+    '<section><h2>6. Organización SCI preliminar</h2><table>'+ensureSCIRows(sci)+'</table></section>'+
+    '<section><h2>7. Control de zonas y recursos</h2><table>'+ensureSCIRows({'Zona caliente':'Por delimitar en cabina o campo según fuente, sustancia y condiciones.','Zona tibia':'Área de transición/control/descontaminación si aplica.','Zona fría':'Puesto de comando, triage, área de espera y logística.','Recursos iniciales':'Unidad HazMat, monitoreo, EPP, control de accesos, comunicación, apoyo médico y enlace institucional según disponibilidad.'})+'</table></section>'+
+    '<section><h2>8. Checklist operativo</h2>'+ensureSCIChecklist()+'</section>'+
+    '<section><h2>9. Validación y advertencia</h2><p>Documento de uso formativo y preliminar. No constituye declaratoria oficial de riesgo, no reemplaza inspección de campo, monitoreo ambiental, identificación técnica de sustancias ni decisiones de autoridad competente.</p></section>'+
+    '<footer><b>Elaboró:</b> ____________________ &nbsp;&nbsp; <b>Función:</b> ____________________ &nbsp;&nbsp; <b>Hora:</b> __________</footer>'+
+    '</body></html>';
+}
+
+function htmlInformeSCI(){
+  const org = (typeof fichaActual !== 'undefined' && fichaActual && fichaActual.organizacionSCI) ? fichaActual.organizacionSCI : {};
+  const title = 'INFORME TÉCNICO-OPERATIVO SCI/NATECH/HAZMAT';
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+title+'</title>'+ensureSCIStyle()+'</head><body>'+
+    '<div class="doc-header"><div><h1>'+title+'</h1><div class="subdoc">Informe preliminar de escenario NaTech/HazMat con soporte espacial y organización SCI.</div></div><div class="tag">INFORME<br>SCI</div></div>'+
+    '<section><h2>1. Resumen ejecutivo</h2><p>Se documenta el análisis preliminar del caso <b>'+ensureSCITextSafe(val('caso'))+'</b>, ubicado en <b>'+ensureSCITextSafe(val('ubicacion'))+'</b>. El escenario se interpreta con enfoque NaTech/HazMat, lectura fuente-ruta-receptor, registro de antecedentes externos y organización bajo lógica SCI.</p></section>'+
+    '<section><h2>2. Datos generales</h2><table>'+ensureSCIRows({'Caso':val('caso'),'Fecha/hora':val('fecha')+' '+val('hora'),'Ubicación':val('ubicacion'),'Coordenadas':val('latPunto')+', '+val('lonPunto'),'Tipo de escenario':val('tipo'),'Nivel preliminar':val('nivel')})+'</table></section>'+
+    '<section><h2>3. Evidencia gráfica del escenario</h2>'+ensureScenarioImageSCI()+'<h3>Captura ArcGIS / visor SIG</h3>'+arcgisCaptureHtmlSCI()+'<h3>Croquis automático de entidades dibujadas</h3>'+autoCroquisSVG()+'<h3>Leyenda operativa tabulada</h3>'+legendTableSCI()+'</section>'+
+    '<section><h2>4. Contexto y antecedentes</h2><table>'+ensureSCIRows({'Particularidades operativas':getParticularidades(),'Antecedentes externos / noticias':getAntecedentes()})+'</table></section>'+
+    '<section><h2>5. Análisis técnico-operativo fuente – ruta – receptor</h2><table>'+ensureSCIRows({'Amenaza / peligrosidad':val('amenaza'),'Fuente tecnológica probable':val('fuente'),'Ruta de exposición o dispersión':val('ruta'),'Receptor vulnerable':val('receptor'),'Elementos expuestos':val('expuestos')})+'</table></section>'+
+    '<section><h2>6. Organización SCI preliminar</h2><table>'+ensureSCIRows({'Mando':org.mando||'Por definir','Seguridad':org.seguridad||'Por definir','Operaciones':org.operaciones||'Por definir','Planificación':org.planificacion||'Por definir','Logística':org.logistica||'Por definir','Enlace / información':org.enlaceInformacion||'Por definir'})+'</table></section>'+
+    '<section><h2>7. Objetivos, acciones y coordinación</h2><table>'+ensureSCIRows({'Objetivo general operativo':'Orientar la priorización inicial, delimitación de zonas, control de accesos, verificación de fuente y protección de población expuesta.','Acciones iniciales propuestas':val('acciones'),'Instituciones a coordinar':val('instituciones')})+'</table></section>'+
+    '<section><h2>8. Seguridad, control de sitio y limitaciones</h2><table>'+ensureSCIRows({'Mensaje de seguridad':'No ingresar a zona caliente sin identificación de sustancia, monitoreo, EPP apropiado y autorización del mando.','Control de sitio':'Usar zonas caliente, tibia y fría como delimitación preliminar; ajustar con viento, sustancia, monitoreo y verificación de campo.','Limitaciones':'El análisis depende de la ficha JSON, capturas, capas SIG, antecedentes y dibujos del usuario. Requiere validación técnica institucional.'})+'</table></section>'+
+    '<section><h2>9. Checklist y trazabilidad</h2>'+ensureSCIChecklist()+'</section>'+
+    '<section><h2>10. Conclusión preliminar</h2><p>El escenario permite estructurar una lectura operativa inicial y generar evidencias para docencia, análisis territorial y preparación de fichas. La información no sustituye mando real, peritaje, monitoreo ni informe técnico oficial.</p></section>'+
+    '<footer><b>Elaboró:</b> ____________________ &nbsp;&nbsp; <b>Revisó:</b> ____________________ &nbsp;&nbsp; <b>Fecha:</b> __________</footer>'+
+    '</body></html>';
+}
+
+function descargaHTMLFormalSCI(contenido, nombreArchivo){
+  try{
+    const blob = new Blob([contenido], {type:'text/html;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nombreArchivo;
+    a.setAttribute('download', nombreArchivo);
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.dispatchEvent(new MouseEvent('click', {bubbles:true, cancelable:true, view:window}));
+    setTimeout(function(){
+      try{ document.body.removeChild(a); }catch(e){}
+      try{ URL.revokeObjectURL(url); }catch(e){}
+    }, 1200);
+  }catch(err){
+    alert('No se pudo descargar el documento. Se abrirá una vista para imprimir o guardar. Error: ' + err.message);
+    try{
+      const w = window.open('', '_blank');
+      if(w){ w.document.open(); w.document.write(contenido); w.document.close(); }
+    }catch(e2){}
+  }
+}
+
+function descargarFichaBomberil(){
+  try{
+    descargaHTMLFormalSCI(htmlFichaSCI(), 'Ficha_Operativa_SCI_NaTech_HazMat.html');
+    marcarChecklist('Ficha e informe generados para SCI');
+  }catch(err){
+    alert('Error generando la ficha SCI: ' + err.message);
+  }
+}
+
+function descargarInformeBomberil(){
+  try{
+    descargaHTMLFormalSCI(htmlInformeSCI(), 'Informe_Tecnico_Operativo_SCI_NaTech_HazMat.html');
+    marcarChecklist('Ficha e informe generados para SCI');
+  }catch(err){
+    alert('Error generando el informe SCI: ' + err.message);
+  }
+}
+
+
+/* --- V15.7 SCI Word: diferenciación formal entre ficha práctica e informe técnico --- */
+function estadoCampoSCI(txt){
+  const v = String(txt || '').trim();
+  return v && v !== 'No registrado' ? v : 'Por completar';
+}
+function evidenciaDibujosSCI(){
+  return '<h3>Croquis automático del escenario</h3>'+autoCroquisSVG()+
+         '<h3>Leyenda operativa tabulada</h3>'+legendTableSCI();
+}
+function tablaZonasSCI(){
+  return ensureSCIRows({
+    'Zona caliente / aislamiento': 'Dibujar buffer o área según fuente probable, sustancia, viento, monitoreo y criterio del mando.',
+    'Zona tibia / control': 'Definir transición, control de acceso, descontaminación si aplica y reducción de exposición.',
+    'Zona fría / apoyo': 'Ubicar puesto de comando, triage, área de espera, logística y enlace institucional.',
+    'Rutas': 'Dibujar rutas de acceso, evacuación, drenajes o trayectorias relevantes.',
+    'Bloqueos': 'Marcar puntos de cierre vial, control de ingreso y seguridad perimetral.'
+  });
+}
+function htmlFichaSCI(){
+  const org = (typeof fichaActual !== 'undefined' && fichaActual && fichaActual.organizacionSCI) ? fichaActual.organizacionSCI : {};
+  const title = 'FICHA PRÁCTICA DE ESCENARIO SCI/NATECH/HAZMAT';
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+title+'</title>'+ensureSCIStyle()+'</head><body>'+
+    '<div class="doc-header"><div><h1>'+title+'</h1><div class="subdoc">Instrumento rápido para uso operativo/formativo: ubicar escenario, dibujar zonas, registrar decisiones iniciales y generar evidencia espacial.</div></div><div class="tag">FICHA<br>CAMPO</div></div>'+
+
+    '<section><h2>1. Identificación rápida del escenario</h2><table>'+ensureSCIRows({
+      'Caso / incidente': estadoCampoSCI(val('caso')),
+      'Fecha y hora': estadoCampoSCI(val('fecha') + ' ' + val('hora')),
+      'Ubicación operativa': estadoCampoSCI(val('ubicacion')),
+      'Coordenadas del punto base': estadoCampoSCI(val('latPunto') + ', ' + val('lonPunto')),
+      'Tipo de escenario': estadoCampoSCI(val('tipo')),
+      'Nivel preliminar': estadoCampoSCI(val('nivel'))
+    })+'</table></section>'+
+
+    '<section><h2>2. Croquis práctico del escenario</h2>'+ensureScenarioImageSCI()+evidenciaDibujosSCI()+'</section>'+
+
+    '<section><h2>3. Lectura operativa fuente – ruta – receptor</h2><table>'+ensureSCIRows({
+      'Amenaza / condición detonante': estadoCampoSCI(val('amenaza')),
+      'Fuente tecnológica probable': estadoCampoSCI(val('fuente')),
+      'Ruta de exposición / dispersión': estadoCampoSCI(val('ruta')),
+      'Receptor vulnerable': estadoCampoSCI(val('receptor')),
+      'Elementos expuestos prioritarios': estadoCampoSCI(val('expuestos'))
+    })+'</table></section>'+
+
+    '<section><h2>4. Zonas, accesos y control inicial</h2><table>'+tablaZonasSCI()+'</table></section>'+
+
+    '<section><h2>5. Acciones inmediatas sugeridas</h2><table>'+ensureSCIRows({
+      'Prioridad 1': 'Seguridad de vida y protección del personal de respuesta.',
+      'Prioridad 2': 'Verificar fuente, sustancia, dirección de viento, drenajes y población sensible.',
+      'Prioridad 3': 'Delimitar zonas preliminares, rutas, bloqueos y puesto de comando.',
+      'Acciones registradas en ficha': estadoCampoSCI(val('acciones')),
+      'Instituciones a coordinar': estadoCampoSCI(val('instituciones'))
+    })+'</table></section>'+
+
+    '<section><h2>6. Organización SCI mínima para el escenario</h2><table>'+ensureSCIRows({
+      'Mando / PC': org.mando || 'Establecer puesto de comando preliminar en zona fría.',
+      'Seguridad': org.seguridad || 'Controlar accesos y evitar ingreso sin verificación.',
+      'Operaciones': org.operaciones || 'Reconocer fuente, rutas, receptores y zonas.',
+      'Planificación': org.planificacion || 'Registrar evidencias, croquis, leyenda y datos por verificar.',
+      'Logística': org.logistica || 'Definir recursos, monitoreo, comunicación y área de espera.'
+    })+'</table></section>'+
+
+    '<section><h2>7. Checklist de aplicación práctica</h2>'+ensureSCIChecklist()+'</section>'+
+
+    '<section><h2>8. Datos críticos por verificar en campo</h2><table>'+ensureSCIRows({
+      'Sustancia / proceso': 'Confirmar sustancia, almacenamiento, proceso o fuente tecnológica.',
+      'Condiciones ambientales': 'Verificar viento, lluvia, drenajes, alcantarillas, pendiente y accesos.',
+      'Población sensible': 'Confirmar presencia de estudiantes, pacientes, adultos mayores, trabajadores o viviendas.',
+      'Evidencias': 'Adjuntar captura ArcGIS, croquis generado y GeoJSON operativo.'
+    })+'</table></section>'+
+
+    '<section><h2>9. Advertencia de uso</h2><p>Ficha de aplicación práctica y preliminar. No constituye declaratoria oficial de riesgo ni reemplaza monitoreo, identificación técnica de sustancias, inspección de campo o decisiones de autoridad competente.</p></section>'+
+    '<footer><b>Elaboró:</b> ____________________ &nbsp;&nbsp; <b>Función:</b> ____________________ &nbsp;&nbsp; <b>Hora:</b> __________</footer>'+
+    '</body></html>';
+}
+
+function listaAntecedentesInformeSCI(){
+  try{
+    if(fichaActual && Array.isArray(fichaActual.antecedentesExternos) && fichaActual.antecedentesExternos.length){
+      let rows = '<tr><th>Fecha</th><th>Fuente</th><th>Tipo</th><th>Descripción</th><th>URL</th></tr>';
+      fichaActual.antecedentesExternos.forEach(function(a){
+        rows += '<tr><td>'+ensureSCITextSafe(a.fecha || 's/f')+'</td><td>'+ensureSCITextSafe(a.fuente || 'Por verificar')+'</td><td>'+ensureSCITextSafe(a.tipo || 'Por verificar')+'</td><td>'+ensureSCITextSafe(a.descripcion || 'Sin descripción')+'</td><td>'+ensureSCITextSafe(a.url || 'Sin URL')+'</td></tr>';
+      });
+      return '<table>'+rows+'</table>';
+    }
+  }catch(e){}
+  return '<div class="placeholder">No se cargaron antecedentes estructurados en la ficha JSON. Use el campo de antecedentes externos o revise fuentes web.</div>';
+}
+
+function datosPorVerificarInformeSCI(){
+  try{
+    if(fichaActual && Array.isArray(fichaActual.datosPorVerificar) && fichaActual.datosPorVerificar.length){
+      return '<ul>'+fichaActual.datosPorVerificar.map(function(x){return '<li>'+ensureSCITextSafe(x)+'</li>';}).join('')+'</ul>';
+    }
+  }catch(e){}
+  return '<ul><li>Coordenada exacta del punto crítico.</li><li>Fuente tecnológica específica.</li><li>Sustancia involucrada.</li><li>Condiciones de viento, drenaje y rutas reales de exposición.</li><li>Validación institucional del escenario.</li></ul>';
+}
+
+function evidenciasInformeSCI(){
+  try{
+    if(fichaActual && Array.isArray(fichaActual.evidenciasRequeridas) && fichaActual.evidenciasRequeridas.length){
+      return '<ul>'+fichaActual.evidenciasRequeridas.map(function(x){return '<li>'+ensureSCITextSafe(x)+'</li>';}).join('')+'</ul>';
+    }
+  }catch(e){}
+  return '<ul><li>Captura del visor SIG/ArcGIS.</li><li>GeoJSON operativo exportado.</li><li>Ficha práctica generada.</li><li>Fuentes externas consultadas.</li></ul>';
+}
+
+function htmlInformeSCI(){
+  const org = (typeof fichaActual !== 'undefined' && fichaActual && fichaActual.organizacionSCI) ? fichaActual.organizacionSCI : {};
+  const title = 'INFORME TÉCNICO-OPERATIVO SCI/NATECH/HAZMAT';
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+title+'</title>'+ensureSCIStyle()+'</head><body>'+
+    '<div class="doc-header"><div><h1>'+title+'</h1><div class="subdoc">Documento ampliado para contextualizar el escenario, antecedentes web, evidencias SIG, análisis técnico-operativo, limitaciones y recomendaciones.</div></div><div class="tag">INFORME<br>TÉCNICO</div></div>'+
+
+    '<section><h2>1. Resumen ejecutivo</h2><p>Se analiza preliminarmente el escenario <b>'+ensureSCITextSafe(estadoCampoSCI(val('caso')))+'</b>, ubicado en <b>'+ensureSCITextSafe(estadoCampoSCI(val('ubicacion')))+'</b>. El análisis integra información de ficha JSON, croquis operativo, captura ArcGIS/visor SIG, antecedentes externos, lectura fuente-ruta-receptor y organización SCI para orientar priorización y documentación técnica.</p></section>'+
+
+    '<section><h2>2. Datos generales del caso</h2><table>'+ensureSCIRows({
+      'Caso': estadoCampoSCI(val('caso')),
+      'Fecha / hora': estadoCampoSCI(val('fecha') + ' ' + val('hora')),
+      'Ubicación': estadoCampoSCI(val('ubicacion')),
+      'Coordenadas': estadoCampoSCI(val('latPunto') + ', ' + val('lonPunto')),
+      'Tipo de escenario': estadoCampoSCI(val('tipo')),
+      'Nivel preliminar': estadoCampoSCI(val('nivel'))
+    })+'</table></section>'+
+
+    '<section><h2>3. Insumos gráficos y SIG</h2><h3>Captura de escenario cargada por el usuario</h3>'+ensureScenarioImageSCI()+'<h3>Captura ArcGIS / visor SIG</h3>'+arcgisCaptureHtmlSCI()+'<h3>Croquis automático de entidades dibujadas</h3>'+autoCroquisSVG()+'<h3>Leyenda operativa tabulada</h3>'+legendTableSCI()+'</section>'+
+
+    '<section><h2>4. Antecedentes externos y datos de la web</h2><p>Este apartado documenta antecedentes públicos o fuentes web incorporadas en la ficha. Deben ser tratados como contexto operativo y no como prueba técnica concluyente.</p>'+listaAntecedentesInformeSCI()+'<h3>Texto complementario de antecedentes</h3><table>'+ensureSCIRows({'Antecedentes registrados': estadoCampoSCI(getAntecedentes())})+'</table></section>'+
+
+    '<section><h2>5. Análisis técnico-operativo fuente – ruta – receptor</h2><table>'+ensureSCIRows({
+      'Amenaza / peligrosidad': estadoCampoSCI(val('amenaza')),
+      'Fuente tecnológica probable': estadoCampoSCI(val('fuente')),
+      'Ruta de exposición / dispersión': estadoCampoSCI(val('ruta')),
+      'Receptor vulnerable': estadoCampoSCI(val('receptor')),
+      'Elementos expuestos': estadoCampoSCI(val('expuestos')),
+      'Particularidades operativas': estadoCampoSCI(getParticularidades())
+    })+'</table></section>'+
+
+    '<section><h2>6. Organización SCI y coordinación institucional</h2><table>'+ensureSCIRows({
+      'Mando': org.mando || 'Por definir',
+      'Seguridad': org.seguridad || 'Por definir',
+      'Operaciones': org.operaciones || 'Por definir',
+      'Planificación': org.planificacion || 'Por definir',
+      'Logística': org.logistica || 'Por definir',
+      'Enlace / información': org.enlaceInformacion || 'Por definir',
+      'Instituciones a coordinar': estadoCampoSCI(val('instituciones'))
+    })+'</table></section>'+
+
+    '<section><h2>7. Acciones iniciales y recomendaciones</h2><table>'+ensureSCIRows({
+      'Acciones iniciales registradas': estadoCampoSCI(val('acciones')),
+      'Recomendación 1': 'Validar coordenada, fuente tecnológica y sustancia con inspección o información institucional.',
+      'Recomendación 2': 'Contrastar croquis operativo con visor SIG, capa de edificaciones/riesgo y rutas reales de acceso.',
+      'Recomendación 3': 'Actualizar zonas caliente, tibia y fría con base en viento, sustancia, monitoreo y mando operativo.',
+      'Recomendación 4': 'Mantener trazabilidad: captura ArcGIS, GeoJSON operativo, ficha práctica y fuentes web.'
+    })+'</table></section>'+
+
+    '<section><h2>8. Datos por verificar</h2>'+datosPorVerificarInformeSCI()+'</section>'+
+
+    '<section><h2>9. Evidencias requeridas y trazabilidad</h2>'+evidenciasInformeSCI()+'<h3>Checklist marcado en cabina</h3>'+ensureSCIChecklist()+'</section>'+
+
+    '<section><h2>10. Limitaciones</h2><p>El informe es preliminar y metodológico. Los antecedentes web no constituyen prueba técnica definitiva. La delimitación espacial generada en la cabina no reemplaza modelación de dispersión, monitoreo ambiental, identificación de sustancias, inspección de campo ni acto administrativo de autoridad competente.</p></section>'+
+
+    '<section><h2>11. Conclusión preliminar</h2><p>El escenario permite estructurar una lectura técnica-operativa inicial, priorizar elementos expuestos y consolidar evidencias para análisis, capacitación o revisión institucional. Se recomienda complementar con validación de campo, información oficial de instalaciones, monitoreo, datos meteorológicos y revisión por especialistas HazMat/SIG.</p></section>'+
+
+    '<footer><b>Elaboró:</b> ____________________ &nbsp;&nbsp; <b>Revisó:</b> ____________________ &nbsp;&nbsp; <b>Fecha:</b> __________</footer>'+
+    '</body></html>';
+}
+
+
+/* --- V15.7 SCI Word: descarga estable compatible con Microsoft Word / LibreOffice --- */
+function prepararDocumentoWordSCI(htmlContent, titulo){
+  // Word abre correctamente HTML con extensión .doc.
+  // Se usa BOM UTF-8 para conservar acentos y caracteres especiales.
+  let contenido = String(htmlContent || '');
+  contenido = contenido.replace('<html>', '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">');
+  contenido = contenido.replace('<head>', '<head><meta name="ProgId" content="Word.Document"><meta name="Generator" content="Cabina SCI NaTech/HazMat V15.7"><meta name="Originator" content="Cabina SCI NaTech/HazMat">');
+  return '\ufeff' + contenido;
+}
+
+function descargarDocumentoWordSCI(htmlContent, nombreArchivo){
+  try{
+    const contenidoWord = prepararDocumentoWordSCI(htmlContent, nombreArchivo);
+    const blob = new Blob([contenidoWord], {type:'application/msword;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nombreArchivo;
+    a.setAttribute('download', nombreArchivo);
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.dispatchEvent(new MouseEvent('click', {bubbles:true, cancelable:true, view:window}));
+    setTimeout(function(){
+      try{ document.body.removeChild(a); }catch(e){}
+      try{ URL.revokeObjectURL(url); }catch(e){}
+    }, 1200);
+  }catch(err){
+    alert('No se pudo descargar en Word. Se intentará descargar como HTML. Error: ' + err.message);
+    try{
+      descargaHTMLFormalSCI(htmlContent, nombreArchivo.replace(/\.doc$/i,'.html'));
+    }catch(e2){
+      alert('No se pudo descargar el documento: ' + e2.message);
+    }
+  }
+}
+
+function descargarFichaBomberil(){
+  try{
+    descargarDocumentoWordSCI(htmlFichaSCI(), 'Ficha_Practica_SCI_NaTech_HazMat.doc');
+    marcarChecklist('Ficha e informe generados para SCI');
+  }catch(err){
+    alert('Error generando la ficha Word SCI: ' + err.message);
+  }
+}
+
+function descargarInformeBomberil(){
+  try{
+    descargarDocumentoWordSCI(htmlInformeSCI(), 'Informe_Tecnico_Operativo_SCI_NaTech_HazMat.doc');
+    marcarChecklist('Ficha e informe generados para SCI');
+  }catch(err){
+    alert('Error generando el informe Word SCI: ' + err.message);
+  }
+}
+
+</script>
+</body>
+</html>
