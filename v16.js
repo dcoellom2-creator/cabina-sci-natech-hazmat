@@ -151,6 +151,40 @@
     map.on('click',e=>{if(tactical.mode){addTacticalMarker(tactical.mode,e.latlng);clearTacticalMode()}});
   }
 
+
+  function injectMapContextUI(){
+    if(el('v16ContextMenu'))return;
+    const menu=document.createElement('div');menu.id='v16ContextMenu';menu.className='v16-context-menu';document.body.appendChild(menu);
+    const mini=document.createElement('div');mini.id='v16MiniTools';mini.className='v16-mini-tools';
+    mini.innerHTML='<button data-q="select" title="Seleccionar / mover">↖</button><button data-q="point" title="Colocar símbolo">✚</button><button data-q="poly" title="Polígono">⬠</button><button data-q="rect" title="Rectángulo">▭</button><button data-q="line" title="Ruta / línea">↗</button><button data-q="more" title="Más opciones">⋮</button>';
+    document.querySelector('#mapShell')?.appendChild(mini);
+    function hide(){menu.classList.remove('open')}
+    function show(x,y,html){menu.innerHTML=html;menu.style.left=Math.min(x,innerWidth-235)+'px';menu.style.top=Math.min(y,innerHeight-340)+'px';menu.classList.add('open')}
+    function mapMenu(e){
+      const oe=e.originalEvent;oe.preventDefault();
+      show(oe.clientX,oe.clientY,'<div class="v16-ctx-title">Mapa operacional</div>'+
+        '<button data-c="symbol">✚ Colocar símbolo…</button><button data-c="poly">⬠ Dibujar polígono</button><button data-c="rect">▭ Dibujar rectángulo</button><button data-c="line">↗ Dibujar ruta / flecha</button><button data-c="circle">◯ Área / radio</button>'+
+        '<div class="v16-ctx-sep"></div><button data-c="layers">◉ Mostrar / ocultar capas</button><button data-c="center">⌖ Centrar aquí</button>');
+      menu.querySelector('[data-c="symbol"]').onclick=()=>{hide();document.querySelector('[data-tab="symbols"]')?.click()};
+      menu.querySelector('[data-c="poly"]').onclick=()=>{hide();if(typeof setMode==='function')setMode('polygon')};
+      menu.querySelector('[data-c="rect"]').onclick=()=>{hide();if(typeof setMode==='function')setMode('rect')};
+      menu.querySelector('[data-c="line"]').onclick=()=>{hide();if(typeof setMode==='function')setMode('line')};
+      menu.querySelector('[data-c="circle"]').onclick=()=>{hide();if(typeof setMode==='function')setMode('buffer')};
+      menu.querySelector('[data-c="center"]').onclick=()=>{map.panTo(e.latlng);hide()};
+      menu.querySelector('[data-c="layers"]').onclick=()=>{show(oe.clientX,oe.clientY,'<div class="v16-ctx-title">Visibilidad</div><button data-v="tactical">✓ Símbolos tácticos</button><button data-v="plume">✓ Pluma / viento</button><button data-v="legend">✓ Leyenda</button><button data-v="oldtools">Herramientas avanzadas</button>');menu.querySelector('[data-v="tactical"]').onclick=()=>{tactical.objects.forEach(o=>map.hasLayer(o.layer)?map.removeLayer(o.layer):o.layer.addTo(map));hide()};menu.querySelector('[data-v="plume"]').onclick=()=>{if(state.plume&&map.hasLayer(state.plume))clearWind();else drawWind();hide()};menu.querySelector('[data-v="legend"]').onclick=()=>{const x=document.querySelector('.legend-panel');if(x)x.style.display=x.style.display==='none'?'':'none';hide()};menu.querySelector('[data-v="oldtools"]').onclick=()=>{document.querySelector('.toolbar')?.classList.toggle('v16-expanded');hide()}};
+    }
+    map.on('contextmenu',mapMenu);
+    document.addEventListener('click',e=>{if(!menu.contains(e.target))hide()});
+    mini.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{
+      const q=b.dataset.q;if(q==='select'){if(typeof setMode==='function')setMode('map')}
+      if(q==='point')document.querySelector('[data-tab="symbols"]')?.click();
+      if(q==='poly'&&typeof setMode==='function')setMode('polygon');
+      if(q==='rect'&&typeof setMode==='function')setMode('rect');
+      if(q==='line'&&typeof setMode==='function')setMode('line');
+      if(q==='more')document.querySelector('.toolbar')?.classList.toggle('v16-expanded');
+    });
+  }
+
   function inject(){
     document.title='Cabina SCI NaTech/HazMat V16 Operacional';
     const h=document.querySelector('h1'); if(h)h.textContent='Cabina SCI NaTech/HazMat V16 Operacional';
@@ -161,6 +195,7 @@
     }
     const app=document.querySelector('.app');
     injectTacticalCatalog();
+    injectMapContextUI();
     const aside=document.createElement('aside');aside.className='drawer';aside.id='panelV16';
     aside.innerHTML='<div class="drawer-head"><h2>V16 · Contexto operacional</h2><button class="secondary" onclick="closeDrawers()">Cerrar</button></div>'+
       '<div class="v16-badge">CAPAS Y FUENTES</div><div class="grid2"><button class="secondary" id="v16OSM">OSM</button><button class="secondary" id="v16Esri">Satélite Esri</button></div>'+
