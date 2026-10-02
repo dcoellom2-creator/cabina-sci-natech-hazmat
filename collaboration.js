@@ -1,6 +1,6 @@
 import { app, database } from './firebase-config.js';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInAnonymously, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js';
-import { ref, set, get, update, remove, push, onValue, onDisconnect, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js';
+import { ref, set, get, update, push, onValue, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js';
 const auth = getAuth(app);
 auth.languageCode = 'es';
 const coordinatorEmail = 'dcoellom2@unemi.edu.ec';
@@ -194,6 +194,20 @@ async function startSharing(){
 function mountMobile(){
  const params=new URLSearchParams(location.hash.slice(1));incidentId=params.get('incidente')||'';const invitation=params.get('invitacion')||'';
  if(!/^[A-Za-z0-9_-]{10,80}$/.test(incidentId)||!/^[a-f0-9]{64}$/.test(invitation)){notice('Enlace incompleto. Solicita a coordinación un enlace nuevo.',true);$('joinForm').hidden=true;return;}
+ const activateMember=(name,restored=false)=>{
+  memberReady=true;$('joinForm').hidden=true;$('memberControls').hidden=false;$('memberIdentity').textContent=name;
+  $('startLocation').disabled=true;$('reportSend').disabled=true;
+  notice(restored?'Sesión recuperada. Coordinación conserva tu última posición. Pulsa Compartir ubicación solo para reanudar lecturas nuevas.':'Registro confirmado. La ubicación permanece apagada hasta que pulses Compartir ubicación.');
+  gpsNotice(restored?'Última posición conservada. GPS apagado hasta que pulses Compartir ubicación.':'GPS apagado. Pulsa Compartir ubicación y acepta el permiso. Enviar reporte no envía tu posición.');
+  stopIncident?.();
+  stopIncident=onValue(path('meta'),snap=>{
+   incident=snap.val();$('incidentName').textContent=incident?.name||'Incidente';
+   const ok=active(incident);
+   $('startLocation').disabled=!ok||sharing;
+   $('reportSend').disabled=!ok;
+   if(!ok){memberReady=false;void stopSharing('Incidente cerrado o vencido.');}
+  },e=>{memberReady=false;void stopSharing(errorText(e));});
+ };
  $('joinForm').onsubmit=async e=>{
   e.preventDefault();$('joinButton').disabled=true;
   try{
@@ -204,14 +218,21 @@ function mountMobile(){
    if(!auth.currentUser)await signInAnonymously(auth);
    const user=auth.currentUser,target=path('members/'+user.uid);const old=await get(target);
    await set(target,{name,phone,role,inviteToken:old.val()?.inviteToken||invitation,joinedAt:old.val()?.joinedAt||serverTimestamp()});
-   memberReady=true;$('joinForm').hidden=true;$('memberControls').hidden=false;$('memberIdentity').textContent=name;
-   notice('Registro confirmado. La ubicación permanece apagada hasta que pulses Compartir ubicación.');gpsNotice('GPS apagado. Pulsa Compartir ubicación y acepta el permiso. Enviar reporte no envía tu posición.');
-   stopIncident=onValue(path('meta'),snap=>{incident=snap.val();$('incidentName').textContent=incident?.name||'Incidente';if(!active(incident)){memberReady=false;void stopSharing('Incidente cerrado o vencido.');$('reportSend').disabled=true;$('startLocation').disabled=true;}},e=>{memberReady=false;void stopSharing(errorText(e));});
+   activateMember(name,false);
   }catch(e){notice(errorText(e),true);}finally{$('joinButton').disabled=false;}
  };
  $('startLocation').onclick=async()=>{if(sharing)return;try{await startSharing();}catch(e){notice(errorText(e),true);$('startLocation').disabled=false;}};
  $('stopLocation').onclick=action(()=>stopSharing());
  $('reportForm').onsubmit=async e=>{e.preventDefault();$('reportSend').disabled=true;try{if(!memberReady||!connected||!active(incident))throw Error('No hay conexión o el incidente ya no admite reportes.');await set(path('reports/'+auth.currentUser.uid),{status:$('memberStatus').value,detail:$('memberDetail').value.trim(),updatedAt:serverTimestamp()});notice('Reporte recibido por Firebase a las '+time(Date.now())+'. Reemplaza tu reporte anterior.');$('memberDetail').value='';}catch(e){notice(errorText(e),true);}finally{$('reportSend').disabled=!memberReady;}};
+ void (async()=>{
+  try{
+   await auth.authStateReady();
+   if(!auth.currentUser)return;
+   const memberSnap=await get(path('members/'+auth.currentUser.uid));
+   const member=memberSnap.val();
+   if(member&&member.inviteToken===invitation)activateMember(member.name,true);
+  }catch(e){/* Si no existe sesión previa, se mantiene el formulario de registro. */}
+ })();
  window.addEventListener('pagehide',()=>{if(watcher!==null)navigator.geolocation.clearWatch(watcher);sharing=false;});
  window.addEventListener('pageshow',e=>{if(e.persisted){$('startLocation').disabled=!memberReady;$('stopLocation').disabled=true;notice('La página volvió a primer plano. Si el navegador pausó el GPS, pulsa Compartir ubicación para reanudar lecturas nuevas; coordinación conserva la última posición.');}});
  setInterval(()=>{if(memberReady&&!active(incident)){memberReady=false;void stopSharing('Incidente vencido.');$('reportSend').disabled=true;}},15000);
