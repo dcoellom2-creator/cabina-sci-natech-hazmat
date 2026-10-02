@@ -82,7 +82,8 @@ function renderPersonnel(){
  $('collabCount').textContent=`${all.length} colaboradores registrados · ${connected?'conexión disponible':'sin conexión'}`;
  for(const [uid,m] of all){
   const revoked=!!incident.revoked?.[uid], p=incident.locations?.[uid], report=incident.reports?.[uid];
-  const fresh=connected&&active(incident.meta)&&!revoked&&p&&Date.now()-p.updatedAt<90000;
+  const age=p?.updatedAt ? Date.now()-p.updatedAt : Infinity;
+  const fresh=connected&&active(incident.meta)&&!revoked&&p&&p.active!==false&&age<120000;
   const row=textNode('article','', 'collab-person');
   row.append(textNode('strong',m.name),textNode('small',`${m.role||'Colaborador'} · ${m.phone}`));
   row.append(textNode('p',revoked?'Acceso revocado':p?`${fresh?'Ubicación reciente':'Última ubicación; no confirma presencia actual'} · ${time(p.updatedAt)} · precisión ±${Math.round(p.accuracy)} m`:'Sin ubicación GPS: el colaborador debe pulsar Compartir ubicación y aceptar el permiso'));
@@ -93,7 +94,7 @@ function renderPersonnel(){
     seen.add(uid); let marker=markers.get(uid);
     if(!marker){marker=L.circleMarker([p.lat,p.lng],{radius:9,weight:3,fillOpacity:.85}).addTo(layer);markers.set(uid,marker);}
     marker.setLatLng([p.lat,p.lng]);marker.setStyle({color:fresh?'#31d0aa':'#ffc247',fillColor:fresh?'#31d0aa':'#ffc247'});
-    labelMarker(marker,m.name,fresh?'GPS reciente':'última ubicación');
+    labelMarker(marker,`${m.name} · ${m.role||'Colaborador'}`,fresh?'EN LÍNEA':'ÚLTIMA POSICIÓN');
     const popup=document.createElement('div');popup.append(textNode('strong',m.name),textNode('p',`${time(p.updatedAt)} · ±${Math.round(p.accuracy)} m${fresh?'':' · dato no actual'}`));marker.bindPopup(popup);
     row.append(makeButton('Ver en mapa',()=>{window.closeDrawers?.();mapInstance.invalidateSize();mapInstance.setView([p.lat,p.lng],17);marker.openPopup();}));
    }
@@ -172,6 +173,7 @@ function mountControl(){
 }
 async function stopSharing(message='Ubicación detenida. Se conserva la última posición registrada en coordinación.'){
  sharing=false;if(watcher!==null){navigator.geolocation.clearWatch(watcher);watcher=null;}
+ if(memberReady&&auth.currentUser&&incidentId&&connected){void update(path('locations/'+auth.currentUser.uid),{active:false,clientUpdatedAt:Date.now()}).catch(()=>{});}
  if($('startLocation'))$('startLocation').disabled=!memberReady;
  if($('stopLocation'))$('stopLocation').disabled=true;
  notice(message);gpsNotice(message);
@@ -180,14 +182,15 @@ async function startSharing(){
  if(!navigator.geolocation)throw Error('El navegador no ofrece geolocalización.');
  if(!memberReady||!connected)throw Error('Completa el registro y verifica la conexión.');
  if(!active(incident))throw Error('El incidente ya cerró o venció.');
- const target=path('locations/'+auth.currentUser.uid);
+ const uid=auth.currentUser?.uid;if(!uid)throw Error('No existe una sesión de colaborador activa.');
+ const target=path('locations/'+uid);
  sharing=true;lastSent=0;$('startLocation').disabled=true;$('stopLocation').disabled=false;notice('Solicitando permiso de ubicación…');gpsNotice('Esperando permiso y lectura GPS…');
  watcher=navigator.geolocation.watchPosition(async position=>{
   if(!sharing||!connected||sending||Date.now()-lastSent<15000)return;
   if(Date.now()-position.timestamp>60000)return;
   if(!active(incident)){await stopSharing('Incidente cerrado o vencido.');return;}
   sending=true;lastSent=Date.now();const {latitude:lat,longitude:lng,accuracy}=position.coords;
-  try{await set(target,{lat,lng,accuracy,updatedAt:serverTimestamp()});notice(`Ubicación enviada a coordinación a las ${time(Date.now())}. Precisión ±${Math.round(accuracy)} m.`);gpsNotice(`GPS compartido · ${time(Date.now())} · precisión ±${Math.round(accuracy)} m.`);}
+  try{await update(target,{lat,lng,accuracy,updatedAt:serverTimestamp(),clientUpdatedAt:Date.now(),active:true});notice(`Ubicación enviada a coordinación a las ${time(Date.now())}. Precisión ±${Math.round(accuracy)} m.`);gpsNotice(`GPS compartido · ${time(Date.now())} · precisión ±${Math.round(accuracy)} m.`);}
   catch(e){notice('No se pudo enviar esta lectura GPS. El seguimiento sigue activo y reintentará automáticamente.',true);gpsNotice('GPS activo; esperando recuperar conexión para actualizar.',true);}finally{sending=false;}
  },async e=>{if(e.code===1)await stopSharing('Permiso de ubicación denegado. Puedes habilitarlo en tu navegador; el registro y los reportes siguen disponibles.');else {notice('GPS sin lectura: '+e.message+'. No se ha confirmado una nueva ubicación.',true);gpsNotice('GPS sin lectura: '+e.message,true);}}, {enableHighAccuracy:true,maximumAge:10000,timeout:20000});
 }
