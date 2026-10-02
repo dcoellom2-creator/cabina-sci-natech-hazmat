@@ -63,3 +63,12 @@ La política de conservación/borrado de incidentes debe definirse antes del uso
 - https://firebase.google.com/docs/auth/web/google-signin
 - https://firebase.google.com/docs/database/web/offline-capabilities
 - https://firebase.google.com/docs/database/usage/billing
+
+## Corrección V17.1 — 2026-10-02
+- Diagnóstico de la prueba del usuario: el reporte del colaborador se recibió, pero el incidente no tenía posición GPS. Enviar reporte no activa geolocalización.
+- Corregida recreación de la capa de personal después de seleccionar de nuevo un incidente: clearMap también reinicia la referencia al mapa.
+- Etiquetas permanentes con nombre y vigencia; ajuste inicial de vista y botón Ver equipo en mapa.
+- Mostrar mi ubicación: GPS local del dispositivo del coordinador, con permiso explícito y botón de detención. No se envía esta posición a Firebase ni a otros dispositivos. Se detiene al salir de sesión o de página.
+- Estado GPS independiente del reporte en el teléfono para evitar confundir envío de texto con posición confirmada.
+- Pruebas: node --test tests/map.test.mjs; recreación de capa, etiquetas, ausencia de marcador sin GPS, ubicación local y descarte de lecturas posteriores a detener. Sin cambios de reglas ni plan de Firebase.
+- Pendiente: confirmar lectura GPS real de ambos teléfonos con permisos concedidos y página abierta.

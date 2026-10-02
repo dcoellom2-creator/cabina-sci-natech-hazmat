@@ -9,6 +9,52 @@ const $ = id => document.getElementById(id);
 let connected = false, incidentId = '', incident = null, watcher = null, lastSent = 0, sending = false;
 let stopIncident = null, disconnectTask = null, sharing = false, markers = new Map(), layer = null, mapInstance = null;
 let memberReady = false;
+let coordinatorWatcher = null, coordinatorPosition = null, coordinatorGeneration = 0, fittedIncident = false;
+function gpsNotice(text,bad=false){const n=$('locationState');if(n){n.textContent=text;n.classList.toggle('error',bad);}}
+function coordinatorNotice(text){const n=$('coordinatorLocationState');if(n)n.textContent=text;}
+function stopCoordinatorLocation(message='Tu ubicación está apagada.'){
+ coordinatorGeneration++;if(coordinatorWatcher!==null)navigator.geolocation.clearWatch(coordinatorWatcher);
+ coordinatorWatcher=null;coordinatorPosition=null;
+ if($('coordinatorStart'))$('coordinatorStart').disabled=false;
+ if($('coordinatorStop'))$('coordinatorStop').disabled=true;
+ coordinatorNotice(message);renderPersonnel();
+}
+function startCoordinatorLocation(){
+ if(!isCoordinator(auth.currentUser))throw Error('Inicia sesión como coordinador.');
+ if(!navigator.geolocation)throw Error('Este navegador no ofrece ubicación.');
+ if(coordinatorWatcher!==null)return;
+ const generation=++coordinatorGeneration;
+ $('coordinatorStart').disabled=true;$('coordinatorStop').disabled=false;
+ coordinatorNotice('Esperando permiso y lectura GPS de este dispositivo…');
+ coordinatorWatcher=navigator.geolocation.watchPosition(position=>{
+  if(generation!==coordinatorGeneration||!isCoordinator(auth.currentUser))return;
+  if(Date.now()-position.timestamp>60000)return;
+  const {latitude:lat,longitude:lng,accuracy}=position.coords;
+  coordinatorPosition={lat,lng,accuracy,updatedAt:position.timestamp};
+  coordinatorNotice(`Tu ubicación: ${time(position.timestamp)} · precisión ±${Math.round(accuracy)} m. Solo visible en esta pantalla.`);
+  renderPersonnel();
+ },e=>{if(generation!==coordinatorGeneration)return;if(e.code===1)stopCoordinatorLocation('Permiso GPS denegado. Habilítalo para este sitio en el navegador.');else coordinatorNotice('GPS sin lectura: '+e.message);},
+ {enableHighAccuracy:true,maximumAge:10000,timeout:20000});
+}
+function fitTeam(){
+ if(!ensureMap()||!markers.size){notice('Todavía no hay ubicaciones recibidas. Enviar un reporte no activa el GPS.',true);return;}
+ window.closeDrawers?.();mapInstance.invalidateSize();
+ mapInstance.fitBounds(L.latLngBounds([...markers.values()].map(m=>m.getLatLng())),{padding:[70,70],maxZoom:17});
+}
+function labelMarker(marker,name,status){
+ const label=textNode('span',name+' · '+status);
+ marker.unbindTooltip();marker.bindTooltip(label,{permanent:true,direction:'top',offset:[0,-10],className:'person-location-label'});
+}
+function renderCoordinator(){
+ const uid='@coordinator';
+ if(!coordinatorPosition||!layer){const old=markers.get(uid);if(old)layer?.removeLayer(old);markers.delete(uid);return;}
+ const p=coordinatorPosition,fresh=Date.now()-p.updatedAt<90000;
+ let marker=markers.get(uid);
+ if(!marker){marker=L.circleMarker([p.lat,p.lng],{radius:11,weight:3,fillOpacity:.9}).addTo(layer);markers.set(uid,marker);}
+ marker.setLatLng([p.lat,p.lng]);marker.setStyle({color:fresh?'#4da9ff':'#ffc247',fillColor:fresh?'#4da9ff':'#ffc247'});
+ labelMarker(marker,(auth.currentUser?.displayName||'Mi ubicación')+' (coordinador)',fresh?'GPS reciente':'última ubicación');
+ const popup=textNode('div',`Coordinador · ${time(p.updatedAt)} · ±${Math.round(p.accuracy)} m · solo en este dispositivo`);marker.bindPopup(popup);
+}
 const errorText = e => ({
  'auth/operation-not-allowed':'El acceso aún no está activado en Firebase. No se enviaron datos.',
  'auth/unauthorized-domain':'Este dominio aún no está autorizado en Firebase.',
@@ -26,35 +72,38 @@ function active(meta){return meta?.active === true && meta.expiresAt > Date.now(
 function textNode(tag,text,cls){const n=document.createElement(tag);n.textContent=text;if(cls)n.className=cls;return n;}
 function time(t){return t ? new Date(t).toLocaleTimeString('es-EC',{hour:'2-digit',minute:'2-digit',second:'2-digit'}) : 'sin registro';}
 function makeButton(text,fn,cls='secondary'){const b=textNode('button',text,cls);b.type='button';b.onclick=action(fn);return b;}
-function clearMap(){if(layer&&mapInstance)mapInstance.removeLayer(layer);layer=null;markers.clear();}
-function ensureMap(){if(!window.map||!window.L)return false;if(mapInstance!==window.map){clearMap();mapInstance=window.map;layer=L.layerGroup().addTo(mapInstance);}return true;}
+function clearMap(){if(layer&&mapInstance)mapInstance.removeLayer(layer);layer=null;mapInstance=null;markers.clear();}
+function ensureMap(){if(!window.map||!window.L)return false;if(mapInstance!==window.map||!layer){clearMap();mapInstance=window.map;layer=L.layerGroup().addTo(mapInstance);}return true;}
 function renderPersonnel(){
- if(!incident)return;
+ if(!incident){ensureMap();renderCoordinator();return;}
  const list=$('collabPersonnel'); if(!list)return; list.replaceChildren();
- ensureMap(); const seen=new Set(); const all=Object.entries(incident.members||{});
+ ensureMap(); const seen=new Set(coordinatorPosition?['@coordinator']:[]); const all=Object.entries(incident.members||{});
  $('collabCount').textContent=`${all.length} colaboradores registrados · ${connected?'conexión disponible':'sin conexión'}`;
  for(const [uid,m] of all){
   const revoked=!!incident.revoked?.[uid], p=incident.locations?.[uid], report=incident.reports?.[uid];
   const fresh=connected&&active(incident.meta)&&!revoked&&p&&Date.now()-p.updatedAt<90000;
   const row=textNode('article','', 'collab-person');
   row.append(textNode('strong',m.name),textNode('small',`${m.role||'Colaborador'} · ${m.phone}`));
-  row.append(textNode('p',revoked?'Acceso revocado':p?`${fresh?'Ubicación reciente':'Última ubicación; no confirma presencia actual'} · ${time(p.updatedAt)} · precisión ±${Math.round(p.accuracy)} m`:'Sin ubicación compartida'));
+  row.append(textNode('p',revoked?'Acceso revocado':p?`${fresh?'Ubicación reciente':'Última ubicación; no confirma presencia actual'} · ${time(p.updatedAt)} · precisión ±${Math.round(p.accuracy)} m`:'Sin ubicación GPS: el colaborador debe pulsar Compartir ubicación y aceptar el permiso'));
   if(report)row.append(textNode('p',`${report.status} · ${time(report.updatedAt)}${report.detail?' · '+report.detail:''}`,report.status==='EMERGENCIA'?'error':''));
   if(p&&!revoked&&layer){
    seen.add(uid); let marker=markers.get(uid);
    if(!marker){marker=L.circleMarker([p.lat,p.lng],{radius:9,weight:3,fillOpacity:.85}).addTo(layer);markers.set(uid,marker);}
-   marker.setLatLng([p.lat,p.lng]);marker.setStyle({color:fresh?'#31d0aa':'#ffc247'});
+   marker.setLatLng([p.lat,p.lng]);marker.setStyle({color:fresh?'#31d0aa':'#ffc247',fillColor:fresh?'#31d0aa':'#ffc247'});
+   labelMarker(marker,m.name,fresh?'GPS reciente':'última ubicación');
    const popup=document.createElement('div');popup.append(textNode('strong',m.name),textNode('p',`${time(p.updatedAt)} · ±${Math.round(p.accuracy)} m${fresh?'':' · dato no actual'}`));marker.bindPopup(popup);
-   row.append(makeButton('Ver en mapa',()=>{window.closeDrawers?.();mapInstance.setView([p.lat,p.lng],17);marker.openPopup();}));
+   row.append(makeButton('Ver en mapa',()=>{window.closeDrawers?.();mapInstance.invalidateSize();mapInstance.setView([p.lat,p.lng],17);marker.openPopup();}));
   }
   if(!revoked)row.append(makeButton('Revocar acceso',async()=>{if(confirm(`¿Revocar el acceso de ${m.name}?`))await set(path('revoked/'+uid),true);},'red'));
   list.append(row);
  }
  for(const [uid,m] of markers){if(!seen.has(uid)){layer?.removeLayer(m);markers.delete(uid);}}
+ renderCoordinator();
+ if(markers.size&&!fittedIncident){fittedIncident=true;mapInstance.invalidateSize();mapInstance.fitBounds(L.latLngBounds([...markers.values()].map(m=>m.getLatLng())),{paddingTopLeft:[60,60],paddingBottomRight:[Math.min(500,mapInstance.getSize().x/2),60],maxZoom:17});}
  if(!all.length)list.append(textNode('p','Todavía no hay colaboradores registrados. Comparte el enlace del incidente.'));
 }
 function showIncident(id){
- stopIncident?.();clearMap();incidentId=id;
+ stopIncident?.();clearMap();incidentId=id;fittedIncident=false;
  $('collabIncident').hidden=false;
  stopIncident=onValue(path(),snap=>{
   incident=snap.val();if(!incident){notice('El incidente no está disponible.',true);return;}
@@ -79,7 +128,7 @@ function mountControl(){
  <p id="collabNotice" role="status" aria-live="polite">Accede como coordinador para abrir un incidente.</p>
  <p><a href="guia-colaboradores.html" target="_blank" rel="noopener" style="color:#69e6c4">Guía de uso y estado de activación</a></p><div id="collabLogin"><p>Acceso de coordinación con tu cuenta de Google.</p><button id="collabSignIn">Entrar con Google</button></div>
  <div id="collabControl" hidden><p id="collabIdentity"></p><button id="collabSignOut" class="secondary">Cerrar sesión</button>
- <h3>Nuevo incidente</h3><label for="collabName">Nombre</label><input id="collabName" maxlength="120" placeholder="Simulacro MATPEL · escuela">
+ <h3>Mi ubicación de coordinador</h3><p id="coordinatorLocationState">Apagada. Usa el GPS del dispositivo donde abres esta cabina; solo se muestra aquí.</p><button id="coordinatorStart">Mostrar mi ubicación</button><button id="coordinatorStop" class="secondary" disabled>Detener mi ubicación</button><button id="collabFit" class="secondary">Ver equipo en mapa</button><h3>Nuevo incidente</h3><label for="collabName">Nombre</label><input id="collabName" maxlength="120" placeholder="Simulacro MATPEL · escuela">
  <label for="collabHours">Duración del enlace</label><select id="collabHours"><option value="4">4 horas</option><option value="12" selected>12 horas</option><option value="24">24 horas</option></select>
  <button id="collabCreate">Crear incidente y enlace</button><h3>Mis incidentes</h3><button id="collabRefresh" class="secondary">Actualizar lista</button><div id="collabIncidents"></div>
  <section id="collabIncident" hidden><h3 id="collabIncidentTitle"></h3><p id="collabIncidentState"></p><label for="collabLink">Enlace privado para colaboradores</label><input id="collabLink" readonly><button id="collabCopy">Copiar enlace</button><p class="hint">Quien reciba este enlace puede registrarse. No lo publiques en redes. Solo coordinación puede ver a todo el equipo.</p><div class="grid2"><button id="collabRotate" class="secondary">Renovar enlace</button><button id="collabEnd" class="red">Cerrar incidente</button></div><p id="collabCount"></p><div id="collabPersonnel"></div></section></div>`;
@@ -88,6 +137,9 @@ function mountControl(){
  $('collabSignIn').onclick=action(async()=>{const provider=new GoogleAuthProvider();provider.setCustomParameters({prompt:'select_account'});await signInWithPopup(auth,provider);});
  $('collabSignOut').onclick=action(()=>signOut(auth));
  $('collabRefresh').onclick=action(listIncidents);
+ $('coordinatorStart').onclick=()=>{try{startCoordinatorLocation();}catch(e){coordinatorNotice(errorText(e));}};
+ $('coordinatorStop').onclick=()=>stopCoordinatorLocation();
+ $('collabFit').onclick=fitTeam;
  $('collabCreate').onclick=action(async()=>{
   if(!isCoordinator(auth.currentUser))throw Error('Acceso de coordinación requerido.');
   const name=$('collabName').value.trim();if(name.length<3)throw Error('Escribe al menos 3 caracteres para el incidente.');
@@ -105,36 +157,37 @@ function mountControl(){
  if($('v16Tech'))$('v16Tech').onclick=()=>{window.openDrawer('panelCollaboration');notice('Crea o selecciona un incidente y abre su enlace en el teléfono del colaborador.');};
  onAuthStateChanged(auth,async user=>{
   const allowed=isCoordinator(user);$('collabLogin').hidden=allowed;$('collabControl').hidden=!allowed;
-  if(!allowed){stopIncident?.();stopIncident=null;incident=null;clearMap();notice(user?'Esta cuenta no tiene acceso de coordinación. Usa la cuenta autorizada.':'Accede como coordinador para abrir un incidente.',!!user);return;}
+  if(!allowed){stopCoordinatorLocation();stopIncident?.();stopIncident=null;incident=null;clearMap();notice(user?'Esta cuenta no tiene acceso de coordinación. Usa la cuenta autorizada.':'Accede como coordinador para abrir un incidente.',!!user);return;}
   $('collabIdentity').textContent=user.email;notice('Sesión de coordinación iniciada.');
   try{await listIncidents();}catch(e){notice(errorText(e),true);}
  });
  window.addEventListener('cabina-map-ready',renderPersonnel);
+ window.addEventListener('pagehide',()=>stopCoordinatorLocation());
  setInterval(renderPersonnel,15000);
 }
 async function stopSharing(message='Ubicación detenida. Puedes continuar enviando reportes.'){
  sharing=false;if(watcher!==null){navigator.geolocation.clearWatch(watcher);watcher=null;}
  if($('startLocation'))$('startLocation').disabled=!memberReady;
  if($('stopLocation'))$('stopLocation').disabled=true;
- notice(message);
+ notice(message);gpsNotice(message);
  if(!connected){notice('Ubicación detenida en este teléfono. Sin conexión para confirmar el borrado remoto; se aplicará al recuperar conexión.',true);if(auth.currentUser&&incidentId)void remove(path('locations/'+auth.currentUser.uid)).catch(()=>{});return;}
  if(auth.currentUser&&incidentId){try{await remove(path('locations/'+auth.currentUser.uid));await disconnectTask?.cancel();}catch{message+=' No se confirmó el borrado remoto; coordinación verá la última posición como no actual.';}}
- notice(message);
+ notice(message);gpsNotice(message);
 }
 async function startSharing(){
  if(!navigator.geolocation)throw Error('El navegador no ofrece geolocalización.');
  if(!memberReady||!connected)throw Error('Completa el registro y verifica la conexión.');
  if(!active(incident))throw Error('El incidente ya cerró o venció.');
  const target=path('locations/'+auth.currentUser.uid);disconnectTask=onDisconnect(target);await disconnectTask.remove();
- sharing=true;lastSent=0;$('startLocation').disabled=true;$('stopLocation').disabled=false;notice('Solicitando permiso de ubicación…');
+ sharing=true;lastSent=0;$('startLocation').disabled=true;$('stopLocation').disabled=false;notice('Solicitando permiso de ubicación…');gpsNotice('Esperando permiso y lectura GPS…');
  watcher=navigator.geolocation.watchPosition(async position=>{
   if(!sharing||!connected||sending||Date.now()-lastSent<15000)return;
   if(Date.now()-position.timestamp>60000)return;
   if(!active(incident)){await stopSharing('Incidente cerrado o vencido.');return;}
   sending=true;lastSent=Date.now();const {latitude:lat,longitude:lng,accuracy}=position.coords;
-  try{await set(target,{lat,lng,accuracy,updatedAt:serverTimestamp()});notice(`Ubicación enviada a coordinación a las ${time(Date.now())}. Precisión ±${Math.round(accuracy)} m.`);}
+  try{await set(target,{lat,lng,accuracy,updatedAt:serverTimestamp()});notice(`Ubicación enviada a coordinación a las ${time(Date.now())}. Precisión ±${Math.round(accuracy)} m.`);gpsNotice(`GPS compartido · ${time(Date.now())} · precisión ±${Math.round(accuracy)} m.`);}
   catch(e){await stopSharing(errorText(e));}finally{sending=false;}
- },async e=>{if(e.code===1)await stopSharing('Permiso de ubicación denegado. Puedes habilitarlo en tu navegador; el registro y los reportes siguen disponibles.');else notice('GPS sin lectura: '+e.message+'. No se ha confirmado una nueva ubicación.',true);}, {enableHighAccuracy:true,maximumAge:10000,timeout:20000});
+ },async e=>{if(e.code===1)await stopSharing('Permiso de ubicación denegado. Puedes habilitarlo en tu navegador; el registro y los reportes siguen disponibles.');else {notice('GPS sin lectura: '+e.message+'. No se ha confirmado una nueva ubicación.',true);gpsNotice('GPS sin lectura: '+e.message,true);}}, {enableHighAccuracy:true,maximumAge:10000,timeout:20000});
 }
 function mountMobile(){
  const params=new URLSearchParams(location.hash.slice(1));incidentId=params.get('incidente')||'';const invitation=params.get('invitacion')||'';
@@ -150,7 +203,7 @@ function mountMobile(){
    const user=auth.currentUser,target=path('members/'+user.uid);const old=await get(target);
    await set(target,{name,phone,role,inviteToken:old.val()?.inviteToken||invitation,joinedAt:old.val()?.joinedAt||serverTimestamp()});
    memberReady=true;$('joinForm').hidden=true;$('memberControls').hidden=false;$('memberIdentity').textContent=name;
-   notice('Registro confirmado. La ubicación permanece apagada hasta que pulses Compartir ubicación.');
+   notice('Registro confirmado. La ubicación permanece apagada hasta que pulses Compartir ubicación.');gpsNotice('GPS apagado. Pulsa Compartir ubicación y acepta el permiso. Enviar reporte no envía tu posición.');
    stopIncident=onValue(path('meta'),snap=>{incident=snap.val();$('incidentName').textContent=incident?.name||'Incidente';if(!active(incident)){memberReady=false;void stopSharing('Incidente cerrado o vencido.');$('reportSend').disabled=true;$('startLocation').disabled=true;}},e=>{memberReady=false;void stopSharing(errorText(e));});
   }catch(e){notice(errorText(e),true);}finally{$('joinButton').disabled=false;}
  };
@@ -163,7 +216,7 @@ function mountMobile(){
 }
 onValue(ref(database,'.info/connected'),s=>{
  const was=connected;connected=s.val()===true;
- if(mobile&&was&&!connected){if(watcher!==null)navigator.geolocation.clearWatch(watcher);watcher=null;sharing=false;if($('startLocation'))$('startLocation').disabled=!memberReady;notice('Sin conexión. La ubicación se detuvo; pulsa Compartir ubicación cuando vuelva Internet.',true);}
+ if(mobile&&was&&!connected){if(watcher!==null)navigator.geolocation.clearWatch(watcher);watcher=null;sharing=false;if($('startLocation'))$('startLocation').disabled=!memberReady;notice('Sin conexión. La ubicación se detuvo; pulsa Compartir ubicación cuando vuelva Internet.',true);gpsNotice('GPS detenido por falta de conexión. Vuelve a pulsar Compartir ubicación.',true);}
  if(!mobile)renderPersonnel();
 });
 if(mobile)mountMobile();else mountControl();
