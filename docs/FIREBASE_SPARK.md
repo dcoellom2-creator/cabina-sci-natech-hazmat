@@ -3,8 +3,8 @@ Fecha de preparación: 2026-10-02. Repositorio existente conservado.
 
 ## Estado de entrega
 Frontend integrado y preparado para GitHub Pages. Proyecto y Realtime Database Spark creados.
-**Activación pendiente:** proveedores Google y Anónimo, dominio autorizado de GitHub Pages y publicación de database.rules.json. La base de producción conserva el bloqueo total hasta confirmar este cambio de acceso.
-No afirmar que el seguimiento real funciona hasta completar activación y prueba entre dos dispositivos/sesiones.
+**Activación completada (2026-10-02):** Google y Anónimo habilitados, dcoellom2-creator.github.io autorizado y reglas privadas publicadas con autorización del usuario. Spark conservado.
+Ingreso Google de coordinación, lectura de lista, creación de incidente/enlace y cierre comprobados desde GitHub Pages. Incidente PRUEBA TÉCNICA cerrado. Registro anónimo y GPS real entre dispositivos pendientes; no afirmar validación operativa completa.
 
 ## Metodología aplicada
 1. Revisar código y distinguir demostraciones de funciones reales.
@@ -34,10 +34,10 @@ Cinco pruebas de integración de reglas aprobadas en Firebase Realtime Database 
 3. Ubicación/reporte propios; coordenadas fuera de rango, datos obsoletos y campos extra rechazados.
 4. Revocación, cierre y caducidad bloquean nuevos registros, ubicaciones y reportes.
 5. Renovación bloquea altas con enlace anterior; miembros existentes conservan acceso.
-Comprobación de sintaxis JavaScript aprobada. Prueba de GPS real y acceso Google en producción: pendientes de activación.
+Comprobación de sintaxis JavaScript aprobada. Acceso Google en producción validado. Prueba de GPS real y registro anónimo desde teléfono pendiente.
 Reproducir: npm install; npm run test:rules (requiere Java 17). Solo proyecto demo-cabina local; no modifica producción.
 
-## Activación prevista
+## Configuración aplicada
 En Firebase Authentication habilitar Google (coordinación) y Anónimo (colaboradores), sin Teléfono/SMS ni Identity Platform.
 Autorizar dcoellom2-creator.github.io.
 Publicar el archivo database.rules.json previamente probado. Ninguna regla global pública.
