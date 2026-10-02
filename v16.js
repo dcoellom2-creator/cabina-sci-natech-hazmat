@@ -185,8 +185,25 @@
     });
   }
 
+  function v16Workspace(view){
+    const land=document.getElementById('v16Landing'),app=document.querySelector('.app'),head=document.querySelector('header');
+    if(view==='home'){land.classList.remove('hidden');app.style.visibility='hidden';head.style.visibility='hidden';return;}
+    land.classList.add('hidden');app.style.visibility='visible';head.style.visibility='visible';document.body.dataset.workspace=view;
+    setTimeout(()=>{try{map.invalidateSize()}catch(e){}},80);
+  }
+  function injectLanding(){
+    if(document.getElementById('v16Landing'))return;
+    const s=document.createElement('section');s.id='v16Landing';s.className='v16-landing';
+    s.innerHTML='<div class="v16-home-card"><div class="v16-home-brand"><div class="v16-home-emblem">🔥</div><div><small>BENEMÉRITO CUERPO DE BOMBEROS</small><h1>Compañía / División de Materiales Peligrosos</h1><p>Cabina SCI · NaTech / MATPEL</p></div><div class="v16-hazmat-emblem">☣</div></div><div class="v16-home-actions"><button id="v16ScenarioEntry"><b>⌖ Escenarios de preparación</b><span>Cartografía, dibujo, zonas y meteorología</span></button><button id="v16OpsEntry"><b>◉ Modo operativo</b><span>Roles, ubicación, comunicaciones y recursos</span></button></div></div>';
+    document.body.appendChild(s);
+    document.getElementById('v16ScenarioEntry').onclick=()=>v16Workspace('scenario');
+    document.getElementById('v16OpsEntry').onclick=()=>{v16Workspace('operation');setTimeout(()=>document.getElementById('v16Btn')?.click(),100)};
+    const h=document.createElement('button');h.className='v16-home-btn';h.textContent='⌂';h.title='Inicio';h.onclick=()=>v16Workspace('home');document.body.appendChild(h);
+    v16Workspace('home');
+  }
   function inject(){
     document.title='Cabina SCI NaTech/HazMat V16 Operacional';
+    injectLanding();
     const h=document.querySelector('h1'); if(h)h.textContent='Cabina SCI NaTech/HazMat V16 Operacional';
     const sub=document.querySelector('.brand .sub'); if(sub)sub.textContent='SCI + MATPEL + contexto geoespacial + meteorología + vigilancia externa.';
     const top=document.querySelector('.top-actions');
