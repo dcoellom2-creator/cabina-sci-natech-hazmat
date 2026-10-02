@@ -105,6 +105,52 @@
     window.__v16Base=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'Tiles © Esri'}).addTo(map);
     window.__v16Base.bringToBack();
   }
+
+  const tactical={mode:null,objects:[],seq:0};
+  const tacticalCatalog=[
+    ['pc','PC','Puesto de Comando','🏁','#31d7ff'],['safety','SEG','Seguridad','🛡️','#ffc247'],
+    ['hazmat','MATPEL','Grupo MATPEL','☣️','#ff6060'],['entry','A/B','Entrada Nivel A/B','🧑‍🚒','#c86cff'],
+    ['rit','RIT','Equipo RIT','🛟','#ff9f43'],['decon','DECON','Descontaminación','🚿','#31d0aa'],
+    ['triage','APH','APH / Triage','⚕️','#80dd55'],['victim','VÍCT','Víctima','✚','#ff6060'],
+    ['leak','FUGA','Fuga / derrame','💧','#ff6060'],['monitor','MON','Monitoreo','📟','#31d7ff'],
+    ['unit','UNID','Unidad respuesta','🚒','#ffc247'],['ambulance','AMB','Ambulancia','🚑','#80dd55'],
+    ['muster','PR','Punto reunión','👥','#31d0aa']
+  ];
+  function tacticalIcon(item){
+    return L.divIcon({className:'v16-tactical-div',html:'<div class="v16-tactical-pin" style="--tc:'+item[4]+'"><span>'+item[3]+'</span><b>'+item[1]+'</b></div>',iconSize:[62,62],iconAnchor:[31,31]});
+  }
+  function addTacticalMarker(item,ll){
+    const id='T'+(++tactical.seq), m=L.marker(ll,{draggable:true,icon:tacticalIcon(item)}).addTo(map);
+    const obj={id,type:item[0],code:item[1],label:item[2],layer:m,created:new Date().toISOString()};
+    tactical.objects.push(obj);
+    m.bindPopup('<b>'+esc(item[2])+'</b><br>ID: '+id+'<br><small>Arrastre para reubicar.</small><br><button onclick="CabinaV16.removeTactical(\''+id+'\')">Eliminar</button>');
+    m.on('dragend',()=>{obj.updated=new Date().toISOString()});
+    renderTacticalCount(); return obj;
+  }
+  function removeTactical(id){const i=tactical.objects.findIndex(o=>o.id===id);if(i>=0){map.removeLayer(tactical.objects[i].layer);tactical.objects.splice(i,1);renderTacticalCount()}}
+  function renderTacticalCount(){const x=el('v16TacticalCount');if(x)x.textContent=tactical.objects.length+' objetos en mapa'}
+  function selectTactical(type){
+    const item=tacticalCatalog.find(x=>x[0]===type);if(!item)return;
+    tactical.mode=item; document.querySelectorAll('.v16-cat-btn').forEach(b=>b.classList.toggle('active',b.dataset.type===type));
+    const s=el('v16TacticalStatus');if(s)s.innerHTML='<b>Colocar:</b> '+esc(item[2])+' · toque/clic en el mapa.';
+  }
+  function clearTacticalMode(){tactical.mode=null;document.querySelectorAll('.v16-cat-btn').forEach(b=>b.classList.remove('active'));if(el('v16TacticalStatus'))el('v16TacticalStatus').textContent='Seleccione un símbolo y toque el mapa.'}
+  function injectTacticalCatalog(){
+    const toolbar=document.querySelector('.toolbar'); if(!toolbar||el('v16TacticalCatalog'))return;
+    const box=document.createElement('div');box.id='v16TacticalCatalog';box.className='v16-tactical-catalog';
+    box.innerHTML='<div class="v16-cat-head"><b>MAPA OPERACIONAL</b><span id="v16TacticalCount">0 objetos en mapa</span></div>'+
+      '<div class="v16-cat-tabs"><button class="active" data-tab="symbols">Símbolos</button><button data-tab="zones">Zonas / rutas</button></div>'+
+      '<div id="v16CatSymbols" class="v16-cat-grid">'+tacticalCatalog.map(x=>'<button class="v16-cat-btn" data-type="'+x[0]+'" title="'+x[2]+'"><span>'+x[3]+'</span><b>'+x[1]+'</b><small>'+x[2]+'</small></button>').join('')+'</div>'+
+      '<div id="v16CatZones" class="v16-zone-grid" hidden><button data-old="buffer" data-color="#ff6060">🔴 Zona caliente</button><button data-old="buffer" data-color="#ffc247">🟡 Zona tibia</button><button data-old="buffer" data-color="#80dd55">🟢 Zona fría</button><button data-old="line" data-color="#c86cff">➡ Ruta entrada</button><button data-old="line" data-color="#80dd55">↩ Ruta evacuación</button><button data-old="line" data-color="#31d7ff">➜ Dirección viento</button><button data-old="rect" data-color="#ff6060">▭ Aislamiento</button></div>'+
+      '<div id="v16TacticalStatus" class="v16-status">Seleccione un símbolo y toque el mapa. No requiere ficha cargada.</div><button class="secondary v16-full" id="v16CancelTool">Cancelar herramienta</button>';
+    toolbar.insertBefore(box,toolbar.firstChild);
+    box.querySelectorAll('.v16-cat-btn').forEach(b=>b.onclick=()=>selectTactical(b.dataset.type));
+    const tabs=box.querySelectorAll('[data-tab]');tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.classList.remove('active'));b.classList.add('active');el('v16CatSymbols').hidden=b.dataset.tab!=='symbols';el('v16CatZones').hidden=b.dataset.tab!=='zones'});
+    box.querySelectorAll('[data-old]').forEach(b=>b.onclick=()=>{clearTacticalMode();const col=el('colorInput');if(col)col.value=b.dataset.color;if(typeof setMode==='function')setMode(b.dataset.old);el('v16TacticalStatus').innerHTML='<b>Herramienta activa:</b> '+esc(b.textContent.trim())+' · dibuje sobre el mapa.'});
+    el('v16CancelTool').onclick=()=>{clearTacticalMode();if(typeof setMode==='function')setMode('map')};
+    map.on('click',e=>{if(tactical.mode){addTacticalMarker(tactical.mode,e.latlng);clearTacticalMode()}});
+  }
+
   function inject(){
     document.title='Cabina SCI NaTech/HazMat V16 Operacional';
     const h=document.querySelector('h1'); if(h)h.textContent='Cabina SCI NaTech/HazMat V16 Operacional';
@@ -114,6 +160,7 @@
       const b=document.createElement('button');b.id='v16Btn';b.className='cyan';b.textContent='V16 Operacional';b.onclick=()=>window.openDrawer?openDrawer('panelV16'):null;top.appendChild(b);
     }
     const app=document.querySelector('.app');
+    injectTacticalCatalog();
     const aside=document.createElement('aside');aside.className='drawer';aside.id='panelV16';
     aside.innerHTML='<div class="drawer-head"><h2>V16 · Contexto operacional</h2><button class="secondary" onclick="closeDrawers()">Cerrar</button></div>'+
       '<div class="v16-badge">CAPAS Y FUENTES</div><div class="grid2"><button class="secondary" id="v16OSM">OSM</button><button class="secondary" id="v16Esri">Satélite Esri</button></div>'+
@@ -138,5 +185,5 @@
 
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',inject);else inject();
-  window.CabinaV16={drawWind,clearWind,fetchNasaPower,openArcGISEmbed};
+  window.CabinaV16={drawWind,clearWind,fetchNasaPower,openArcGISEmbed,removeTactical,selectTactical};
 })();
