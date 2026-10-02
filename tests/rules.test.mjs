@@ -1,0 +1,66 @@
+import { initializeTestEnvironment, assertSucceeds, assertFails } from '@firebase/rules-unit-testing';
+import { readFile } from 'node:fs/promises';
+import { ref, set, get, update, remove } from 'firebase/database';
+import { test, before, after, beforeEach } from 'node:test';
+let env;
+const adminClaims={email:'dcoellom2@unemi.edu.ec',email_verified:true,firebase:{sign_in_provider:'google.com'}};
+const key='a'.repeat(64), id='incident-test';
+const member=(inviteToken=key)=>({name:'Prueba sintética',phone:'0000000000',role:'Prueba',inviteToken,joinedAt:Date.now()});
+const loc=()=>({lat:0,lng:0,accuracy:10,updatedAt:Date.now()});
+const db=(uid,claims={})=>env.authenticatedContext(uid,claims).database();
+const p=(db,s)=>ref(db,'incidents/'+id+'/'+s);
+before(async()=>{env=await initializeTestEnvironment({projectId:'demo-cabina',database:{host:'127.0.0.1',port:9000,rules:await readFile('database.rules.json','utf8')}});});
+after(async()=>env?.cleanup());
+beforeEach(async()=>{await env.clearDatabase();await env.withSecurityRulesDisabled(async ctx=>set(p(ctx.database(),''),{meta:{name:'Incidente sintético',ownerUid:'owner',active:true,createdAt:Date.now(),expiresAt:Date.now()+3600000},inviteToken:key}));});
+test('solo coordinador verificado crea incidentes y lista datos',async()=>{
+ const meta={name:'Nuevo incidente',ownerUid:'owner',active:true,createdAt:Date.now(),expiresAt:Date.now()+3600000};
+ await assertSucceeds(set(ref(db('owner',adminClaims),'incidents/new/meta'),meta));
+ await assertFails(set(ref(db('other'),'incidents/other/meta'),{...meta,ownerUid:'other'}));
+ await assertFails(get(ref(db('other'),'incidents')));
+ await assertFails(get(ref(env.unauthenticatedContext().database(),'incidents')));
+ await assertSucceeds(get(ref(db('owner',adminClaims),'incidents')));
+ await assertFails(get(ref(db('fake',{...adminClaims,email_verified:false}),'incidents')));
+});
+test('invitacion correcta permite registro propio, no ajeno ni token incorrecto',async()=>{
+ const a=db('alice');await assertFails(set(p(a,'members/alice'),member('b'.repeat(64))));
+ await assertSucceeds(set(p(a,'members/alice'),member()));
+ await assertFails(set(p(a,'members/bob'),member()));
+ await assertFails(get(p(db('bob'),'members/alice')));
+ await assertFails(get(p(db('bob'),'inviteToken')));
+ await assertSucceeds(get(p(a,'meta')));
+});
+test('ubicacion y reporte propios, sin acceso transversal ni campos extra',async()=>{
+ const a=db('alice');await set(p(a,'members/alice'),member());
+ await assertSucceeds(set(p(a,'locations/alice'),loc()));
+ await assertFails(get(p(db('bob'),'locations/alice')));
+ await assertFails(set(p(a,'locations/bob'),loc()));
+ await assertFails(set(p(a,'locations/alice'),{...loc(),lat:95}));
+ await assertFails(set(p(a,'locations/alice'),{...loc(),updatedAt:Date.now()-120000}));
+ await assertFails(set(p(a,'locations/alice'),{...loc(),extra:'no'}));
+ await assertSucceeds(set(p(a,'reports/alice'),{status:'ESTOY OK',detail:'Prueba',updatedAt:Date.now()}));
+ await assertFails(set(p(a,'reports/alice'),{status:'ADMIN',detail:'',updatedAt:Date.now()}));
+ await assertSucceeds(remove(p(a,'locations/alice')));
+});
+test('revocacion, cierre y vencimiento bloquean nuevas ubicaciones',async()=>{
+ const a=db('alice'),o=db('owner',adminClaims);await set(p(a,'members/alice'),member());
+ await assertSucceeds(set(p(o,'revoked/alice'),true));
+ await assertFails(set(p(a,'locations/alice'),loc()));
+ await assertFails(remove(p(a,'revoked/alice')));
+ await assertFails(get(p(a,'meta')));
+ await remove(p(o,'revoked/alice'));
+ await assertSucceeds(update(p(o,'meta'),{active:false}));
+ await assertFails(set(p(a,'locations/alice'),loc()));
+ await assertFails(set(p(db('bob'),'members/bob'),member()));
+ await assertSucceeds(remove(p(a,'locations/alice')));
+ await env.withSecurityRulesDisabled(async ctx=>update(p(ctx.database(),'meta'),{active:true,expiresAt:Date.now()-1000}));
+ await assertFails(set(p(a,'reports/alice'),{status:'ESTOY OK',detail:'',updatedAt:Date.now()}));
+});
+test('renovar enlace bloquea nuevas altas con el anterior, conserva miembros',async()=>{
+ const a=db('alice'),o=db('owner',adminClaims);await set(p(a,'members/alice'),member());
+ await assertSucceeds(set(p(o,'inviteToken'),'c'.repeat(64)));
+ await assertFails(set(p(db('bob'),'members/bob'),member()));
+ await assertSucceeds(set(p(db('bob'),'members/bob'),member('c'.repeat(64))));
+ await assertSucceeds(set(p(a,'locations/alice'),loc()));
+ await assertFails(update(p(a,'meta'),{active:false}));
+ await assertFails(set(p(a,'members/alice'),{...member(),isAdmin:true}));
+});

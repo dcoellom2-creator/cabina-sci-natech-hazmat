@@ -1,46 +1,65 @@
-# Firebase — Cabina SCI NaTech/MATPEL
-Fecha: 2026-10-02.
+# Cabina SCI NaTech/MATPEL — V17
+Fecha de preparación: 2026-10-02. Repositorio existente conservado.
 
-## Objetivo y restriccion
-Backend Realtime Database y registro web para el frontend existente en GitHub Pages.
-Solo Spark, sin tarjeta, sin vincular facturacion ni habilitar servicios de pago.
+## Estado de entrega
+Frontend integrado y preparado para GitHub Pages. Proyecto y Realtime Database Spark creados.
+**Activación pendiente:** proveedores Google y Anónimo, dominio autorizado de GitHub Pages y publicación de database.rules.json. La base de producción conserva el bloqueo total hasta confirmar este cambio de acceso.
+No afirmar que el seguimiento real funciona hasta completar activación y prueba entre dos dispositivos/sesiones.
 
-## Configuracion ejecutada
-- Proyecto: cabina-sci-natech-matpel.
-- Nombre: Cabina SCI NaTech MATPEL.
-- Plan verificado en consola: Spark, USD 0 al mes.
-- Realtime Database: https://cabina-sci-natech-matpel-default-rtdb.firebaseio.com
-- Region: us-central1.
-- App: Cabina SCI NaTech MATPEL - GitHub Pages.
-- App ID: 1:1068350353943:web:5168e9531b51bdc3f32252.
-- SDK y configuracion publica: /firebase-config.js.
-- No se habilitaron Analytics, Gemini, Hosting, Storage, Cloud Functions ni facturacion.
+## Metodología aplicada
+1. Revisar código y distinguir demostraciones de funciones reales.
+2. Definir roles, datos, consentimiento y vencimiento por incidente.
+3. Implementar sobre Cabina existente.
+4. Probar permisos en emulador con datos sintéticos.
+5. Publicar frontend, verificar interfaz, activar acceso previa confirmación requerida y probar flujo completo.
+6. Registrar evidencia, limitaciones y reversión.
 
-## Seguridad
-Reglas iniciales publicadas en modo bloqueado:
-```json
-{"rules":{".read":false,".write":false}}
-```
-No abrir lectura/escritura global para probar ubicaciones o telefonos.
-La configuracion publica del SDK no concede acceso administrativo.
+## Cambios
+- Registro móvil por enlace privado, nombre, teléfono y función. Teléfono de contacto no verificado por SMS.
+- Coordinador: cuenta Google verificada dcoellom2@unemi.edu.ec.
+- Colaborador: identidad Firebase anónima ligada al navegador y al enlace del incidente.
+- Consentimiento de registro, permiso GPS separado y botón detener ubicación.
+- Ubicación enviada como máximo cada 15 segundos; lectura reciente hasta 90 segundos. Una posición antigua no prueba presencia actual.
+- Coordinador visualiza equipo; cada colaborador solo sus propios registros y metadatos del incidente.
+- Enlace aleatorio de 256 bits en fragmento URL, caducidad 4/12/24 horas, rotación y revocación por participante.
+- Reporte de estado y detalle: se conserva el último reporte por colaborador, no una bitácora histórica.
+- Salida de conexión retira ubicación con onDisconnect; detener solicita borrado de posición.
+- Sustitución de controles que mostraban un técnico/GPS ficticio y PTT local. Taller conserva etiqueta de demostración.
+- Corrección de exposición del mapa a módulos para representar ubicaciones.
 
-## Integracion pendiente
-El modulo esta preparado para importar desde el frontend:
-```js
-import { app, database } from "./firebase-config.js";
-```
-El frontend existente aun no importa este modulo ni sincroniza colaboradores.
-Antes de habilitar datos reales: implementar autenticacion, roles y reglas por usuario/incidente; probar escritura propia, denegacion a terceros y lectura autorizada del coordinador.
-No se habilito autenticacion telefonica/SMS.
-La creacion del backend no equivale a una prueba funcional de seguimiento en el mapa.
+## Validación realizada
+Cinco pruebas de integración de reglas aprobadas en Firebase Realtime Database Emulator v4.11.2, CLI 14.12.0, Java 17:
+1. Solo coordinador Google verificado crea incidentes y lista datos; sin acceso público.
+2. Invitación correcta y escritura propia, rechazo de token erróneo y acceso ajeno.
+3. Ubicación/reporte propios; coordenadas fuera de rango, datos obsoletos y campos extra rechazados.
+4. Revocación, cierre y caducidad bloquean nuevos registros, ubicaciones y reportes.
+5. Renovación bloquea altas con enlace anterior; miembros existentes conservan acceso.
+Comprobación de sintaxis JavaScript aprobada. Prueba de GPS real y acceso Google en producción: pendientes de activación.
+Reproducir: npm install; npm run test:rules (requiere Java 17). Solo proyecto demo-cabina local; no modifica producción.
 
-## Verificacion
-Consola mostro proyecto creado, plan Spark, base vacia en us-central1 y app web registrada.
-No se introdujo tarjeta ni se selecciono Blaze.
-El limite gratuito puede restringir el servicio; no cambiar a Blaze automaticamente.
+## Activación prevista
+En Firebase Authentication habilitar Google (coordinación) y Anónimo (colaboradores), sin Teléfono/SMS ni Identity Platform.
+Autorizar dcoellom2-creator.github.io.
+Publicar el archivo database.rules.json previamente probado. Ninguna regla global pública.
+Mantener Spark; no asociar facturación, tarjeta, Blaze, Storage ni Functions.
+
+## Limitaciones
+El navegador no garantiza GPS continuo en segundo plano o con pantalla bloqueada. Requiere Internet, HTTPS, permiso y página abierta.
+El enlace permite altas a quien lo posea: compartir solo con personal autorizado. Rotar no revoca registros previos; usar Revocar acceso.
+Una identidad anónima puede perderse si se borra almacenamiento o cambia navegador. Reingreso puede crear un nuevo registro.
+Los nombres y teléfonos son declarados; no acreditan identidad ni pertenencia institucional.
+El formulario explica el uso de datos. El usuario decide si enciende GPS; ningún envío automático de ubicación al abrir enlace.
+No se cargaron datos reales en las pruebas. Sin PTT de audio remoto, archivos ni historial de movimientos.
+El plan gratuito tiene cuotas; no se convierte automáticamente a Blaze por esta implementación.
+
+## Reversión
+Frontend anterior: commit 3eccfa8d850aa86325a891c0643985f1b96fe14e.
+Para bloqueo inmediato restablecer {"rules":{".read":false,".write":false}} en Firebase; no elimina datos almacenados.
+La política de conservación/borrado de incidentes debe definirse antes del uso sostenido; esta versión no elimina incidentes automáticamente.
 
 ## Fuentes oficiales
+- https://firebase.google.com/docs/database/security/rules-conditions
+- https://firebase.google.com/docs/auth/web/anonymous-auth
+- https://firebase.google.com/docs/auth/web/google-signin
+- https://firebase.google.com/docs/database/web/offline-capabilities
 - https://firebase.google.com/docs/database/usage/billing
-- https://firebase.google.com/pricing
-- https://firebase.google.com/docs/database/security/quickstart
-- https://firebase.google.com/docs/web/setup

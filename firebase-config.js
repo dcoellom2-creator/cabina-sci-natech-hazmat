@@ -1,6 +1,6 @@
 // Firebase Spark, creado el 2026-10-02. Sin facturacion ni servicios de pago.
 // Configuracion publica de cliente: no es una credencial de administrador.
-// RTDB se mantiene en modo bloqueado hasta implementar autenticacion y reglas por rol.
+// RTDB permanece bloqueado hasta confirmar la activacion de los proveedores y reglas probadas.
 // Uso: import { app, database } from "./firebase-config.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
@@ -15,3 +15,4 @@ export const firebaseConfig = Object.freeze({
 });
 export const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
+

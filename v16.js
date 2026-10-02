@@ -202,13 +202,13 @@
     v16Workspace('home');
   }
   function inject(){
-    document.title='Cabina SCI NaTech/HazMat V16 Operacional';
+    document.title='Cabina SCI NaTech/HazMat V17 · Colaboración';
     injectLanding();
-    const h=document.querySelector('h1'); if(h)h.textContent='Cabina SCI NaTech/HazMat V16 Operacional';
+    const h=document.querySelector('h1'); if(h)h.textContent='Cabina SCI NaTech/HazMat V17 · Colaboración';
     const sub=document.querySelector('.brand .sub'); if(sub)sub.textContent='SCI + MATPEL + contexto geoespacial + meteorología + vigilancia externa.';
     const top=document.querySelector('.top-actions');
     if(top&&!el('v16Btn')){
-      const b=document.createElement('button');b.id='v16Btn';b.className='cyan';b.textContent='V16 Operacional';b.onclick=()=>window.openDrawer?openDrawer('panelV16'):null;top.appendChild(b);
+      const b=document.createElement('button');b.id='v16Btn';b.className='cyan';b.textContent='V17 · Colaboración';b.onclick=()=>window.openDrawer?openDrawer('panelV16'):null;top.appendChild(b);
     }
     const app=document.querySelector('.app');
     injectTacticalCatalog();
@@ -223,7 +223,7 @@
       '<div class="v16-badge">PLUMA TÁCTICA</div><div class="grid2"><div><div class="mini-title">Longitud m</div><input id="v16PlumeLength" type="number" value="300"></div><div><div class="mini-title">Ancho m</div><input id="v16PlumeWidth" type="number" value="100"></div></div>'+
       '<div class="grid2"><button class="red" id="v16Draw">Dibujar / actualizar</button><button class="secondary" id="v16Clear">Quitar pluma</button></div>'+
       '<div class="v16-warning"><b>Clasificación:</b> CROQUIS TÁCTICO. Esta geometría no representa todavía un cálculo ERG/ALOHA validado.</div>'+
-      '<div class="v16-badge">VISTAS OPERACIONALES</div><div class="grid2"><button class="green" id="v16Control">Cabina de Control</button><button class="gold" id="v16Workshop">Taller</button></div><button class="cyan v16-full" id="v16Tech">Terminal Técnico / PTT</button><div id="v16RoleView"></div>'+
+      '<div class="v16-badge">VISTAS OPERACIONALES</div><div class="grid2"><button class="green" id="v16Control">Cabina de Control</button><button class="gold" id="v16Workshop">Taller</button></div><button class="cyan v16-full" id="v16Tech">Acceso de colaboradores</button><div id="v16RoleView"></div>'+
       '<div class="v16-badge">PRÓXIMAS CONEXIONES</div><div class="v16-source-grid"><span>ERG 2024 PHMSA</span><span>Modelo dispersión</span><span>Alertas Ecuador</span><span>INAMHI</span><span>NASA FIRMS</span><span>Rayos</span><span>InSAR</span><span>LiDAR/DEM</span><span>GPS unidades</span></div>';
     app.appendChild(aside);
     const wrap=document.createElement('div');wrap.className='v16-arc-wrap';wrap.innerHTML='<div class="v16-arc-head"><b>ArcGIS WebMap · '+WEBMAP_ID+'</b><button class="secondary" id="v16ArcClose">Cerrar</button></div><iframe id="v16ArcFrame" title="ArcGIS WebMap" loading="lazy"></iframe>';app.appendChild(wrap);
@@ -231,9 +231,11 @@
     el('v16Nasa').onclick=fetchNasaPower;el('v16Draw').onclick=drawWind;el('v16Clear').onclick=clearWind;
     const role=el('v16RoleView');
     function stamp(label){const t=new Date().toLocaleTimeString();role.innerHTML='<div class="v16-event"><b>'+esc(label)+'</b><small>'+t+' · evento local de demostración</small></div>'+role.innerHTML}
-    el('v16Control').onclick=()=>{role.innerHTML='<div class="v16-role"><h3>Cabina de Control</h3><div class="v16-kpis"><span><b>01</b>Técnicos</span><span><b>GPS</b>Activo</span><span><b>0</b>Alertas</span></div><p>Mapa vivo, estado del personal, eventos, formularios, comunicaciones y bitácora.</p></div>'};
+    const openLive=()=>{if(el('panelCollaboration'))openDrawer('panelCollaboration');else alert('La conexión de colaboradores no está disponible. Revisa Internet y recarga la página.');};
+    el('v16Control').onclick=openLive;
     el('v16Workshop').onclick=()=>{role.innerHTML='<div class="v16-role"><h3>Taller de prueba</h3><p>Simule interacciones sin afectar un incidente real.</p><div class="v16-actions"><button data-e="SIMULAR GPS">Mover técnico</button><button data-e="SIMULAR VIENTO">Cambiar viento</button><button data-e="SIMULAR ALERTA">Disparar alerta</button></div></div>';role.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>stamp(b.dataset.e))};
-    el('v16Tech').onclick=()=>{role.innerHTML='<div class="v16-phone"><div class="v16-phone-head"><b>DCOELLO-01</b><span>● CONECTADO</span></div><div class="v16-actions"><button data-e="ESTOY OK">✓ ESTOY OK</button><button data-e="PRODUCTO IDENTIFICADO">☣ PRODUCTO IDENTIFICADO</button><button data-e="FUGA LOCALIZADA">⌖ FUGA LOCALIZADA</button><button data-e="VÍCTIMA">✚ VÍCTIMA</button><button data-e="NECESITO APOYO">! NECESITO APOYO</button><button data-e="RETIRADA">↩ RETIRADA</button><button class="emergency" data-e="EMERGENCIA">⚠ EMERGENCIA</button></div><button class="v16-ptt" id="v16PTT">🎙 MANTENER PARA HABLAR</button><textarea id="v16Detail" placeholder="Información de detalle / observación breve"></textarea><button class="secondary v16-full" id="v16DetailSend">Enviar detalle</button><div id="v16TechLog"></div></div>';role.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{const log=el('v16TechLog');const t=new Date().toLocaleTimeString();log.innerHTML='<div class="v16-event"><b>'+esc(b.dataset.e)+'</b><small>'+t+' · GPS asociado al enviar</small></div>'+log.innerHTML});const ptt=el('v16PTT');let rec,chunks=[],stream;const start=async()=>{try{stream=await navigator.mediaDevices.getUserMedia({audio:true});rec=new MediaRecorder(stream);chunks=[];rec.ondataavailable=e=>chunks.push(e.data);rec.onstop=()=>{const blob=new Blob(chunks,{type:rec.mimeType});const url=URL.createObjectURL(blob);el('v16TechLog').innerHTML='<div class="v16-event"><b>🎙 Audio '+Math.round(blob.size/1024)+' KB</b><audio controls src="'+url+'"></audio><small>'+new Date().toLocaleTimeString()+' · demostración local</small></div>'+el('v16TechLog').innerHTML;stream.getTracks().forEach(x=>x.stop())};rec.start();ptt.classList.add('talking');ptt.textContent='🔴 HABLANDO… SUELTE PARA ENVIAR'}catch(e){alert('No se pudo acceder al micrófono: '+e.message)}};const stop=()=>{if(rec&&rec.state==='recording'){rec.stop();ptt.classList.remove('talking');ptt.textContent='🎙 MANTENER PARA HABLAR'}};ptt.onpointerdown=e=>{e.preventDefault();start()};ptt.onpointerup=stop;ptt.onpointercancel=stop;el('v16DetailSend').onclick=()=>{const v=el('v16Detail').value.trim();if(v){const log=el('v16TechLog');log.innerHTML='<div class="v16-event"><b>Detalle</b><small>'+esc(v)+' · '+new Date().toLocaleTimeString()+'</small></div>'+log.innerHTML;el('v16Detail').value=''}}};
+    el('v16Tech').onclick=openLive;
+
 
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',inject);else inject();

@@ -1,0 +1,113 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "incidents": {
+      ".read": "auth != null && auth.token.email == 'dcoellom2@unemi.edu.ec' && auth.token.email_verified == true && auth.token.firebase.sign_in_provider == 'google.com'",
+      "$incident": {
+        "meta": {
+          ".validate": "newData.hasChildren([\"ownerUid\", \"name\", \"active\", \"createdAt\", \"expiresAt\"])",
+          "ownerUid": {
+            ".validate": "newData.val() == auth.uid && (!data.exists() || newData.val() == data.val())"
+          },
+          "name": {
+            ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 120"
+          },
+          "active": {
+            ".validate": "newData.isBoolean()"
+          },
+          "createdAt": {
+            ".validate": "newData.isNumber() && ((!data.exists() && newData.val() >= now - 60000 && newData.val() <= now + 5000) || newData.val() == data.val())"
+          },
+          "expiresAt": {
+            ".validate": "newData.isNumber() && ((!data.exists() && newData.val() > now && newData.val() <= now + 86400000) || newData.val() == data.val())"
+          },
+          "$other": {
+            ".validate": false
+          },
+          ".write": "auth != null && auth.token.email == 'dcoellom2@unemi.edu.ec' && auth.token.email_verified == true && auth.token.firebase.sign_in_provider == 'google.com' && newData.exists() && (!data.exists() || data.child('ownerUid').val() == auth.uid)",
+          ".read": "auth != null && root.child('incidents').child($incident).child('members').child(auth.uid).exists() && !root.child('incidents').child($incident).child('revoked').child(auth.uid).exists()"
+        },
+        "inviteToken": {
+          ".write": "auth != null && auth.token.email == 'dcoellom2@unemi.edu.ec' && auth.token.email_verified == true && auth.token.firebase.sign_in_provider == 'google.com' && root.child('incidents').child($incident).child('meta/ownerUid').val() == auth.uid",
+          ".validate": "newData.isString() && newData.val().matches(/^[a-f0-9]{64}$/)"
+        },
+        "members": {
+          "$uid": {
+            ".validate": "newData.hasChildren([\"name\", \"phone\", \"role\", \"inviteToken\", \"joinedAt\"])",
+            "name": {
+              ".validate": "newData.isString() && newData.val().length >= 2 && newData.val().length <= 80"
+            },
+            "phone": {
+              ".validate": "newData.isString() && newData.val().matches(/^[+0-9 ()-]{7,25}$/)"
+            },
+            "role": {
+              ".validate": "newData.isString() && newData.val().length <= 60"
+            },
+            "inviteToken": {
+              ".validate": "newData.isString() && newData.val().matches(/^[a-f0-9]{64}$/) && (!data.exists() || data.val() == newData.val())"
+            },
+            "joinedAt": {
+              ".validate": "newData.isNumber() && ((!data.exists() && newData.val() >= now - 60000 && newData.val() <= now + 5000) || data.val() == newData.val())"
+            },
+            "$other": {
+              ".validate": false
+            },
+            ".read": "auth != null && auth.uid == $uid",
+            ".write": "auth != null && auth.uid == $uid && newData.exists() && root.child('incidents').child($incident).child('meta/active').val() == true && root.child('incidents').child($incident).child('meta/expiresAt').val() > now && !root.child('incidents').child($incident).child('revoked').child($uid).exists() && (data.exists() || newData.child('inviteToken').val() == root.child('incidents').child($incident).child('inviteToken').val())"
+          }
+        },
+        "locations": {
+          "$uid": {
+            ".validate": "newData.hasChildren([\"lat\", \"lng\", \"accuracy\", \"updatedAt\"])",
+            "lat": {
+              ".validate": "newData.isNumber() && newData.val() >= -90 && newData.val() <= 90"
+            },
+            "lng": {
+              ".validate": "newData.isNumber() && newData.val() >= -180 && newData.val() <= 180"
+            },
+            "accuracy": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000"
+            },
+            "updatedAt": {
+              ".validate": "newData.isNumber() && newData.val() >= now - 60000 && newData.val() <= now + 5000"
+            },
+            "$other": {
+              ".validate": false
+            },
+            ".read": "auth != null && auth.uid == $uid",
+            ".write": "auth != null && auth.uid == $uid && (!newData.exists() || (auth != null && auth.uid == $uid && root.child('incidents').child($incident).child('members').child($uid).exists() && !root.child('incidents').child($incident).child('revoked').child($uid).exists() && root.child('incidents').child($incident).child('meta/active').val() == true && root.child('incidents').child($incident).child('meta/expiresAt').val() > now))"
+          }
+        },
+        "reports": {
+          "$uid": {
+            ".validate": "newData.hasChildren([\"status\", \"detail\", \"updatedAt\"])",
+            "status": {
+              ".validate": "newData.isString() && newData.val().matches(/^(ESTOY OK|NECESITO APOYO|RETIRADA|EMERGENCIA|OBSERVACION)$/)"
+            },
+            "detail": {
+              ".validate": "newData.isString() && newData.val().length <= 500"
+            },
+            "updatedAt": {
+              ".validate": "newData.isNumber() && newData.val() >= now - 60000 && newData.val() <= now + 5000"
+            },
+            "$other": {
+              ".validate": false
+            },
+            ".read": "auth != null && auth.uid == $uid",
+            ".write": "auth != null && auth.uid == $uid && root.child('incidents').child($incident).child('members').child($uid).exists() && !root.child('incidents').child($incident).child('revoked').child($uid).exists() && root.child('incidents').child($incident).child('meta/active').val() == true && root.child('incidents').child($incident).child('meta/expiresAt').val() > now && newData.exists()"
+          }
+        },
+        "revoked": {
+          "$uid": {
+            ".write": "auth != null && auth.token.email == 'dcoellom2@unemi.edu.ec' && auth.token.email_verified == true && auth.token.firebase.sign_in_provider == 'google.com' && root.child('incidents').child($incident).child('meta/ownerUid').val() == auth.uid",
+            ".validate": "newData.val() == true"
+          }
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    }
+  }
+}
