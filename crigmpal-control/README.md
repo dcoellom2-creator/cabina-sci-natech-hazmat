@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.8.3 — Zoom + MQTT/WSS + GitHub Pages; pizarra y cues probados entre navegadores.
+v0.9.0 — video VDO.Ninja + MQTT/WSS + GitHub Pages; Zoom queda para audio/reunión.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -154,3 +154,17 @@ Pruebas automatizadas en navegadores separados confirmaron:
 - TAKE + alerta 5 min: el panelista recibió “5 MIN · AL AIRE · …” sin perder el estado AL AIRE.
 
 La única función que requiere ensayo físico es CAPTURAR ZOOM, porque el selector de ventana depende del navegador del operador.
+
+
+## v0.9 — cámara web VDO.Ninja
+Arquitectura:
+- VDO.Ninja: video del panelista, integrado como iframe en Panelista LIVE y PROGRAM.
+- Zoom: audio y reunión, sin ser capturado por Promter Risk.
+- MQTT/WSS: cues, presencia, alertas y pizarra.
+- GitHub Pages: aplicación, escenas y configuración.
+- Cada panelista tiene un stream ID fijo; CONTROL cambia la cámara automáticamente según el panelista seleccionado.
+- Panelista LIVE mantiene la cámara visible dentro de la misma página para reducir suspensión del navegador móvil.
+- VDO.Ninja se configura con audio deshabilitado; el audio continúa por Zoom para evitar eco.
+
+### Flujo
+Panelista abre su URL PR -> permite cámara -> VDO.Ninja publica video -> CONTROL selecciona panelista -> PREVIEW/PROGRAM cargan automáticamente el view de esa cámara -> TAKE controla la escena y MQTT mantiene cues/alertas/pizarra.
