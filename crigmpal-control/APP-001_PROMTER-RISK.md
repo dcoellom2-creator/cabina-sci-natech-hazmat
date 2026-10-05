@@ -4,7 +4,7 @@
 - Código: APP-001
 - Nombre: Promter Risk
 - Estado: L2 — web funcional
-- Versión: 0.4.0
+- Versión: 0.7.0
 - Repositorio: dcoellom2-creator/cabina-sci-natech-hazmat
 - Ruta pública: /crigmpal-control/
 
@@ -95,3 +95,19 @@ El primer paquete nativo es el caso Piñas de Kervin Chunga. La presentación de
 
 ### Criterio de producto
 GitHub sigue siendo la fuente maestra de código, versión y contenido. El video no se almacena en GitHub; viaja punto a punto durante la sesión.
+
+
+## v0.7 — arquitectura operativa
+- Zoom transporta cámara y audio.
+- CONTROL captura la ventana de Zoom y compone PREVIEW/PROGRAM.
+- PeerJS Cloud se usa solo como señalización gratuita para un canal de datos P2P.
+- El canal de datos sincroniza presencia, alertas, cues y pizarra.
+- No hay Firebase Console, códigos de oferta/respuesta ni autenticación de panelistas.
+- MSc. Diego Delgado se incorpora como Moderador.
+- El inicio principal redirige a `index-v070.html`.
+
+### URLs de producción
+- `index-v070.html`
+- `control-v070.html`
+- `panelist-live-v070.html?panelista=<id>`
+- `program-v070.html`
