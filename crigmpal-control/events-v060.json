@@ -1,0 +1,584 @@
+{
+  "version": "0.6.0",
+  "updatedAt": "2026-10-05T10:50:00-05:00",
+  "event": {
+    "id": "crigmpal-2026-10",
+    "name": "Conocer el riesgo para decidir y actuar",
+    "subtitle": "Ciencia · territorio · gestión · comunidad",
+    "mode": "Virtual vía Zoom",
+    "speakers": {
+      "kervin": {
+        "name": "PhD. Kervin Chunga",
+        "role": "Geólogo investigador",
+        "axis": "CONOCER",
+        "theme": "Base técnica y evidencia territorial",
+        "video": "",
+        "ideas": [
+          [
+            "Base técnica",
+            "La calidad de la decisión depende de la calidad de la evidencia."
+          ],
+          [
+            "Trámite vs gestión",
+            "Cumplir un formato no sustituye entender el riesgo."
+          ],
+          [
+            "Territorio",
+            "El estudio debe traducirse en una lectura útil para quien decide."
+          ]
+        ]
+      },
+      "daniel": {
+        "name": "MSc. Daniel Coello",
+        "role": "Geólogo / Gestión de riesgos",
+        "axis": "DECIDIR",
+        "theme": "Del dato técnico a la gestión",
+        "video": "",
+        "ideas": [
+          [
+            "Cadena de decisión",
+            "Fuente → dato → análisis → decisión → responsable → evidencia → resultado."
+          ],
+          [
+            "Gestión",
+            "No gestionamos mapas; gestionamos decisiones."
+          ],
+          [
+            "Implementación",
+            "La información debe terminar en responsables, medidas, plazos y seguimiento."
+          ]
+        ]
+      },
+      "patricio": {
+        "name": "MSc. Patricio Cobo",
+        "role": "Ing. Ambiental / Gestión de riesgos",
+        "axis": "ACTUAR",
+        "theme": "Territorio, preparación y comunidad",
+        "video": "",
+        "ideas": [
+          [
+            "Capacidad",
+            "Un plan no equivale automáticamente a capacidad instalada."
+          ],
+          [
+            "Preparación",
+            "Comités, capacitación, SAT, ejercicios y retroalimentación."
+          ],
+          [
+            "Territorio",
+            "La gestión se comprueba cuando puede ser aplicada por los actores."
+          ]
+        ]
+      },
+      "xavier": {
+        "name": "MSc. Xavier Verdezoto",
+        "role": "Gestión de riesgo y emergencia / Prefectura de Bolívar",
+        "axis": "ARTICULAR",
+        "theme": "Gobernanza del riesgo",
+        "video": "",
+        "ideas": [
+          [
+            "Gobernanza",
+            "No es reunión: es responsabilidad, continuidad y coordinación."
+          ],
+          [
+            "Competencias",
+            "Los actores deben saber qué les corresponde y con qué recursos cuentan."
+          ],
+          [
+            "Continuidad",
+            "La implementación debe sostenerse más allá de las personas."
+          ]
+        ]
+      },
+      "diego": {
+        "name": "MSc. Diego Delgado",
+        "role": "Geólogo / Moderador",
+        "axis": "MODERAR",
+        "theme": "Conducción técnica, preguntas y transiciones",
+        "video": "",
+        "ideas": [
+          [
+            "Conducir",
+            "Mantener el hilo del conversatorio sin competir con los panelistas."
+          ],
+          [
+            "Profundizar",
+            "Usar preguntas breves para llevar la discusión de evidencia a decisión y acción."
+          ],
+          [
+            "Controlar tiempo",
+            "Cerrar respuestas, ordenar intervenciones y proteger el ritmo del evento."
+          ]
+        ]
+      }
+    },
+    "publicSlides": [
+      {
+        "tag": "CASO PIÑAS · LADERAS URBANAS",
+        "title": "Del evento de ladera a la decisión operativa",
+        "lead": "El caso Piñas permite explicar cómo una emergencia por movimientos en masa se traduce en lectura técnica, gestión territorial y decisiones de mitigación.",
+        "cards": [
+          [
+            "Lluvia extrema",
+            "Deslizamientos de finales de febrero de 2025 vinculados a lluvias intensas asociadas a La Niña Modoki."
+          ],
+          [
+            "Inventario técnico",
+            "Ortomosaicos y reconocimiento geológico permitieron delimitar deslizamientos, colapsos y flujos."
+          ],
+          [
+            "Condición local",
+            "Brechas volcánicas, dacitas, andesitas, gneises y suelos residuales saturados condicionaron la inestabilidad."
+          ]
+        ],
+        "question": "¿Estamos mirando solo el desastre o leyendo las condiciones que lo hicieron posible?",
+        "source": "Fuente: Chunga, K. (2025). Dinámica de deformación de los deslizamientos del 28.02.2025 en Piñas, provincia El Oro. DOI:10.13140/RG.2.2.32572.55683."
+      },
+      {
+        "tag": "EVIDENCIA → ESTABILIDAD",
+        "title": "El dato técnico que cambia la conversación",
+        "lead": "El análisis de estabilidad muestra cómo la saturación reduce el factor de seguridad y convierte una descripción del daño en una decisión defendible.",
+        "cards": [
+          [
+            "Antes del evento",
+            "El análisis reporta SF 1.526 en condición estática previa."
+          ],
+          [
+            "Con saturación",
+            "El margen baja a SF 1.125 por efecto del nivel de saturación asociado a lluvia intensa."
+          ],
+          [
+            "Talud inestable",
+            "Después del colapso se reportan condiciones inestables con SF 0.926, agravadas por agua."
+          ]
+        ],
+        "table": {
+          "headers": [
+            "Condición",
+            "SF",
+            "Lectura para gestión"
+          ],
+          "rows": [
+            [
+              "Natural previa",
+              "1.526",
+              "Estabilidad aparente"
+            ],
+            [
+              "Con saturación",
+              "1.125",
+              "Reducción del margen"
+            ],
+            [
+              "Talud colapsado",
+              "0.926",
+              "Inestabilidad"
+            ],
+            [
+              "Agua + condición crítica",
+              "0.727",
+              "Mayor peligro"
+            ]
+          ]
+        },
+        "question": "¿Qué decisión se justifica cuando el factor de seguridad muestra que el problema ya no es solo visual?",
+        "source": "Valores SF resumidos del texto público de Chunga (2025), ResearchGate."
+      },
+      {
+        "tag": "MITIGACIÓN",
+        "title": "De la geometría del talud a medidas concretas",
+        "lead": "El caso presenta alternativas de estabilización y control de flujos que permiten pasar del diagnóstico a una ruta de intervención.",
+        "cards": [
+          [
+            "Bermas y anclajes",
+            "Reconfiguración geométrica del terreno para mejorar la estabilidad."
+          ],
+          [
+            "SF objetivo",
+            "El diseño reporta incremento a SF ≈ 1.706–1.709 en condición estática."
+          ],
+          [
+            "Control de flujos",
+            "Disipadores, diques y separadores reducen velocidad y transporte de bloques/sedimentos."
+          ]
+        ],
+        "question": "Si ya sabemos dónde falló, por qué falló y qué medida reduce el riesgo, ¿qué impide actuar?",
+        "source": "Medidas resumidas a partir de Chunga (2025), texto público ResearchGate."
+      },
+      {
+        "tag": "PREGUNTA ESTRATÉGICA",
+        "title": "No es PowerPoint: es escena técnica guiada",
+        "lead": "Durante la transmisión, el panelista puede aparecer en burbuja o media pantalla, mientras la interfaz muestra contenido técnico, tabla, pregunta o pizarra en la misma escena.",
+        "cards": [
+          [
+            "Panelista",
+            "Cámara reducida, nombre, eje y alerta de tiempo."
+          ],
+          [
+            "Contenido",
+            "Pregunta clave, tarjetas, tabla, fragmento técnico y referencia."
+          ],
+          [
+            "Valor antes que venta",
+            "La necesidad de asesoría aparece como consecuencia de entender la brecha, no como presión comercial."
+          ]
+        ],
+        "question": "¿Cómo hacemos que el público comprenda la brecha técnica antes de ofrecer una solución?",
+        "source": "Criterio operativo Promter Risk: valor técnico primero; servicios como ruta natural de acompañamiento."
+      }
+    ],
+    "blocks": [
+      {
+        "id": "d1a",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:00",
+        "end": "18:08",
+        "title": "Apertura y encuadre",
+        "people": [
+          "diego"
+        ],
+        "cue": "Presentar el hilo: conocer → decidir → actuar → articular.",
+        "prompt": "Bienvenidos. Hoy vamos a seguir una ruta sencilla: conocer el riesgo, convertirlo en decisión y preguntarnos qué hace falta para actuar."
+      },
+      {
+        "id": "d1b",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:08",
+        "end": "18:35",
+        "title": "Base técnica y evidencia",
+        "people": [
+          "kervin"
+        ],
+        "cue": "Estudios, mapas, riesgo, trámite vs gestión.",
+        "prompt": "¿Estamos gestionando el riesgo o solamente cumpliendo un trámite?"
+      },
+      {
+        "id": "d1c",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:35",
+        "end": "18:45",
+        "title": "Diálogo técnico",
+        "people": [
+          "diego",
+          "kervin",
+          "daniel"
+        ],
+        "cue": "Extraer elementos mínimos que necesita una decisión territorial.",
+        "prompt": "Kervin, si mañana este estudio entra a una institución, ¿qué información no debería perderse? Daniel, ¿qué dato necesitas para convertirlo en decisión?"
+      },
+      {
+        "id": "d1d",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:45",
+        "end": "19:20",
+        "title": "Del dato técnico a la decisión",
+        "people": [
+          "daniel"
+        ],
+        "cue": "Cruce territorial, competencias, responsables, medidas y evidencia.",
+        "prompt": "¿En qué momento el conocimiento del territorio deja de ser información y empieza realmente a convertirse en gestión?"
+      },
+      {
+        "id": "d1e",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "19:20",
+        "end": "19:42",
+        "title": "Informes, proyectos y financiamiento",
+        "people": [
+          "diego",
+          "kervin",
+          "daniel"
+        ],
+        "cue": "Llenar formatos no reemplaza una base técnica suficiente.",
+        "prompt": "¿Qué brecha impide pasar de un reporte técnico a una intervención financiable y defendible?"
+      },
+      {
+        "id": "d1f",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "19:42",
+        "end": "19:52",
+        "title": "Preguntas del público",
+        "people": [
+          "diego",
+          "kervin",
+          "daniel"
+        ],
+        "cue": "Responder orientación general y registrar casos que requieren revisión específica.",
+        "prompt": "Abrimos preguntas del público. Busquemos casos que permitan distinguir orientación general de análisis aplicado."
+      },
+      {
+        "id": "d1g",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "19:52",
+        "end": "20:00",
+        "title": "Cierre día 1",
+        "people": [
+          "diego",
+          "daniel"
+        ],
+        "cue": "Lo que conocemos condiciona lo que podemos decidir.",
+        "prompt": "Cerramos el primer día con una idea: lo que conocemos condiciona lo que podemos decidir. Mañana veremos cómo esa decisión se vuelve capacidad y gobernanza."
+      },
+      {
+        "id": "d2a",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:00",
+        "end": "18:07",
+        "title": "Recapitulación",
+        "people": [
+          "diego"
+        ],
+        "cue": "Reconectar evidencia, decisión, territorio y gobernanza.",
+        "prompt": "Retomamos el hilo de ayer: evidencia y decisión. Hoy bajamos esa conversación al territorio, la comunidad y la articulación institucional."
+      },
+      {
+        "id": "d2b",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:07",
+        "end": "18:32",
+        "title": "Preparación y comunidad",
+        "people": [
+          "patricio"
+        ],
+        "cue": "Actores, comités, capacitación, SAT, ejercicios y respuesta.",
+        "prompt": "¿Qué hace que una comunidad esté preparada y no solamente tenga un plan?"
+      },
+      {
+        "id": "d2c",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:32",
+        "end": "18:47",
+        "title": "Diálogo territorio",
+        "people": [
+          "diego",
+          "patricio",
+          "daniel"
+        ],
+        "cue": "Del documento a la capacidad instalada.",
+        "prompt": "Patricio, ¿qué información debe llegar a la comunidad y cuál debe permanecer como insumo técnico? Daniel, ¿cómo se conecta eso con la gestión institucional?"
+      },
+      {
+        "id": "d2d",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:47",
+        "end": "19:17",
+        "title": "Gobernanza del riesgo",
+        "people": [
+          "xavier"
+        ],
+        "cue": "Competencias, coordinación, responsabilidades y continuidad.",
+        "prompt": "Cuando todos tienen responsabilidad, ¿qué hace que realmente se articulen?"
+      },
+      {
+        "id": "d2e",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:17",
+        "end": "19:37",
+        "title": "Pregunta transversal",
+        "people": [
+          "diego",
+          "kervin",
+          "daniel",
+          "patricio",
+          "xavier"
+        ],
+        "cue": "Conocer · decidir · actuar · articular.",
+        "prompt": "Pregunta transversal para todos: si ya conocemos el riesgo, ¿qué nos falta para tomar buenas decisiones y actuar realmente sobre él?"
+      },
+      {
+        "id": "d2f",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:37",
+        "end": "19:47",
+        "title": "Caso integrador",
+        "people": [
+          "diego",
+          "kervin",
+          "daniel",
+          "patricio",
+          "xavier"
+        ],
+        "cue": "Amenaza + población + instituciones + intervención que no avanza.",
+        "prompt": "Caso integrador: cada uno responda desde su ámbito. ¿Qué haría para destrabar una intervención que técnicamente está sustentada pero no avanza?"
+      },
+      {
+        "id": "d2g",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:47",
+        "end": "19:54",
+        "title": "Ruta de soluciones",
+        "people": [
+          "daniel"
+        ],
+        "cue": "Diagnóstico, asesoría, capacitación e implementación.",
+        "prompt": "Si una institución enfrenta una brecha concreta, el siguiente paso es revisar su caso."
+      },
+      {
+        "id": "d2h",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:54",
+        "end": "20:00",
+        "title": "Cierre final",
+        "people": [
+          "diego",
+          "daniel"
+        ],
+        "cue": "Agradecer y dejar ruta de seguimiento.",
+        "prompt": "Cerramos integrando conocer, decidir, actuar y articular. Gracias por mantener una conversación técnica orientada a soluciones."
+      }
+    ],
+    "productionScenes": [
+      {
+        "id": "k-intro",
+        "layout": "fullspeaker",
+        "tag": "CASO PIÑAS · KERVIN CHUNGA",
+        "title": "Piñas: del evento de ladera a la decisión operativa",
+        "lead": "",
+        "cards": [],
+        "question": "",
+        "source": "Caso técnico de referencia: Chunga, K. (2025). Dinámica de deformación de los deslizamientos del 28.02.2025 en Piñas, provincia El Oro.",
+        "producerCue": "Mira a cámara. Presenta el caso Piñas en 45–60 segundos y establece por qué es útil para hablar de decisión."
+      },
+      {
+        "tag": "CASO PIÑAS · LADERAS URBANAS",
+        "title": "Del evento de ladera a la decisión operativa",
+        "lead": "El caso Piñas permite explicar cómo una emergencia por movimientos en masa se traduce en lectura técnica, gestión territorial y decisiones de mitigación.",
+        "cards": [
+          [
+            "Lluvia extrema",
+            "Deslizamientos de finales de febrero de 2025 vinculados a lluvias intensas asociadas a La Niña Modoki."
+          ],
+          [
+            "Inventario técnico",
+            "Ortomosaicos y reconocimiento geológico permitieron delimitar deslizamientos, colapsos y flujos."
+          ],
+          [
+            "Condición local",
+            "Brechas volcánicas, dacitas, andesitas, gneises y suelos residuales saturados condicionaron la inestabilidad."
+          ]
+        ],
+        "question": "¿Estamos mirando solo el desastre o leyendo las condiciones que lo hicieron posible?",
+        "source": "Fuente: Chunga, K. (2025). Dinámica de deformación de los deslizamientos del 28.02.2025 en Piñas, provincia El Oro. DOI:10.13140/RG.2.2.32572.55683.",
+        "id": "k-context",
+        "layout": "cards",
+        "producerCue": "Explica la secuencia lluvia → inventario → condición local. Usa las tarjetas como apoyo; no las leas literalmente."
+      },
+      {
+        "tag": "EVIDENCIA → ESTABILIDAD",
+        "title": "Factor de seguridad: el dato que cambia la conversación",
+        "lead": "El análisis de estabilidad muestra cómo la saturación reduce el factor de seguridad y convierte una descripción del daño en una decisión defendible.",
+        "cards": [
+          [
+            "Antes del evento",
+            "El análisis reporta SF 1.526 en condición estática previa."
+          ],
+          [
+            "Con saturación",
+            "El margen baja a SF 1.125 por efecto del nivel de saturación asociado a lluvia intensa."
+          ],
+          [
+            "Talud inestable",
+            "Después del colapso se reportan condiciones inestables con SF 0.926, agravadas por agua."
+          ]
+        ],
+        "table": {
+          "headers": [
+            "Condición",
+            "SF",
+            "Lectura para gestión"
+          ],
+          "rows": [
+            [
+              "Natural previa",
+              "1.526",
+              "Estabilidad aparente"
+            ],
+            [
+              "Con saturación",
+              "1.125",
+              "Reducción del margen"
+            ],
+            [
+              "Talud colapsado",
+              "0.926",
+              "Inestabilidad"
+            ],
+            [
+              "Agua + condición crítica",
+              "0.727",
+              "Mayor peligro"
+            ]
+          ]
+        },
+        "question": "¿Qué decisión se justifica cuando el factor de seguridad muestra que el problema ya no es solo visual?",
+        "source": "Valores SF resumidos del texto público de Chunga (2025), ResearchGate.",
+        "id": "k-sf",
+        "layout": "table",
+        "producerCue": "Concentra la explicación en cómo la saturación reduce el factor de seguridad y cambia la decisión."
+      },
+      {
+        "tag": "MITIGACIÓN",
+        "title": "De la geometría del talud a medidas concretas",
+        "lead": "El caso presenta alternativas de estabilización y control de flujos que permiten pasar del diagnóstico a una ruta de intervención.",
+        "cards": [
+          [
+            "Bermas y anclajes",
+            "Reconfiguración geométrica del terreno para mejorar la estabilidad."
+          ],
+          [
+            "SF objetivo",
+            "El diseño reporta incremento a SF ≈ 1.706–1.709 en condición estática."
+          ],
+          [
+            "Control de flujos",
+            "Disipadores, diques y separadores reducen velocidad y transporte de bloques/sedimentos."
+          ]
+        ],
+        "question": "Si ya sabemos dónde falló, por qué falló y qué medida reduce el riesgo, ¿qué impide actuar?",
+        "source": "Medidas resumidas a partir de Chunga (2025), texto público ResearchGate.",
+        "id": "k-mitigation",
+        "layout": "cards",
+        "producerCue": "Conecta cada medida técnica con la pregunta: ¿qué decisión institucional permite implementarla?"
+      },
+      {
+        "id": "k-question",
+        "layout": "question",
+        "tag": "PREGUNTA ESTRATÉGICA",
+        "title": "Del estudio a la decisión",
+        "lead": "",
+        "cards": [],
+        "question": "Si ya sabemos dónde falló, por qué falló y qué medida reduce el riesgo, ¿qué impide actuar?",
+        "source": "Pregunta de moderación construida a partir del caso Piñas y la discusión sobre decisión e implementación.",
+        "producerCue": "Detente. Formula la pregunta, deja 2–3 segundos de silencio y responde desde tu experiencia."
+      },
+      {
+        "id": "k-board",
+        "layout": "board",
+        "tag": "PIZARRA TÉCNICA",
+        "title": "De lluvia a falla: explicación en pizarra",
+        "lead": "",
+        "cards": [],
+        "question": "¿Qué relación causal no debería perder de vista quien toma la decisión?",
+        "source": "Pizarra del panelista dentro de Promter Risk · explicación técnica en vivo.",
+        "producerCue": "Usa la pizarra para una sola cadena causal: lluvia → saturación → pérdida de resistencia → movimiento. Máximo 2 minutos."
+      }
+    ],
+    "moderatorId": "diego"
+  }
+}
