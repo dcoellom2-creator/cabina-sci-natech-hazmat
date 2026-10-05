@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.4.0 — producción multirol con WebRTC beta, confidence monitor y pizarra remota.
+v0.4.1 — estabilización de video móvil, handshake CONTROL→PROGRAM y pizarra persistente.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -73,3 +73,13 @@ Limitación: redes corporativas o NAT estrictas pueden bloquear una conexión ST
 - PROGRAM: `program.html`
 - PANELISTA LIVE: `panelist-live.html?panelista=<id>`
 - `public.html` redirige a PROGRAM para evitar capturar por error una interfaz con controles.
+
+
+## Correcciones v0.4.1
+A partir del primer ensayo con teléfono + computador:
+- El panelista transmite solo la pista de video hacia producción; el micrófono queda para prueba/medición local, reduciendo carga y riesgo de congelamiento.
+- Cámara móvil limitada a resolución/framerate razonables para estabilidad.
+- El canal de pizarra limita frecuencia y descarta movimientos si el buffer se satura.
+- CONTROL muestra por separado estado de video y datos.
+- PROGRAM anuncia que está listo y CONTROL reinyecta el MediaStream automáticamente.
+- La pizarra conserva los trazos aunque la escena todavía no esté al aire y se redibuja al entrar en modo Pizarra.
