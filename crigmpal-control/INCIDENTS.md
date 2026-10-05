@@ -39,3 +39,13 @@
 - **Corrección v0.8.3:** las alertas actualizan solo el campo alert y conservan el estado de programa.
 - **Prueba:** panelista recibió “5 MIN · AL AIRE · Concentra la explicación…” desde un navegador independiente.
 - **Estado:** RESUELTO Y VERIFICADO.
+
+
+## INC-PR-005 · Captura de Zoom inestable/negra dentro de PROGRAM
+- **Fecha:** 2026-10-05
+- **Versiones afectadas:** v0.5–v0.8
+- **Síntoma:** captura de Zoom mediante getDisplayMedia alternaba entre pantalla completa, recursión y superficie negra; Zoom reorganizaba su ventana durante compartir/orador.
+- **Impacto:** el rostro no permanecía estable dentro de PREVIEW/PROGRAM.
+- **Decisión:** retirar captura de Zoom de la ruta principal.
+- **Solución v0.9:** VDO.Ninja publica video directamente desde el navegador del panelista; PROGRAM recibe el stream por URL. Zoom queda solo para audio/reunión.
+- **Estado:** MITIGADO POR CAMBIO DE ARQUITECTURA.
