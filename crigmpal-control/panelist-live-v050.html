@@ -33,7 +33,7 @@ main{max-width:1500px;margin:auto;padding:20px}.selector{display:flex;gap:10px;a
   <div style="display:flex;gap:12px;align-items:center"><span style="font-size:11px;color:var(--muted);font-weight:900">v0.5.0</span><div id="connStatus" class="conn"><span id="connDot" class="dot"></span><span id="connText">Sin conexión</span></div></div>
 </header>
 <main>
-  <div style="background:#eaf6ee;border-left:5px solid var(--green);padding:12px 14px;border-radius:0 14px 14px 0;margin-bottom:14px"><b style="color:#176d33">MODO PRODUCCIÓN ESTABLE</b><div style="color:#49665a;font-size:13px;line-height:1.45;margin-top:4px">Usa Zoom para cámara y audio. Promter Risk queda para guion, alertas, pizarra y notas. La cámara directa de PR queda solo como prueba experimental.</div></div>
+  <div style="background:#eaf6ee;border-left:5px solid var(--green);padding:12px 14px;border-radius:0 14px 14px 0;margin-bottom:14px"><b style="color:#176d33">MODO PRODUCCIÓN ESTABLE</b><div style="color:#49665a;font-size:13px;line-height:1.45;margin-top:4px">Usa Zoom para cámara y audio. NO actives la cámara dentro de Promter Risk durante el evento. PR queda para guion, alertas, pizarra y notas.</div></div>
   <div class="selector"><select id="speakerSelect"></select><button id="backBtn" class="secondary">Volver al prompter</button><button id="fullBtn" class="secondary">Pantalla completa</button></div>
   <section id="workspace" class="workspace">
     <div class="top">
@@ -42,13 +42,12 @@ main{max-width:1500px;margin:auto;padding:20px}.selector{display:flex;gap:10px;a
     </div>
 
     <div class="livegrid">
-      <article class="panel">
-        <span class="eyebrow">CÁMARA DIRECTA · EXPERIMENTAL</span>
+      <details class="panel"><summary style="cursor:pointer;font-weight:900;color:var(--navy)">Diagnóstico avanzado — cámara directa PR (NO USAR EN PRODUCCIÓN)</summary><div style="margin-top:12px"><span class="eyebrow">CÁMARA DIRECTA · EXPERIMENTAL</span>
         <div class="camera" style="margin-top:10px"><video id="camVideo" autoplay muted playsinline></video><div id="camEmpty" class="camera-empty"><b>Cámara apagada</b>Actívala antes del ensayo y verifica encuadre, luz y audio.</div><div class="statusbar"><span id="camState">OFF</span><span id="micState">Micrófono: --</span></div></div>
         <div class="meter"><span id="micMeter"></span></div><div id="videoStats" class="muted" style="font-size:11px;margin-top:7px">Video local: sin iniciar</div>
         <div class="testline"><button id="startMediaBtn" class="secondary">Probar cámara directa PR</button><button id="stopMediaBtn" class="secondary">Apagar</button></div>
         <div class="devicegrid" style="margin-top:12px"><label>Cámara<select id="cameraSelect"></select></label><label>Micrófono<select id="micSelect"></select></label></div>
-      </article>
+</div></details>
 
       <article class="panel confidence">
         <div><span class="eyebrow">CONFIDENCE MONITOR</span><div style="margin-top:8px"><span id="stateBadge" class="statebadge">EN ESPERA</span></div></div>
