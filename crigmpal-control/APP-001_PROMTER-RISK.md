@@ -4,7 +4,7 @@
 - Código: APP-001
 - Nombre: Promter Risk
 - Estado: L2 — web funcional
-- Versión: 0.8.3
+- Versión: 0.9.0
 - Repositorio: dcoellom2-creator/cabina-sci-natech-hazmat
 - Ruta pública: /crigmpal-control/
 
@@ -130,3 +130,14 @@ Arquitectura final para el conversatorio:
 - Cues y alertas validados.
 - Moderador Diego Delgado integrado.
 - Captura Zoom pendiente únicamente de ensayo físico del selector de ventana.
+
+
+## v0.9 — video web integrado
+- Video del panelista: VDO.Ninja.
+- Audio/reunión: Zoom.
+- Control/pizarra/alertas: MQTT.
+- Sin captura de Zoom.
+- Sin instalación de OBS.
+- Sin Firebase en la ruta crítica.
+- Sin intercambio manual de códigos.
+- Cámaras vinculadas automáticamente por panelista.
