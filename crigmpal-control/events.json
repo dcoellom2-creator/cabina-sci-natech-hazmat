@@ -1,6 +1,6 @@
 {
-  "version": "0.3.2",
-  "updatedAt": "2026-10-05T08:12:00-05:00",
+  "version": "0.4.0",
+  "updatedAt": "2026-10-05T08:30:00-05:00",
   "event": {
     "id": "crigmpal-2026-10",
     "name": "Conocer el riesgo para decidir y actuar",
@@ -423,7 +423,8 @@
         "lead": "",
         "cards": [],
         "question": "",
-        "source": "Caso técnico de referencia: Chunga, K. (2025). Dinámica de deformación de los deslizamientos del 28.02.2025 en Piñas, provincia El Oro."
+        "source": "Caso técnico de referencia: Chunga, K. (2025). Dinámica de deformación de los deslizamientos del 28.02.2025 en Piñas, provincia El Oro.",
+        "producerCue": "Mira a cámara. Presenta el caso Piñas en 45–60 segundos y establece por qué es útil para hablar de decisión."
       },
       {
         "tag": "CASO PIÑAS · LADERAS URBANAS",
@@ -446,7 +447,8 @@
         "question": "¿Estamos mirando solo el desastre o leyendo las condiciones que lo hicieron posible?",
         "source": "Fuente: Chunga, K. (2025). Dinámica de deformación de los deslizamientos del 28.02.2025 en Piñas, provincia El Oro. DOI:10.13140/RG.2.2.32572.55683.",
         "id": "k-context",
-        "layout": "cards"
+        "layout": "cards",
+        "producerCue": "Explica la secuencia lluvia → inventario → condición local. Usa las tarjetas como apoyo; no las leas literalmente."
       },
       {
         "tag": "EVIDENCIA → ESTABILIDAD",
@@ -498,7 +500,8 @@
         "question": "¿Qué decisión se justifica cuando el factor de seguridad muestra que el problema ya no es solo visual?",
         "source": "Valores SF resumidos del texto público de Chunga (2025), ResearchGate.",
         "id": "k-sf",
-        "layout": "table"
+        "layout": "table",
+        "producerCue": "Concentra la explicación en cómo la saturación reduce el factor de seguridad y cambia la decisión."
       },
       {
         "tag": "MITIGACIÓN",
@@ -521,7 +524,8 @@
         "question": "Si ya sabemos dónde falló, por qué falló y qué medida reduce el riesgo, ¿qué impide actuar?",
         "source": "Medidas resumidas a partir de Chunga (2025), texto público ResearchGate.",
         "id": "k-mitigation",
-        "layout": "cards"
+        "layout": "cards",
+        "producerCue": "Conecta cada medida técnica con la pregunta: ¿qué decisión institucional permite implementarla?"
       },
       {
         "id": "k-question",
@@ -531,7 +535,19 @@
         "lead": "",
         "cards": [],
         "question": "Si ya sabemos dónde falló, por qué falló y qué medida reduce el riesgo, ¿qué impide actuar?",
-        "source": "Pregunta de moderación construida a partir del caso Piñas y la discusión sobre decisión e implementación."
+        "source": "Pregunta de moderación construida a partir del caso Piñas y la discusión sobre decisión e implementación.",
+        "producerCue": "Detente. Formula la pregunta, deja 2–3 segundos de silencio y responde desde tu experiencia."
+      },
+      {
+        "id": "k-board",
+        "layout": "board",
+        "tag": "PIZARRA TÉCNICA",
+        "title": "De lluvia a falla: explicación en pizarra",
+        "lead": "",
+        "cards": [],
+        "question": "¿Qué relación causal no debería perder de vista quien toma la decisión?",
+        "source": "Pizarra del panelista dentro de Promter Risk · explicación técnica en vivo.",
+        "producerCue": "Usa la pizarra para una sola cadena causal: lluvia → saturación → pérdida de resistencia → movimiento. Máximo 2 minutos."
       }
     ]
   }
