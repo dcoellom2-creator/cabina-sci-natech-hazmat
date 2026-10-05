@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.7.0 — arquitectura sin Firebase Console: Zoom + PeerJS Cloud (datos) + GitHub Pages.
+v0.8.0 — Zoom + MQTT sobre WSS + GitHub Pages; sin Firebase ni códigos manuales.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -129,3 +129,17 @@ MSc. Diego Delgado — Geólogo / Moderador — se incorpora como usuario MODERA
 
 ### Riesgo técnico conocido
 PeerJS Cloud es un servicio público compartido. Para un evento pequeño es suficiente como señalización de datos, pero no se utiliza para video/audio. Si una red impide la conexión P2P, Zoom sigue funcionando y el evento puede continuar sin pizarra remota.
+
+
+## v0.8 — MQTT automático
+La prueba PeerJS v0.7 devolvió `peer-unavailable` y no entregó la pizarra. La ruta crítica se cambia a MQTT sobre WebSocket seguro.
+
+- Broker público de pruebas: `wss://broker.emqx.io:8084/mqtt`.
+- Zoom: cámara y audio.
+- MQTT: estado de escena, presencia, alertas y pizarra.
+- GitHub Pages: aplicación y contenido.
+- No hay códigos de oferta/respuesta, Firebase Console ni cuentas de panelista.
+- CONTROL publica el estado; Panelista/Moderador lo reciben automáticamente.
+- La pizarra se publica como imagen JPEG comprimida y CONTROL/PROGRAM reciben el último estado.
+
+Importante: el broker público no se usa para datos sensibles. Notas privadas nunca se publican; permanecen en localStorage.
