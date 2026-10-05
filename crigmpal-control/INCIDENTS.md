@@ -30,3 +30,12 @@
 - **Decisión:** retirar PeerJS de la ruta crítica.
 - **Solución v0.8:** MQTT sobre WebSocket seguro con broker público EMQX para sincronización automática.
 - **Estado:** RESUELTO POR CAMBIO DE TRANSPORTE.
+
+
+## INC-PR-004 · Alerta 5 min eliminaba estado AL AIRE
+- **Fecha:** 2026-10-05
+- **Versión afectada:** v0.8.2
+- **Síntoma:** después de TAKE, pulsar 5 min publicaba un estado PREPARA y eliminaba AL AIRE.
+- **Corrección v0.8.3:** las alertas actualizan solo el campo alert y conservan el estado de programa.
+- **Prueba:** panelista recibió “5 MIN · AL AIRE · Concentra la explicación…” desde un navegador independiente.
+- **Estado:** RESUELTO Y VERIFICADO.
