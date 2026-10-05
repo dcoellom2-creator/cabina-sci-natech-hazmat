@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.8.0 — Zoom + MQTT sobre WSS + GitHub Pages; sin Firebase ni códigos manuales.
+v0.8.3 — Zoom + MQTT/WSS + GitHub Pages; pizarra y cues probados entre navegadores.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -143,3 +143,14 @@ La prueba PeerJS v0.7 devolvió `peer-unavailable` y no entregó la pizarra. La 
 - La pizarra se publica como imagen JPEG comprimida y CONTROL/PROGRAM reciben el último estado.
 
 Importante: el broker público no se usa para datos sensibles. Notas privadas nunca se publican; permanecen en localStorage.
+
+
+## Verificación v0.8.3
+Pruebas automatizadas en navegadores separados confirmaron:
+- Panelista: “Producción conectada”.
+- Pizarra: envío de 2 KB desde Kervin y recepción en CONTROL con hora.
+- CONTROL: presencia de panelista mientras el navegador remoto está activo.
+- Cues: escena “Factor de seguridad” recibida por Kervin.
+- TAKE + alerta 5 min: el panelista recibió “5 MIN · AL AIRE · …” sin perder el estado AL AIRE.
+
+La única función que requiere ensayo físico es CAPTURAR ZOOM, porque el selector de ventana depende del navegador del operador.
