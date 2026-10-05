@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.4.2 — modo móvil estable, telemetría y pizarra por snapshot.
+v0.5.0 — modo de producción estable: cámara/audio por Zoom, gráficos y pizarra por Promter Risk.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -98,3 +98,16 @@ Ensayo real teléfono → computador confirmó que `RTCPeerConnection.connection
 - Conectado + 0 KB/0 frames = el enlace WebRTC está negociado, pero no está llegando video.
 - Pizarra 0 = el DataChannel no está entregando mensajes.
 - Si ambos permanecen en cero con v0.4.2, dejar de insistir con STUN-only y migrar la capa en vivo a un relay/signaling dedicado (TURN/WebRTC service), manteniendo GitHub para código y contenidos.
+
+
+## Modo de producción estable v0.5
+El ensayo real mostró que la cámara WebRTC directa desde teléfono no es suficientemente confiable para producción. La arquitectura operativa cambia:
+
+- **Zoom**: transporte de cámara y audio del panelista.
+- **Panelista LIVE**: confidence monitor, guion, alertas, pizarra y notas; cámara directa PR queda experimental.
+- **CONTROL**: captura localmente la ventana de Zoom mediante `getDisplayMedia()`, la integra en PREVIEW/PROGRAM y recibe la pizarra.
+- **PROGRAM**: salida 16:9 con cámara capturada + contenido técnico.
+- **Pizarra**: el panelista puede dibujar y pulsar “Enviar pizarra a producción”; CONTROL confirma la recepción y PROGRAM muestra el snapshot.
+
+### Motivo
+La separación reduce carga en el teléfono, evita competir por la cámara con Zoom y elimina la dependencia de STUN-only para el video principal. GitHub sigue siendo la fuente maestra del producto y los contenidos.
