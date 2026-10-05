@@ -4,7 +4,7 @@
 - Código: APP-001
 - Nombre: Promter Risk
 - Estado: L2 — web funcional
-- Versión: 0.7.0
+- Versión: 0.8.0
 - Repositorio: dcoellom2-creator/cabina-sci-natech-hazmat
 - Ruta pública: /crigmpal-control/
 
@@ -111,3 +111,13 @@ GitHub sigue siendo la fuente maestra de código, versión y contenido. El video
 - `control-v070.html`
 - `panelist-live-v070.html?panelista=<id>`
 - `program-v070.html`
+
+
+## v0.8 — canal de datos MQTT
+Arquitectura final para el conversatorio:
+- Zoom para media.
+- MQTT/WSS para mensajes de control, presencia y pizarra.
+- GitHub Pages para interfaz y contenidos.
+- Moderator: MSc. Diego Delgado.
+- Sin intercambio manual de códigos.
+- Sin dependencia operativa de Firebase.
