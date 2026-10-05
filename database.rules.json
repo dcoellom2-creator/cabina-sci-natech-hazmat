@@ -108,6 +108,66 @@
           ".validate": false
         }
       }
+    },
+    "promterRisk": {
+      "events": {
+        "$event": {
+          "state": {
+            ".read": "auth != null",
+            ".write": "auth != null && auth.token.email == 'dcoellom2@unemi.edu.ec' && auth.token.email_verified == true && auth.token.firebase.sign_in_provider == 'google.com'",
+            "$other": {
+              ".validate": true
+            }
+          },
+          "clients": {
+            ".read": "auth != null && auth.token.email == 'dcoellom2@unemi.edu.ec' && auth.token.email_verified == true && auth.token.firebase.sign_in_provider == 'google.com'",
+            "$uid": {
+              ".write": "auth != null && auth.uid == $uid",
+              ".validate": "newData.hasChildren(['speakerId','role','online','updatedAt'])",
+              "speakerId": {
+                ".validate": "newData.isString() && newData.val().length <= 80"
+              },
+              "role": {
+                ".validate": "newData.val() == 'panelist'"
+              },
+              "online": {
+                ".validate": "newData.isBoolean()"
+              },
+              "updatedAt": {
+                ".validate": "newData.isNumber() || newData.val() == now"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          },
+          "boards": {
+            ".read": "auth != null",
+            "$uid": {
+              ".write": "auth != null && auth.uid == $uid",
+              ".validate": "newData.hasChildren(['speakerId','data','updatedAt'])",
+              "speakerId": {
+                ".validate": "newData.isString() && newData.val().length <= 80"
+              },
+              "data": {
+                ".validate": "newData.isString() && newData.val().length <= 800000"
+              },
+              "updatedAt": {
+                ".validate": "newData.isNumber()"
+              },
+              "$other": {
+                ".validate": false
+              }
+            }
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+      "$other": {
+        ".validate": false
+      }
     }
   }
 }
