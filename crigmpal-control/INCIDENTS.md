@@ -10,3 +10,13 @@
 - **Criterio de escalamiento:** si CONTROL mantiene 0 KB / 0 frames y pizarra 0 pese a conexión en v0.4.2, abandonar STUN-only para producción y pasar a una capa de relay/señalización dedicada (TURN/WebRTC service). GitHub continúa como repositorio y fuente de contenidos.
 - **Estado:** MITIGADO ARQUITECTÓNICAMENTE EN v0.5.
 - **Decisión:** no usar WebRTC STUN-only para la cámara principal del evento. Cámara/audio viajan por Zoom; PR integra la ventana localmente y mantiene WebRTC/DataChannel solo como beta para funciones auxiliares.
+
+
+## INC-PR-002 · Firebase Console inaccesible para despliegue de reglas
+- **Fecha:** 2026-10-05
+- **Síntoma:** no fue posible completar el acceso operativo a Firebase Console desde Work/TinyFish.
+- **Impacto:** la v0.6 no podía depender de reglas RTDB no desplegadas.
+- **Decisión:** eliminar Firebase de la ruta crítica del evento.
+- **Solución v0.7:** Zoom para media + PeerJS Cloud para señalización de datos + GitHub Pages para interfaz/contenido.
+- **Resultado:** conexión automática sin intercambio manual de códigos.
+- **Estado:** RESUELTO POR CAMBIO DE ARQUITECTURA.
