@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Promter Risk · Panelista LIVE</title>
+<style>
+:root{--navy:#082b4b;--ink:#102133;--muted:#6b7787;--line:#dce5ed;--bg:#f3f6f9;--green:#23864a;--amber:#d97706;--red:#c73333;--blue:#2563eb;--shadow:0 16px 42px rgba(8,43,75,.10)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial;background:var(--bg);color:var(--ink)}
+header{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:20}
+.brand{display:flex;align-items:center;gap:12px}.mark{width:42px;height:42px;border-radius:13px;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:950}.brand b{display:block}.brand small{display:block;color:var(--muted)}
+button,select,textarea{font:inherit}button{border:0;border-radius:12px;padding:11px 14px;font-weight:850;cursor:pointer}.primary{background:var(--navy);color:#fff}.secondary{background:#edf2f6;color:var(--navy)}.danger{background:#ffe8e8;color:#a71f1f}.success{background:#e8f6ec;color:#176d33}.hidden{display:none!important}
+main{max-width:1500px;margin:auto;padding:20px}.selector{display:flex;gap:10px;align-items:center;margin-bottom:14px}.selector select{min-width:280px;border:1px solid var(--line);border-radius:11px;padding:10px;background:#fff}
+.workspace{background:#fff;border:4px solid transparent;border-radius:24px;padding:18px;box-shadow:var(--shadow);transition:.25s ease}.state-live{border-color:#b7dfc3}.state-warning{border-color:#f0bf68;box-shadow:0 0 0 8px rgba(217,119,6,.08)}.state-danger{border-color:#ed9696;box-shadow:0 0 0 9px rgba(199,51,51,.08)}.state-onair{border-color:#6fa2d5}
+.top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.axis{display:inline-flex;padding:7px 10px;border-radius:999px;background:#edf3f8;color:var(--navy);font-size:11px;font-weight:950;letter-spacing:.09em}.top h1{margin:8px 0 3px;color:var(--navy);font-size:34px}.muted{color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap}
+.livegrid{display:grid;grid-template-columns:1fr 1.25fr;gap:16px;margin-top:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.camera{background:#0a1622;border-radius:18px;overflow:hidden;min-height:410px;display:grid;place-items:center;position:relative}.camera video{width:100%;height:100%;object-fit:cover;display:block}.camera-empty{color:#c6d2dc;text-align:center;padding:30px}.camera-empty b{display:block;font-size:22px;color:#fff;margin-bottom:7px}.statusbar{position:absolute;left:12px;right:12px;bottom:12px;background:rgba(3,15,25,.72);color:#fff;border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;gap:12px;backdrop-filter:blur(10px)}
+.meter{height:8px;background:#e9eef2;border-radius:999px;overflow:hidden;margin-top:8px}.meter span{display:block;height:100%;width:0;background:var(--green);transition:.08s}
+.confidence{display:flex;flex-direction:column;min-height:410px}.eyebrow{font-size:10px;font-weight:950;letter-spacing:.15em;color:#607488}.statebadge{display:inline-flex;border-radius:999px;padding:7px 10px;background:#eef3f7;color:var(--navy);font-size:11px;font-weight:950}.confidence h2{font-size:30px;color:var(--navy);margin:10px 0}.prompt{border-left:5px solid var(--navy);background:#f7fafc;border-radius:0 15px 15px 0;padding:16px 18px;font-size:22px;font-weight:850;line-height:1.35;color:var(--navy)}.ideas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.idea{border:1px solid var(--line);border-radius:13px;padding:12px;background:#fbfcfe}.idea b{display:block;color:var(--navy);font-size:13px;margin-bottom:5px}.idea span{font-size:12px;color:var(--muted);line-height:1.35}.timerrow{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}.timerbox{background:#f7fafc;border-radius:14px;padding:12px;text-align:center}.big{font-size:48px;font-weight:950;letter-spacing:-.05em;color:var(--navy);font-variant-numeric:tabular-nums}.timerbox small{color:var(--muted)}.operatorcue{background:#fff8ea;border-left:5px solid var(--amber);border-radius:0 13px 13px 0;padding:12px 14px;margin-top:12px}.operatorcue b{display:block;color:#8b4b00;margin-bottom:4px}
+.tabs{display:flex;gap:7px;margin:18px 0;border-bottom:1px solid var(--line);overflow:auto}.tab{background:transparent;color:#667789;border-bottom:3px solid transparent;border-radius:9px 9px 0 0}.tab.active{color:var(--navy);border-bottom-color:var(--navy)}.tab-panel{display:none}.tab-panel.active{display:block}
+.devicegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.devicegrid label{font-size:12px;font-weight:800}.devicegrid select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;margin-top:5px}.testline{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.boardgrid{display:grid;grid-template-columns:1.6fr .65fr;gap:15px}.canvasbox{height:520px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.canvasbox canvas{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}.cardstack{display:grid;gap:8px}.cardidea{border:1px solid var(--line);border-radius:13px;padding:12px;background:#fafcfd}.cardidea b{display:block;color:var(--navy);margin-bottom:5px}.cardidea span{font-size:12px;color:var(--muted)}
+.pairgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.pairgrid textarea{width:100%;min-height:170px;border:1px solid var(--line);border-radius:12px;padding:10px;font:12px ui-monospace,SFMono-Regular,Menlo,monospace}.pairnote{background:#f4f8fb;border-left:5px solid var(--blue);padding:12px;border-radius:0 12px 12px 0;color:#3f5367;line-height:1.45}.conn{display:inline-flex;gap:7px;align-items:center;font-weight:850;font-size:12px}.dot{width:9px;height:9px;border-radius:50%;background:#9aa8b5}.dot.ok{background:var(--green)}.dot.warn{background:var(--amber)}
+.notes{width:100%;min-height:360px;border:1px solid var(--line);border-radius:14px;padding:14px;font-size:17px;line-height:1.55}
+.toast{position:fixed;right:20px;bottom:20px;background:#102133;color:#fff;padding:13px 15px;border-radius:12px;box-shadow:var(--shadow);z-index:60}
+@media(max-width:1000px){.livegrid,.boardgrid,.pairgrid{grid-template-columns:1fr}.ideas{grid-template-columns:1fr}.camera{min-height:320px}.top{flex-direction:column}.timerrow{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){main{padding:12px}.selector{align-items:stretch;flex-direction:column}.selector select{min-width:0;width:100%}.big{font-size:40px}.confidence h2{font-size:25px}.prompt{font-size:19px}.devicegrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="mark">PR</div><div><b>Promter Risk · Panelista LIVE</b><small>Cámara · confidence monitor · pizarra · enlace con producción</small></div></div>
+  <div style="display:flex;gap:12px;align-items:center"><span style="font-size:11px;color:var(--muted);font-weight:900">v0.5.0</span><div id="connStatus" class="conn"><span id="connDot" class="dot"></span><span id="connText">Sin conexión</span></div></div>
+</header>
+<main>
+  <div style="background:#eaf6ee;border-left:5px solid var(--green);padding:12px 14px;border-radius:0 14px 14px 0;margin-bottom:14px"><b style="color:#176d33">MODO PRODUCCIÓN ESTABLE</b><div style="color:#49665a;font-size:13px;line-height:1.45;margin-top:4px">Usa Zoom para cámara y audio. Promter Risk queda para guion, alertas, pizarra y notas. La cámara directa de PR queda solo como prueba experimental.</div></div>
+  <div class="selector"><select id="speakerSelect"></select><button id="backBtn" class="secondary">Volver al prompter</button><button id="fullBtn" class="secondary">Pantalla completa</button></div>
+  <section id="workspace" class="workspace">
+    <div class="top">
+      <div><span id="axis" class="axis"></span><h1 id="speakerName"></h1><p id="role" class="muted"></p></div>
+      <div class="actions"><button id="alertsBtn" class="primary">Activar alertas</button><button id="refreshBtn" class="secondary">Actualizar evento</button></div>
+    </div>
+
+    <div class="livegrid">
+      <article class="panel">
+        <span class="eyebrow">CÁMARA DIRECTA · EXPERIMENTAL</span>
+        <div class="camera" style="margin-top:10px"><video id="camVideo" autoplay muted playsinline></video><div id="camEmpty" class="camera-empty"><b>Cámara apagada</b>Actívala antes del ensayo y verifica encuadre, luz y audio.</div><div class="statusbar"><span id="camState">OFF</span><span id="micState">Micrófono: --</span></div></div>
+        <div class="meter"><span id="micMeter"></span></div><div id="videoStats" class="muted" style="font-size:11px;margin-top:7px">Video local: sin iniciar</div>
+        <div class="testline"><button id="startMediaBtn" class="secondary">Probar cámara directa PR</button><button id="stopMediaBtn" class="secondary">Apagar</button></div>
+        <div class="devicegrid" style="margin-top:12px"><label>Cámara<select id="cameraSelect"></select></label><label>Micrófono<select id="micSelect"></select></label></div>
+      </article>
+
+      <article class="panel confidence">
+        <div><span class="eyebrow">CONFIDENCE MONITOR</span><div style="margin-top:8px"><span id="stateBadge" class="statebadge">EN ESPERA</span></div></div>
+        <h2 id="blockTitle"></h2>
+        <p id="cue" class="muted"></p>
+        <div id="prompt" class="prompt"></div>
+        <div id="ideas" class="ideas"></div>
+        <div id="operatorCue" class="operatorcue"><b>PRODUCCIÓN</b><span id="operatorCueText">Aún no hay instrucción del operador.</span></div>
+        <div class="timerrow"><div class="timerbox"><div id="timer" class="big">--:--</div><small id="timerLabel">Tiempo</small></div><div class="timerbox"><div id="nextTime" class="big">--:--</div><small>Próxima participación</small></div></div>
+      </article>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="board">Pizarra</button>
+      <button class="tab" data-tab="pair">Conectar con producción</button>
+      <button class="tab" data-tab="notes">Notas</button>
+    </div>
+
+    <section id="boardPanel" class="tab-panel active">
+      <div class="boardgrid">
+        <article class="panel"><div class="actions" style="margin-bottom:10px"><button id="penBtn" class="secondary">Lápiz</button><button id="eraserBtn" class="secondary">Borrador</button><button id="clearBtn" class="danger">Limpiar</button><button id="saveBtn" class="secondary">Guardar PNG</button><button id="sendBoardBtn" class="primary">Enviar pizarra a producción</button></div><div class="canvasbox"><canvas id="board"></canvas></div></article>
+        <aside class="panel"><span class="eyebrow">IDEAS DE APOYO</span><h3>Tarjetas del panelista</h3><div id="boardIdeas" class="cardstack"></div><p id="boardSendState" class="muted" style="font-size:12px">Cuando termines un esquema, pulsa <b>Enviar pizarra a producción</b>. CONTROL confirmará la recepción.</p></aside>
+      </div>
+    </section>
+
+    <section id="pairPanel" class="tab-panel">
+      <div class="panel">
+        <span class="eyebrow">CONEXIÓN DIRECTA · BETA</span><h2>Conectar esta cámara con CONTROL</h2>
+        <p class="pairnote">Esta versión mantiene GitHub-only. La conexión es WebRTC punto a punto usando STUN público; no sube tu video a GitHub. En algunas redes corporativas/NAT estrictas puede requerir TURN en una versión futura.</p>
+        <div class="pairgrid">
+          <div><h3>1. Generar oferta</h3><button id="offerBtn" class="primary">Generar código para producción</button><textarea id="offerCode" placeholder="Aquí aparecerá el código de oferta..."></textarea><button id="copyOfferBtn" class="secondary">Copiar oferta</button></div>
+          <div><h3>2. Recibir respuesta</h3><textarea id="answerCode" placeholder="Pega aquí el código de respuesta que te devuelve producción..."></textarea><button id="applyAnswerBtn" class="primary">Aplicar respuesta y conectar</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="notesPanel" class="tab-panel">
+      <div class="panel"><span class="eyebrow">NOTAS PRIVADAS</span><h2>Tu cuaderno</h2><textarea id="notes" class="notes" placeholder="Ejemplos, cifras, frases, preguntas, recordatorios..."></textarea><p id="noteState" class="muted">Guardado localmente.</p></div>
+    </section>
+  </section>
+</main>
+<div id="toast" class="toast hidden"></div>
+<script>
+let data=null,speakerId=null,mediaStream=null,audioCtx=null,analyser=null,meterRAF=null,pc=null,dc=null,tool='pen',drawing=false,ctx=null,alertsOn=false,operatorState={},lastBoardSend=0,boardShotTimer=null;
+const $=id=>document.getElementById(id),qa=s=>[...document.querySelectorAll(s)];
+function toast(t){$('toast').textContent=t;$('toast').classList.remove('hidden');clearTimeout(toast.t);toast.t=setTimeout(function(){$('toast').classList.add('hidden')},2800)}
+function enc(obj){return btoa(unescape(encodeURIComponent(JSON.stringify(obj))))}
+function dec(txt){return JSON.parse(decodeURIComponent(escape(atob(txt.trim()))))}
+function dateOf(b,k){return new Date(b.date+'T'+b[k]+':00-05:00')}
+function fmt(ms){let s=Math.max(0,Math.floor(ms/1000)),m=Math.floor(s/60);s%=60;return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+function noteKey(){return 'pr-live-note:'+data.event.id+':'+speakerId}
+async function loadData(){data=await (await fetch('./events-v050.json?v='+Date.now(),{cache:'no-store'})).json();loadSpeakers();render();toast('Evento actualizado')}
+function loadSpeakers(){let s=$('speakerSelect'),q=new URLSearchParams(location.search).get('panelista');if(!speakerId)speakerId=q&&data.event.speakers[q]?q:Object.keys(data.event.speakers)[0];s.innerHTML='';Object.entries(data.event.speakers).forEach(function(entry){let o=document.createElement('option');o.value=entry[0];o.textContent=entry[1].name;s.appendChild(o)});s.value=speakerId}
+function blocks(){return data.event.blocks.filter(function(b){return b.people.includes(speakerId)})}
+function moment(){let now=new Date(),bs=blocks(),c=bs.find(function(b){return now>=dateOf(b,'start')&&now<dateOf(b,'end')}),n=bs.find(function(b){return now<dateOf(b,'start')});if(c)return{state:'live',b:c,n:n};if(n)return{state:'wait',b:n,n:n};return{state:'done',b:bs[bs.length-1],n:null}}
+function render(){if(!data||!speakerId)return;let p=data.event.speakers[speakerId],m=moment(),b=m.b,now=new Date(),ws=$('workspace');$('speakerName').textContent=p.name;$('role').textContent=p.role;$('axis').textContent=p.axis;$('blockTitle').textContent=b.title;$('cue').textContent=b.cue;$('prompt').textContent=b.prompt;$('ideas').innerHTML=(p.ideas||[]).map(function(x){return '<div class="idea"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'}).join('');$('boardIdeas').innerHTML=(p.ideas||[]).map(function(x){return '<div class="cardidea"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'}).join('');
+ws.className='workspace';let badge=$('stateBadge');if(m.state==='wait'){let rem=dateOf(b,'start')-now;$('timer').textContent=fmt(rem);$('timerLabel').textContent='Falta para tu bloque';badge.textContent='EN ESPERA';$('nextTime').textContent=b.start}else if(m.state==='live'){let rem=dateOf(b,'end')-now;$('timer').textContent=fmt(rem);$('timerLabel').textContent='Tiempo restante';badge.textContent='EN VIVO';ws.classList.add('state-live');if(rem<=300000&&rem>120000){ws.className='workspace state-warning';badge.textContent='5 MIN';if(alertsOn)signal('Quedan 5 minutos')}if(rem<=120000){ws.className='workspace state-danger';badge.textContent='CIERRA';if(alertsOn)signal('Quedan 2 minutos')}$('nextTime').textContent=m.n&&m.n.id!==b.id?m.n.start:'--:--'}else{$('timer').textContent='00:00';$('timerLabel').textContent='Bloques terminados';badge.textContent='FINALIZADO';$('nextTime').textContent='--:--'}
+if(operatorState.alert==='danger'){ws.className='workspace state-danger'}else if(operatorState.alert==='warning'){ws.className='workspace state-warning'}if(operatorState.onair){ws.classList.add('state-onair');$('operatorCueText').textContent='AL AIRE · '+(operatorState.operatorCue||operatorState.sceneTitle||'Escena activa')}else if(operatorState.sceneTitle){$('operatorCueText').textContent='PREPARA: '+(operatorState.operatorCue||operatorState.sceneTitle)}else{$('operatorCueText').textContent='Aún no hay instrucción del operador.'}}
+function signal(msg){if(signal.last===msg)return;signal.last=msg;beep(msg.includes('2')?780:540);toast(msg);if('Notification'in window&&Notification.permission==='granted')new Notification('Promter Risk',{body:msg})}
+function beep(f){try{let A=window.AudioContext||window.webkitAudioContext,c=new A,o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=f;g.gain.value=.07;o.start();setTimeout(function(){o.stop();c.close()},320)}catch(e){}}
+async function enableAlerts(){if('Notification'in window&&Notification.permission==='default')await Notification.requestPermission();alertsOn=true;beep(520);toast('Alertas activadas')}
+async function enumerate(){let ds=await navigator.mediaDevices.enumerateDevices(),cams=ds.filter(function(d){return d.kind==='videoinput'}),mics=ds.filter(function(d){return d.kind==='audioinput'});$('cameraSelect').innerHTML=cams.map(function(d,i){return '<option value="'+d.deviceId+'">'+(d.label||('Cámara '+(i+1)))+'</option>'}).join('');$('micSelect').innerHTML=mics.map(function(d,i){return '<option value="'+d.deviceId+'">'+(d.label||('Micrófono '+(i+1)))+'</option>'}).join('')}
+async function startMedia(){stopMedia();let videoId=$('cameraSelect').value,audioId=$('micSelect').value;let constraints={video:videoId?{deviceId:{exact:videoId},width:{ideal:640,max:640},height:{ideal:360,max:480},frameRate:{ideal:15,max:15}}:{facingMode:'user',width:{ideal:640,max:640},height:{ideal:360,max:480},frameRate:{ideal:15,max:15}},audio:audioId?{deviceId:{exact:audioId},echoCancellation:true,noiseSuppression:true}:{echoCancellation:true,noiseSuppression:true}};try{mediaStream=await navigator.mediaDevices.getUserMedia(constraints);$('camVideo').srcObject=mediaStream;$('camEmpty').classList.add('hidden');$('camState').textContent='CAM ON';$('micState').textContent='Micrófono: ON';$('videoStats').textContent='Video local: 640×360 · 15 fps objetivo';await enumerate();startMeter();if(pc)mediaStream.getVideoTracks().forEach(function(t){if(!pc.getSenders().some(function(s){return s.track===t}))pc.addTrack(t,mediaStream)});toast('Cámara y micrófono activos')}catch(e){toast('No se pudo activar cámara/micrófono: '+e.message)}}
+function stopMedia(){if(mediaStream){mediaStream.getTracks().forEach(function(t){t.stop()});mediaStream=null}$('camVideo').srcObject=null;$('camEmpty').classList.remove('hidden');$('camState').textContent='OFF';$('micState').textContent='Micrófono: --';if(meterRAF)cancelAnimationFrame(meterRAF);$('micMeter').style.width='0%'}
+function startMeter(){try{audioCtx=new (window.AudioContext||window.webkitAudioContext)();let src=audioCtx.createMediaStreamSource(mediaStream);analyser=audioCtx.createAnalyser();analyser.fftSize=256;src.connect(analyser);let arr=new Uint8Array(analyser.frequencyBinCount);function loop(){analyser.getByteFrequencyData(arr);let avg=arr.reduce(function(a,b){return a+b},0)/arr.length;$('micMeter').style.width=Math.min(100,avg*1.8)+'%';meterRAF=requestAnimationFrame(loop)}loop()}catch(e){}}
+function waitIce(peer){return new Promise(function(resolve){if(peer.iceGatheringState==='complete')return resolve();let f=function(){if(peer.iceGatheringState==='complete'){peer.removeEventListener('icegatheringstatechange',f);resolve()}};peer.addEventListener('icegatheringstatechange',f);setTimeout(resolve,5000)})}
+async function makeOffer(){if(!mediaStream){toast('Primero activa cámara + micrófono');return}pc=new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'}]});mediaStream.getVideoTracks().forEach(function(t){let sender=pc.addTrack(t,mediaStream);try{let p=sender.getParameters();p.encodings=p.encodings&&p.encodings.length?p.encodings:[{}];p.encodings[0].maxBitrate=300000;p.encodings[0].maxFramerate=15;sender.setParameters(p).catch(function(){})}catch(e){}});dc=pc.createDataChannel('promter-risk');wireData();pc.onconnectionstatechange=connState;let offer=await pc.createOffer();await pc.setLocalDescription(offer);await waitIce(pc);$('offerCode').value=enc(pc.localDescription);$('connText').textContent='Oferta lista';$('connDot').className='dot warn';toast('Oferta generada. Envíala a producción.')}
+async function applyAnswer(){if(!pc){toast('Primero genera la oferta');return}try{let ans=dec($('answerCode').value);await pc.setRemoteDescription(ans);toast('Respuesta aplicada. Esperando conexión...')}catch(e){toast('Código de respuesta inválido')}}
+function wireData(){if(!dc)return;dc.bufferedAmountLowThreshold=65536;dc.onopen=function(){connState();$('connText').textContent='Conectado a producción · datos OK';sendData({t:'hello',speakerId:speakerId,name:data.event.speakers[speakerId].name})};dc.onclose=connState;dc.onmessage=function(e){try{let m=JSON.parse(e.data);if(m.t==='cue'){operatorState=m;render();if(m.alert==='warning')toast('Producción: quedan 5 min');if(m.alert==='danger')toast('Producción: quedan 2 min')}if(m.t==='boardAck'){$('boardSendState').textContent='✓ Pizarra recibida por producción · '+new Date().toLocaleTimeString('es-EC',{hour:'2-digit',minute:'2-digit',second:'2-digit'});$('boardSendState').style.color='var(--green)';toast('Pizarra recibida por producción')}}catch(err){}}}
+function connState(){let st=pc?pc.connectionState:'new',ok=st==='connected',dataOk=dc&&dc.readyState==='open';$('connText').textContent=ok?(dataOk?'Conectado a producción · datos OK':'Video conectado · abriendo datos…'):('Estado: '+st);$('connDot').className='dot '+(ok&&dataOk?'ok':(st==='connecting'||ok?'warn':''))}
+function sendData(o,dropIfBusy){if(!dc||dc.readyState!=='open')return false;if(dropIfBusy&&dc.bufferedAmount>262144)return false;dc.send(JSON.stringify(o));return true}
+function sendBoardSnapshot(){if(!dc||dc.readyState!=='open'||dc.bufferedAmount>400000)return;try{let src=$('board'),ratio=(src.width&&src.height)?src.height/src.width:0.56;let tmp=document.createElement('canvas');tmp.width=640;tmp.height=Math.max(360,Math.round(640*ratio));let tctx=tmp.getContext('2d');tctx.fillStyle='#fff';tctx.fillRect(0,0,tmp.width,tmp.height);tctx.drawImage(src,0,0,tmp.width,tmp.height);let jpg=tmp.toDataURL('image/jpeg',0.58);sendData({t:'boardImage',data:jpg},true)}catch(e){}}
+function initBoard(){let c=$('board');ctx=c.getContext('2d');resizeBoard();function point(e){let r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*(c.width/r.width),y:(e.clientY-r.top)*(c.height/r.height),nx:(e.clientX-r.left)/r.width,ny:(e.clientY-r.top)/r.height}}c.onpointerdown=function(e){drawing=true;let p=point(e);ctx.beginPath();ctx.moveTo(p.x,p.y);sendData({t:'board',a:'start',x:p.nx,y:p.ny,tool:tool})};c.onpointermove=function(e){if(!drawing)return;let p=point(e);ctx.lineCap='round';ctx.lineJoin='round';ctx.lineWidth=tool==='eraser'?24:3;ctx.strokeStyle=tool==='eraser'?'#fff':'#102133';ctx.lineTo(p.x,p.y);ctx.stroke();let now=performance.now();if(now-lastBoardSend>=90){lastBoardSend=now;sendData({t:'board',a:'move',x:p.nx,y:p.ny,tool:tool},true)}clearTimeout(boardShotTimer);boardShotTimer=setTimeout(sendBoardSnapshot,260)};c.onpointerup=c.onpointerleave=function(){if(drawing){sendData({t:'board',a:'end'});sendBoardSnapshot()}drawing=false}}
+function resizeBoard(){if(!ctx)return;let c=$('board'),r=c.getBoundingClientRect(),old=document.createElement('canvas');old.width=c.width||1;old.height=c.height||1;old.getContext('2d').drawImage(c,0,0);c.width=Math.max(1,Math.round(r.width*devicePixelRatio));c.height=Math.max(1,Math.round(r.height*devicePixelRatio));ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);if(old.width>1)ctx.drawImage(old,0,0,c.width,c.height)}
+function clearBoard(){let c=$('board');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);sendData({t:'board',a:'clear'});sendBoardSnapshot()}
+function saveBoard(){let a=document.createElement('a');a.download='pizarra-'+speakerId+'.png';a.href=$('board').toDataURL();a.click()}
+function switchTab(name){qa('.tab').forEach(function(x){x.classList.toggle('active',x.dataset.tab===name)});qa('.tab-panel').forEach(function(x){x.classList.remove('active')});$(name+'Panel').classList.add('active');if(name==='board')setTimeout(resizeBoard,60)}
+function bind(){$('speakerSelect').onchange=function(e){speakerId=e.target.value;let u=new URL(location.href);u.searchParams.set('panelista',speakerId);history.replaceState(null,'',u);$('notes').value=localStorage.getItem(noteKey())||'';render()};$('backBtn').onclick=function(){location.href='./?panelista='+speakerId};$('fullBtn').onclick=function(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()};$('alertsBtn').onclick=enableAlerts;$('refreshBtn').onclick=loadData;$('startMediaBtn').onclick=startMedia;$('stopMediaBtn').onclick=stopMedia;$('cameraSelect').onchange=startMedia;$('micSelect').onchange=startMedia;$('offerBtn').onclick=makeOffer;$('copyOfferBtn').onclick=function(){navigator.clipboard.writeText($('offerCode').value);toast('Oferta copiada')};$('applyAnswerBtn').onclick=applyAnswer;$('penBtn').onclick=function(){tool='pen'};$('eraserBtn').onclick=function(){tool='eraser'};$('clearBtn').onclick=clearBoard;$('saveBtn').onclick=saveBoard;$('sendBoardBtn').onclick=function(){$('boardSendState').textContent='Enviando pizarra…';$('boardSendState').style.color='var(--amber)';sendBoardSnapshot()};qa('.tab').forEach(function(x){x.onclick=function(){switchTab(x.dataset.tab)}});$('notes').oninput=function(){localStorage.setItem(noteKey(),$('notes').value);$('noteState').textContent='Guardado '+new Date().toLocaleTimeString('es-EC',{hour:'2-digit',minute:'2-digit'})};window.addEventListener('resize',resizeBoard)}
+async function init(){bind();await loadData();$('notes').value=localStorage.getItem(noteKey())||'';await enumerate().catch(function(){});initBoard();setInterval(render,1000)}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
