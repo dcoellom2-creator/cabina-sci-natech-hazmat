@@ -4,7 +4,7 @@
 - Código: APP-001
 - Nombre: Promter Risk
 - Estado: L2 — web funcional
-- Versión: 0.2.1
+- Versión: 0.3.1
 - Repositorio: dcoellom2-creator/cabina-sci-natech-hazmat
 - Ruta pública: /crigmpal-control/
 
@@ -69,3 +69,13 @@ Las notas y tarjetas personales se guardan con localStorage y no se sincronizan 
 
 ## Regla de producto
 Documentar → versionar → probar → publicar → medir → mejorar → monetizar.
+
+## Módulo de realización
+Promter Risk adopta una lógica de producción audiovisual:
+- CONTROL: operación privada.
+- PREVIEW: escena preparada.
+- TAKE: transición deliberada.
+- PROGRAM: salida pública limpia.
+- Escenas reutilizables: panelista completo, tarjetas, tabla, pregunta y futuras escenas de imagen/pizarra.
+
+El primer paquete nativo es el caso Piñas de Kervin Chunga. La presentación deja de ser un archivo externo y pasa a ser contenido estructurado dentro de Promter Risk.
