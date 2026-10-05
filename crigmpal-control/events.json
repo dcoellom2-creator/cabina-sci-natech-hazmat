@@ -1,6 +1,6 @@
 {
-  "version": "0.3.1",
-  "updatedAt": "2026-10-05T08:00:00-05:00",
+  "version": "0.3.2",
+  "updatedAt": "2026-10-05T08:12:00-05:00",
   "event": {
     "id": "crigmpal-2026-10",
     "name": "Conocer el riesgo para decidir y actuar",
@@ -450,7 +450,7 @@
       },
       {
         "tag": "EVIDENCIA → ESTABILIDAD",
-        "title": "El dato técnico que cambia la conversación",
+        "title": "Factor de seguridad: el dato que cambia la conversación",
         "lead": "El análisis de estabilidad muestra cómo la saturación reduce el factor de seguridad y convierte una descripción del daño en una decisión defendible.",
         "cards": [
           [
