@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.5.0 — modo de producción estable: cámara/audio por Zoom, gráficos y pizarra por Promter Risk.
+v0.7.0 — arquitectura sin Firebase Console: Zoom + PeerJS Cloud (datos) + GitHub Pages.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -111,3 +111,21 @@ El ensayo real mostró que la cámara WebRTC directa desde teléfono no es sufic
 
 ### Motivo
 La separación reduce carga en el teléfono, evita competir por la cámara con Zoom y elimina la dependencia de STUN-only para el video principal. GitHub sigue siendo la fuente maestra del producto y los contenidos.
+
+
+## v0.7 — conexión automática sin Firebase
+La consola de Firebase no fue accesible de forma operativa, así que Promter Risk deja de depender de ella para el evento.
+
+Arquitectura:
+- Zoom: cámara y audio.
+- GitHub Pages: interfaz, escenas y configuración.
+- PeerJS Cloud: señalización gratuita para un canal WebRTC de datos entre CONTROL y cada panelista.
+- Canal de datos: pizarra, alertas, cues y presencia.
+- CONTROL y PROGRAM: mismo equipo de producción; sincronización local y captura de la ventana de Zoom.
+- No hay códigos de oferta/respuesta ni inicio de sesión para panelistas.
+
+### Moderador
+MSc. Diego Delgado — Geólogo / Moderador — se incorpora como usuario MODERAR y participa en aperturas, transiciones, preguntas y cierres.
+
+### Riesgo técnico conocido
+PeerJS Cloud es un servicio público compartido. Para un evento pequeño es suficiente como señalización de datos, pero no se utiliza para video/audio. Si una red impide la conexión P2P, Zoom sigue funcionando y el evento puede continuar sin pizarra remota.
