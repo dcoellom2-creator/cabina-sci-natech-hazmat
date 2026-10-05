@@ -20,3 +20,13 @@
 - **Solución v0.7:** Zoom para media + PeerJS Cloud para señalización de datos + GitHub Pages para interfaz/contenido.
 - **Resultado:** conexión automática sin intercambio manual de códigos.
 - **Estado:** RESUELTO POR CAMBIO DE ARQUITECTURA.
+
+
+## INC-PR-003 · PeerJS no localiza al peer de CONTROL
+- **Fecha:** 2026-10-05
+- **Versión afectada:** v0.7.0
+- **Síntoma:** CONTROL registra su canal, pero Panelista devuelve `peer-unavailable`; pizarra no llega.
+- **Prueba:** automatización CONTROL + Panelista Kervin + envío de pizarra.
+- **Decisión:** retirar PeerJS de la ruta crítica.
+- **Solución v0.8:** MQTT sobre WebSocket seguro con broker público EMQX para sincronización automática.
+- **Estado:** RESUELTO POR CAMBIO DE TRANSPORTE.
