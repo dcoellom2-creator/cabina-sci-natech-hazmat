@@ -1,6 +1,6 @@
 {
-  "version": "0.9.0",
-  "updatedAt": "2026-10-05T15:58:00-05:00",
+  "version": "0.9.1",
+  "updatedAt": "2026-10-05T17:02:00-05:00",
   "event": {
     "id": "crigmpal-2026-10",
     "name": "Conocer el riesgo para decidir y actuar",
@@ -28,8 +28,8 @@
           ]
         ],
         "cameraStreamId": "prcrig2026_kervin_7f2a19c4",
-        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_kervin_7f2a19c4&webcam&autostart&audiodevice=0&cleanish&width=720&height=1280&fps=24",
-        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_kervin_7f2a19c4&cleanoutput&noaudio&cover"
+        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_kervin_7f2a19c4&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
+        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_kervin_7f2a19c4&cleanoutput&noaudio&cover&autoplay"
       },
       "daniel": {
         "name": "MSc. Daniel Coello",
@@ -52,8 +52,8 @@
           ]
         ],
         "cameraStreamId": "prcrig2026_daniel_91d3b6e8",
-        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_daniel_91d3b6e8&webcam&autostart&audiodevice=0&cleanish&width=720&height=1280&fps=24",
-        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_daniel_91d3b6e8&cleanoutput&noaudio&cover"
+        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_daniel_91d3b6e8&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
+        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_daniel_91d3b6e8&cleanoutput&noaudio&cover&autoplay"
       },
       "patricio": {
         "name": "MSc. Patricio Cobo",
@@ -76,8 +76,8 @@
           ]
         ],
         "cameraStreamId": "prcrig2026_patricio_5c8f24a1",
-        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_patricio_5c8f24a1&webcam&autostart&audiodevice=0&cleanish&width=720&height=1280&fps=24",
-        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_patricio_5c8f24a1&cleanoutput&noaudio&cover"
+        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_patricio_5c8f24a1&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
+        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_patricio_5c8f24a1&cleanoutput&noaudio&cover&autoplay"
       },
       "xavier": {
         "name": "MSc. Xavier Verdezoto",
@@ -100,8 +100,8 @@
           ]
         ],
         "cameraStreamId": "prcrig2026_xavier_3e71c9b2",
-        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_xavier_3e71c9b2&webcam&autostart&audiodevice=0&cleanish&width=720&height=1280&fps=24",
-        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_xavier_3e71c9b2&cleanoutput&noaudio&cover"
+        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_xavier_3e71c9b2&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
+        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_xavier_3e71c9b2&cleanoutput&noaudio&cover&autoplay"
       },
       "diego": {
         "name": "MSc. Diego Delgado",
@@ -124,8 +124,8 @@
           ]
         ],
         "cameraStreamId": "prcrig2026_diego_8a4d72f6",
-        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_diego_8a4d72f6&webcam&autostart&audiodevice=0&cleanish&width=720&height=1280&fps=24",
-        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_diego_8a4d72f6&cleanoutput&noaudio&cover"
+        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_diego_8a4d72f6&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
+        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_diego_8a4d72f6&cleanoutput&noaudio&cover&autoplay"
       }
     },
     "publicSlides": [
