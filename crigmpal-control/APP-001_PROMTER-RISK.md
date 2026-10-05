@@ -4,7 +4,7 @@
 - Código: APP-001
 - Nombre: Promter Risk
 - Estado: L2 — web funcional
-- Versión: 0.3.1
+- Versión: 0.4.0
 - Repositorio: dcoellom2-creator/cabina-sci-natech-hazmat
 - Ruta pública: /crigmpal-control/
 
@@ -79,3 +79,19 @@ Promter Risk adopta una lógica de producción audiovisual:
 - Escenas reutilizables: panelista completo, tarjetas, tabla, pregunta y futuras escenas de imagen/pizarra.
 
 El primer paquete nativo es el caso Piñas de Kervin Chunga. La presentación deja de ser un archivo externo y pasa a ser contenido estructurado dentro de Promter Risk.
+
+
+## v0.4 — producción remota
+- Modo LIVE para panelistas.
+- Cámara y micrófono con selección de dispositivos.
+- Medidor básico de audio.
+- Confidence monitor por bloque.
+- Cues de producción enviados desde CONTROL.
+- Alertas visuales 5 min / 2 min.
+- WebRTC directo panelista → productor.
+- Pizarra remota basada en eventos de dibujo.
+- PROGRAM recibe video remoto y pizarra cuando la sesión WebRTC está activa.
+- Escena de pizarra incorporada al caso piloto Piñas.
+
+### Criterio de producto
+GitHub sigue siendo la fuente maestra de código, versión y contenido. El video no se almacena en GitHub; viaja punto a punto durante la sesión.
