@@ -1,6 +1,6 @@
 {
-  "version": "0.5.1",
-  "updatedAt": "2026-10-05T10:30:00-05:00",
+  "version": "0.5.2",
+  "updatedAt": "2026-10-05T10:45:00-05:00",
   "event": {
     "id": "crigmpal-2026-10",
     "name": "Conocer el riesgo para decidir y actuar",
@@ -88,6 +88,27 @@
           [
             "Continuidad",
             "La implementación debe sostenerse más allá de las personas."
+          ]
+        ]
+      },
+      "diego": {
+        "name": "MSc. Diego Delgado",
+        "role": "Geólogo / Moderador",
+        "axis": "MODERAR",
+        "theme": "Conducción técnica, preguntas y transiciones",
+        "video": "",
+        "ideas": [
+          [
+            "Conducir",
+            "Mantener el hilo del conversatorio sin competir con los panelistas."
+          ],
+          [
+            "Profundizar",
+            "Usar preguntas breves para llevar la discusión de evidencia a decisión y acción."
+          ],
+          [
+            "Controlar tiempo",
+            "Cerrar respuestas, ordenar intervenciones y proteger el ritmo del evento."
           ]
         ]
       }
@@ -216,10 +237,10 @@
         "end": "18:08",
         "title": "Apertura y encuadre",
         "people": [
-          "daniel"
+          "diego"
         ],
         "cue": "Presentar el hilo: conocer → decidir → actuar → articular.",
-        "prompt": "Hoy no venimos a acumular conceptos. Venimos a preguntarnos cómo el conocimiento del riesgo termina en decisiones y acciones."
+        "prompt": "Bienvenidos. Hoy vamos a seguir una ruta sencilla: conocer el riesgo, convertirlo en decisión y preguntarnos qué hace falta para actuar."
       },
       {
         "id": "d1b",
@@ -242,11 +263,12 @@
         "end": "18:45",
         "title": "Diálogo técnico",
         "people": [
+          "diego",
           "kervin",
           "daniel"
         ],
         "cue": "Extraer elementos mínimos que necesita una decisión territorial.",
-        "prompt": "Si mañana este estudio entra a una institución, ¿qué información no debería perderse?"
+        "prompt": "Kervin, si mañana este estudio entra a una institución, ¿qué información no debería perderse? Daniel, ¿qué dato necesitas para convertirlo en decisión?"
       },
       {
         "id": "d1d",
@@ -269,11 +291,12 @@
         "end": "19:42",
         "title": "Informes, proyectos y financiamiento",
         "people": [
+          "diego",
           "kervin",
           "daniel"
         ],
         "cue": "Llenar formatos no reemplaza una base técnica suficiente.",
-        "prompt": "¿Qué brecha impide pasar de un reporte a una intervención financiable y defendible?"
+        "prompt": "¿Qué brecha impide pasar de un reporte técnico a una intervención financiable y defendible?"
       },
       {
         "id": "d1f",
@@ -283,11 +306,12 @@
         "end": "19:52",
         "title": "Preguntas del público",
         "people": [
+          "diego",
           "kervin",
           "daniel"
         ],
         "cue": "Responder orientación general y registrar casos que requieren revisión específica.",
-        "prompt": "¿Qué caso del público nos ayuda a mostrar la diferencia entre orientación y asesoría aplicada?"
+        "prompt": "Abrimos preguntas del público. Busquemos casos que permitan distinguir orientación general de análisis aplicado."
       },
       {
         "id": "d1g",
@@ -297,10 +321,11 @@
         "end": "20:00",
         "title": "Cierre día 1",
         "people": [
+          "diego",
           "daniel"
         ],
         "cue": "Lo que conocemos condiciona lo que podemos decidir.",
-        "prompt": "Mañana bajamos esa decisión al territorio y a la gobernanza."
+        "prompt": "Cerramos el primer día con una idea: lo que conocemos condiciona lo que podemos decidir. Mañana veremos cómo esa decisión se vuelve capacidad y gobernanza."
       },
       {
         "id": "d2a",
@@ -310,10 +335,10 @@
         "end": "18:07",
         "title": "Recapitulación",
         "people": [
-          "daniel"
+          "diego"
         ],
         "cue": "Reconectar evidencia, decisión, territorio y gobernanza.",
-        "prompt": "Ayer hablamos de base técnica y decisión; hoy vemos si eso se convierte en capacidad y articulación."
+        "prompt": "Retomamos el hilo de ayer: evidencia y decisión. Hoy bajamos esa conversación al territorio, la comunidad y la articulación institucional."
       },
       {
         "id": "d2b",
@@ -336,11 +361,12 @@
         "end": "18:47",
         "title": "Diálogo territorio",
         "people": [
+          "diego",
           "patricio",
           "daniel"
         ],
         "cue": "Del documento a la capacidad instalada.",
-        "prompt": "¿Qué información debe llegar a la comunidad y cuál debe quedarse como insumo técnico?"
+        "prompt": "Patricio, ¿qué información debe llegar a la comunidad y cuál debe permanecer como insumo técnico? Daniel, ¿cómo se conecta eso con la gestión institucional?"
       },
       {
         "id": "d2d",
@@ -363,13 +389,14 @@
         "end": "19:37",
         "title": "Pregunta transversal",
         "people": [
+          "diego",
           "kervin",
           "daniel",
           "patricio",
           "xavier"
         ],
         "cue": "Conocer · decidir · actuar · articular.",
-        "prompt": "Si ya conocemos el riesgo, ¿qué nos falta para tomar buenas decisiones y actuar realmente sobre él?"
+        "prompt": "Pregunta transversal para todos: si ya conocemos el riesgo, ¿qué nos falta para tomar buenas decisiones y actuar realmente sobre él?"
       },
       {
         "id": "d2f",
@@ -379,13 +406,14 @@
         "end": "19:47",
         "title": "Caso integrador",
         "people": [
+          "diego",
           "kervin",
           "daniel",
           "patricio",
           "xavier"
         ],
         "cue": "Amenaza + población + instituciones + intervención que no avanza.",
-        "prompt": "¿Qué haría cada uno desde su ámbito para destrabar este caso?"
+        "prompt": "Caso integrador: cada uno responda desde su ámbito. ¿Qué haría para destrabar una intervención que técnicamente está sustentada pero no avanza?"
       },
       {
         "id": "d2g",
@@ -408,10 +436,11 @@
         "end": "20:00",
         "title": "Cierre final",
         "people": [
+          "diego",
           "daniel"
         ],
         "cue": "Agradecer y dejar ruta de seguimiento.",
-        "prompt": "Evidencia que no circula no se convierte en decisión; decisión sin responsable no se convierte en gestión."
+        "prompt": "Cerramos integrando conocer, decidir, actuar y articular. Gracias por mantener una conversación técnica orientada a soluciones."
       }
     ],
     "productionScenes": [
@@ -549,6 +578,7 @@
         "source": "Pizarra del panelista dentro de Promter Risk · explicación técnica en vivo.",
         "producerCue": "Usa la pizarra para una sola cadena causal: lluvia → saturación → pérdida de resistencia → movimiento. Máximo 2 minutos."
       }
-    ]
+    ],
+    "moderatorId": "diego"
   }
 }
