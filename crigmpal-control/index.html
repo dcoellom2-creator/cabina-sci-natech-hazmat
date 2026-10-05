@@ -39,7 +39,7 @@ select,textarea{width:100%;border:1px solid var(--line);border-radius:12px;paddi
 </section>
 
 <section id="admin" class="view">
-  <div class="section-head"><div><span class="eyebrow">ADMINISTRADOR DE EVENTOS</span><h1 id="eventName"></h1><p id="eventMeta" class="muted"></p></div><div class="actions"><button id="reloadBtn" class="secondary">Actualizar desde GitHub</button><button id="adminAlerts" class="primary">Activar alertas</button></div></div>
+  <div class="section-head"><div><span class="eyebrow">ADMINISTRADOR DE EVENTOS</span><h1 id="eventName"></h1><p id="eventMeta" class="muted"></p></div><div class="actions"><a href="./control.html" target="_blank" class="secondary" style="text-decoration:none;padding:11px 14px;border-radius:12px;font-weight:800">CONTROL producción</a><a href="./program.html" target="_blank" class="secondary" style="text-decoration:none;padding:11px 14px;border-radius:12px;font-weight:800">PROGRAM público</a><button id="reloadBtn" class="secondary">Actualizar desde GitHub</button><button id="adminAlerts" class="primary">Activar alertas</button></div></div>
   <div class="grid2">
     <article class="card"><span class="eyebrow">ESTADO EN VIVO</span><h2 id="liveState"></h2><p id="liveDetail" class="muted"></p></article>
     <article class="card"><span class="eyebrow">ARQUITECTURA</span><h2>GitHub-only</h2><p class="muted">Todos leen la misma configuración desde este repositorio. Los relojes y alertas se calculan localmente por horario.</p></article>
