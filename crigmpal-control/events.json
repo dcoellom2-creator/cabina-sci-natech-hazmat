@@ -1,0 +1,303 @@
+{
+  "version": "0.2.1",
+  "updatedAt": "2026-10-04T23:59:00-05:00",
+  "event": {
+    "id": "crigmpal-2026-10",
+    "name": "Conocer el riesgo para decidir y actuar",
+    "subtitle": "Ciencia · territorio · gestión · comunidad",
+    "mode": "Virtual vía Zoom",
+    "speakers": {
+      "kervin": {
+        "name": "PhD. Kervin Chunga",
+        "role": "Geólogo investigador",
+        "axis": "CONOCER",
+        "theme": "Base técnica y evidencia territorial",
+        "video": "",
+        "ideas": [
+          [
+            "Base técnica",
+            "La calidad de la decisión depende de la calidad de la evidencia."
+          ],
+          [
+            "Trámite vs gestión",
+            "Cumplir un formato no sustituye entender el riesgo."
+          ],
+          [
+            "Territorio",
+            "El estudio debe traducirse en una lectura útil para quien decide."
+          ]
+        ]
+      },
+      "daniel": {
+        "name": "MSc. Daniel Coello",
+        "role": "Geólogo / Gestión de riesgos",
+        "axis": "DECIDIR",
+        "theme": "Del dato técnico a la gestión",
+        "video": "",
+        "ideas": [
+          [
+            "Cadena de decisión",
+            "Fuente → dato → análisis → decisión → responsable → evidencia → resultado."
+          ],
+          [
+            "Gestión",
+            "No gestionamos mapas; gestionamos decisiones."
+          ],
+          [
+            "Implementación",
+            "La información debe terminar en responsables, medidas, plazos y seguimiento."
+          ]
+        ]
+      },
+      "patricio": {
+        "name": "MSc. Patricio Cobo",
+        "role": "Ing. Ambiental / Gestión de riesgos",
+        "axis": "ACTUAR",
+        "theme": "Territorio, preparación y comunidad",
+        "video": "",
+        "ideas": [
+          [
+            "Capacidad",
+            "Un plan no equivale automáticamente a capacidad instalada."
+          ],
+          [
+            "Preparación",
+            "Comités, capacitación, SAT, ejercicios y retroalimentación."
+          ],
+          [
+            "Territorio",
+            "La gestión se comprueba cuando puede ser aplicada por los actores."
+          ]
+        ]
+      },
+      "xavier": {
+        "name": "MSc. Xavier Verdezoto",
+        "role": "Gestión de riesgo y emergencia / Prefectura de Bolívar",
+        "axis": "ARTICULAR",
+        "theme": "Gobernanza del riesgo",
+        "video": "",
+        "ideas": [
+          [
+            "Gobernanza",
+            "No es reunión: es responsabilidad, continuidad y coordinación."
+          ],
+          [
+            "Competencias",
+            "Los actores deben saber qué les corresponde y con qué recursos cuentan."
+          ],
+          [
+            "Continuidad",
+            "La implementación debe sostenerse más allá de las personas."
+          ]
+        ]
+      }
+    },
+    "blocks": [
+      {
+        "id": "d1a",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:00",
+        "end": "18:08",
+        "title": "Apertura y encuadre",
+        "people": [
+          "daniel"
+        ],
+        "cue": "Presentar el hilo: conocer → decidir → actuar → articular.",
+        "prompt": "Hoy no venimos a acumular conceptos. Venimos a preguntarnos cómo el conocimiento del riesgo termina en decisiones y acciones."
+      },
+      {
+        "id": "d1b",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:08",
+        "end": "18:35",
+        "title": "Base técnica y evidencia",
+        "people": [
+          "kervin"
+        ],
+        "cue": "Estudios, mapas, riesgo, trámite vs gestión.",
+        "prompt": "¿Estamos gestionando el riesgo o solamente cumpliendo un trámite?"
+      },
+      {
+        "id": "d1c",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:35",
+        "end": "18:45",
+        "title": "Diálogo técnico",
+        "people": [
+          "kervin",
+          "daniel"
+        ],
+        "cue": "Extraer elementos mínimos que necesita una decisión territorial.",
+        "prompt": "Si mañana este estudio entra a una institución, ¿qué información no debería perderse?"
+      },
+      {
+        "id": "d1d",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:45",
+        "end": "19:20",
+        "title": "Del dato técnico a la decisión",
+        "people": [
+          "daniel"
+        ],
+        "cue": "Cruce territorial, competencias, responsables, medidas y evidencia.",
+        "prompt": "¿En qué momento el conocimiento del territorio deja de ser información y empieza realmente a convertirse en gestión?"
+      },
+      {
+        "id": "d1e",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "19:20",
+        "end": "19:42",
+        "title": "Informes, proyectos y financiamiento",
+        "people": [
+          "kervin",
+          "daniel"
+        ],
+        "cue": "Llenar formatos no reemplaza una base técnica suficiente.",
+        "prompt": "¿Qué brecha impide pasar de un reporte a una intervención financiable y defendible?"
+      },
+      {
+        "id": "d1f",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "19:42",
+        "end": "19:52",
+        "title": "Preguntas del público",
+        "people": [
+          "kervin",
+          "daniel"
+        ],
+        "cue": "Responder orientación general y registrar casos que requieren revisión específica.",
+        "prompt": "¿Qué caso del público nos ayuda a mostrar la diferencia entre orientación y asesoría aplicada?"
+      },
+      {
+        "id": "d1g",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "19:52",
+        "end": "20:00",
+        "title": "Cierre día 1",
+        "people": [
+          "daniel"
+        ],
+        "cue": "Lo que conocemos condiciona lo que podemos decidir.",
+        "prompt": "Mañana bajamos esa decisión al territorio y a la gobernanza."
+      },
+      {
+        "id": "d2a",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:00",
+        "end": "18:07",
+        "title": "Recapitulación",
+        "people": [
+          "daniel"
+        ],
+        "cue": "Reconectar evidencia, decisión, territorio y gobernanza.",
+        "prompt": "Ayer hablamos de base técnica y decisión; hoy vemos si eso se convierte en capacidad y articulación."
+      },
+      {
+        "id": "d2b",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:07",
+        "end": "18:32",
+        "title": "Preparación y comunidad",
+        "people": [
+          "patricio"
+        ],
+        "cue": "Actores, comités, capacitación, SAT, ejercicios y respuesta.",
+        "prompt": "¿Qué hace que una comunidad esté preparada y no solamente tenga un plan?"
+      },
+      {
+        "id": "d2c",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:32",
+        "end": "18:47",
+        "title": "Diálogo territorio",
+        "people": [
+          "patricio",
+          "daniel"
+        ],
+        "cue": "Del documento a la capacidad instalada.",
+        "prompt": "¿Qué información debe llegar a la comunidad y cuál debe quedarse como insumo técnico?"
+      },
+      {
+        "id": "d2d",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:47",
+        "end": "19:17",
+        "title": "Gobernanza del riesgo",
+        "people": [
+          "xavier"
+        ],
+        "cue": "Competencias, coordinación, responsabilidades y continuidad.",
+        "prompt": "Cuando todos tienen responsabilidad, ¿qué hace que realmente se articulen?"
+      },
+      {
+        "id": "d2e",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:17",
+        "end": "19:37",
+        "title": "Pregunta transversal",
+        "people": [
+          "kervin",
+          "daniel",
+          "patricio",
+          "xavier"
+        ],
+        "cue": "Conocer · decidir · actuar · articular.",
+        "prompt": "Si ya conocemos el riesgo, ¿qué nos falta para tomar buenas decisiones y actuar realmente sobre él?"
+      },
+      {
+        "id": "d2f",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:37",
+        "end": "19:47",
+        "title": "Caso integrador",
+        "people": [
+          "kervin",
+          "daniel",
+          "patricio",
+          "xavier"
+        ],
+        "cue": "Amenaza + población + instituciones + intervención que no avanza.",
+        "prompt": "¿Qué haría cada uno desde su ámbito para destrabar este caso?"
+      },
+      {
+        "id": "d2g",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:47",
+        "end": "19:54",
+        "title": "Ruta de soluciones",
+        "people": [
+          "daniel"
+        ],
+        "cue": "Diagnóstico, asesoría, capacitación e implementación.",
+        "prompt": "Si una institución enfrenta una brecha concreta, el siguiente paso es revisar su caso."
+      },
+      {
+        "id": "d2h",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:54",
+        "end": "20:00",
+        "title": "Cierre final",
+        "people": [
+          "daniel"
+        ],
+        "cue": "Agradecer y dejar ruta de seguimiento.",
+        "prompt": "Evidencia que no circula no se convierte en decisión; decisión sin responsable no se convierte en gestión."
+      }
+    ]
+  }
+}
