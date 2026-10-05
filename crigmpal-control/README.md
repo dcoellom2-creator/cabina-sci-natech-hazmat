@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.3.1 — CONTROL + PREVIEW + PROGRAM + escenas nativas.
+v0.4.0 — producción multirol con WebRTC beta, confidence monitor y pizarra remota.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -49,3 +49,27 @@ El panelista no presenta PowerPoint. Promter Risk compone la escena: identidad i
 
 ### Limitación vigente
 La cámara remota y la pizarra de un panelista en otro computador todavía no se sincronizan en PROGRAM. Eso requerirá una capa de estado/streaming en tiempo real.
+
+
+## Panelista LIVE
+- `panelist-live.html`: cámara y micrófono, prueba técnica, confidence monitor, pizarra, notas y emparejamiento WebRTC.
+- La pantalla cambia de tono por horario y por instrucciones del operador.
+- CONTROL envía al panelista el cue de producción: PREPARA / AL AIRE / alerta 5 min / alerta 2 min.
+- La pizarra se transmite como eventos de dibujo a PROGRAM cuando la conexión directa está activa.
+
+## WebRTC beta GitHub-only
+Para mantener la arquitectura sin backend, el enlace remoto usa WebRTC punto a punto con STUN público:
+1. Panelista activa cámara + micrófono.
+2. Panelista genera una oferta y la envía al productor.
+3. CONTROL pega la oferta, genera la respuesta y la devuelve al panelista.
+4. Panelista aplica la respuesta.
+5. CONTROL recibe video y datos de pizarra.
+6. PROGRAM puede mostrar la cámara en las escenas y la pizarra en la escena específica.
+
+Limitación: redes corporativas o NAT estrictas pueden bloquear una conexión STUN-only; una versión futura podría añadir TURN/señalización.
+
+## URLs operativas
+- CONTROL: `control.html`
+- PROGRAM: `program.html`
+- PANELISTA LIVE: `panelist-live.html?panelista=<id>`
+- `public.html` redirige a PROGRAM para evitar capturar por error una interfaz con controles.
