@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.2.1 — multirol con configuración maestra separada.
+v0.3.1 — CONTROL + PREVIEW + PROGRAM + escenas nativas.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -36,3 +36,16 @@ GitHub Pages es estático. No existe una base de datos compartida ni autenticaci
 
 ## Evolución
 L2 Web funcional → L3 PWA instalable → L4 producto comercial → L5 Play Store/SaaS.
+
+## Producción audiovisual
+- `control.html`: consola privada del productor. Selecciona panelista/escena, prepara PREVIEW y envía con TAKE.
+- `program.html`: salida limpia 16:9 para capturar en Zoom/OBS; no contiene controles.
+- `events.json > productionScenes`: secuencia editorial de escenas.
+- Sincronización actual CONTROL→PROGRAM: `localStorage` entre ventanas del mismo navegador/equipo.
+- Caso piloto integrado: Kervin Chunga / Piñas (entrada, contexto, tabla SF, mitigación y pregunta estratégica).
+
+### Regla de realización
+El panelista no presenta PowerPoint. Promter Risk compone la escena: identidad institucional + panelista + evidencia + referencia + pregunta.
+
+### Limitación vigente
+La cámara remota y la pizarra de un panelista en otro computador todavía no se sincronizan en PROGRAM. Eso requerirá una capa de estado/streaming en tiempo real.
