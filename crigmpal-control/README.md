@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.4.1 — estabilización de video móvil, handshake CONTROL→PROGRAM y pizarra persistente.
+v0.4.2 — modo móvil estable, telemetría y pizarra por snapshot.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -83,3 +83,18 @@ A partir del primer ensayo con teléfono + computador:
 - CONTROL muestra por separado estado de video y datos.
 - PROGRAM anuncia que está listo y CONTROL reinyecta el MediaStream automáticamente.
 - La pizarra conserva los trazos aunque la escena todavía no esté al aire y se redibuja al entrar en modo Pizarra.
+
+
+## Correcciones v0.4.2
+Ensayo real teléfono → computador confirmó que `RTCPeerConnection.connectionState=connected` no basta para asegurar video útil ni canal de pizarra. La versión añade:
+- video móvil objetivo 640×360 a 15 fps;
+- bitrate máximo de video aproximado 300 kbps;
+- telemetría en CONTROL: KB recibidos, frames decodificados y mensajes de pizarra;
+- versión visible en Panelista LIVE;
+- snapshot JPEG de pizarra como respaldo de los eventos vectoriales;
+- PROGRAM muestra el snapshot más reciente cuando entra la escena Pizarra.
+
+### Criterio de diagnóstico
+- Conectado + 0 KB/0 frames = el enlace WebRTC está negociado, pero no está llegando video.
+- Pizarra 0 = el DataChannel no está entregando mensajes.
+- Si ambos permanecen en cero con v0.4.2, dejar de insistir con STUN-only y migrar la capa en vivo a un relay/signaling dedicado (TURN/WebRTC service), manteniendo GitHub para código y contenidos.
