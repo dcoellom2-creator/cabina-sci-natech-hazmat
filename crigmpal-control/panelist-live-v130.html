@@ -39,10 +39,13 @@ function loadCamera(){let sp=data.event.speakers[speakerId],f=$('cameraPush'),ur
 function loadSpeakers(){let s=$('speakerSelect');s.innerHTML='';Object.entries(data.event.speakers).forEach(([id,p])=>{let o=document.createElement('option');o.value=id;o.textContent=p.name;s.appendChild(o)});s.value=speakerId}
 function activeSceneState(){let scenes=data.event.productionScenes||[],sc=scenes[Number(liveState.sceneIndex)]||null;if(!sc)return {sc:null,flow:[],q:{},qi:0};let flow=sc.questionFlow||[],qi=Math.max(0,Math.min(flow.length?flow.length-1:0,Number(liveState.questionIndex||0)));return{sc,flow,q:flow[qi]||{},qi}}
 function runtimeTimes(sc){
-  const now=Date.now(),sd=Number(liveState.durationSec||sc?.durationSec||0)*1000,gd=Number(liveState.segmentDurationSec||sc?.segmentDurationSec||0)*1000;
-  const sr=liveState.onair&&liveState.sceneStartedAt?sd-(now-liveState.sceneStartedAt):sd;
+  const now=Date.now(),hasQ=Number(liveState.questionCount||0)>0,
+    sd=Number(hasQ?liveState.questionDurationSec:(liveState.durationSec||sc?.durationSec||0))*1000,
+    gd=Number(liveState.segmentDurationSec||sc?.segmentDurationSec||0)*1000,
+    unitStart=hasQ?liveState.questionStartedAt:liveState.sceneStartedAt;
+  const sr=liveState.onair&&unitStart?sd-(now-unitStart):sd;
   const gr=liveState.segmentStartedAt?gd-(now-liveState.segmentStartedAt):gd;
-  return{sr,gr,sd,gd}
+  return{sr,gr,sd,gd,hasQ}
 }
 function renderHilo(sc,as){
   let blockId=liveState.blockId||sc?.blockId||'',blocks=data.event.blocks||[],curBlock=blocks.find(b=>b.id===blockId),day=curBlock?.day||blocks[0]?.day||'Programa',dayBlocks=blocks.filter(b=>b.day===day),bi=dayBlocks.findIndex(b=>b.id===blockId);
@@ -84,9 +87,9 @@ function render(){
   $('boardIdeas').innerHTML=sceneIdeas.map(x=>'<div class="idea"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
   ws.className='workspace';
   if(liveState.onair&&sc){
-    $('timer').textContent=fmt(t.sr);$('timerLabel').textContent=(liveState.scenePosition?'Idea '+liveState.scenePosition+'/'+liveState.segmentSceneCount+' · ':'')+(t.sr<=0?'Cierra la idea':'Tiempo restante');
+    $('timer').textContent=fmt(t.sr);$('timerLabel').textContent=t.hasQ?('Pregunta '+(Number(liveState.questionIndex||0)+1)+'/'+liveState.questionCount+' · '+(t.sr<=0?'Cierra respuesta':'Tiempo respuesta')):((liveState.scenePosition?'Idea '+liveState.scenePosition+'/'+liveState.segmentSceneCount+' · ':'')+(t.sr<=0?'Cierra la idea':'Tiempo restante'));
     $('blockTimerMini').textContent='Bloque '+fmt(t.gr);
-    $('next').textContent=liveState.sceneEnding?'⚠ Cierra la idea; producción hará SIGUIENTE.':'El avance lo controla producción.';
+    $('next').textContent=liveState.sceneEnding?(t.hasQ?'⚠ Cierra la respuesta; producción avanzará la pregunta.':'⚠ Cierra la idea; producción hará SIGUIENTE.'):'El avance lo controla producción.';
     if(liveState.sceneEnding)ws.classList.add('sceneEnding');
   }else{
     $('timer').textContent=fmt(t.sd);$('timerLabel').textContent='Tiempo objetivo de la idea';$('blockTimerMini').textContent='Bloque '+fmt(t.gd);$('next').textContent='Esperando TAKE de producción.';
