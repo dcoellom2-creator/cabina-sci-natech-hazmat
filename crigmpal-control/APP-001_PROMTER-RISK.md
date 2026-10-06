@@ -4,7 +4,7 @@
 - Código: APP-001
 - Nombre: Promter Risk
 - Estado: L2 — web funcional
-- Versión: 0.9.0
+- Versión: 0.10.0
 - Repositorio: dcoellom2-creator/cabina-sci-natech-hazmat
 - Ruta pública: /crigmpal-control/
 
@@ -141,3 +141,11 @@ Arquitectura final para el conversatorio:
 - Sin Firebase en la ruta crítica.
 - Sin intercambio manual de códigos.
 - Cámaras vinculadas automáticamente por panelista.
+
+
+## v0.10 — escenas narrativas
+- Single speaker: panelista + contenido técnico.
+- Trio: tres cámaras simultáneas + pregunta activa.
+- Moderator: moderador + pregunta programada.
+- Control narrativo: pregunta objetivo + continuidad + avance RESUELTA → SIGUIENTE.
+- Sincronización privada a moderador/panelistas por MQTT.
