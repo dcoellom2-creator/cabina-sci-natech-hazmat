@@ -4,7 +4,7 @@
 - Código: APP-001
 - Nombre: Promter Risk
 - Estado: L2 — web funcional
-- Versión: 0.13.0
+- Versión: 0.13.1
 - Repositorio: dcoellom2-creator/cabina-sci-natech-hazmat
 - Ruta pública: /crigmpal-control/
 
@@ -182,3 +182,10 @@ Arquitectura final para el conversatorio:
 - Speaker scene filter: preparación por panelista sin perder escenas compartidas.
 - Moderator conductor: timeline del día, pregunta, destinatario, transición y siguiente bloque.
 - Daniel deck registry: 8 diapositivas persistentes listas.
+
+
+## v0.13.1 — Daniel PDF pipeline
+- Fuente maestra: PDF de 8 páginas.
+- Render persistente por página.
+- Manifest usa la misma semántica de Kervin: `deckId -> slides[] -> assetUrl/previewUrl`.
+- QA comprobado en PREVIEW para página 1 y página 8.
