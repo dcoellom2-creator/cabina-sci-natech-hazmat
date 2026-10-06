@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.12.0 — decks persistentes por panelista; sin carga manual de PDF/PPT durante la transmisión.
+v0.13.0 — control temporal de producción, escenas filtradas por participante, hilo conductor y deck Daniel 8/8.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -225,3 +225,17 @@ PROGRAM obtiene la diapositiva desde el activo persistente. No usa selector de a
 - `05_PROMTER_RISK_DECKS/Patricio_Cobos_Deck` — preparado para ingestión.
 
 La diapositiva pública se conserva tal cual. El guion privado y las transiciones viven como metadatos separados.
+
+
+## v0.13 — control temporal y guion operativo
+- CONTROL incorpora dos relojes: bloque/intervención e idea/pregunta.
+- TAKE inicia el reloj de la escena; el primer TAKE de un bloque inicia el reloj del bloque.
+- Alertas automáticas por bloque: 5 min y 2 min restantes.
+- Aviso automático de cierre de idea/respuesta a 30 s.
+- El avance nunca es automático: SIGUIENTE y RESUELTA → SIGUIENTE quedan bajo control del productor.
+- En escenas con preguntas, el reloj de idea se convierte en reloj por respuesta.
+- Selector de participante filtra las escenas propias y compartidas; Programa completo recupera la secuencia total.
+- Los enlaces inferiores son dinámicos: Moderador Diego + vista del participante seleccionado.
+- Vista privada abre por defecto en Hilo general; Pizarra es una herramienta opcional.
+- Hilo general muestra programa del día, bloque actual, escena/pregunta activa, destinatario y continuidad.
+- Deck Daniel “Mitigación y toma de decisiones en el GAD”: 8/8 integrado como activos persistentes.
