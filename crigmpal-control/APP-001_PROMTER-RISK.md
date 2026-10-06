@@ -4,7 +4,7 @@
 - Código: APP-001
 - Nombre: Promter Risk
 - Estado: L2 — web funcional
-- Versión: 0.11.0
+- Versión: 0.11.2
 - Repositorio: dcoellom2-creator/cabina-sci-natech-hazmat
 - Ruta pública: /crigmpal-control/
 
@@ -156,3 +156,10 @@ Arquitectura final para el conversatorio:
 - Vista pública 27/73: cámara del panelista + diapositiva nativa.
 - Vista privada de Kervin con talking points y puente narrativo.
 - La presentación deja de depender de PowerPoint externo durante la transmisión.
+
+
+## v0.11.2 — fuente PDF
+- Sustituye la carga PPTX por PDF.js.
+- 10 páginas originales del deck Piñas.
+- Render exacto en PROGRAM; sin reinterpretación del contenido.
+- Persistencia local del PDF mediante IndexedDB.
