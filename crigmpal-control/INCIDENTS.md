@@ -58,3 +58,13 @@
 - **Causa:** extraer imágenes internas desde PPTX en navegador dependía de la estructura OOXML y no era suficientemente robusto para producción.
 - **Corrección v0.11.2:** usar el PDF entregado por el usuario como fuente visual; PDF.js renderiza directamente las 10 páginas originales.
 - **Estado:** MITIGADO POR CAMBIO DE FUENTE.
+
+
+## INC-PR-008 · Carga local de PDF contraria al flujo de producción
+- **Fecha:** 2026-10-06
+- **Versiones afectadas:** v0.11.1–v0.11.3
+- **Síntoma:** PROGRAM/CONTROL solicitaban volver a cargar el PDF del panelista en el navegador.
+- **Impacto:** dependencia operativa innecesaria y riesgo de falla durante el evento.
+- **Decisión:** eliminar carga local/IndexedDB de la ruta de producción.
+- **Corrección v0.12:** deck registry con activos persistentes por panelista. Kervin Piñas queda 10/10 preintegrado; Daniel y Patricio tienen carpetas preparadas.
+- **Estado:** RESUELTO POR CAMBIO DE METODOLOGÍA.
