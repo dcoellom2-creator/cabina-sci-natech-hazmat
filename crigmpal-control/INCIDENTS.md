@@ -68,3 +68,11 @@
 - **Decisión:** eliminar carga local/IndexedDB de la ruta de producción.
 - **Corrección v0.12:** deck registry con activos persistentes por panelista. Kervin Piñas queda 10/10 preintegrado; Daniel y Patricio tienen carpetas preparadas.
 - **Estado:** RESUELTO POR CAMBIO DE METODOLOGÍA.
+
+
+## INC-PR-009 · CONTROL sin tiempos operativos y escenas no filtradas
+- **Fecha:** 2026-10-06
+- **Versión afectada:** v0.12.x
+- **Síntomas:** alertas 5/2 min manuales; sin cronómetro visible por idea; selector de Daniel seguía mostrando el mismo listado general; acceso inferior permanecía en Kervin; vista de panelista priorizaba pizarra sobre hilo conductor.
+- **Corrección v0.13:** Cue Engine con reloj de bloque + reloj de idea/respuesta, alertas automáticas, escenas por participante, enlace dinámico y Hilo general como vista principal.
+- **Estado:** RESUELTO.
