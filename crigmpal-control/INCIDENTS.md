@@ -49,3 +49,12 @@
 - **Decisión:** retirar captura de Zoom de la ruta principal.
 - **Solución v0.9:** VDO.Ninja publica video directamente desde el navegador del panelista; PROGRAM recibe el stream por URL. Zoom queda solo para audio/reunión.
 - **Estado:** MITIGADO POR CAMBIO DE ARQUITECTURA.
+
+
+## INC-PR-007 · PPTX no cargado / extracción frágil
+- **Fecha:** 2026-10-05
+- **Versión afectada:** v0.11.1
+- **Síntoma:** CONTROL indicaba que la presentación PPTX no estaba cargada.
+- **Causa:** extraer imágenes internas desde PPTX en navegador dependía de la estructura OOXML y no era suficientemente robusto para producción.
+- **Corrección v0.11.2:** usar el PDF entregado por el usuario como fuente visual; PDF.js renderiza directamente las 10 páginas originales.
+- **Estado:** MITIGADO POR CAMBIO DE FUENTE.
