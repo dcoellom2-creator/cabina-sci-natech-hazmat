@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.13.0 — control temporal de producción, escenas filtradas por participante, hilo conductor y deck Daniel 8/8.
+v0.13.1 — deck Daniel convertido a PDF maestro y renderizado por página como Kervin.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -239,3 +239,11 @@ La diapositiva pública se conserva tal cual. El guion privado y las transicione
 - Vista privada abre por defecto en Hilo general; Pizarra es una herramienta opcional.
 - Hilo general muestra programa del día, bloque actual, escena/pregunta activa, destinatario y continuidad.
 - Deck Daniel “Mitigación y toma de decisiones en el GAD”: 8/8 integrado como activos persistentes.
+
+
+## v0.13.1 — Daniel por PDF maestro
+- Las 8 imágenes de Daniel se consolidaron en `Daniel_Coello_Mitigacion_GAD_v1.pdf`.
+- El PDF se verificó renderizando sus 8 páginas.
+- Cada página se publicó como activo persistente en `Daniel_Coello_Deck`, siguiendo el mismo patrón usado para Kervin.
+- Se corrigió la clave del registro del deck: `daniel-mitigacion-gad` ahora coincide exactamente con `scene.deckId`.
+- PROGRAM y PREVIEW resuelven las 8 láminas sin carga manual en runtime.
