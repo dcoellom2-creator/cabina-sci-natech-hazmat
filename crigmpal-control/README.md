@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.9.0 — video VDO.Ninja + MQTT/WSS + GitHub Pages; Zoom queda para audio/reunión.
+v0.10.0 — guion por escenas, tríos de panelistas y moderación dirigida con preguntas encadenadas.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -168,3 +168,19 @@ Arquitectura:
 
 ### Flujo
 Panelista abre su URL PR -> permite cámara -> VDO.Ninja publica video -> CONTROL selecciona panelista -> PREVIEW/PROGRAM cargan automáticamente el view de esa cámara -> TAKE controla la escena y MQTT mantiene cues/alertas/pizarra.
+
+
+## v0.10 — realización guiada por guion
+Promter Risk deja de tratar las escenas como piezas aisladas y las conecta con el hilo del conversatorio.
+
+Funciones:
+- Vista TRÍO: hasta tres panelistas simultáneos con cámaras VDO.Ninja.
+- Vista MODERADOR: cámara del moderador + pregunta/encuadre programado.
+- Cada escena puede definir `participants`, `leadSpeaker` y `questionFlow`.
+- CONTROL muestra la pregunta activa, el panelista objetivo y la continuidad.
+- Botón `RESUELTA → SIGUIENTE`: avanza la pregunta manteniendo la escena y el estado AL AIRE.
+- El panelista objetivo recibe “PREGUNTA PARA TI”.
+- El moderador recibe pregunta actual, destinatario y transición siguiente.
+- Los demás panelistas reciben instrucción de escucha y el hilo que viene después.
+
+Esto permite conducir el conversatorio como una secuencia narrativa: evidencia → decisión → acción → articulación.
