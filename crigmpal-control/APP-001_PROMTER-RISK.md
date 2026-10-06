@@ -4,7 +4,7 @@
 - Código: APP-001
 - Nombre: Promter Risk
 - Estado: L2 — web funcional
-- Versión: 0.12.0
+- Versión: 0.13.0
 - Repositorio: dcoellom2-creator/cabina-sci-natech-hazmat
 - Ruta pública: /crigmpal-control/
 
@@ -172,3 +172,13 @@ Arquitectura final para el conversatorio:
 - PROGRAM usa asset URL persistente con fallback de preview.
 - Guion privado separado del contenido público.
 - Misma metodología para Kervin, Daniel, Patricio y futuros panelistas.
+
+
+## v0.13 — Cue Engine
+- Segment clock: controla la intervención completa.
+- Scene/question clock: controla la idea o respuesta activa.
+- Auto cue 5 min / 2 min de bloque y 30 s de idea.
+- Manual advance: el sistema avisa, el productor decide cuándo avanzar.
+- Speaker scene filter: preparación por panelista sin perder escenas compartidas.
+- Moderator conductor: timeline del día, pregunta, destinatario, transición y siguiente bloque.
+- Daniel deck registry: 8 diapositivas persistentes listas.
