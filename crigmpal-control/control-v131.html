@@ -1,0 +1,186 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Promter Risk · CONTROL v0.13.1</title>
+<style>
+:root{--navy:#082b4b;--ink:#102133;--muted:#6b7787;--line:#dce5ed;--bg:#eef3f7;--green:#23864a;--amber:#e88927;--red:#c73333;--shadow:0 16px 42px rgba(8,43,75,.10)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial;background:var(--bg);color:var(--ink)}header{height:72px;background:#061d31;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:4px solid var(--amber)}.brand{display:flex;gap:8px;align-items:center}.brand img{width:42px;height:42px;object-fit:contain;background:#fff;border-radius:10px;padding:2px}.brand b{display:block}.brand small{color:#c7d9e6}
+main{max-width:1580px;margin:auto;padding:18px}.grid{display:grid;grid-template-columns:430px 1fr;gap:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow)}.eyebrow{font-size:10px;font-weight:950;letter-spacing:.15em;color:#607488}.panel h2{margin:7px 0 12px;color:var(--navy)}label{display:block;font-weight:800;font-size:12px;margin:12px 0 6px}select,button{font:inherit}select{width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;background:#fff}button,a.btn{border:0;border-radius:11px;padding:10px 13px;font-weight:850;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.primary{background:var(--navy);color:#fff}.take{background:var(--amber);color:#111}.secondary{background:#edf2f6;color:var(--navy)}.danger{background:#ffe8e8;color:#a71f1f}.actions{display:flex;gap:7px;flex-wrap:wrap}.actions>*{flex:1}.scene-list{display:grid;gap:7px;max-height:330px;overflow:auto;margin-top:9px}.scene{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fafcfd;cursor:pointer}.scene.active{outline:3px solid var(--amber);background:#fff7ec}.scene b{display:block;font-size:13px}.scene span{font-size:11px;color:var(--muted)}.status{display:flex;gap:7px;align-items:center;font-size:12px;font-weight:850}.dot{width:9px;height:9px;border-radius:50%;background:#9aa8b5}.dot.ok{background:var(--green)}.dot.warn{background:var(--amber)}.dot.bad{background:var(--red)}.section{border-top:1px solid var(--line);padding-top:13px;margin-top:14px}.preview{position:relative;background:#111;border-radius:18px;overflow:hidden;aspect-ratio:16/9;box-shadow:var(--shadow)}iframe{width:100%;height:100%;border:0}.preview-label{position:absolute;top:10px;left:10px;z-index:3;background:var(--amber);padding:6px 9px;border-radius:999px;font-size:10px;font-weight:950}.program{padding:10px;border-radius:10px;background:#eef8f1;border-left:5px solid var(--green);margin-top:12px}.boardimg{display:none;width:100%;aspect-ratio:16/9;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:10px;margin-top:8px}.muted{color:var(--muted)}.scriptbox{margin-top:12px;border:1px solid #d7e2ea;border-radius:14px;padding:12px;background:#f8fbfd}.scriptbox .target{font-size:10px;font-weight:950;letter-spacing:.13em;color:#e88927}.scriptbox .questionText{font-size:14px;line-height:1.35;font-weight:850;color:#082b4b;margin:7px 0}.scriptbox .transition{font-size:11px;line-height:1.35;color:#647688;border-top:1px solid #e3eaf0;padding-top:7px;margin-top:7px}.badge{display:inline-flex;margin-left:6px;padding:2px 6px;border-radius:999px;background:#e9f1f7;color:#36556d;font-size:9px;font-weight:950;letter-spacing:.08em}.connected{display:grid;gap:5px;margin-top:6px}.chip{font-size:11px;padding:7px 9px;border-radius:999px;background:#eef7f0;color:#176d33;font-weight:800}.security{font-size:10px;color:var(--muted);line-height:1.4;margin-top:6px}
+.filterbar{display:flex;gap:6px;margin:8px 0 10px}.filterbar button.active{background:#082b4b;color:#fff}
+.timingbox{margin:12px 0;border:1px solid #cbdbe6;border-radius:15px;padding:12px;background:linear-gradient(135deg,#f7fbfe,#eef6fb)}
+.timegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.timecard{background:#fff;border:1px solid #d8e3ea;border-radius:12px;padding:10px}.timecard .label{font-size:10px;letter-spacing:.12em;font-weight:950;color:#597185}.timecard .bigtime{font-size:26px;font-weight:950;color:#082b4b;margin:3px 0}.timecard .sub{font-size:11px;color:#647688}.progress{height:8px;background:#e5edf2;border-radius:999px;overflow:hidden;margin-top:7px}.progress>span{display:block;height:100%;width:0;background:#1387b8;transition:width .3s}.timecard.warn{border-color:#e5a22a;background:#fff9eb}.timecard.danger{border-color:#d83434;background:#fff0f0}.timecard.over{border-color:#a92222;background:#ffe6e6}.timehint{margin-top:8px;font-size:11px;font-weight:850;color:#536a7b}.scene-group{font-size:10px;font-weight:950;letter-spacing:.11em;color:#73899a;margin:10px 2px 5px;text-transform:uppercase}
+.scene.hidden{display:none}.route-note{font-size:10px;color:#6b7f90;margin-top:5px}
+@media(max-width:700px){.timegrid{grid-template-columns:1fr}}
+@media(max-width:1000px){.grid{grid-template-columns:1fr}}
+</style><script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script></head>
+<body><header><div class="brand"><img src="data:image/webp;base64,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"><img src="data:image/webp;base64,UklGRqoEAABXRUJQVlA4IJ4EAAAQGACdASpgAGAAPpFAmkilpCKhKrlbqLASCWQbYB/bECXTulQ+R5UPoJ8K695o8dfqA8wDnEeYD9gPSi9TH+T32L0IOmE8qq79PEKOFtBsgWwPHDy4ZI1Yvtn9wiIW+S5Yz4Ha+AjWfllkY7Oi87FevG7rVUSF+vZA9dr8BybqDdy96ZcawKAv+e5vIfk8WhHs9KfWQeoRYu4RCKAPk5LuFDCMeUMcsp1mROtfslt62BozISZJGEBEAqnnMsygvojnIBDob6+hrAAA/vuUBSHEKzutVz58jSbsL6vM6QFZdR+7Vd7o2a5YZ4Is1f1eYQ3yUArlg1VmaX+4HmDdc9PrsoUT6FxjiYNjceIfupgxq6kln/+LQEVaNhZQcg20TO+38MSIeDcIqxmWMc1J6mcFySsId6UKadp0PjFLk6CdUHf0k8PefdfshUclNiUhS6hkaeniY60lx5Cq0Ubk7gHrdcwHSZYXGLpKos0AuUOxng6wTVt0hasJdSyxdmh53bt++61Ie8QHMyk/44RlrhxFw7+bbTYYiAyMTpTcTYF4DjJsN5jUJt+TE59Ctx/IWm3GH4jPBTvvHyjfyvrlwY66SY8P1lxN79/1+C52dgtRmuO9IrYI+mC2+IDyPBV8mVABX9z3soG96SDF30u0qqkHFDRq9yrR5DSLyjpgkZcaBYB7iuXTm+d0jPYCoZ+d4kFVwZTvJBVcGU7zbyGL5WPdsOXByZAZ93pP03v8lH/2P7/I+sBNiAPYCbEB9dDgBpGAMU5QlEY5+W+R5xOOGiRNh2Z0A7WKXr38DoT59nJ+liaxgBGT3CIyw1I3tTBYz/MQDLdIQQEBa8EPu3ERTAuEv9bpSV4oECKPN4dTuI5PMYJtTp5dliT1p80HpPA4C/R9RGC/ThZGZYIUzn1InlvIoGRs9hP5j2rj7V1PODTj0rHz2j2SftP7AL13rsNs6URZKEKwxqN7qbhO6KNOGeMO7Lxup6lsWXeiO44uELljde5Hm24t8ghNSufhxJj15J/9ObitexU8cugSvTJgC9H4pQx5aDNrIoCSx/aqOp46TSf/uuGNBDzx2KUK3k2PHZ6tgtzwiOLHiEo1WbTkcozLiKYBAgOqSH39E21zUof0LtNysC7nBxWwCu3Sg7ZeL5i3TkhKTZyyP5KsHdGNEVmjsQQtqktELp53oBuchK1H9lPjFzZdOPFe6pZ9cfq1pnvWw4kEXDfh2zq+kZ7xmsZfqGsG0MalJipdci08JoLuo6hgVDiUM6aBJrDKGm5r+kaibk454XPeDA04yaNWJcxfO1hgN0PBrrZGXUa/oUiGfBnEA2g41Ijn3f4dapFvwvR/FKVO+Qn0iOGD53NhsIvCqa5SAiP0X78xIxMalRMyq1jiVERp6Nb0jIKGmsk6lxPxXiGDh2EZxtEfC+gJ7rWsTtRbhNF0c9RXf+gVoJEd7s/amvggHeSaEt/5j63GlN5BQW086ed56dHqMK7NtxgFtFjhwYbgV+cHpOwk+nH+nJm8KamampmtrnsL2LDWdAftcwOGnKkbzB1hbE9xP3P8wCyyM2lKLbre/6AAAAA"><div><b>Promter Risk · CONTROL</b><small>VDO.Ninja + MQTT · v0.13.1</small></div></div><b id="clock">--:--:--</b></header>
+<main><div class="grid"><section class="panel"><span class="eyebrow">REALIZACIÓN</span><h2>Control de escena</h2>
+<div class="section"><span class="eyebrow">CANAL EN VIVO · SIN CÓDIGOS</span><div class="status"><span id="rtDot" class="dot"></span><span id="rtText">Conectando…</span></div><div id="clients" class="connected"></div><div class="security">Canal de evento para estado, alertas y pizarra. No envía notas privadas, audio ni video.</div></div>
+<label>Panelista / moderador</label>
+<select id="speaker">
+  <optgroup label="MODERADOR">
+    <option value="diego">MSc. Diego Delgado — Moderador</option>
+  </optgroup>
+  <optgroup label="PANELISTAS">
+    <option value="kervin" selected>PhD. Kervin Chunga — CONOCER</option>
+    <option value="daniel">MSc. Daniel Coello — DECIDIR</option>
+    <option value="patricio">MSc. Patricio Cobo — ACTUAR</option>
+    <option value="xavier">MSc. Xavier Verdezoto — ARTICULAR</option>
+  </optgroup>
+</select><div class="filterbar"><button id="filterSpeaker" class="secondary active">Solo seleccionado</button><button id="filterProgram" class="secondary">Programa completo</button></div><label>Escena</label><div id="scenes" class="scene-list"></div>
+<div class="actions" style="margin-top:10px"><button id="prev" class="secondary">← Anterior</button><button id="next" class="secondary">Siguiente →</button></div><div class="timingbox"><div class="timegrid"><div id="segmentCard" class="timecard"><div class="label">BLOQUE / INTERVENCIÓN</div><div id="segmentTime" class="bigtime">--:--</div><div id="segmentMeta" class="sub">Selecciona una escena</div><div class="progress"><span id="segmentBar"></span></div></div><div id="sceneCard" class="timecard"><div class="label">IDEA / ESCENA</div><div id="sceneTime" class="bigtime">--:--</div><div id="sceneMeta" class="sub">El reloj inicia con TAKE</div><div class="progress"><span id="sceneBar"></span></div></div></div><div id="timeHint" class="timehint">El cambio de escena siempre es manual. PR te avisará automáticamente a 5 min y 2 min del fin del bloque y a 30 s del fin de cada idea.</div></div><div id="scriptBox" class="scriptbox"><div class="target">GUIÓN / PREGUNTA ACTIVA</div><div id="scriptQuestion" class="questionText">Sin pregunta programada.</div><div id="scriptPoints" class="transition"></div><div id="scriptTransition" class="transition">Selecciona una escena con flujo de moderación.</div><div class="actions" style="margin-top:8px"><button id="qPrev" class="secondary">← Pregunta</button><button id="qNext" class="primary">RESUELTA → SIGUIENTE</button></div></div>
+<div class="actions" style="margin-top:8px"><button id="take" class="take">TAKE / AL AIRE</button><button id="black" class="danger">NEGRO</button></div>
+<label>Alerta</label><div class="actions"><button data-alert="" class="secondary">Normal</button><button data-alert="warning" class="secondary">5 min</button><button data-alert="danger" class="danger">2 min</button></div>
+<div class="program"><span class="eyebrow">PROGRAM</span><div id="programText"><b>Sin escena</b></div></div>
+<div class="section"><span class="eyebrow">DECKS PERSISTENTES · SIN CARGAS EN VIVO</span>
+<div class="status"><span class="dot ok"></span><span>Kervin 10/10 · Daniel 8/8 · decks persistentes listos</span></div>
+<p class="muted" style="font-size:11px">Las diapositivas están integradas como activos permanentes del evento. CONTROL solo selecciona escena → PREVIEW → TAKE. Daniel y Patricio quedan preparados para el mismo flujo de ingestión.</p>
+<div class="connected" style="margin-top:8px"><div>Kervin / Piñas 2025 <b>10/10 LISTO</b></div><div>Daniel / Mitigación GAD <b>8/8 LISTO</b></div><div>Patricio Cobo <span class="muted">pendiente de deck</span></div></div>
+</div><div class="section"><span class="eyebrow">VIDEO DEL PANELISTA</span><div class="status"><span class="dot ok"></span><span id="cameraText">VDO.Ninja · cámara automática según panelista</span></div><p class="muted" style="font-size:11px"><b>CONTROL no transmite cámara.</b> El panelista debe abrir su espacio y activar la cámara. La vista de señal será negra mientras no exista un emisor activo.</p><div class="actions" style="margin-top:8px"><a id="cameraSender" class="btn primary" target="_blank">ABRIR CÁMARA / EMITIR</a><a id="cameraTest" class="btn secondary" target="_blank">VER SEÑAL / RECEPTOR</a></div></div>
+<div class="section"><span class="eyebrow">PIZARRA RECIBIDA</span><div id="boardText" class="muted" style="font-size:11px">Sin pizarra</div><div id="mqttDebug" class="muted" style="font-size:10px;margin-top:4px">MQTT: sin mensajes</div><img id="boardImg" class="boardimg"></div>
+</section>
+<section><div class="preview"><span class="preview-label">PREVIEW</span><iframe id="preview" src="./program-v131.html?preview=1"></iframe></div><div class="actions" style="justify-content:flex-end;margin-top:10px"><button id="openProgram" class="secondary">Abrir PROGRAM</button><a id="moderatorLink" class="btn secondary" href="./panelist-live-v131.html?panelista=diego" target="_blank">Moderador Diego</a><a id="selectedPanelistLink" class="btn secondary" href="./panelist-live-v131.html?panelista=kervin" target="_blank">Panelista Kervin</a></div></section></div></main>
+<script>
+let data=null,idx=0,speaker='kervin',questionIndex=0,alertState='',client=null,presence={},programWin=null,lastBoard='',controlBeat=null,lastSyncState=null,sceneFilter='speaker',sceneStartedAt=0,questionStartedAt=0,segmentStartedAt=0,activeSegmentId='',lastAutoKey='';
+const $=id=>document.getElementById(id);
+function base(){return data.realtime.topicBase}function tState(){return base()+'/state'}function tPresence(){return base()+'/presence/'}function tBoard(){return base()+'/board/'}
+function scenes(){return data.event.productionScenes||data.event.publicSlides||[]}
+function currentScene(){return scenes()[idx]||{}}
+function sceneLead(sc=currentScene()){return sc.leadSpeaker&&data.event.speakers[sc.leadSpeaker]?sc.leadSpeaker:speaker}
+function segmentScenes(sc=currentScene()){return scenes().filter(x=>x.segmentId===sc.segmentId)}
+function state(onair=false,black=false){
+  let sc=currentScene(),flow=sc.questionFlow||[],qi=Math.max(0,Math.min(flow.length?flow.length-1:0,questionIndex)),q=flow[qi]||{},seg=segmentScenes(sc),now=Date.now();
+  let qDur=Number(q.durationSec|| (flow.length?Math.max(30,Math.floor(Number(sc.durationSec||0)/flow.length)):0));
+  let unitDur=flow.length?qDur:Number(sc.durationSec||0),unitStart=flow.length?questionStartedAt:sceneStartedAt;
+  return{speakerId:sceneLead(sc),selectedSpeakerId:speaker,targetSpeakerId:q.to||sceneLead(sc),sceneIndex:idx,questionIndex:qi,onair,black,alert:alertState,
+    sceneTitle:sc.title||'',producerCue:sc.producerCue||sc.title||'',participants:sc.participants||[sceneLead(sc)],question:q.prompt||sc.question||'',transition:q.transition||'',
+    blockId:sc.blockId||'',segmentId:sc.segmentId||'',segmentTitle:sc.segmentTitle||'',durationSec:Number(sc.durationSec||0),segmentDurationSec:Number(sc.segmentDurationSec||0),
+    sceneStartedAt,questionStartedAt,questionDurationSec:qDur,segmentStartedAt,
+    sceneEnding:!!(onair&&unitStart&&unitDur&&now-unitStart>=Math.max(0,(unitDur-30)*1000)),
+    scenePosition:seg.findIndex(x=>x.id===sc.id)+1,segmentSceneCount:seg.length,questionCount:flow.length,ts:now}
+}
+function publish(topic,obj,retain=true){if(client?.connected)client.publish(topic,JSON.stringify(obj),{qos:0,retain})}
+function loadSpeakers(){
+  const s=$('speaker'),speakers=data?.event?.speakers||{},moderatorId=data?.event?.moderatorId||'diego';
+  if(!Object.keys(speakers).length)return;
+  s.innerHTML='';
+  const gm=document.createElement('optgroup');gm.label='MODERADOR';
+  const gp=document.createElement('optgroup');gp.label='PANELISTAS';
+  Object.entries(speakers).forEach(([id,p])=>{
+    const o=document.createElement('option');o.value=id;
+    o.textContent=id===moderatorId?(p.name+' — Moderador'):(p.name+' — '+(p.axis||'Panelista'));
+    (id===moderatorId?gm:gp).appendChild(o);
+  });
+  if(gm.children.length)s.appendChild(gm);
+  if(gp.children.length)s.appendChild(gp);
+  if(!speakers[speaker])speaker=moderatorId&&speakers[moderatorId]?moderatorId:Object.keys(speakers)[0];
+  s.value=speaker;
+}
+function visibleSceneEntries(){
+  return scenes().map((sc,i)=>({sc,i})).filter(({sc})=>sceneFilter==='program'||sc.leadSpeaker===speaker||(sc.participants||[]).includes(speaker)||(sc.questionFlow||[]).some(q=>q.to===speaker));
+}
+function renderScenes(){
+  const entries=visibleSceneEntries();
+  let html='',lastBlock='';
+  for(const {sc:x,i} of entries){
+    if(x.blockId!==lastBlock){lastBlock=x.blockId;html+='<div class="scene-group">'+(x.segmentTitle||x.blockId||'Bloque')+'</div>'}
+    let lead=data.event.speakers[x.leadSpeaker],deck=data.event.presentationDecks?.[x.deckId],badge=x.layout==='trio'?'3 PANELISTAS':x.layout==='moderator'?'MODERADOR':x.layout==='presentation'?((lead?.name||'PANELISTA').replace(/^\S+\.\s*/,'')+' · '+(x.slideNo||'')+'/'+(deck?.slideCount||'?')):'';
+    html+='<div class="scene '+(i===idx?'active':'')+'" data-i="'+i+'"><b>'+(i+1)+' · '+(x.title||'Escena')+(badge?'<span class="badge">'+badge+'</span>':'')+'</b><span>'+Math.round((x.durationSec||0)/60*10)/10+' min · '+(x.layout==='presentation'?'diapositiva':(x.layout||'contenido'))+'</span></div>';
+  }
+  $('scenes').innerHTML=html||'<div class="muted" style="font-size:11px">Sin escenas asignadas a este participante.</div>';
+  document.querySelectorAll('.scene[data-i]').forEach(el=>el.onclick=()=>selectScene(+el.dataset.i));
+}
+function currentFlow(){let sc=currentScene(),flow=sc.questionFlow||[];questionIndex=Math.max(0,Math.min(flow.length?flow.length-1:0,questionIndex));return {sc,flow,q:flow[questionIndex]||{}}}
+function renderScript(){
+  let {sc,flow,q}=currentFlow(),target=data.event.speakers[q.to],pts=sc.talkingPoints||[],lead=data.event.speakers[sc.leadSpeaker];
+  if(!flow.length){
+    $('scriptQuestion').textContent=sc.producerCue||'Esta escena no tiene preguntas encadenadas.';
+    $('scriptPoints').innerHTML=pts.length?'<b>Ideas para '+(lead?.name||'panelista')+':</b><br>• '+pts.join('<br>• '):'';
+    $('scriptTransition').textContent=sc.bridge?'Puente: '+sc.bridge:'Siguiente: avance manual cuando termine la idea.';
+    $('qPrev').disabled=true;$('qNext').disabled=true;return
+  }
+  $('scriptPoints').innerHTML=pts.length?'<b>Ideas:</b><br>• '+pts.join('<br>• '):'';
+  $('qPrev').disabled=questionIndex<=0;$('qNext').disabled=questionIndex>=flow.length-1;
+  $('scriptQuestion').textContent=(target?'Para '+target.name+': ':'')+(q.prompt||'');
+  $('scriptTransition').textContent='Continuidad: '+(q.transition||'Pasar a la siguiente pregunta.');
+}
+function advanceQuestion(delta){let {flow}=currentFlow();if(!flow.length)return;questionIndex=Math.max(0,Math.min(flow.length-1,questionIndex+delta));questionStartedAt=Date.now();renderScript();renderTiming();sendPreview();let st=lastSyncState?{...lastSyncState,...state(lastSyncState.onair,false),onair:lastSyncState.onair,black:false}:state(false,false);syncState(st);if(st.onair)localStorage.setItem('pr_program_state',JSON.stringify(st))}
+function sendPreview(){let f=$('preview').contentWindow;f?.postMessage({type:'PR_PREVIEW',state:state(false,false)},'*');if(lastBoard)f?.postMessage({type:'PR_REMOTE_BOARD_IMAGE',data:lastBoard},'*')}
+function syncState(st){lastSyncState=st;publish(tState(),st)}
+function updateCameraInfo(){
+  let sp=data.event.speakers[speaker];
+  $('cameraText').textContent=(sp?.name||speaker)+' · VDO.Ninja';
+  $('cameraTest').href=sp?.cameraViewUrl||'#';
+  $('cameraSender').href='./panelist-live-v131.html?panelista='+encodeURIComponent(speaker);
+  $('selectedPanelistLink').href='./panelist-live-v131.html?panelista='+encodeURIComponent(speaker);
+  $('selectedPanelistLink').textContent=(speaker===data.event.moderatorId?'Vista ':'Panelista ')+(sp?.name||speaker).replace(/^(PhD\.|MSc\.)\s*/,'');
+}
+function selectScene(i){
+  idx=Math.max(0,Math.min(scenes().length-1,i));questionIndex=0;
+  renderScenes();renderScript();renderTiming();sendPreview();syncState(state(false,false));
+}
+function take(){
+  let sc=currentScene(),now=Date.now();
+  if(activeSegmentId!==sc.segmentId||!segmentStartedAt){activeSegmentId=sc.segmentId||sc.id;segmentStartedAt=now}
+  if(!lastSyncState?.onair||lastSyncState.sceneIndex!==idx||!sceneStartedAt){sceneStartedAt=now;questionStartedAt=now}
+  alertState='';lastAutoKey='';
+  let st=state(true,false);syncState(st);localStorage.setItem('pr_program_state',JSON.stringify(st));
+  let names=(sc.participants||[sceneLead(sc)]).map(id=>data.event.speakers[id]?.name||id).join(' · ');
+  $('programText').innerHTML='<b>'+sc.title+'</b><br><span>'+names+'</span>';
+  if(programWin&&!programWin.closed)programWin.postMessage({type:'PR_PROGRAM_STATE',state:st},location.origin);
+  renderTiming();
+}
+function black(){let st=state(false,true);syncState(st);localStorage.setItem('pr_program_state',JSON.stringify(st));if(programWin&&!programWin.closed)programWin.postMessage({type:'PR_PROGRAM_STATE',state:st},location.origin)}
+function fmtClock(ms){
+  const over=ms<0;let s=Math.floor(Math.abs(ms)/1000),m=Math.floor(s/60);s%=60;
+  return (over?'+':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')
+}
+function renderTiming(){
+  let sc=currentScene(),flow=sc.questionFlow||[],q=flow[questionIndex]||{},now=Date.now(),on=!!lastSyncState?.onair&&lastSyncState.sceneIndex===idx;
+  let qDur=Number(q.durationSec||(flow.length?Math.max(30,Math.floor(Number(sc.durationSec||0)/flow.length)):0));
+  let unitDur=(flow.length?qDur:Number(sc.durationSec||0))*1000,unitStart=flow.length?questionStartedAt:sceneStartedAt;
+  let gd=Number(sc.segmentDurationSec||0)*1000;
+  let ur=on&&unitStart?unitDur-(now-unitStart):unitDur,gr=segmentStartedAt&&activeSegmentId===sc.segmentId?gd-(now-segmentStartedAt):gd;
+  let up=unitDur?Math.max(0,Math.min(100,(unitDur-ur)/unitDur*100)):0,gp=gd?Math.max(0,Math.min(100,(gd-gr)/gd*100)):0;
+  $('sceneTime').textContent=on?fmtClock(ur):fmtClock(unitDur);$('segmentTime').textContent=segmentStartedAt&&activeSegmentId===sc.segmentId?fmtClock(gr):fmtClock(gd);
+  $('sceneMeta').textContent=flow.length?('Pregunta '+(questionIndex+1)+'/'+flow.length+' · '+(data.event.speakers[q.to]?.name||'respuesta')):((on?'Restante · ':'Objetivo · ')+(sc.title||'Escena'));
+  $('segmentMeta').textContent=(sc.segmentTitle||'Bloque')+' · '+Math.round(gp)+'% consumido';
+  $('sceneBar').style.width=up+'%';$('segmentBar').style.width=gp+'%';
+  $('sceneCard').className='timecard'+(on&&ur<=0?' over':on&&ur<=30000?' warn':'');
+  $('segmentCard').className='timecard'+(segmentStartedAt&&gr<=120000?' danger':segmentStartedAt&&gr<=300000?' warn':'');
+  $('timeHint').textContent=on?(ur<=0?(flow.length?'TIEMPO DE RESPUESTA CUMPLIDO → RESUELTA / SIGUIENTE cuando cierre la frase.':'TIEMPO DE IDEA CUMPLIDO → haz SIGUIENTE cuando cierre la frase.'):ur<=30000?((flow.length?'RESPUESTA':'IDEA')+' POR CERRAR · quedan '+fmtClock(ur)+'. El avance sigue siendo manual.'):'Siguiente manual · PR controla bloque, idea y respuestas.'):'El reloj inicia al pulsar TAKE.';
+  if(lastSyncState?.onair&&segmentStartedAt&&activeSegmentId===sc.segmentId){
+    let auto=gr<=120000?'danger':gr<=300000?'warning':'',ending=ur<=30000,key=auto+'|'+ending+'|'+questionIndex;
+    if(key!==lastAutoKey){lastAutoKey=key;alertState=auto;let st=state(true,false);syncState(st);localStorage.setItem('pr_program_state',JSON.stringify(st));if(programWin&&!programWin.closed)programWin.postMessage({type:'PR_PROGRAM_STATE',state:st},location.origin)}
+  }
+}
+function renderClients(){let now=Date.now(),html='';Object.entries(presence).filter(([id,p])=>p&&p.online&&now-(p.updatedAt||0)<60000).forEach(([id,p])=>{html+='<span class="chip">'+(data.event.speakers[p.speakerId]?.name||p.speakerId)+' · conectado</span>'});$('clients').innerHTML=html||'<span class="muted" style="font-size:11px">Esperando panelistas…</span>'}
+function initMQTT(){let id='prctrl_'+Math.random().toString(16).slice(2,10),controlTopic=base()+'/control';client=mqtt.connect(data.realtime.broker,{clientId:id,clean:true,connectTimeout:5000,reconnectPeriod:1500,keepalive:20,will:{topic:controlTopic,payload:JSON.stringify({online:false,updatedAt:Date.now()}),qos:0,retain:true}});client.on('connect',()=>{$('rtText').textContent='Canal listo · conexión automática';$('rtDot').className='dot ok';client.subscribe(base()+'/#');syncState(state(false,false));client.publish(controlTopic,JSON.stringify({online:true,updatedAt:Date.now()}),{qos:0,retain:true});clearInterval(controlBeat);controlBeat=setInterval(()=>client.connected&&client.publish(controlTopic,JSON.stringify({online:true,updatedAt:Date.now()}),{qos:0,retain:true}),15000)});client.on('reconnect',()=>{$('rtText').textContent='Reconectando…';$('rtDot').className='dot warn'});client.on('offline',()=>{$('rtText').textContent='Sin red';$('rtDot').className='dot bad'});client.on('error',()=>{$('rtText').textContent='Error de canal';$('rtDot').className='dot bad'});client.on('message',(topic,payload)=>{$('mqttDebug').textContent='MQTT: '+topic+' · '+payload.length+' bytes';let obj;try{obj=JSON.parse(payload.toString())}catch(e){return}if(topic.startsWith(tPresence())){presence[topic.slice(tPresence().length)]=obj;renderClients()}if(topic.startsWith(base()+'/boardmeta/')){$('boardText').textContent='Señal de pizarra recibida · '+(obj.size||0)+' caracteres'}if(topic.startsWith(tBoard())&&obj?.data){lastBoard=obj.data;$('boardImg').src=obj.data;$('boardImg').style.display='block';$('boardText').textContent='Recibida de '+(data.event.speakers[obj.speakerId]?.name||obj.speakerId)+' · '+new Date(obj.updatedAt||Date.now()).toLocaleTimeString('es-EC');sendPreview();if(programWin&&!programWin.closed)programWin.postMessage({type:'PR_REMOTE_BOARD_IMAGE',data:lastBoard},location.origin)}});setInterval(renderClients,10000)}
+async function init(){
+  try{
+    data=await (await fetch('./events-v131.json?v='+Date.now(),{cache:'no-store'})).json();
+    loadSpeakers();let first=visibleSceneEntries()[0];if(first)idx=first.i;renderScenes();renderScript();updateCameraInfo();renderTiming();initMQTT();
+    $('speaker').onchange=e=>{
+      speaker=e.target.value;sceneFilter='speaker';
+      $('filterSpeaker').classList.add('active');$('filterProgram').classList.remove('active');
+      updateCameraInfo();let first=visibleSceneEntries()[0];if(first){idx=first.i;questionIndex=0}renderScenes();renderScript();renderTiming();sendPreview();syncState(state(false,false));
+    };
+    $('filterSpeaker').onclick=()=>{sceneFilter='speaker';$('filterSpeaker').classList.add('active');$('filterProgram').classList.remove('active');renderScenes()};
+    $('filterProgram').onclick=()=>{sceneFilter='program';$('filterProgram').classList.add('active');$('filterSpeaker').classList.remove('active');renderScenes()};
+    $('prev').onclick=()=>{let v=visibleSceneEntries(),p=v.findIndex(x=>x.i===idx);if(p>0)selectScene(v[p-1].i)};
+    $('next').onclick=()=>{let v=visibleSceneEntries(),p=v.findIndex(x=>x.i===idx);if(p>=0&&p<v.length-1)selectScene(v[p+1].i)};
+    $('qPrev').onclick=()=>advanceQuestion(-1);$('qNext').onclick=()=>advanceQuestion(1);
+    $('take').onclick=take;$('black').onclick=black;
+    document.querySelectorAll('[data-alert]').forEach(b=>b.onclick=()=>{
+      alertState=b.dataset.alert;lastAutoKey='manual-'+Date.now();
+      let st=lastSyncState?{...lastSyncState,alert:alertState,ts:Date.now()}:state(false,false);
+      syncState(st);sendPreview();if(st.onair)localStorage.setItem('pr_program_state',JSON.stringify(st));
+    });
+    $('openProgram').onclick=()=>{programWin=window.open('./program-v131.html','prProgram')};
+    $('preview').onload=()=>setTimeout(sendPreview,250);
+    window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='PR_PROGRAM_READY')programWin=e.source});
+    setInterval(()=>{
+      $('clock').textContent=new Date().toLocaleTimeString('es-EC',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'America/Guayaquil'});
+      renderTiming();
+    },1000);
+  }catch(err){console.error('PR CONTROL init',err);$('rtText').textContent='Error al cargar configuración';$('rtDot').className='dot bad'}
+}
+document.addEventListener('DOMContentLoaded',init);
+</script></body></html>
