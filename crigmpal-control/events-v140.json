@@ -1,6 +1,6 @@
 {
-  "version": "0.14.0",
-  "updatedAt": "2026-10-06T13:42:00-05:00",
+  "version": "0.14.1",
+  "updatedAt": "2026-10-06T15:08:00-05:00",
   "event": {
     "id": "crigmpal-2026-10",
     "name": "Conocer el riesgo para decidir y actuar",
@@ -1844,6 +1844,46 @@
       },
       "cameraMode": "dedicated-phone-page",
       "note": "El panelista controla únicamente sus diapositivas durante su turno. El productor conserva control maestro."
+    },
+    "panelistConsole": {
+      "publicMirror": true,
+      "slideControl": {
+        "enabled": true,
+        "mode": "command-to-control",
+        "policy": "El panelista solo puede avanzar o retroceder dentro de sus propias escenas de presentación cuando está AL AIRE. CONTROL valida y conserva la autoridad de producción."
+      },
+      "turnSignals": {
+        "active": "green",
+        "twoMinutes": "amber",
+        "oneMinute": "orange",
+        "thirtySeconds": "red",
+        "overtime": "red-pulse"
+      },
+      "boardTools": [
+        "pen",
+        "marker",
+        "line",
+        "arrow",
+        "rectangle",
+        "ellipse",
+        "text",
+        "eraser"
+      ],
+      "boardColors": [
+        "#102133",
+        "#0b6fb8",
+        "#169b62",
+        "#f4b000",
+        "#ef6c00",
+        "#d32f2f",
+        "#7b1fa2"
+      ],
+      "boardWidths": [
+        2,
+        4,
+        7,
+        12
+      ]
     }
   },
   "realtime": {
