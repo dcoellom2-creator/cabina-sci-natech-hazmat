@@ -1,4 +1,4 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Promter Risk · PROGRAM v0.11.0.2</title><style>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Promter Risk · PROGRAM v0.11.1.2</title><style>
 :root{--navy:#082b4b;--ink:#102133;--muted:#667789;--line:#dfe6ed;--amber:#e88927;--green:#23864a;--red:#c73333}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial;color:var(--ink)}#stage{position:absolute;inset:0;background:#fff;display:grid;grid-template-columns:32% 68%;transition:.35s ease}.black{background:#000!important}.black>*{display:none!important}
 .speaker{position:relative;background:linear-gradient(160deg,#0b3154,#061829 68%);color:#fff;padding:4.2vh 2.5vw;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}.speaker:after{content:'';position:absolute;width:46vh;height:46vh;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-24vh;top:-18vh}.logos{display:flex;gap:.6vw;align-items:center;position:relative;z-index:2}.logos img{width:4.2vw;max-width:66px;min-width:42px;aspect-ratio:1;object-fit:contain;background:#fff;border-radius:12px;padding:3px}.eyebrow{font-size:.8vw;min-font-size:10px;letter-spacing:.15em;font-weight:950;color:#d7e5ef}.axis{display:inline-flex;align-self:flex-start;background:rgba(255,255,255,.13);padding:.5vw .8vw;border-radius:999px;font-size:.75vw;font-weight:950;letter-spacing:.1em}.avatar{width:11vw;height:11vw;max-width:180px;max-height:180px;min-width:112px;min-height:112px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--navy);font-size:3.3vw;font-weight:950;box-shadow:0 16px 45px rgba(0,0,0,.25);margin:2vh 0}.speaker h1{font-size:2.4vw;line-height:1.04;margin:.8vh 0}.role{font-size:1.05vw;color:#d3e1eb;line-height:1.35}.speaker-bottom{position:relative;z-index:2}.speaker-bottom small{color:#b9cfdf}.livecue{font-size:1vw;font-weight:900;margin-top:.6vh}
@@ -14,6 +14,9 @@
 .layout-presentation .content>div:not(#nativePresentation),.layout-presentation .content>.source{display:none!important}
 #nativePresentation{display:none;width:100%;height:100%;align-items:center;justify-content:center}
 .layout-presentation #nativePresentation{display:flex}
+.exact-slide-wrap{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#111a24}
+.exact-slide-img{width:100%;height:100%;object-fit:contain;display:block;border:0;box-shadow:0 16px 42px rgba(0,0,0,.35)}
+.deck-missing{width:92%;max-width:900px;border:1px dashed #71808c;border-radius:18px;padding:4vh 3vw;text-align:center;color:#d6e1e9;background:#18232d}.deck-missing b{display:block;font-size:2vw;margin-bottom:1vh}.deck-missing span{font-size:1vw;color:#9db0bf;line-height:1.5}
 .pr-slide{width:100%;aspect-ratio:16/9;max-height:94vh;background:linear-gradient(135deg,#202b36,#27333f);border:1px solid #53616f;border-radius:18px;color:#f7fbff;box-shadow:0 18px 44px rgba(0,0,0,.28);padding:2.5vh 2.1vw;display:flex;flex-direction:column;overflow:hidden}
 .pr-slide .kicker{font-size:.72vw;letter-spacing:.15em;font-weight:950;color:#62c7ff}.pr-slide h2{color:#fff;font-size:2.45vw;line-height:1.03;margin:.6vh 0 1.5vh;letter-spacing:-.035em}.pr-slide .sub{font-size:.98vw;color:#c7d3de;line-height:1.38}.pr-slide .bottom{margin-top:auto;font-size:.82vw;color:#d5dde5;border-top:1px solid rgba(255,255,255,.16);padding-top:1vh}.metric{border:1px solid #526271;background:#151f29;border-radius:14px;padding:1.1vh .95vw}.metric .label{font-size:.66vw;letter-spacing:.1em;color:#94a7b8;font-weight:900}.metric .value{font-size:1.65vw;font-weight:950;margin-top:.3vh}.pillBlue{color:#61cdfc}.pillGreen{color:#9fc47f}.pillRed{color:#ff4d3f}
 .mapgrid{display:grid;grid-template-columns:42% 58%;gap:1.4vw;flex:1;min-height:0}.mapmeta{display:grid;grid-template-columns:1fr 1fr;gap:.7vw;align-content:start}.mapmeta .wide{grid-column:1/-1}.fakeMap{position:relative;border-radius:16px;overflow:hidden;background:radial-gradient(circle at 66% 68%,#78919c 0 7%,transparent 8%),linear-gradient(145deg,#364735,#1a2523 40%,#2a3437 72%,#172023);border:1px solid #55636d}.fakeMap:before,.fakeMap:after{content:'';position:absolute;background:#d53028;opacity:.9;border-radius:45% 55% 60% 40%}.fakeMap:before{width:18%;height:44%;left:47%;top:26%;transform:rotate(-12deg)}.fakeMap:after{width:10%;height:24%;left:58%;top:55%;transform:rotate(28deg)}
@@ -38,7 +41,7 @@ let data=null,previewMode=new URLSearchParams(location.search).get('preview')===
 async function init(){initRemoteBoard();data=await (await fetch('./events-v110.json?v='+Date.now(),{cache:'no-store'})).json();if(previewMode){window.addEventListener('message',e=>{if(e.data?.type==='PR_PREVIEW')render(e.data.state)});render({sceneIndex:0,speakerId:'kervin',alert:'',black:false})}else{initMQTT();loadProgram();window.addEventListener('storage',e=>{if(e.key==='pr_program_state')loadProgram()});if(window.opener&&!window.opener.closed)window.opener.postMessage({type:'PR_PROGRAM_READY'},location.origin)}}
 
 function initMQTT(){let base=data.realtime.topicBase,id='prprog_'+Math.random().toString(16).slice(2,10);mqttClient=mqtt.connect(data.realtime.broker,{clientId:id,clean:true,connectTimeout:5000,reconnectPeriod:1500,keepalive:20});mqttClient.on('connect',()=>mqttClient.subscribe([base+'/state',base+'/board/+']));mqttClient.on('message',(topic,payload)=>{let obj;try{obj=JSON.parse(payload.toString())}catch(e){return}if(topic===base+'/state'){render(obj);localStorage.setItem('pr_program_state',JSON.stringify(obj))}if(topic.startsWith(base+'/board/')&&obj?.data){lastBoardImage=obj.data;$('remoteBoardImage').src=obj.data;$('stage').classList.add('has-board-image');if(lastState)render(lastState)}})}
-window.setRemoteStream=function(){/* legacy compatibility: v0.11.0 uses VDO.Ninja */}
+window.setRemoteStream=function(){/* legacy compatibility: v0.11.1 uses VDO.Ninja */}
 function initRemoteBoard(){let c=$('remoteBoard');boardCtx=c.getContext('2d');resizeRemoteBoard();window.addEventListener('resize',resizeRemoteBoard)}
 function resizeRemoteBoard(){if(!boardCtx)return;let c=$('remoteBoard'),r=c.getBoundingClientRect(),w=r.width||Math.max(640,window.innerWidth*.58),h=r.height||Math.max(360,window.innerHeight*.58);c.width=Math.max(1,Math.round(w*devicePixelRatio));c.height=Math.max(1,Math.round(h*devicePixelRatio));boardCtx=c.getContext('2d');boardCtx.fillStyle='#fff';boardCtx.fillRect(0,0,c.width,c.height);let copy=boardEvents.slice();boardDrawing=false;copy.forEach(m=>applyBoard(m,false))}
 function applyBoard(msg,record=true){if(!boardCtx)return;if(record){if(msg.a==='clear')boardEvents=[];else{boardEvents.push(msg);if(boardEvents.length>12000)boardEvents=boardEvents.slice(-10000)}}let c=$('remoteBoard'),x=(msg.x||0)*c.width,y=(msg.y||0)*c.height;if(msg.a==='clear'){boardCtx.fillStyle='#fff';boardCtx.fillRect(0,0,c.width,c.height);boardDrawing=false;return}if(msg.a==='start'){boardTool=msg.tool||'pen';boardDrawing=true;boardCtx.beginPath();boardCtx.moveTo(x,y);return}if(msg.a==='move'&&boardDrawing){boardTool=msg.tool||boardTool;boardCtx.lineCap='round';boardCtx.lineJoin='round';boardCtx.lineWidth=boardTool==='eraser'?28:4;boardCtx.strokeStyle=boardTool==='eraser'?'#fff':'#102133';boardCtx.lineTo(x,y);boardCtx.stroke();return}if(msg.a==='end'){boardDrawing=false}}
@@ -53,35 +56,22 @@ function setCamera(sp){let f=$('cameraFrame'),sid=sp.cameraStreamId||'';if(!sid)
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function viewUrl(sp){return sp?.cameraViewUrl||('https://vdo.ninja/?view='+encodeURIComponent(sp?.cameraStreamId||'')+'&cleanoutput&noaudio&cover&autoplay')}
 function activeFlow(sc,st){let flow=sc.questionFlow||[],i=Math.max(0,Math.min(flow.length-1,Number(st.questionIndex||0)));return {flow,i,q:flow[i]||{}}}
-function arr(x){return Array.isArray(x)?x:[]}
-function renderPresentation(sc){
-  const d=sc.slideData||{},k=sc.slideKind||'case',box=$('nativePresentation');
-  const head='<div class="kicker">'+esc(sc.tag||'CASO PIÑAS')+'</div><h2>'+esc(sc.title||'')+'</h2>';
-  let body='';
-  if(k==='case'){
-    body='<div class="mapgrid"><div><div class="mapmeta"><div class="metric"><div class="label">UBICACIÓN</div><div class="value">'+esc(d.location||'')+'</div></div><div class="metric"><div class="label">FECHA</div><div class="value">'+esc(d.date||'')+'</div></div><div class="metric wide"><div class="label">FOCO DE ANÁLISIS</div><div class="value">'+esc(d.focus||'')+'</div></div></div><div class="bottom">'+esc(d.thesis||'')+'</div></div><div class="fakeMap"></div></div>';
-  } else if(k==='rain'){
-    const vals=[70,130,190,105,120,135,115,160,215,110,160,150,220,588],labs=['10','11','12','13','15','16','18','19','20','21','22','23','24','25'];let mx=600;
-    body='<div class="rainwrap"><div><div class="bars">'+vals.map((v,i)=>'<div class="bar '+(i===vals.length-1?'hot':'')+'" style="height:'+(v/mx*100)+'%"><span>'+labs[i]+'</span></div>').join('')+'</div><div class="bottom">'+esc(d.highlight||'')+'</div></div><div class="raincall"><div class="metric"><div class="label">ACUMULACIÓN MENSUAL</div><div class="value pillBlue">'+esc(d.monthly||'')+'</div></div><div class="metric"><div class="label">MÁXIMO HISTÓRICO PREVIO</div><div class="value">'+esc(d.prior||'')+'</div></div><div class="metric"><div class="label">CORTO PLAZO</div><div class="value pillBlue">'+esc(d.short||'')+'</div></div></div></div>';
-  } else if(k==='method'){
-    body='<div class="methodgrid"><div class="steps">'+arr(d.steps).map(x=>'<div class="stepbox"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('')+'</div><div class="sitepanel"><h3>VULNERABILIDAD DEL SITIO</h3><ul>'+arr(d.vulnerability).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div></div>';
-  } else if(k==='structure'){
-    body='<div class="twocol"><div class="evidence"><h3>'+esc(d.leftTitle||'')+'</h3><div class="rockshape"></div><ul>'+arr(d.left).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div><div class="evidence"><h3>'+esc(d.rightTitle||'')+'</h3><div class="stereonet"></div>'+arr(d.metrics).map(x=>'<div class="sub"><b>'+esc(x[0])+':</b> '+esc(x[1])+'</div>').join('')+'</div></div><div class="bottom">'+esc(d.footer||'')+'</div>';
-  } else if(k==='fs'){
-    body='<div class="fsrule">Límite de referencia del estudio: '+esc(d.threshold||'')+'</div><div class="fsgrid"><div class="fspane"><div class="sub">'+esc(d.dry?.label||'')+'</div><div class="fsvalue pillGreen">'+esc(d.dry?.value||'')+'</div><div class="sub">'+esc(d.dry?.status||'')+'</div></div><div class="fspane"><div class="sub">'+esc(d.wet?.label||'')+'</div><div class="fsvalue pillRed">'+esc(d.wet?.value||'')+'</div><div class="sub">'+esc(d.wet?.status||'')+'</div></div></div><div class="bottom">'+esc(d.footer||'')+'</div>';
-  } else if(k==='chain'){
-    body='<div class="chain">'+arr(d.steps).map(x=>'<div class="chaincard"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('')+'</div><div class="stats">'+arr(d.stats).map(x=>'<div class="stat"><b>'+esc(x[0])+'</b>'+esc(x[1])+'</div>').join('')+'</div>';
-  } else if(k==='infrastructure'){
-    body='<div class="cascade">'+arr(d.stages).map((x,i)=>'<div class="chaincard"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>').join('')+'</div><div class="bottom">'+esc(d.footer||'')+'</div>';
-  } else if(k==='mitigation'){
-    body='<div class="mitgrid"><div class="slopeViz"><div class="ground"></div><div class="drain"></div><div class="anchor a1"></div><div class="anchor a2"></div><div class="anchor a3"></div></div><div class="axes"><div class="metric"><div class="label">ANTES</div><div class="value pillRed">'+esc(d.before||'')+'</div></div><div class="metric"><div class="label">DESPUÉS</div><div class="value pillGreen">'+esc(d.after||'')+'</div></div>'+arr(d.axes).map(x=>'<div class="axisbox"><b>'+esc(x[0])+'</b><br><span>'+esc(x[1])+'</span></div>').join('')+'<div class="sub">'+esc(d.note||'')+'</div></div></div>';
-  } else if(k==='synthesis'){
-    body='<div class="fourcols">'+arr(d.columns).map(x=>'<div class="domain"><h3>'+esc(x[0])+'</h3><ul>'+arr(x[1]).map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul></div>').join('')+'</div><div class="bottom">'+esc(d.footer||'')+'</div>';
-  } else if(k==='question'){
-    body='<div class="bigQ"><div class="pre">'+esc(d.pre||'')+'</div><div class="q">'+esc(d.question||'')+'</div></div>';
-  }
-  box.innerHTML='<section class="pr-slide">'+head+body+'</section>';
+let exactSlideUrl='';
+function openDeckDB(){return new Promise((resolve,reject)=>{let q=indexedDB.open('promter-risk-decks',1);q.onupgradeneeded=()=>{let db=q.result;if(!db.objectStoreNames.contains('assets'))db.createObjectStore('assets')};q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
+async function deckGet(key){let db=await openDeckDB();return new Promise((res,rej)=>{let q=db.transaction('assets').objectStore('assets').get(key);q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)})}
+async function renderExactSlide(sc){
+  const box=$('nativePresentation'),n=Number(sc.slideNo||0);
+  box.innerHTML='<div class="exact-slide-wrap"><div class="deck-missing"><b>Cargando diapositiva '+n+'/10…</b><span>'+esc(sc.title||'')+'</span></div></div>';
+  try{
+    const blob=await deckGet('pinas2025:slide:'+n);
+    if(lastState && scenes()[Number(lastState.sceneIndex)]?.id!==sc.id)return;
+    if(!blob){box.innerHTML='<div class="exact-slide-wrap"><div class="deck-missing"><b>Presentación exacta no cargada</b><span>En CONTROL usa “CARGAR PPTX EXACTO”. Promter Risk no reconstruirá ni modificará esta diapositiva.</span></div></div>';return}
+    if(exactSlideUrl)URL.revokeObjectURL(exactSlideUrl);exactSlideUrl=URL.createObjectURL(blob);
+    box.innerHTML='<div class="exact-slide-wrap"><img class="exact-slide-img" alt="Diapositiva original '+n+'" src="'+exactSlideUrl+'"></div>';
+  }catch(err){box.innerHTML='<div class="exact-slide-wrap"><div class="deck-missing"><b>Error al leer el deck exacto</b><span>'+esc(err.message||String(err))+'</span></div></div>'}
 }
+function arr(x){return Array.isArray(x)?x:[]}
+function renderPresentation(sc){renderExactSlide(sc)}
 function renderMulti(sc,st){
   const box=$('multiStage'), participants=sc.participants||[st.speakerId], af=activeFlow(sc,st), q=af.q||{}, target=data.event.speakers[q.to];
   if(sc.layout==='trio'){
@@ -117,5 +107,6 @@ function render(st){
   }
   if(st.alert)stage.classList.add('alert-'+st.alert)
 }
+window.addEventListener('message',e=>{if(e.origin===location.origin&&e.data?.type==='PR_DECK_UPDATED'&&lastState){let sc=scenes()[Number(lastState.sceneIndex)]||{};if(sc.layout==='presentation')renderPresentation(sc)}});
 document.addEventListener('DOMContentLoaded',init);
 </script></body></html>
