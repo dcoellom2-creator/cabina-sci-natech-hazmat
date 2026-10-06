@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.11.2 — deck Piñas renderizado directamente desde el PDF original, página por página.
+v0.12.0 — decks persistentes por panelista; sin carga manual de PDF/PPT durante la transmisión.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -201,3 +201,27 @@ Se retiró el parser PPTX de la ruta de producción del caso Piñas.
 - PROGRAM usa PDF.js para renderizar la página original correspondiente a cada escena.
 - Se preservan textos, gráficos, fotografías, colores y composición del PDF; Promter Risk no reconstruye la diapositiva.
 - El guion privado de Kervin continúa separado de la salida pública.
+
+
+## v0.12 — metodología de decks persistentes
+Objetivo operativo: ningún productor ni panelista carga archivos durante la transmisión.
+
+### Ingestión (una sola vez, antes del evento)
+1. Recibir PDF/PPTX del panelista.
+2. Renderizar cada página/diapositiva sin alterar su contenido visual.
+3. Guardar los activos de forma persistente en la carpeta del panelista.
+4. Crear/actualizar el manifest del deck en `events-v120.json`.
+5. Vincular cada slide con su `sceneId`, talking points, producer cue y bridge.
+6. Ejecutar QA visual en PREVIEW/PROGRAM.
+7. Publicar.
+
+### Operación en vivo
+CONTROL → seleccionar escena → PREVIEW → TAKE → PROGRAM.
+PROGRAM obtiene la diapositiva desde el activo persistente. No usa selector de archivos, IndexedDB ni carga local.
+
+### Estructura de activos
+- `05_PROMTER_RISK_DECKS/Kervin_Chunga_Pinas_2025` — 10/10 listo.
+- `05_PROMTER_RISK_DECKS/Daniel_Coello_Deck` — preparado para ingestión.
+- `05_PROMTER_RISK_DECKS/Patricio_Cobos_Deck` — preparado para ingestión.
+
+La diapositiva pública se conserva tal cual. El guion privado y las transiciones viven como metadatos separados.
