@@ -1,0 +1,1098 @@
+{
+  "version": "0.11.0",
+  "updatedAt": "2026-10-05T22:45:00-05:00",
+  "event": {
+    "id": "crigmpal-2026-10",
+    "name": "Conocer el riesgo para decidir y actuar",
+    "subtitle": "Ciencia · territorio · gestión · comunidad",
+    "mode": "Virtual vía Zoom",
+    "speakers": {
+      "kervin": {
+        "name": "PhD. Kervin Chunga",
+        "role": "Geólogo investigador",
+        "axis": "CONOCER",
+        "theme": "Base técnica y evidencia territorial",
+        "video": "",
+        "ideas": [
+          [
+            "Base técnica",
+            "La calidad de la decisión depende de la calidad de la evidencia."
+          ],
+          [
+            "Trámite vs gestión",
+            "Cumplir un formato no sustituye entender el riesgo."
+          ],
+          [
+            "Territorio",
+            "El estudio debe traducirse en una lectura útil para quien decide."
+          ]
+        ],
+        "cameraStreamId": "prcrig2026_kervin_7f2a19c4",
+        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_kervin_7f2a19c4&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
+        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_kervin_7f2a19c4&cleanoutput&noaudio&cover&autoplay"
+      },
+      "daniel": {
+        "name": "MSc. Daniel Coello",
+        "role": "Geólogo / Gestión de riesgos",
+        "axis": "DECIDIR",
+        "theme": "Del dato técnico a la gestión",
+        "video": "",
+        "ideas": [
+          [
+            "Cadena de decisión",
+            "Fuente → dato → análisis → decisión → responsable → evidencia → resultado."
+          ],
+          [
+            "Gestión",
+            "No gestionamos mapas; gestionamos decisiones."
+          ],
+          [
+            "Implementación",
+            "La información debe terminar en responsables, medidas, plazos y seguimiento."
+          ]
+        ],
+        "cameraStreamId": "prcrig2026_daniel_91d3b6e8",
+        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_daniel_91d3b6e8&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
+        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_daniel_91d3b6e8&cleanoutput&noaudio&cover&autoplay"
+      },
+      "patricio": {
+        "name": "MSc. Patricio Cobo",
+        "role": "Ing. Ambiental / Gestión de riesgos",
+        "axis": "ACTUAR",
+        "theme": "Territorio, preparación y comunidad",
+        "video": "",
+        "ideas": [
+          [
+            "Capacidad",
+            "Un plan no equivale automáticamente a capacidad instalada."
+          ],
+          [
+            "Preparación",
+            "Comités, capacitación, SAT, ejercicios y retroalimentación."
+          ],
+          [
+            "Territorio",
+            "La gestión se comprueba cuando puede ser aplicada por los actores."
+          ]
+        ],
+        "cameraStreamId": "prcrig2026_patricio_5c8f24a1",
+        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_patricio_5c8f24a1&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
+        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_patricio_5c8f24a1&cleanoutput&noaudio&cover&autoplay"
+      },
+      "xavier": {
+        "name": "MSc. Xavier Verdezoto",
+        "role": "Gestión de riesgo y emergencia / Prefectura de Bolívar",
+        "axis": "ARTICULAR",
+        "theme": "Gobernanza del riesgo",
+        "video": "",
+        "ideas": [
+          [
+            "Gobernanza",
+            "No es reunión: es responsabilidad, continuidad y coordinación."
+          ],
+          [
+            "Competencias",
+            "Los actores deben saber qué les corresponde y con qué recursos cuentan."
+          ],
+          [
+            "Continuidad",
+            "La implementación debe sostenerse más allá de las personas."
+          ]
+        ],
+        "cameraStreamId": "prcrig2026_xavier_3e71c9b2",
+        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_xavier_3e71c9b2&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
+        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_xavier_3e71c9b2&cleanoutput&noaudio&cover&autoplay"
+      },
+      "diego": {
+        "name": "MSc. Diego Delgado",
+        "role": "Geólogo / Moderador",
+        "axis": "MODERAR",
+        "theme": "Conducción técnica, preguntas y transiciones",
+        "video": "",
+        "ideas": [
+          [
+            "Conducir",
+            "Mantener el hilo del conversatorio sin competir con los panelistas."
+          ],
+          [
+            "Profundizar",
+            "Usar preguntas breves para llevar la discusión de evidencia a decisión y acción."
+          ],
+          [
+            "Controlar tiempo",
+            "Cerrar respuestas, ordenar intervenciones y proteger el ritmo del evento."
+          ]
+        ],
+        "cameraStreamId": "prcrig2026_diego_8a4d72f6",
+        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_diego_8a4d72f6&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
+        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_diego_8a4d72f6&cleanoutput&noaudio&cover&autoplay"
+      }
+    },
+    "publicSlides": [
+      {
+        "tag": "CASO PIÑAS · LADERAS URBANAS",
+        "title": "Del evento de ladera a la decisión operativa",
+        "lead": "El caso Piñas permite explicar cómo una emergencia por movimientos en masa se traduce en lectura técnica, gestión territorial y decisiones de mitigación.",
+        "cards": [
+          [
+            "Lluvia extrema",
+            "Deslizamientos de finales de febrero de 2025 vinculados a lluvias intensas asociadas a La Niña Modoki."
+          ],
+          [
+            "Inventario técnico",
+            "Ortomosaicos y reconocimiento geológico permitieron delimitar deslizamientos, colapsos y flujos."
+          ],
+          [
+            "Condición local",
+            "Brechas volcánicas, dacitas, andesitas, gneises y suelos residuales saturados condicionaron la inestabilidad."
+          ]
+        ],
+        "question": "¿Estamos mirando solo el desastre o leyendo las condiciones que lo hicieron posible?",
+        "source": "Fuente: Chunga, K. (2025). Dinámica de deformación de los deslizamientos del 28.02.2025 en Piñas, provincia El Oro. DOI:10.13140/RG.2.2.32572.55683."
+      },
+      {
+        "tag": "EVIDENCIA → ESTABILIDAD",
+        "title": "El dato técnico que cambia la conversación",
+        "lead": "El análisis de estabilidad muestra cómo la saturación reduce el factor de seguridad y convierte una descripción del daño en una decisión defendible.",
+        "cards": [
+          [
+            "Antes del evento",
+            "El análisis reporta SF 1.526 en condición estática previa."
+          ],
+          [
+            "Con saturación",
+            "El margen baja a SF 1.125 por efecto del nivel de saturación asociado a lluvia intensa."
+          ],
+          [
+            "Talud inestable",
+            "Después del colapso se reportan condiciones inestables con SF 0.926, agravadas por agua."
+          ]
+        ],
+        "table": {
+          "headers": [
+            "Condición",
+            "SF",
+            "Lectura para gestión"
+          ],
+          "rows": [
+            [
+              "Natural previa",
+              "1.526",
+              "Estabilidad aparente"
+            ],
+            [
+              "Con saturación",
+              "1.125",
+              "Reducción del margen"
+            ],
+            [
+              "Talud colapsado",
+              "0.926",
+              "Inestabilidad"
+            ],
+            [
+              "Agua + condición crítica",
+              "0.727",
+              "Mayor peligro"
+            ]
+          ]
+        },
+        "question": "¿Qué decisión se justifica cuando el factor de seguridad muestra que el problema ya no es solo visual?",
+        "source": "Valores SF resumidos del texto público de Chunga (2025), ResearchGate."
+      },
+      {
+        "tag": "MITIGACIÓN",
+        "title": "De la geometría del talud a medidas concretas",
+        "lead": "El caso presenta alternativas de estabilización y control de flujos que permiten pasar del diagnóstico a una ruta de intervención.",
+        "cards": [
+          [
+            "Bermas y anclajes",
+            "Reconfiguración geométrica del terreno para mejorar la estabilidad."
+          ],
+          [
+            "SF objetivo",
+            "El diseño reporta incremento a SF ≈ 1.706–1.709 en condición estática."
+          ],
+          [
+            "Control de flujos",
+            "Disipadores, diques y separadores reducen velocidad y transporte de bloques/sedimentos."
+          ]
+        ],
+        "question": "Si ya sabemos dónde falló, por qué falló y qué medida reduce el riesgo, ¿qué impide actuar?",
+        "source": "Medidas resumidas a partir de Chunga (2025), texto público ResearchGate."
+      },
+      {
+        "tag": "PREGUNTA ESTRATÉGICA",
+        "title": "No es PowerPoint: es escena técnica guiada",
+        "lead": "Durante la transmisión, el panelista puede aparecer en burbuja o media pantalla, mientras la interfaz muestra contenido técnico, tabla, pregunta o pizarra en la misma escena.",
+        "cards": [
+          [
+            "Panelista",
+            "Cámara reducida, nombre, eje y alerta de tiempo."
+          ],
+          [
+            "Contenido",
+            "Pregunta clave, tarjetas, tabla, fragmento técnico y referencia."
+          ],
+          [
+            "Valor antes que venta",
+            "La necesidad de asesoría aparece como consecuencia de entender la brecha, no como presión comercial."
+          ]
+        ],
+        "question": "¿Cómo hacemos que el público comprenda la brecha técnica antes de ofrecer una solución?",
+        "source": "Criterio operativo Promter Risk: valor técnico primero; servicios como ruta natural de acompañamiento."
+      }
+    ],
+    "blocks": [
+      {
+        "id": "d1a",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:00",
+        "end": "18:08",
+        "title": "Apertura y encuadre",
+        "people": [
+          "diego"
+        ],
+        "cue": "Presentar el hilo: conocer → decidir → actuar → articular.",
+        "prompt": "Bienvenidos. Hoy vamos a seguir una ruta sencilla: conocer el riesgo, convertirlo en decisión y preguntarnos qué hace falta para actuar."
+      },
+      {
+        "id": "d1b",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:08",
+        "end": "18:35",
+        "title": "Base técnica y evidencia",
+        "people": [
+          "kervin"
+        ],
+        "cue": "Estudios, mapas, riesgo, trámite vs gestión.",
+        "prompt": "¿Estamos gestionando el riesgo o solamente cumpliendo un trámite?"
+      },
+      {
+        "id": "d1c",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:35",
+        "end": "18:45",
+        "title": "Diálogo técnico",
+        "people": [
+          "diego",
+          "kervin",
+          "daniel"
+        ],
+        "cue": "Extraer elementos mínimos que necesita una decisión territorial.",
+        "prompt": "Kervin, si mañana este estudio entra a una institución, ¿qué información no debería perderse? Daniel, ¿qué dato necesitas para convertirlo en decisión?"
+      },
+      {
+        "id": "d1d",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "18:45",
+        "end": "19:20",
+        "title": "Del dato técnico a la decisión",
+        "people": [
+          "daniel"
+        ],
+        "cue": "Cruce territorial, competencias, responsables, medidas y evidencia.",
+        "prompt": "¿En qué momento el conocimiento del territorio deja de ser información y empieza realmente a convertirse en gestión?"
+      },
+      {
+        "id": "d1e",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "19:20",
+        "end": "19:42",
+        "title": "Informes, proyectos y financiamiento",
+        "people": [
+          "diego",
+          "kervin",
+          "daniel"
+        ],
+        "cue": "Llenar formatos no reemplaza una base técnica suficiente.",
+        "prompt": "¿Qué brecha impide pasar de un reporte técnico a una intervención financiable y defendible?"
+      },
+      {
+        "id": "d1f",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "19:42",
+        "end": "19:52",
+        "title": "Preguntas del público",
+        "people": [
+          "diego",
+          "kervin",
+          "daniel"
+        ],
+        "cue": "Responder orientación general y registrar casos que requieren revisión específica.",
+        "prompt": "Abrimos preguntas del público. Busquemos casos que permitan distinguir orientación general de análisis aplicado."
+      },
+      {
+        "id": "d1g",
+        "day": "Día 1",
+        "date": "2026-10-06",
+        "start": "19:52",
+        "end": "20:00",
+        "title": "Cierre día 1",
+        "people": [
+          "diego",
+          "daniel"
+        ],
+        "cue": "Lo que conocemos condiciona lo que podemos decidir.",
+        "prompt": "Cerramos el primer día con una idea: lo que conocemos condiciona lo que podemos decidir. Mañana veremos cómo esa decisión se vuelve capacidad y gobernanza."
+      },
+      {
+        "id": "d2a",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:00",
+        "end": "18:07",
+        "title": "Recapitulación",
+        "people": [
+          "diego"
+        ],
+        "cue": "Reconectar evidencia, decisión, territorio y gobernanza.",
+        "prompt": "Retomamos el hilo de ayer: evidencia y decisión. Hoy bajamos esa conversación al territorio, la comunidad y la articulación institucional."
+      },
+      {
+        "id": "d2b",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:07",
+        "end": "18:32",
+        "title": "Preparación y comunidad",
+        "people": [
+          "patricio"
+        ],
+        "cue": "Actores, comités, capacitación, SAT, ejercicios y respuesta.",
+        "prompt": "¿Qué hace que una comunidad esté preparada y no solamente tenga un plan?"
+      },
+      {
+        "id": "d2c",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:32",
+        "end": "18:47",
+        "title": "Diálogo territorio",
+        "people": [
+          "diego",
+          "patricio",
+          "daniel"
+        ],
+        "cue": "Del documento a la capacidad instalada.",
+        "prompt": "Patricio, ¿qué información debe llegar a la comunidad y cuál debe permanecer como insumo técnico? Daniel, ¿cómo se conecta eso con la gestión institucional?"
+      },
+      {
+        "id": "d2d",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "18:47",
+        "end": "19:17",
+        "title": "Gobernanza del riesgo",
+        "people": [
+          "xavier"
+        ],
+        "cue": "Competencias, coordinación, responsabilidades y continuidad.",
+        "prompt": "Cuando todos tienen responsabilidad, ¿qué hace que realmente se articulen?"
+      },
+      {
+        "id": "d2e",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:17",
+        "end": "19:37",
+        "title": "Pregunta transversal",
+        "people": [
+          "diego",
+          "kervin",
+          "daniel",
+          "patricio",
+          "xavier"
+        ],
+        "cue": "Conocer · decidir · actuar · articular.",
+        "prompt": "Pregunta transversal para todos: si ya conocemos el riesgo, ¿qué nos falta para tomar buenas decisiones y actuar realmente sobre él?"
+      },
+      {
+        "id": "d2f",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:37",
+        "end": "19:47",
+        "title": "Caso integrador",
+        "people": [
+          "diego",
+          "kervin",
+          "daniel",
+          "patricio",
+          "xavier"
+        ],
+        "cue": "Amenaza + población + instituciones + intervención que no avanza.",
+        "prompt": "Caso integrador: cada uno responda desde su ámbito. ¿Qué haría para destrabar una intervención que técnicamente está sustentada pero no avanza?"
+      },
+      {
+        "id": "d2g",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:47",
+        "end": "19:54",
+        "title": "Ruta de soluciones",
+        "people": [
+          "daniel"
+        ],
+        "cue": "Diagnóstico, asesoría, capacitación e implementación.",
+        "prompt": "Si una institución enfrenta una brecha concreta, el siguiente paso es revisar su caso."
+      },
+      {
+        "id": "d2h",
+        "day": "Día 2",
+        "date": "2026-10-07",
+        "start": "19:54",
+        "end": "20:00",
+        "title": "Cierre final",
+        "people": [
+          "diego",
+          "daniel"
+        ],
+        "cue": "Agradecer y dejar ruta de seguimiento.",
+        "prompt": "Cerramos integrando conocer, decidir, actuar y articular. Gracias por mantener una conversación técnica orientada a soluciones."
+      }
+    ],
+    "productionScenes": [
+      {
+        "id": "d1-open-moderator",
+        "layout": "moderator",
+        "tag": "APERTURA · DÍA 1",
+        "title": "Conocer → decidir → actuar → articular",
+        "lead": "Diego abre el conversatorio y presenta el hilo que conectará cada intervención.",
+        "participants": [
+          "diego"
+        ],
+        "leadSpeaker": "diego",
+        "producerCue": "Abre en 60–90 segundos. Explica el hilo y presenta a Kervin como primer panelista.",
+        "questionFlow": [
+          {
+            "to": "diego",
+            "prompt": "¿Qué buscamos hoy? Pasar de información técnica a decisiones y acciones concretas.",
+            "transition": "Presenta a Kervin y abre el eje CONOCER."
+          }
+        ]
+      },
+      {
+        "id": "k-pinas-01",
+        "layout": "presentation",
+        "slideNo": 1,
+        "slideKind": "case",
+        "participants": [
+          "kervin"
+        ],
+        "leadSpeaker": "kervin",
+        "tag": "PIÑAS 2025 · CASO FORENSE",
+        "title": "Piñas 2025: un caso para entender cómo falla el territorio",
+        "lead": "Ubica el caso antes de entrar en cifras. El desastre no se presenta como un hecho fortuito, sino como una cadena causal reconstruible.",
+        "slideData": {
+          "location": "Piñas, El Oro",
+          "date": "28/02/2025",
+          "focus": "Sector Roldós–San Francisco y quebrada Coronita",
+          "thesis": "Forzamiento hidrológico + vulnerabilidad geológica + exposición urbana"
+        },
+        "talkingPoints": [
+          "Abrir con la ubicación y la fecha, no con el modelo numérico.",
+          "Plantear la tesis: el evento fue la expresión visible de una condición de terreno y agua que ya venía construyéndose.",
+          "Anticipar el hilo: disparador → predisposición → falla → amplificación → solución."
+        ],
+        "producerCue": "60–75 s. No leas la diapositiva. Usa el mapa como ubicación y formula la tesis causal.",
+        "bridge": "Ahora sí: ¿qué cambió en febrero de 2025 para llevar ese sistema al límite?"
+      },
+      {
+        "id": "k-pinas-02",
+        "layout": "presentation",
+        "slideNo": 2,
+        "slideKind": "rain",
+        "participants": [
+          "kervin"
+        ],
+        "leadSpeaker": "kervin",
+        "tag": "DISPARADOR HIDROCLIMÁTICO",
+        "title": "La lluvia de 2025 salió de todo rango histórico",
+        "lead": "La acumulación antecedente saturó el terreno y la intensidad de corto plazo empujó el sistema por encima del umbral de estabilidad.",
+        "slideData": {
+          "monthly": "≈588 mm",
+          "prior": "≈200–220 mm/mes",
+          "short": "50–120 mm en pocas horas",
+          "highlight": "La anomalía no es solo cuánto llovió, sino cómo se combinó acumulación + intensidad."
+        },
+        "talkingPoints": [
+          "Diferenciar lluvia antecedente de intensidad de corto plazo.",
+          "Explicar que la saturación eleva presión de poros y reduce esfuerzo efectivo.",
+          "Evitar una atribución climática especulativa: centrarse en la señal hidrológica medida."
+        ],
+        "producerCue": "90 s. Señala primero 588 mm, después el rango histórico y termina con el pulso de corto plazo.",
+        "bridge": "Pero la lluvia por sí sola no explica por qué falló precisamente esta ladera."
+      },
+      {
+        "id": "k-pinas-03",
+        "layout": "presentation",
+        "slideNo": 3,
+        "slideKind": "method",
+        "participants": [
+          "kervin"
+        ],
+        "leadSpeaker": "kervin",
+        "tag": "MÉTODO INTEGRADO",
+        "title": "El estudio integral revela un terreno predispuesto al colapso",
+        "lead": "Campo, fotogrametría UAV y modelación convergen para reconstruir mecanismo, geometría y estabilidad.",
+        "slideData": {
+          "steps": [
+            [
+              "1. CAMPO",
+              "Mapeo geológico y estructural"
+            ],
+            [
+              "2. DRON",
+              "Ortomosaico UAV RTK · ~5 cm/px · 787 ha"
+            ],
+            [
+              "3. MODELO",
+              "Análisis cinemático + equilibrio límite"
+            ]
+          ],
+          "vulnerability": [
+            "Sectores urbanos con pendientes >40%",
+            "Dacitas meteorizadas sobre brechas volcánicas",
+            "Discontinuidades y flujo subsuperficial"
+          ]
+        },
+        "talkingPoints": [
+          "Explicar que ninguna fuente aislada resuelve el caso.",
+          "El campo identifica materiales y discontinuidades; el dron da geometría; el modelo prueba hipótesis.",
+          "Conectar metodología con decisión: se necesita trazabilidad entre evidencia y conclusión."
+        ],
+        "producerCue": "75–90 s. Explica el método como cadena de evidencia, no como lista de herramientas.",
+        "bridge": "Con esa evidencia, la pregunta cambia de 'qué ocurrió' a 'por qué esa roca podía deslizar'."
+      },
+      {
+        "id": "k-pinas-04",
+        "layout": "presentation",
+        "slideNo": 4,
+        "slideKind": "structure",
+        "participants": [
+          "kervin"
+        ],
+        "leadSpeaker": "kervin",
+        "tag": "CONTROL ESTRUCTURAL",
+        "title": "La geometría de la roca ya favorecía el deslizamiento",
+        "lead": "La ladera estaba estructuralmente predispuesta antes del evento de lluvia.",
+        "slideData": {
+          "leftTitle": "EVIDENCIA 1 · EL ESCARPE",
+          "left": [
+            "Dacita muy meteorizada",
+            "Brecha volcánica más competente",
+            "Relleno arcilloso en discontinuidades"
+          ],
+          "rightTitle": "EVIDENCIA 2 · CONTROL ESTRUCTURAL",
+          "metrics": [
+            [
+              "F1",
+              "255°/36°"
+            ],
+            [
+              "RMR",
+              "39"
+            ],
+            [
+              "SMR",
+              "14–18 · Clase V"
+            ]
+          ],
+          "footer": "Predisposición a falla planar antes del disparador hidrológico."
+        },
+        "talkingPoints": [
+          "Mostrar el contraste mecánico: dacita alterada sobre brecha competente.",
+          "Explicar por qué F1 255°/36° cumple condiciones geométricas de deslizamiento planar.",
+          "Traducir RMR 39 y SMR 14–18: masa rocosa pobre y talud muy inestable."
+        ],
+        "producerCue": "2 min. Aquí sí vale detenerse: es la diapositiva geológica central de Kervin.",
+        "bridge": "La geometría explicaba la predisposición; el agua explica el punto de inflexión."
+      },
+      {
+        "id": "k-pinas-05",
+        "layout": "presentation",
+        "slideNo": 5,
+        "slideKind": "fs",
+        "participants": [
+          "kervin"
+        ],
+        "leadSpeaker": "kervin",
+        "tag": "FACTOR DE SEGURIDAD",
+        "title": "El agua invierte el factor de seguridad",
+        "lead": "El modelo cuantifica el paso de estabilidad marginal a inestabilidad cuando ingresa el nivel freático.",
+        "slideData": {
+          "threshold": "FS ≥ 1.50",
+          "dry": {
+            "label": "CONDICIÓN SECA",
+            "value": "1.526",
+            "status": "Estabilidad marginal"
+          },
+          "wet": {
+            "label": "CONDICIÓN SATURADA",
+            "value": "0.980",
+            "status": "Inestable · FS < 1.0"
+          },
+          "footer": "El agua no cambia solo el paisaje: cambia matemáticamente la estabilidad."
+        },
+        "talkingPoints": [
+          "Definir FS en una frase sencilla antes de usar el número.",
+          "Subrayar que 1.526 apenas supera el umbral de diseño usado en el estudio.",
+          "Con saturación el FS cae a 0.980: la presión de poros convierte una ladera marginal en inestable."
+        ],
+        "producerCue": "2 min. Comparación visual fuerte: 1.526 → 0.980. Evita tecnicismo excesivo; tradúcelo a decisión.",
+        "bridge": "Una vez iniciada la falla, el proceso no se quedó como un simple deslizamiento."
+      },
+      {
+        "id": "k-pinas-06",
+        "layout": "presentation",
+        "slideNo": 6,
+        "slideKind": "chain",
+        "participants": [
+          "kervin"
+        ],
+        "leadSpeaker": "kervin",
+        "tag": "EVOLUCIÓN DEL PROCESO",
+        "title": "De deslizamiento planar a flujo de detritos",
+        "lead": "La falla inicial incorporó agua, bloques y sedimentos, aumentando rápidamente su movilidad y capacidad destructiva.",
+        "slideData": {
+          "steps": [
+            [
+              "1. FALLA INICIAL",
+              "Deslizamiento planar rápido · inicio ~20:40"
+            ],
+            [
+              "2. SATURACIÓN Y CARGA",
+              "Incorporación de bloques métricos y sedimentos"
+            ],
+            [
+              "3. IMPACTO URBANO",
+              "Transición a flujo de detritos/lodo denso"
+            ]
+          ],
+          "stats": [
+            [
+              "3",
+              "fallecidos"
+            ],
+            [
+              ">500",
+              "afectados"
+            ],
+            [
+              "223",
+              "polígonos inventariados"
+            ]
+          ]
+        },
+        "talkingPoints": [
+          "Explicar la transición de mecanismo: desprendimiento/deslizamiento → flujo canalizado.",
+          "La incorporación de agua y material aumenta energía y alcance.",
+          "Usar las cifras humanas solo después de explicar el mecanismo físico."
+        ],
+        "producerCue": "90 s. Mantén la secuencia causal. No conviertas esta lámina en recuento de daños.",
+        "bridge": "El siguiente punto es clave: el proceso natural encontró una infraestructura que amplificó sus efectos."
+      },
+      {
+        "id": "k-pinas-07",
+        "layout": "presentation",
+        "slideNo": 7,
+        "slideKind": "infrastructure",
+        "participants": [
+          "kervin"
+        ],
+        "leadSpeaker": "kervin",
+        "tag": "INFRAESTRUCTURA Y EFECTO CASCADA",
+        "title": "La infraestructura amplificó el peligro hidrológico",
+        "lead": "El box-duct obstruido y superado hidráulicamente actuó como multiplicador del daño aguas abajo.",
+        "slideData": {
+          "stages": [
+            [
+              "OBSTRUCCIÓN",
+              "Carga sólida: sedimentos y bloques métricos"
+            ],
+            [
+              "CAPACIDAD",
+              "El flujo denso supera la capacidad hidráulica"
+            ],
+            [
+              "EFECTO CASCADA",
+              "Desbordamiento y mayor destrucción aguas abajo"
+            ]
+          ],
+          "footer": "La infraestructura no origina la falla de ladera, pero puede agravar la magnitud del desastre."
+        },
+        "talkingPoints": [
+          "Separar causa geotécnica de amplificación hidráulica.",
+          "Explicar el taponamiento por carga sólida y la insuficiencia del conducto para escenarios extremos.",
+          "Conectar con diseño, mantenimiento y expansión urbana."
+        ],
+        "producerCue": "90 s. Frase clave: infraestructura como multiplicador, no como causa única.",
+        "bridge": "Si entendemos mecanismo y amplificadores, ya podemos evaluar una solución integrada."
+      },
+      {
+        "id": "k-pinas-08",
+        "layout": "presentation",
+        "slideNo": 8,
+        "slideKind": "mitigation",
+        "participants": [
+          "kervin"
+        ],
+        "leadSpeaker": "kervin",
+        "tag": "MITIGACIÓN GEOTÉCNICA",
+        "title": "Perfilado, refuerzo y drenaje",
+        "lead": "La estabilización propuesta actúa sobre geometría, resistencia y presión de agua.",
+        "slideData": {
+          "before": "FS post-falla saturado = 0.727",
+          "after": "FS mitigado ≈ 1.65–1.71",
+          "axes": [
+            [
+              "1. GEOMETRÍA",
+              "11 bermas para reducir fuerzas impulsoras"
+            ],
+            [
+              "2. REFUERZO",
+              "Anclajes nominales de 100 kN"
+            ],
+            [
+              "3. PRESIÓN",
+              "Drenaje superficial y profundo para controlar saturación"
+            ]
+          ],
+          "note": "El manuscrito reporta configuraciones modeladas con FS ~1.65 y un resumen de estabilidad ~1.71."
+        },
+        "talkingPoints": [
+          "No vender una obra única: explicar que la estabilidad mejora por combinación de medidas.",
+          "Geometría reduce fuerzas impulsoras; anclajes aumentan resistencia; drenaje ataca el disparador hidrológico.",
+          "Aclarar que el valor mitigado depende de la configuración modelada; el estudio reporta valores alrededor de 1.65–1.71."
+        ],
+        "producerCue": "2 min. Esta lámina conecta diagnóstico con diseño. Destaca que el drenaje es parte estructural de la solución.",
+        "bridge": "La lección ya no es solo geotécnica; obliga a diseñar ciudad e infraestructura para extremos integrados."
+      },
+      {
+        "id": "k-pinas-09",
+        "layout": "presentation",
+        "slideNo": 9,
+        "slideKind": "synthesis",
+        "participants": [
+          "kervin"
+        ],
+        "leadSpeaker": "kervin",
+        "tag": "SÍNTESIS PARA GESTIÓN",
+        "title": "Piñas obliga a diseñar para extremos integrados",
+        "lead": "La reducción del riesgo requiere actuar simultáneamente sobre agua, ladera, infraestructura y ciudad.",
+        "slideData": {
+          "columns": [
+            [
+              "CLIMA & AGUA",
+              [
+                "Criterios de lluvia extrema",
+                "Control y mantenimiento de drenajes"
+              ]
+            ],
+            [
+              "GEOTECNIA",
+              [
+                "Estabilización post-falla",
+                "Monitoreo de ladera y agua subterránea"
+              ]
+            ],
+            [
+              "HIDRÁULICA",
+              [
+                "Check dams / diques",
+                "Disipadores de energía"
+              ]
+            ],
+            [
+              "CIUDAD",
+              [
+                "Uso de suelo adaptativo",
+                "Mantenimiento preventivo"
+              ]
+            ]
+          ],
+          "footer": "Retener la montaña no basta si no controlamos también la energía y las rutas del flujo."
+        },
+        "talkingPoints": [
+          "Convertir el caso en una lección transferible: no basta con estabilizar el talud.",
+          "Diseño hidráulico, mantenimiento, monitoreo y uso del suelo forman parte de la misma estrategia.",
+          "Preparar el puente hacia la gestión: la ciencia ya ofrece un diagnóstico y opciones."
+        ],
+        "producerCue": "90 s. Cierra la parte técnica con cuatro dominios de acción y deja abierta la pregunta de implementación.",
+        "bridge": "Y aquí aparece la pregunta que ya no es solo geológica: ¿por qué, si sabemos tanto, cuesta convertirlo en acción?"
+      },
+      {
+        "id": "k-pinas-10",
+        "layout": "presentation",
+        "slideNo": 10,
+        "slideKind": "question",
+        "participants": [
+          "kervin"
+        ],
+        "leadSpeaker": "kervin",
+        "tag": "PREGUNTA PUENTE",
+        "title": "Del conocimiento a la decisión",
+        "lead": "",
+        "slideData": {
+          "pre": "Si ya sabemos dónde falló, por qué falló y qué medidas elevan la estabilidad…",
+          "question": "¿Qué impide que este conocimiento se convierta en decisión y acción?"
+        },
+        "talkingPoints": [
+          "No responder inmediatamente. Dejar 2–3 segundos de silencio.",
+          "Kervin responde desde la evidencia: qué necesita una institución para no perder el valor técnico del estudio.",
+          "Cerrar entregando la conversación a Diego y Daniel: evidencia → decisión → responsabilidad → implementación."
+        ],
+        "producerCue": "Pregunta de transición. Pausa. Respuesta breve de Kervin (60–90 s) y entrega al moderador.",
+        "bridge": "Diego toma la palabra y abre el diálogo con Daniel.",
+        "questionFlow": [
+          {
+            "to": "kervin",
+            "prompt": "Si ya sabemos dónde falló, por qué falló y qué medidas elevan la estabilidad, ¿qué impide que este conocimiento se convierta en decisión y acción?",
+            "transition": "Diego recoge la respuesta de Kervin y deriva a Daniel: ¿qué dato y qué proceso convierten evidencia en decisión institucional?"
+          }
+        ]
+      },
+      {
+        "id": "d1-dialogue-trio",
+        "layout": "trio",
+        "tag": "DIÁLOGO TÉCNICO",
+        "title": "De la evidencia a la decisión",
+        "lead": "Tres voces conectadas en una sola pantalla: moderación, evidencia y decisión.",
+        "participants": [
+          "diego",
+          "kervin",
+          "daniel"
+        ],
+        "leadSpeaker": "diego",
+        "producerCue": "Diego conduce. Mantén respuestas breves y usa RESUELTA → SIGUIENTE para avanzar el hilo.",
+        "questionFlow": [
+          {
+            "to": "kervin",
+            "prompt": "Si mañana este estudio entra a una institución, ¿qué información no debería perderse?",
+            "transition": "Diego recoge la idea técnica y deriva la pregunta a Daniel."
+          },
+          {
+            "to": "daniel",
+            "prompt": "¿Qué dato necesitas para convertir esa evidencia en una decisión institucional defendible?",
+            "transition": "Diego cierra el puente: evidencia → decisión → responsable."
+          },
+          {
+            "to": "diego",
+            "prompt": "Cierra el bloque en una frase: ¿qué debe existir para que el estudio no termine como un documento más?",
+            "transition": "Da paso al bloque de Daniel: DECIDIR."
+          }
+        ]
+      },
+      {
+        "id": "d1-finance-trio",
+        "layout": "trio",
+        "tag": "INFORMES · PROYECTOS · FINANCIAMIENTO",
+        "title": "¿Qué falta para convertir un informe en intervención?",
+        "lead": "La conversación conecta calidad técnica, decisión y viabilidad de implementación.",
+        "participants": [
+          "diego",
+          "kervin",
+          "daniel"
+        ],
+        "leadSpeaker": "diego",
+        "producerCue": "Diego reparte la pregunta por capas: evidencia, decisión y salida operativa.",
+        "questionFlow": [
+          {
+            "to": "kervin",
+            "prompt": "¿Cuál es la brecha técnica que más debilita un informe cuando debe sostener una inversión?",
+            "transition": "Conecta el problema técnico con la toma de decisión."
+          },
+          {
+            "to": "daniel",
+            "prompt": "¿Qué transforma un reporte técnico en una intervención priorizada, presupuestable y defendible?",
+            "transition": "Resume en responsables, medidas, plazos y evidencia."
+          },
+          {
+            "to": "diego",
+            "prompt": "Cierre: ¿qué debería llevarse hoy una institución que reconoce esa brecha?",
+            "transition": "Abre preguntas del público."
+          }
+        ]
+      },
+      {
+        "id": "d2-open-moderator",
+        "layout": "moderator",
+        "tag": "APERTURA · DÍA 2",
+        "title": "De la decisión a la capacidad y la gobernanza",
+        "lead": "Diego retoma el hilo del día anterior y lo baja al territorio y la articulación.",
+        "participants": [
+          "diego"
+        ],
+        "leadSpeaker": "diego",
+        "producerCue": "Recapitula en 60 segundos y da paso a Patricio.",
+        "questionFlow": [
+          {
+            "to": "diego",
+            "prompt": "Ayer cerramos con evidencia y decisión. Hoy la pregunta es: ¿cómo se convierte eso en capacidad real?",
+            "transition": "Presenta a Patricio y abre el eje ACTUAR."
+          }
+        ]
+      },
+      {
+        "id": "d2-territory-trio",
+        "layout": "trio",
+        "tag": "DIÁLOGO TERRITORIO",
+        "title": "Del documento a la capacidad instalada",
+        "lead": "Moderación, acción territorial y gestión institucional en una sola conversación.",
+        "participants": [
+          "diego",
+          "patricio",
+          "daniel"
+        ],
+        "leadSpeaker": "diego",
+        "producerCue": "Conduce en secuencia: comunidad → gestión → síntesis.",
+        "questionFlow": [
+          {
+            "to": "patricio",
+            "prompt": "¿Qué información debe llegar a la comunidad y cuál debe permanecer como insumo técnico?",
+            "transition": "Diego conecta la respuesta con gestión institucional."
+          },
+          {
+            "to": "daniel",
+            "prompt": "¿Cómo se conecta esa capacidad comunitaria con decisiones y responsabilidades institucionales?",
+            "transition": "Cierra con la idea de capacidad instalada."
+          },
+          {
+            "to": "diego",
+            "prompt": "Síntesis: ¿cómo sabemos que un plan dejó de ser papel y se convirtió en capacidad?",
+            "transition": "Da paso a Xavier y al eje ARTICULAR."
+          }
+        ]
+      },
+      {
+        "id": "d2-transversal-trio",
+        "layout": "trio",
+        "tag": "PREGUNTA TRANSVERSAL",
+        "title": "Si ya conocemos el riesgo, ¿qué nos falta para actuar?",
+        "lead": "Tres perspectivas en pantalla y una misma pregunta de continuidad.",
+        "participants": [
+          "kervin",
+          "daniel",
+          "patricio"
+        ],
+        "leadSpeaker": "daniel",
+        "producerCue": "Respuestas de máximo 90 segundos. Mantén la pregunta visible.",
+        "questionFlow": [
+          {
+            "to": "kervin",
+            "prompt": "Desde la evidencia: ¿qué nos falta para actuar realmente sobre un riesgo ya conocido?",
+            "transition": "Pasa de conocimiento a decisión."
+          },
+          {
+            "to": "daniel",
+            "prompt": "Desde la gestión: ¿qué convierte el conocimiento en una decisión ejecutable?",
+            "transition": "Pasa de decisión a capacidad territorial."
+          },
+          {
+            "to": "patricio",
+            "prompt": "Desde el territorio: ¿qué hace que esa decisión se convierta en capacidad real para la comunidad?",
+            "transition": "Diego retoma y prepara gobernanza/caso integrador."
+          }
+        ]
+      },
+      {
+        "id": "d2-case-trio",
+        "layout": "trio",
+        "tag": "CASO INTEGRADOR",
+        "title": "Intervención sustentada técnicamente, pero que no avanza",
+        "lead": "Un mismo caso, tres responsabilidades complementarias.",
+        "participants": [
+          "diego",
+          "xavier",
+          "daniel"
+        ],
+        "leadSpeaker": "diego",
+        "producerCue": "Diego plantea el caso. Xavier responde gobernanza; Daniel cierra con ruta de decisión.",
+        "questionFlow": [
+          {
+            "to": "xavier",
+            "prompt": "¿Qué destraba una intervención cuando el sustento técnico existe, pero la articulación institucional falla?",
+            "transition": "Conecta gobernanza con responsabilidades y continuidad."
+          },
+          {
+            "to": "daniel",
+            "prompt": "¿Cuál sería la secuencia mínima para pasar de ese bloqueo a una ruta ejecutable?",
+            "transition": "Conecta diagnóstico → decisión → responsable → seguimiento."
+          },
+          {
+            "to": "diego",
+            "prompt": "Cierra el caso con una frase que conecte conocer, decidir, actuar y articular.",
+            "transition": "Da paso a la ruta de soluciones y cierre final."
+          }
+        ]
+      },
+      {
+        "id": "d2-close-moderator",
+        "layout": "moderator",
+        "tag": "CIERRE FINAL",
+        "title": "Conocer · decidir · actuar · articular",
+        "lead": "Diego cierra el hilo y deja una ruta clara de seguimiento.",
+        "participants": [
+          "diego"
+        ],
+        "leadSpeaker": "diego",
+        "producerCue": "Cierre de 60–90 segundos. Agradece y deja la ruta de seguimiento.",
+        "questionFlow": [
+          {
+            "to": "diego",
+            "prompt": "¿Qué idea debe quedarse el público al terminar este conversatorio?",
+            "transition": "Agradece a panelistas, CRIGMPAL, SAMBIES y público."
+          }
+        ]
+      }
+    ],
+    "moderatorId": "diego",
+    "productionLogic": {
+      "maxVisiblePanelists": 3,
+      "questionAdvanceLabel": "RESUELTA → SIGUIENTE",
+      "moderatorId": "diego",
+      "behavior": "Cada escena puede definir participants, leadSpeaker y questionFlow. CONTROL avanza questionIndex; Panelista/Moderador reciben la pregunta activa por MQTT."
+    },
+    "presentationDecks": {
+      "pinas2025": {
+        "title": "Análisis Forense Piñas 2025",
+        "speaker": "kervin",
+        "sceneIds": [
+          "k-pinas-01",
+          "k-pinas-02",
+          "k-pinas-03",
+          "k-pinas-04",
+          "k-pinas-05",
+          "k-pinas-06",
+          "k-pinas-07",
+          "k-pinas-08",
+          "k-pinas-09",
+          "k-pinas-10"
+        ],
+        "source": "Análisis_Forense_Piñas_2025.pptx",
+        "mode": "native-promter"
+      }
+    }
+  },
+  "realtime": {
+    "transport": "mqtt-wss",
+    "broker": "wss://broker.emqx.io:8084/mqtt",
+    "topicBase": "promter-risk/crigmpal-2026-10/a7c91d4e",
+    "media": "Zoom",
+    "notes": "MQTT public broker transports only event state, presence, alerts and whiteboard. No private notes or audio/video."
+  },
+  "video": {
+    "transport": "VDO.Ninja",
+    "host": "https://vdo.ninja/",
+    "viewerParams": "cleanoutput&noaudio&cover",
+    "publisherParams": "webcam&autostart&audiodevice=0&cleanish&width=720&height=1280&fps=24",
+    "notes": "Video only. Audio remains in Zoom. Each panelist has a fixed stream ID."
+  }
+}
