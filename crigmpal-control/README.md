@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.11.0 — deck Piñas convertido a 10 escenas nativas con guion privado para Kervin.
+v0.11.2 — deck Piñas renderizado directamente desde el PDF original, página por página.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -193,3 +193,11 @@ Se integró el archivo “Análisis Forense Piñas 2025” como 10 escenas nativ
 - Kervin recibe en su vista privada: título de diapositiva, instrucción de exposición, 3 puntos de explicación y puente a la siguiente lámina.
 - La última lámina activa la pregunta de transición hacia Diego y Daniel.
 - Valores actualizados del manuscrito usado como base: FS seco 1.526, FS saturado 0.980, post-falla saturado 0.727 y mitigado alrededor de 1.65–1.71.
+
+
+## v0.11.2 — PDF exacto
+Se retiró el parser PPTX de la ruta de producción del caso Piñas.
+- CONTROL carga `Análisis_Forense_Piñas_2025.pdf` y lo guarda localmente en IndexedDB.
+- PROGRAM usa PDF.js para renderizar la página original correspondiente a cada escena.
+- Se preservan textos, gráficos, fotografías, colores y composición del PDF; Promter Risk no reconstruye la diapositiva.
+- El guion privado de Kervin continúa separado de la salida pública.
