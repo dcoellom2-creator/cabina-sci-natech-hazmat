@@ -4,7 +4,7 @@
 - Código: APP-001
 - Nombre: Promter Risk
 - Estado: L2 — web funcional
-- Versión: 0.10.0
+- Versión: 0.11.0
 - Repositorio: dcoellom2-creator/cabina-sci-natech-hazmat
 - Ruta pública: /crigmpal-control/
 
@@ -149,3 +149,10 @@ Arquitectura final para el conversatorio:
 - Moderator: moderador + pregunta programada.
 - Control narrativo: pregunta objetivo + continuidad + avance RESUELTA → SIGUIENTE.
 - Sincronización privada a moderador/panelistas por MQTT.
+
+
+## v0.11 — presentación técnica nativa
+- 10 escenas Piñas 2025 integradas al motor PROGRAM.
+- Vista pública 27/73: cámara del panelista + diapositiva nativa.
+- Vista privada de Kervin con talking points y puente narrativo.
+- La presentación deja de depender de PowerPoint externo durante la transmisión.
