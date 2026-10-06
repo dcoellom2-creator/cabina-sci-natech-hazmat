@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.13.1 — deck Daniel convertido a PDF maestro y renderizado por página como Kervin.
+v0.14.2 — sincronización integral CONTROL ↔ PANELISTA/MODERADOR ↔ PROGRAM, con pizarra por turno y reconexión segura.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -38,7 +38,7 @@ GitHub Pages es estático. No existe una base de datos compartida ni autenticaci
 L2 Web funcional → L3 PWA instalable → L4 producto comercial → L5 Play Store/SaaS.
 
 ## Producción audiovisual
-- `control.html`: consola privada del productor. Selecciona panelista/escena, prepara PREVIEW y envía con TAKE.
+- `control.html`: consola privada del productor (estable v0.14.2). Selecciona panelista/escena, prepara PREVIEW y envía con TAKE.
 - `program.html`: salida limpia 16:9 para capturar en Zoom/OBS; no contiene controles.
 - `events.json > productionScenes`: secuencia editorial de escenas.
 - Sincronización actual CONTROL→PROGRAM: `localStorage` entre ventanas del mismo navegador/equipo.
@@ -247,3 +247,13 @@ La diapositiva pública se conserva tal cual. El guion privado y las transicione
 - Cada página se publicó como activo persistente en `Daniel_Coello_Deck`, siguiendo el mismo patrón usado para Kervin.
 - Se corrigió la clave del registro del deck: `daniel-mitigacion-gad` ahora coincide exactamente con `scene.deckId`.
 - PROGRAM y PREVIEW resuelven las 8 láminas sin carga manual en runtime.
+
+
+## v0.14.2 — sincronización integral
+- CONTROL conserva el estado AL AIRE ante reconexiones MQTT y no vuelve a PREVIEW accidentalmente.
+- La pizarra queda asociada al panelista activo; una pizarra de otro participante no sustituye la salida vigente.
+- El panelista puede enviar PIZARRA A PROGRAM únicamente durante su turno y volver a la presentación desde su consola.
+- CONTROL mantiene override maestro con PIZARRA, VOLVER ESCENA, TAKE y NEGRO.
+- PROGRAM interpreta el estado `surface` para alternar presentación/pizarra sin requerir escenas board dedicadas.
+- Panelistas y moderador comparten el estado global, pero los controles de diapositiva permanecen bloqueados fuera del turno propio.
+- QA E2E realizado sobre CONTROL, Panelista Daniel, Moderador Diego y PROGRAM; TAKE, temporizadores, PREVIEW, bloqueo por rol y salida pública resultaron concordantes.
