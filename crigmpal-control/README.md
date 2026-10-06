@@ -3,7 +3,7 @@
 Aplicación web publicada con GitHub Pages para conducir eventos técnicos con una experiencia distinta para administrador y panelistas.
 
 ## Versión actual
-v0.10.0 — guion por escenas, tríos de panelistas y moderación dirigida con preguntas encadenadas.
+v0.11.0 — deck Piñas convertido a 10 escenas nativas con guion privado para Kervin.
 
 ## Enlace publicado
 https://dcoellom2-creator.github.io/cabina-sci-natech-hazmat/crigmpal-control/
@@ -184,3 +184,12 @@ Funciones:
 - Los demás panelistas reciben instrucción de escucha y el hilo que viene después.
 
 Esto permite conducir el conversatorio como una secuencia narrativa: evidencia → decisión → acción → articulación.
+
+
+## v0.11 — deck Piñas nativo
+Se integró el archivo “Análisis Forense Piñas 2025” como 10 escenas nativas de Promter Risk para Kervin.
+- La salida pública mantiene cámara de Kervin a la izquierda y diapositiva nativa a la derecha.
+- Cada escena conserva el hilo del deck: caso → lluvia → método → control estructural → FS → cadena de falla → infraestructura → mitigación → síntesis → pregunta puente.
+- Kervin recibe en su vista privada: título de diapositiva, instrucción de exposición, 3 puntos de explicación y puente a la siguiente lámina.
+- La última lámina activa la pregunta de transición hacia Diego y Daniel.
+- Valores actualizados del manuscrito usado como base: FS seco 1.526, FS saturado 0.980, post-falla saturado 0.727 y mitigado alrededor de 1.65–1.71.
