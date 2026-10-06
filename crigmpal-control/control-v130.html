@@ -38,7 +38,7 @@ main{max-width:1580px;margin:auto;padding:18px}.grid{display:grid;grid-template-
 </section>
 <section><div class="preview"><span class="preview-label">PREVIEW</span><iframe id="preview" src="./program-v130.html?preview=1"></iframe></div><div class="actions" style="justify-content:flex-end;margin-top:10px"><button id="openProgram" class="secondary">Abrir PROGRAM</button><a id="moderatorLink" class="btn secondary" href="./panelist-live-v130.html?panelista=diego" target="_blank">Moderador Diego</a><a id="selectedPanelistLink" class="btn secondary" href="./panelist-live-v130.html?panelista=kervin" target="_blank">Panelista Kervin</a></div></section></div></main>
 <script>
-let data=null,idx=0,speaker='kervin',questionIndex=0,alertState='',client=null,presence={},programWin=null,lastBoard='',controlBeat=null,lastSyncState=null,sceneFilter='speaker',sceneStartedAt=0,segmentStartedAt=0,activeSegmentId='',lastAutoKey='';
+let data=null,idx=0,speaker='kervin',questionIndex=0,alertState='',client=null,presence={},programWin=null,lastBoard='',controlBeat=null,lastSyncState=null,sceneFilter='speaker',sceneStartedAt=0,questionStartedAt=0,segmentStartedAt=0,activeSegmentId='',lastAutoKey='';
 const $=id=>document.getElementById(id);
 function base(){return data.realtime.topicBase}function tState(){return base()+'/state'}function tPresence(){return base()+'/presence/'}function tBoard(){return base()+'/board/'}
 function scenes(){return data.event.productionScenes||data.event.publicSlides||[]}
@@ -47,11 +47,14 @@ function sceneLead(sc=currentScene()){return sc.leadSpeaker&&data.event.speakers
 function segmentScenes(sc=currentScene()){return scenes().filter(x=>x.segmentId===sc.segmentId)}
 function state(onair=false,black=false){
   let sc=currentScene(),flow=sc.questionFlow||[],qi=Math.max(0,Math.min(flow.length?flow.length-1:0,questionIndex)),q=flow[qi]||{},seg=segmentScenes(sc),now=Date.now();
+  let qDur=Number(q.durationSec|| (flow.length?Math.max(30,Math.floor(Number(sc.durationSec||0)/flow.length)):0));
+  let unitDur=flow.length?qDur:Number(sc.durationSec||0),unitStart=flow.length?questionStartedAt:sceneStartedAt;
   return{speakerId:sceneLead(sc),selectedSpeakerId:speaker,targetSpeakerId:q.to||sceneLead(sc),sceneIndex:idx,questionIndex:qi,onair,black,alert:alertState,
     sceneTitle:sc.title||'',producerCue:sc.producerCue||sc.title||'',participants:sc.participants||[sceneLead(sc)],question:q.prompt||sc.question||'',transition:q.transition||'',
     blockId:sc.blockId||'',segmentId:sc.segmentId||'',segmentTitle:sc.segmentTitle||'',durationSec:Number(sc.durationSec||0),segmentDurationSec:Number(sc.segmentDurationSec||0),
-    sceneStartedAt,segmentStartedAt,sceneEnding:!!(onair&&sceneStartedAt&&sc.durationSec&&now-sceneStartedAt>=Math.max(0,(sc.durationSec-30)*1000)),
-    scenePosition:seg.findIndex(x=>x.id===sc.id)+1,segmentSceneCount:seg.length,ts:now}
+    sceneStartedAt,questionStartedAt,questionDurationSec:qDur,segmentStartedAt,
+    sceneEnding:!!(onair&&unitStart&&unitDur&&now-unitStart>=Math.max(0,(unitDur-30)*1000)),
+    scenePosition:seg.findIndex(x=>x.id===sc.id)+1,segmentSceneCount:seg.length,questionCount:flow.length,ts:now}
 }
 function publish(topic,obj,retain=true){if(client?.connected)client.publish(topic,JSON.stringify(obj),{qos:0,retain})}
 function loadSpeakers(){
@@ -98,7 +101,7 @@ function renderScript(){
   $('scriptQuestion').textContent=(target?'Para '+target.name+': ':'')+(q.prompt||'');
   $('scriptTransition').textContent='Continuidad: '+(q.transition||'Pasar a la siguiente pregunta.');
 }
-function advanceQuestion(delta){let {flow}=currentFlow();if(!flow.length)return;questionIndex=Math.max(0,Math.min(flow.length-1,questionIndex+delta));renderScript();sendPreview();let st=lastSyncState?{...lastSyncState,...state(lastSyncState.onair,false),onair:lastSyncState.onair,black:false}:state(false,false);syncState(st);if(st.onair)localStorage.setItem('pr_program_state',JSON.stringify(st))}
+function advanceQuestion(delta){let {flow}=currentFlow();if(!flow.length)return;questionIndex=Math.max(0,Math.min(flow.length-1,questionIndex+delta));questionStartedAt=Date.now();renderScript();renderTiming();sendPreview();let st=lastSyncState?{...lastSyncState,...state(lastSyncState.onair,false),onair:lastSyncState.onair,black:false}:state(false,false);syncState(st);if(st.onair)localStorage.setItem('pr_program_state',JSON.stringify(st))}
 function sendPreview(){let f=$('preview').contentWindow;f?.postMessage({type:'PR_PREVIEW',state:state(false,false)},'*');if(lastBoard)f?.postMessage({type:'PR_REMOTE_BOARD_IMAGE',data:lastBoard},'*')}
 function syncState(st){lastSyncState=st;publish(tState(),st)}
 function updateCameraInfo(){
@@ -116,7 +119,7 @@ function selectScene(i){
 function take(){
   let sc=currentScene(),now=Date.now();
   if(activeSegmentId!==sc.segmentId||!segmentStartedAt){activeSegmentId=sc.segmentId||sc.id;segmentStartedAt=now}
-  if(!lastSyncState?.onair||lastSyncState.sceneIndex!==idx||!sceneStartedAt)sceneStartedAt=now;
+  if(!lastSyncState?.onair||lastSyncState.sceneIndex!==idx||!sceneStartedAt){sceneStartedAt=now;questionStartedAt=now}
   alertState='';lastAutoKey='';
   let st=state(true,false);syncState(st);localStorage.setItem('pr_program_state',JSON.stringify(st));
   let names=(sc.participants||[sceneLead(sc)]).map(id=>data.event.speakers[id]?.name||id).join(' · ');
@@ -130,25 +133,22 @@ function fmtClock(ms){
   return (over?'+':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')
 }
 function renderTiming(){
-  let sc=currentScene(),now=Date.now(),on=!!lastSyncState?.onair&&lastSyncState.sceneIndex===idx;
-  let sd=Number(sc.durationSec||0)*1000,gd=Number(sc.segmentDurationSec||0)*1000;
-  let sr=on&&sceneStartedAt?sd-(now-sceneStartedAt):sd,gr=segmentStartedAt&&activeSegmentId===sc.segmentId?gd-(now-segmentStartedAt):gd;
-  let sp=sd?Math.max(0,Math.min(100,(sd-sr)/sd*100)):0,gp=gd?Math.max(0,Math.min(100,(gd-gr)/gd*100)):0;
-  $('sceneTime').textContent=on?fmtClock(sr):fmtClock(sd);$('segmentTime').textContent=segmentStartedAt&&activeSegmentId===sc.segmentId?fmtClock(gr):fmtClock(gd);
-  $('sceneMeta').textContent=(on?'Restante · ':'Objetivo · ')+(sc.title||'Escena');
+  let sc=currentScene(),flow=sc.questionFlow||[],q=flow[questionIndex]||{},now=Date.now(),on=!!lastSyncState?.onair&&lastSyncState.sceneIndex===idx;
+  let qDur=Number(q.durationSec||(flow.length?Math.max(30,Math.floor(Number(sc.durationSec||0)/flow.length)):0));
+  let unitDur=(flow.length?qDur:Number(sc.durationSec||0))*1000,unitStart=flow.length?questionStartedAt:sceneStartedAt;
+  let gd=Number(sc.segmentDurationSec||0)*1000;
+  let ur=on&&unitStart?unitDur-(now-unitStart):unitDur,gr=segmentStartedAt&&activeSegmentId===sc.segmentId?gd-(now-segmentStartedAt):gd;
+  let up=unitDur?Math.max(0,Math.min(100,(unitDur-ur)/unitDur*100)):0,gp=gd?Math.max(0,Math.min(100,(gd-gr)/gd*100)):0;
+  $('sceneTime').textContent=on?fmtClock(ur):fmtClock(unitDur);$('segmentTime').textContent=segmentStartedAt&&activeSegmentId===sc.segmentId?fmtClock(gr):fmtClock(gd);
+  $('sceneMeta').textContent=flow.length?('Pregunta '+(questionIndex+1)+'/'+flow.length+' · '+(data.event.speakers[q.to]?.name||'respuesta')):((on?'Restante · ':'Objetivo · ')+(sc.title||'Escena'));
   $('segmentMeta').textContent=(sc.segmentTitle||'Bloque')+' · '+Math.round(gp)+'% consumido';
-  $('sceneBar').style.width=sp+'%';$('segmentBar').style.width=gp+'%';
-  $('sceneCard').className='timecard'+(on&&sr<=0?' over':on&&sr<=30000?' warn':'');
+  $('sceneBar').style.width=up+'%';$('segmentBar').style.width=gp+'%';
+  $('sceneCard').className='timecard'+(on&&ur<=0?' over':on&&ur<=30000?' warn':'');
   $('segmentCard').className='timecard'+(segmentStartedAt&&gr<=120000?' danger':segmentStartedAt&&gr<=300000?' warn':'');
-  $('timeHint').textContent=on?(sr<=0?'TIEMPO DE IDEA CUMPLIDO → haz SIGUIENTE cuando cierre la frase.':sr<=30000?'IDEA POR CERRAR · quedan '+fmtClock(sr)+'. El siguiente avance sigue siendo manual.':'Siguiente manual · PR te avisa automáticamente por tiempos.'):'El reloj de la idea inicia al pulsar TAKE.';
+  $('timeHint').textContent=on?(ur<=0?(flow.length?'TIEMPO DE RESPUESTA CUMPLIDO → RESUELTA / SIGUIENTE cuando cierre la frase.':'TIEMPO DE IDEA CUMPLIDO → haz SIGUIENTE cuando cierre la frase.'):ur<=30000?((flow.length?'RESPUESTA':'IDEA')+' POR CERRAR · quedan '+fmtClock(ur)+'. El avance sigue siendo manual.'):'Siguiente manual · PR controla bloque, idea y respuestas.'):'El reloj inicia al pulsar TAKE.';
   if(lastSyncState?.onair&&segmentStartedAt&&activeSegmentId===sc.segmentId){
-    let auto=gr<=120000?'danger':gr<=300000?'warning':'',ending=sr<=30000;
-    let key=auto+'|'+ending;
-    if(key!==lastAutoKey){
-      lastAutoKey=key;alertState=auto;
-      let st=state(true,false);syncState(st);localStorage.setItem('pr_program_state',JSON.stringify(st));
-      if(programWin&&!programWin.closed)programWin.postMessage({type:'PR_PROGRAM_STATE',state:st},location.origin);
-    }
+    let auto=gr<=120000?'danger':gr<=300000?'warning':'',ending=ur<=30000,key=auto+'|'+ending+'|'+questionIndex;
+    if(key!==lastAutoKey){lastAutoKey=key;alertState=auto;let st=state(true,false);syncState(st);localStorage.setItem('pr_program_state',JSON.stringify(st));if(programWin&&!programWin.closed)programWin.postMessage({type:'PR_PROGRAM_STATE',state:st},location.origin)}
   }
 }
 function renderClients(){let now=Date.now(),html='';Object.entries(presence).filter(([id,p])=>p&&p.online&&now-(p.updatedAt||0)<60000).forEach(([id,p])=>{html+='<span class="chip">'+(data.event.speakers[p.speakerId]?.name||p.speakerId)+' · conectado</span>'});$('clients').innerHTML=html||'<span class="muted" style="font-size:11px">Esperando panelistas…</span>'}
@@ -156,11 +156,11 @@ function initMQTT(){let id='prctrl_'+Math.random().toString(16).slice(2,10),cont
 async function init(){
   try{
     data=await (await fetch('./events-v130.json?v='+Date.now(),{cache:'no-store'})).json();
-    loadSpeakers();renderScenes();renderScript();updateCameraInfo();renderTiming();initMQTT();
+    loadSpeakers();let first=visibleSceneEntries()[0];if(first)idx=first.i;renderScenes();renderScript();updateCameraInfo();renderTiming();initMQTT();
     $('speaker').onchange=e=>{
       speaker=e.target.value;sceneFilter='speaker';
       $('filterSpeaker').classList.add('active');$('filterProgram').classList.remove('active');
-      updateCameraInfo();renderScenes();renderScript();renderTiming();
+      updateCameraInfo();let first=visibleSceneEntries()[0];if(first){idx=first.i;questionIndex=0}renderScenes();renderScript();renderTiming();sendPreview();syncState(state(false,false));
     };
     $('filterSpeaker').onclick=()=>{sceneFilter='speaker';$('filterSpeaker').classList.add('active');$('filterProgram').classList.remove('active');renderScenes()};
     $('filterProgram').onclick=()=>{sceneFilter='program';$('filterProgram').classList.add('active');$('filterSpeaker').classList.remove('active');renderScenes()};
