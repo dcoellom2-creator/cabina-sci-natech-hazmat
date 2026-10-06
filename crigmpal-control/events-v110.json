@@ -1,6 +1,6 @@
 {
-  "version": "0.11.0",
-  "updatedAt": "2026-10-05T22:45:00-05:00",
+  "version": "0.11.1",
+  "updatedAt": "2026-10-05T23:31:00-05:00",
   "event": {
     "id": "crigmpal-2026-10",
     "name": "Conocer el riesgo para decidir y actuar",
@@ -514,7 +514,7 @@
         ],
         "leadSpeaker": "kervin",
         "tag": "DISPARADOR HIDROCLIMÁTICO",
-        "title": "La lluvia de 2025 salió de todo rango histórico",
+        "title": "El disparador: la lluvia de 2025 salió de todo rango histórico",
         "lead": "La acumulación antecedente saturó el terreno y la intensidad de corto plazo empujó el sistema por encima del umbral de estabilidad.",
         "slideData": {
           "monthly": "≈588 mm",
@@ -625,7 +625,7 @@
         ],
         "leadSpeaker": "kervin",
         "tag": "FACTOR DE SEGURIDAD",
-        "title": "El agua invierte el factor de seguridad",
+        "title": "El punto de inflexión: el agua invierte el factor de seguridad",
         "lead": "El modelo cuantifica el paso de estabilidad marginal a inestabilidad cuando ingresa el nivel freático.",
         "slideData": {
           "threshold": "FS ≥ 1.50",
@@ -659,7 +659,7 @@
         ],
         "leadSpeaker": "kervin",
         "tag": "EVOLUCIÓN DEL PROCESO",
-        "title": "De deslizamiento planar a flujo de detritos",
+        "title": "La reacción en cadena: de deslizamiento planar a flujo de detritos",
         "lead": "La falla inicial incorporó agua, bloques y sedimentos, aumentando rápidamente su movilidad y capacidad destructiva.",
         "slideData": {
           "steps": [
@@ -746,7 +746,7 @@
         ],
         "leadSpeaker": "kervin",
         "tag": "MITIGACIÓN GEOTÉCNICA",
-        "title": "Perfilado, refuerzo y drenaje",
+        "title": "La solución geotécnica: perfilado, refuerzo y drenaje",
         "lead": "La estabilización propuesta actúa sobre geometría, resistencia y presión de agua.",
         "slideData": {
           "before": "FS post-falla saturado = 0.727",
@@ -785,7 +785,7 @@
         ],
         "leadSpeaker": "kervin",
         "tag": "SÍNTESIS PARA GESTIÓN",
-        "title": "Piñas obliga a diseñar para extremos integrados",
+        "title": "Síntesis: Piñas obliga a diseñar para extremos integrados",
         "lead": "La reducción del riesgo requiere actuar simultáneamente sobre agua, ladera, infraestructura y ciudad.",
         "slideData": {
           "columns": [
@@ -838,7 +838,7 @@
         ],
         "leadSpeaker": "kervin",
         "tag": "PREGUNTA PUENTE",
-        "title": "Del conocimiento a la decisión",
+        "title": "¿Qué impide que este conocimiento se convierta en decisión y acción?",
         "lead": "",
         "slideData": {
           "pre": "Si ya sabemos dónde falló, por qué falló y qué medidas elevan la estabilidad…",
@@ -1077,7 +1077,9 @@
           "k-pinas-10"
         ],
         "source": "Análisis_Forense_Piñas_2025.pptx",
-        "mode": "native-promter"
+        "mode": "native-promter",
+        "renderMode": "exact-pptx-image",
+        "note": "La salida pública usa la imagen original de cada diapositiva extraída localmente del PPTX, sin reescritura ni reinterpretación."
       }
     }
   },
