@@ -76,3 +76,13 @@
 - **Síntomas:** alertas 5/2 min manuales; sin cronómetro visible por idea; selector de Daniel seguía mostrando el mismo listado general; acceso inferior permanecía en Kervin; vista de panelista priorizaba pizarra sobre hilo conductor.
 - **Corrección v0.13:** Cue Engine con reloj de bloque + reloj de idea/respuesta, alertas automáticas, escenas por participante, enlace dinámico y Hilo general como vista principal.
 - **Estado:** RESUELTO.
+
+
+## INC-PR-010 · Deck Daniel registrado pero activo no resuelto
+- **Fecha:** 2026-10-06
+- **Versión afectada:** v0.13.0
+- **Síntoma:** PREVIEW mostraba “Activo de presentación no configurado” en escenas de Daniel.
+- **Causa raíz:** las escenas usaban `deckId=daniel-mitigacion-gad` pero el registro estaba almacenado bajo la clave `presentationDecks.daniel`; PROGRAM busca el deck por clave exacta.
+- **Corrección v0.13.1:** PDF maestro de 8 páginas, render persistente por página y registro exacto bajo `presentationDecks["daniel-mitigacion-gad"]`.
+- **QA:** escenas “Piñas 2025 en cifras” e “Indicadores de seguimiento para el GAD” verificadas visualmente en PREVIEW.
+- **Estado:** RESUELTO.
