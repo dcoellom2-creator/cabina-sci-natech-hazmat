@@ -1,10 +1,10 @@
 {
   "version": "0.14.2",
-  "updatedAt": "2026-10-06T15:14:00-05:00",
+  "updatedAt": "2026-10-30T12:00:00-05:00",
   "event": {
     "id": "crigmpal-2026-10",
-    "name": "Conocer el riesgo para decidir y actuar",
-    "subtitle": "Ciencia · territorio · gestión · comunidad",
+    "name": "Del registro de campo a la acción",
+    "subtitle": "Día 1: entrega de herramientas piloto · Día 2: conversación con Xavier y Camilo",
     "mode": "Virtual vía Zoom",
     "speakers": {
       "kervin": {
@@ -33,9 +33,9 @@
       },
       "daniel": {
         "name": "MSc. Daniel Coello",
-        "role": "Geólogo / Gestión de riesgos",
-        "axis": "DECIDIR",
-        "theme": "Del dato técnico a la gestión",
+        "role": "Moderador · GeoPro.ec",
+        "axis": "MODERAR",
+        "theme": "Observar → registrar → decidir → actuar → verificar",
         "video": "",
         "ideas": [
           [
@@ -103,1441 +103,1344 @@
         "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_xavier_3e71c9b2&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
         "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_xavier_3e71c9b2&cleanoutput&noaudio&cover&autoplay"
       },
-      "diego": {
-        "name": "MSc. Diego Delgado",
-        "role": "Geólogo / Moderador",
-        "axis": "MODERAR",
-        "theme": "Conducción técnica, preguntas y transiciones",
+      "camilo": {
+        "name": "Camilo",
+        "role": "Panelista",
+        "axis": "CONVERSAR",
+        "theme": "Necesidades, participación y enfoque Esfera",
         "video": "",
-        "ideas": [
-          [
-            "Conducir",
-            "Mantener el hilo del conversatorio sin competir con los panelistas."
-          ],
-          [
-            "Profundizar",
-            "Usar preguntas breves para llevar la discusión de evidencia a decisión y acción."
-          ],
-          [
-            "Controlar tiempo",
-            "Cerrar respuestas, ordenar intervenciones y proteger el ritmo del evento."
-          ]
-        ],
-        "cameraStreamId": "prcrig2026_diego_8a4d72f6",
-        "cameraPushUrl": "https://vdo.ninja/?push=prcrig2026_diego_8a4d72f6&webcam&autostart&audiodevice=0&videodevice=1&facing=user&safemode&cleanish",
-        "cameraViewUrl": "https://vdo.ninja/?view=prcrig2026_diego_8a4d72f6&cleanoutput&noaudio&cover&autoplay"
+        "ideas": [],
+        "cameraStreamId": "pr_camilo_cc8a61ef47b52b3514e4de9c",
+        "cameraPushUrl": "https://vdo.ninja/?push=pr_camilo_cc8a61ef47b52b3514e4de9c&webcam&autostart&audiodevice=0&cleanish",
+        "cameraViewUrl": "https://vdo.ninja/?view=pr_camilo_cc8a61ef47b52b3514e4de9c&cleanoutput&noaudio&cover&autoplay"
       }
     },
-    "publicSlides": [
-      {
-        "tag": "CASO PIÑAS · LADERAS URBANAS",
-        "title": "Del evento de ladera a la decisión operativa",
-        "lead": "El caso Piñas permite explicar cómo una emergencia por movimientos en masa se traduce en lectura técnica, gestión territorial y decisiones de mitigación.",
-        "cards": [
-          [
-            "Lluvia extrema",
-            "Deslizamientos de finales de febrero de 2025 vinculados a lluvias intensas asociadas a La Niña Modoki."
-          ],
-          [
-            "Inventario técnico",
-            "Ortomosaicos y reconocimiento geológico permitieron delimitar deslizamientos, colapsos y flujos."
-          ],
-          [
-            "Condición local",
-            "Brechas volcánicas, dacitas, andesitas, gneises y suelos residuales saturados condicionaron la inestabilidad."
-          ]
-        ],
-        "question": "¿Estamos mirando solo el desastre o leyendo las condiciones que lo hicieron posible?",
-        "source": "Fuente: Chunga, K. (2025). Dinámica de deformación de los deslizamientos del 28.02.2025 en Piñas, provincia El Oro. DOI:10.13140/RG.2.2.32572.55683."
-      },
-      {
-        "tag": "EVIDENCIA → ESTABILIDAD",
-        "title": "El dato técnico que cambia la conversación",
-        "lead": "El análisis de estabilidad muestra cómo la saturación reduce el factor de seguridad y convierte una descripción del daño en una decisión defendible.",
-        "cards": [
-          [
-            "Antes del evento",
-            "El análisis reporta SF 1.526 en condición estática previa."
-          ],
-          [
-            "Con saturación",
-            "El margen baja a SF 1.125 por efecto del nivel de saturación asociado a lluvia intensa."
-          ],
-          [
-            "Talud inestable",
-            "Después del colapso se reportan condiciones inestables con SF 0.926, agravadas por agua."
-          ]
-        ],
-        "table": {
-          "headers": [
-            "Condición",
-            "SF",
-            "Lectura para gestión"
-          ],
-          "rows": [
-            [
-              "Natural previa",
-              "1.526",
-              "Estabilidad aparente"
-            ],
-            [
-              "Con saturación",
-              "1.125",
-              "Reducción del margen"
-            ],
-            [
-              "Talud colapsado",
-              "0.926",
-              "Inestabilidad"
-            ],
-            [
-              "Agua + condición crítica",
-              "0.727",
-              "Mayor peligro"
-            ]
-          ]
-        },
-        "question": "¿Qué decisión se justifica cuando el factor de seguridad muestra que el problema ya no es solo visual?",
-        "source": "Valores SF resumidos del texto público de Chunga (2025), ResearchGate."
-      },
-      {
-        "tag": "MITIGACIÓN",
-        "title": "De la geometría del talud a medidas concretas",
-        "lead": "El caso presenta alternativas de estabilización y control de flujos que permiten pasar del diagnóstico a una ruta de intervención.",
-        "cards": [
-          [
-            "Bermas y anclajes",
-            "Reconfiguración geométrica del terreno para mejorar la estabilidad."
-          ],
-          [
-            "SF objetivo",
-            "El diseño reporta incremento a SF ≈ 1.706–1.709 en condición estática."
-          ],
-          [
-            "Control de flujos",
-            "Disipadores, diques y separadores reducen velocidad y transporte de bloques/sedimentos."
-          ]
-        ],
-        "question": "Si ya sabemos dónde falló, por qué falló y qué medida reduce el riesgo, ¿qué impide actuar?",
-        "source": "Medidas resumidas a partir de Chunga (2025), texto público ResearchGate."
-      },
-      {
-        "tag": "PREGUNTA ESTRATÉGICA",
-        "title": "No es PowerPoint: es escena técnica guiada",
-        "lead": "Durante la transmisión, el panelista puede aparecer en burbuja o media pantalla, mientras la interfaz muestra contenido técnico, tabla, pregunta o pizarra en la misma escena.",
-        "cards": [
-          [
-            "Panelista",
-            "Cámara reducida, nombre, eje y alerta de tiempo."
-          ],
-          [
-            "Contenido",
-            "Pregunta clave, tarjetas, tabla, fragmento técnico y referencia."
-          ],
-          [
-            "Valor antes que venta",
-            "La necesidad de asesoría aparece como consecuencia de entender la brecha, no como presión comercial."
-          ]
-        ],
-        "question": "¿Cómo hacemos que el público comprenda la brecha técnica antes de ofrecer una solución?",
-        "source": "Criterio operativo Promter Risk: valor técnico primero; servicios como ruta natural de acompañamiento."
-      }
-    ],
+    "publicSlides": [],
     "blocks": [
       {
         "id": "d1a",
         "day": "Día 1",
-        "date": "2026-10-06",
-        "start": "18:00",
-        "end": "18:08",
-        "title": "Apertura y encuadre",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 0,
+        "durationMin": 8,
+        "title": "Apertura y pregunta al público",
         "people": [
-          "diego"
+          "daniel"
         ],
-        "cue": "Presentar el hilo: conocer → decidir → actuar → articular.",
-        "prompt": "Bienvenidos. Hoy vamos a seguir una ruta sencilla: conocer el riesgo, convertirlo en decisión y preguntarnos qué hace falta para actuar."
+        "cue": "Minutos 0–8. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Apertura y pregunta al público"
       },
       {
         "id": "d1b",
         "day": "Día 1",
-        "date": "2026-10-06",
-        "start": "18:08",
-        "end": "18:35",
-        "title": "Base técnica y evidencia",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 8,
+        "durationMin": 10,
+        "title": "Alcance y entrega de insumos",
         "people": [
-          "kervin"
+          "daniel"
         ],
-        "cue": "Estudios, mapas, riesgo, trámite vs gestión.",
-        "prompt": "¿Estamos gestionando el riesgo o solamente cumpliendo un trámite?"
+        "cue": "Minutos 8–18. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Alcance y entrega de insumos"
       },
       {
         "id": "d1c",
         "day": "Día 1",
-        "date": "2026-10-06",
-        "start": "18:35",
-        "end": "18:45",
-        "title": "Diálogo técnico",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 18,
+        "durationMin": 25,
+        "title": "Reconocimiento geológico y geotécnico preliminar",
         "people": [
-          "diego",
-          "kervin",
           "daniel"
         ],
-        "cue": "Extraer elementos mínimos que necesita una decisión territorial.",
-        "prompt": "Kervin, si mañana este estudio entra a una institución, ¿qué información no debería perderse? Daniel, ¿qué dato necesitas para convertirlo en decisión?"
+        "cue": "Minutos 18–43. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Reconocimiento geológico y geotécnico preliminar"
       },
       {
         "id": "d1d",
         "day": "Día 1",
-        "date": "2026-10-06",
-        "start": "18:45",
-        "end": "19:20",
-        "title": "Del dato técnico a la decisión",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 43,
+        "durationMin": 10,
+        "title": "Del hallazgo a la comunidad",
         "people": [
           "daniel"
         ],
-        "cue": "Cruce territorial, competencias, responsables, medidas y evidencia.",
-        "prompt": "¿En qué momento el conocimiento del territorio deja de ser información y empieza realmente a convertirse en gestión?"
+        "cue": "Minutos 43–53. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Del hallazgo a la comunidad"
       },
       {
         "id": "d1e",
         "day": "Día 1",
-        "date": "2026-10-06",
-        "start": "19:20",
-        "end": "19:42",
-        "title": "Informes, proyectos y financiamiento",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 53,
+        "durationMin": 25,
+        "title": "Herramienta de acompañamiento comunitario",
         "people": [
-          "diego",
-          "kervin",
           "daniel"
         ],
-        "cue": "Llenar formatos no reemplaza una base técnica suficiente.",
-        "prompt": "¿Qué brecha impide pasar de un reporte técnico a una intervención financiable y defendible?"
+        "cue": "Minutos 53–78. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Herramienta de acompañamiento comunitario"
       },
       {
         "id": "d1f",
         "day": "Día 1",
-        "date": "2026-10-06",
-        "start": "19:42",
-        "end": "19:52",
-        "title": "Preguntas del público",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 78,
+        "durationMin": 27,
+        "title": "Caso común y observaciones",
         "people": [
-          "diego",
-          "kervin",
           "daniel"
         ],
-        "cue": "Responder orientación general y registrar casos que requieren revisión específica.",
-        "prompt": "Abrimos preguntas del público. Busquemos casos que permitan distinguir orientación general de análisis aplicado."
+        "cue": "Minutos 78–105. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Caso común y observaciones"
       },
       {
         "id": "d1g",
         "day": "Día 1",
-        "date": "2026-10-06",
-        "start": "19:52",
-        "end": "20:00",
-        "title": "Cierre día 1",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 105,
+        "durationMin": 15,
+        "title": "Entrega, piloto y puente al día 2",
         "people": [
-          "diego",
           "daniel"
         ],
-        "cue": "Lo que conocemos condiciona lo que podemos decidir.",
-        "prompt": "Cerramos el primer día con una idea: lo que conocemos condiciona lo que podemos decidir. Mañana veremos cómo esa decisión se vuelve capacidad y gobernanza."
+        "cue": "Minutos 105–120. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Entrega, piloto y puente al día 2"
       },
       {
         "id": "d2a",
         "day": "Día 2",
-        "date": "2026-10-07",
-        "start": "18:00",
-        "end": "18:07",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 0,
+        "durationMin": 10,
         "title": "Recapitulación",
         "people": [
-          "diego"
+          "daniel"
         ],
-        "cue": "Reconectar evidencia, decisión, territorio y gobernanza.",
-        "prompt": "Retomamos el hilo de ayer: evidencia y decisión. Hoy bajamos esa conversación al territorio, la comunidad y la articulación institucional."
+        "cue": "Minutos 0–10. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Recapitulación"
       },
       {
         "id": "d2b",
         "day": "Día 2",
-        "date": "2026-10-07",
-        "start": "18:07",
-        "end": "18:32",
-        "title": "Preparación y comunidad",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 10,
+        "durationMin": 25,
+        "title": "Xavier: recepción, coordinación y continuidad",
         "people": [
-          "patricio"
+          "daniel",
+          "xavier",
+          "camilo"
         ],
-        "cue": "Actores, comités, capacitación, SAT, ejercicios y respuesta.",
-        "prompt": "¿Qué hace que una comunidad esté preparada y no solamente tenga un plan?"
+        "cue": "Minutos 10–35. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Xavier: recepción, coordinación y continuidad"
       },
       {
         "id": "d2c",
         "day": "Día 2",
-        "date": "2026-10-07",
-        "start": "18:32",
-        "end": "18:47",
-        "title": "Diálogo territorio",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 35,
+        "durationMin": 25,
+        "title": "Camilo: pertinencia, protección y participación",
         "people": [
-          "diego",
-          "patricio",
-          "daniel"
+          "daniel",
+          "xavier",
+          "camilo"
         ],
-        "cue": "Del documento a la capacidad instalada.",
-        "prompt": "Patricio, ¿qué información debe llegar a la comunidad y cuál debe permanecer como insumo técnico? Daniel, ¿cómo se conecta eso con la gestión institucional?"
+        "cue": "Minutos 35–60. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Camilo: pertinencia, protección y participación"
       },
       {
         "id": "d2d",
         "day": "Día 2",
-        "date": "2026-10-07",
-        "start": "18:47",
-        "end": "19:17",
-        "title": "Gobernanza del riesgo",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 60,
+        "durationMin": 30,
+        "title": "Caso compartido",
         "people": [
-          "xavier"
+          "daniel",
+          "xavier",
+          "camilo"
         ],
-        "cue": "Competencias, coordinación, responsabilidades y continuidad.",
-        "prompt": "Cuando todos tienen responsabilidad, ¿qué hace que realmente se articulen?"
+        "cue": "Minutos 60–90. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Caso compartido"
       },
       {
         "id": "d2e",
         "day": "Día 2",
-        "date": "2026-10-07",
-        "start": "19:17",
-        "end": "19:37",
-        "title": "Pregunta transversal",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 90,
+        "durationMin": 20,
+        "title": "Preguntas del público",
         "people": [
-          "diego",
-          "kervin",
           "daniel",
-          "patricio",
-          "xavier"
+          "xavier",
+          "camilo"
         ],
-        "cue": "Conocer · decidir · actuar · articular.",
-        "prompt": "Pregunta transversal para todos: si ya conocemos el riesgo, ¿qué nos falta para tomar buenas decisiones y actuar realmente sobre él?"
+        "cue": "Minutos 90–110. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Preguntas del público"
       },
       {
         "id": "d2f",
         "day": "Día 2",
-        "date": "2026-10-07",
-        "start": "19:37",
-        "end": "19:47",
-        "title": "Caso integrador",
+        "date": "",
+        "start": "",
+        "end": "",
+        "offsetMin": 110,
+        "durationMin": 10,
+        "title": "Ajustes prioritarios y cierre",
         "people": [
-          "diego",
-          "kervin",
           "daniel",
-          "patricio",
-          "xavier"
+          "xavier",
+          "camilo"
         ],
-        "cue": "Amenaza + población + instituciones + intervención que no avanza.",
-        "prompt": "Caso integrador: cada uno responda desde su ámbito. ¿Qué haría para destrabar una intervención que técnicamente está sustentada pero no avanza?"
-      },
-      {
-        "id": "d2g",
-        "day": "Día 2",
-        "date": "2026-10-07",
-        "start": "19:47",
-        "end": "19:54",
-        "title": "Ruta de soluciones",
-        "people": [
-          "daniel"
-        ],
-        "cue": "Diagnóstico, asesoría, capacitación e implementación.",
-        "prompt": "Si una institución enfrenta una brecha concreta, el siguiente paso es revisar su caso."
-      },
-      {
-        "id": "d2h",
-        "day": "Día 2",
-        "date": "2026-10-07",
-        "start": "19:54",
-        "end": "20:00",
-        "title": "Cierre final",
-        "people": [
-          "diego",
-          "daniel"
-        ],
-        "cue": "Agradecer y dejar ruta de seguimiento.",
-        "prompt": "Cerramos integrando conocer, decidir, actuar y articular. Gracias por mantener una conversación técnica orientada a soluciones."
+        "cue": "Minutos 110–120. Avance manual; PREVIEW antes de TAKE.",
+        "prompt": "Ajustes prioritarios y cierre"
       }
     ],
     "productionScenes": [
       {
-        "id": "d1-open-moderator",
-        "layout": "moderator",
-        "tag": "APERTURA · DÍA 1",
-        "title": "Conocer → decidir → actuar → articular",
-        "lead": "Diego abre el conversatorio y presenta el hilo que conectará cada intervención.",
-        "participants": [
-          "diego"
-        ],
-        "leadSpeaker": "diego",
-        "producerCue": "Abre en 60–90 segundos. Explica el hilo y presenta a Kervin como primer panelista.",
-        "questionFlow": [
-          {
-            "to": "diego",
-            "prompt": "¿Qué buscamos hoy? Pasar de información técnica a decisiones y acciones concretas.",
-            "transition": "Presenta a Kervin y abre el eje CONOCER."
-          }
-        ],
+        "id": "piloto-apertura",
         "blockId": "d1a",
         "segmentId": "d1a",
-        "segmentTitle": "Apertura y encuadre",
+        "segmentTitle": "Apertura y pregunta al público",
         "segmentDurationSec": 480,
-        "durationSec": 480
-      },
-      {
-        "id": "k-pinas-01",
-        "layout": "presentation",
-        "slideNo": 1,
-        "slideKind": "case",
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "moderator",
+        "tag": "DÍA 1",
+        "title": "Del registro de campo a la acción",
         "participants": [
-          "kervin"
-        ],
-        "leadSpeaker": "kervin",
-        "tag": "PIÑAS 2025 · CASO FORENSE",
-        "title": "Piñas 2025: un caso para entender cómo falla el territorio",
-        "lead": "Ubica el caso antes de entrar en cifras. El desastre no se presenta como un hecho fortuito, sino como una cadena causal reconstruible.",
-        "slideData": {
-          "location": "Piñas, El Oro",
-          "date": "28/02/2025",
-          "focus": "Sector Roldós–San Francisco y quebrada Coronita",
-          "thesis": "Forzamiento hidrológico + vulnerabilidad geológica + exposición urbana"
-        },
-        "talkingPoints": [
-          "Abrir con la ubicación y la fecha, no con el modelo numérico.",
-          "Plantear la tesis: el evento fue la expresión visible de una condición de terreno y agua que ya venía construyéndose.",
-          "Anticipar el hilo: disparador → predisposición → falla → amplificación → solución."
-        ],
-        "producerCue": "60–75 s. No leas la diapositiva. Usa el mapa como ubicación y formula la tesis causal.",
-        "bridge": "Ahora sí: ¿qué cambió en febrero de 2025 para llevar ese sistema al límite?",
-        "deckId": "pinas2025",
-        "assetUrl": "https://drive.google.com/thumbnail?id=1yDU8WkF-LRm56RgrhfCH_00J7cSnf_Hz&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1yDU8WkF-LRm56RgrhfCH_00J7cSnf_Hz/preview",
-        "blockId": "d1b",
-        "segmentId": "d1b",
-        "segmentTitle": "Base técnica y evidencia",
-        "segmentDurationSec": 1620,
-        "durationSec": 120
-      },
-      {
-        "id": "k-pinas-02",
-        "layout": "presentation",
-        "slideNo": 2,
-        "slideKind": "rain",
-        "participants": [
-          "kervin"
-        ],
-        "leadSpeaker": "kervin",
-        "tag": "DISPARADOR HIDROCLIMÁTICO",
-        "title": "El disparador: la lluvia de 2025 salió de todo rango histórico",
-        "lead": "La acumulación antecedente saturó el terreno y la intensidad de corto plazo empujó el sistema por encima del umbral de estabilidad.",
-        "slideData": {
-          "monthly": "≈588 mm",
-          "prior": "≈200–220 mm/mes",
-          "short": "50–120 mm en pocas horas",
-          "highlight": "La anomalía no es solo cuánto llovió, sino cómo se combinó acumulación + intensidad."
-        },
-        "talkingPoints": [
-          "Diferenciar lluvia antecedente de intensidad de corto plazo.",
-          "Explicar que la saturación eleva presión de poros y reduce esfuerzo efectivo.",
-          "Evitar una atribución climática especulativa: centrarse en la señal hidrológica medida."
-        ],
-        "producerCue": "90 s. Señala primero 588 mm, después el rango histórico y termina con el pulso de corto plazo.",
-        "bridge": "Pero la lluvia por sí sola no explica por qué falló precisamente esta ladera.",
-        "deckId": "pinas2025",
-        "assetUrl": "https://drive.google.com/thumbnail?id=1c6lNdNq7fh0d2xrNwdvwAeWAwkVV6Dn-&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1c6lNdNq7fh0d2xrNwdvwAeWAwkVV6Dn-/preview",
-        "blockId": "d1b",
-        "segmentId": "d1b",
-        "segmentTitle": "Base técnica y evidencia",
-        "segmentDurationSec": 1620,
-        "durationSec": 120
-      },
-      {
-        "id": "k-pinas-03",
-        "layout": "presentation",
-        "slideNo": 3,
-        "slideKind": "method",
-        "participants": [
-          "kervin"
-        ],
-        "leadSpeaker": "kervin",
-        "tag": "MÉTODO INTEGRADO",
-        "title": "El estudio integral revela un terreno predispuesto al colapso",
-        "lead": "Campo, fotogrametría UAV y modelación convergen para reconstruir mecanismo, geometría y estabilidad.",
-        "slideData": {
-          "steps": [
-            [
-              "1. CAMPO",
-              "Mapeo geológico y estructural"
-            ],
-            [
-              "2. DRON",
-              "Ortomosaico UAV RTK · ~5 cm/px · 787 ha"
-            ],
-            [
-              "3. MODELO",
-              "Análisis cinemático + equilibrio límite"
-            ]
-          ],
-          "vulnerability": [
-            "Sectores urbanos con pendientes >40%",
-            "Dacitas meteorizadas sobre brechas volcánicas",
-            "Discontinuidades y flujo subsuperficial"
-          ]
-        },
-        "talkingPoints": [
-          "Explicar que ninguna fuente aislada resuelve el caso.",
-          "El campo identifica materiales y discontinuidades; el dron da geometría; el modelo prueba hipótesis.",
-          "Conectar metodología con decisión: se necesita trazabilidad entre evidencia y conclusión."
-        ],
-        "producerCue": "75–90 s. Explica el método como cadena de evidencia, no como lista de herramientas.",
-        "bridge": "Con esa evidencia, la pregunta cambia de 'qué ocurrió' a 'por qué esa roca podía deslizar'.",
-        "deckId": "pinas2025",
-        "assetUrl": "https://drive.google.com/thumbnail?id=1tCPoOMSzZdxC3KQ2_aFPriJE0ZaKvzL-&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1tCPoOMSzZdxC3KQ2_aFPriJE0ZaKvzL-/preview",
-        "blockId": "d1b",
-        "segmentId": "d1b",
-        "segmentTitle": "Base técnica y evidencia",
-        "segmentDurationSec": 1620,
-        "durationSec": 120
-      },
-      {
-        "id": "k-pinas-04",
-        "layout": "presentation",
-        "slideNo": 4,
-        "slideKind": "structure",
-        "participants": [
-          "kervin"
-        ],
-        "leadSpeaker": "kervin",
-        "tag": "CONTROL ESTRUCTURAL",
-        "title": "La geometría de la roca ya favorecía el deslizamiento",
-        "lead": "La ladera estaba estructuralmente predispuesta antes del evento de lluvia.",
-        "slideData": {
-          "leftTitle": "EVIDENCIA 1 · EL ESCARPE",
-          "left": [
-            "Dacita muy meteorizada",
-            "Brecha volcánica más competente",
-            "Relleno arcilloso en discontinuidades"
-          ],
-          "rightTitle": "EVIDENCIA 2 · CONTROL ESTRUCTURAL",
-          "metrics": [
-            [
-              "F1",
-              "255°/36°"
-            ],
-            [
-              "RMR",
-              "39"
-            ],
-            [
-              "SMR",
-              "14–18 · Clase V"
-            ]
-          ],
-          "footer": "Predisposición a falla planar antes del disparador hidrológico."
-        },
-        "talkingPoints": [
-          "Mostrar el contraste mecánico: dacita alterada sobre brecha competente.",
-          "Explicar por qué F1 255°/36° cumple condiciones geométricas de deslizamiento planar.",
-          "Traducir RMR 39 y SMR 14–18: masa rocosa pobre y talud muy inestable."
-        ],
-        "producerCue": "2 min. Aquí sí vale detenerse: es la diapositiva geológica central de Kervin.",
-        "bridge": "La geometría explicaba la predisposición; el agua explica el punto de inflexión.",
-        "deckId": "pinas2025",
-        "assetUrl": "https://drive.google.com/thumbnail?id=147EsfOHOaddHzoSLcWkFVHNthBfl2WGB&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/147EsfOHOaddHzoSLcWkFVHNthBfl2WGB/preview",
-        "blockId": "d1b",
-        "segmentId": "d1b",
-        "segmentTitle": "Base técnica y evidencia",
-        "segmentDurationSec": 1620,
-        "durationSec": 180
-      },
-      {
-        "id": "k-pinas-05",
-        "layout": "presentation",
-        "slideNo": 5,
-        "slideKind": "fs",
-        "participants": [
-          "kervin"
-        ],
-        "leadSpeaker": "kervin",
-        "tag": "FACTOR DE SEGURIDAD",
-        "title": "El punto de inflexión: el agua invierte el factor de seguridad",
-        "lead": "El modelo cuantifica el paso de estabilidad marginal a inestabilidad cuando ingresa el nivel freático.",
-        "slideData": {
-          "threshold": "FS ≥ 1.50",
-          "dry": {
-            "label": "CONDICIÓN SECA",
-            "value": "1.526",
-            "status": "Estabilidad marginal"
-          },
-          "wet": {
-            "label": "CONDICIÓN SATURADA",
-            "value": "0.980",
-            "status": "Inestable · FS < 1.0"
-          },
-          "footer": "El agua no cambia solo el paisaje: cambia matemáticamente la estabilidad."
-        },
-        "talkingPoints": [
-          "Definir FS en una frase sencilla antes de usar el número.",
-          "Subrayar que 1.526 apenas supera el umbral de diseño usado en el estudio.",
-          "Con saturación el FS cae a 0.980: la presión de poros convierte una ladera marginal en inestable."
-        ],
-        "producerCue": "2 min. Comparación visual fuerte: 1.526 → 0.980. Evita tecnicismo excesivo; tradúcelo a decisión.",
-        "bridge": "Una vez iniciada la falla, el proceso no se quedó como un simple deslizamiento.",
-        "deckId": "pinas2025",
-        "assetUrl": "https://drive.google.com/thumbnail?id=1vnEQEKLEz0ZBMlx8paqJTv-S1WczTQ7i&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1vnEQEKLEz0ZBMlx8paqJTv-S1WczTQ7i/preview",
-        "blockId": "d1b",
-        "segmentId": "d1b",
-        "segmentTitle": "Base técnica y evidencia",
-        "segmentDurationSec": 1620,
-        "durationSec": 180
-      },
-      {
-        "id": "k-pinas-06",
-        "layout": "presentation",
-        "slideNo": 6,
-        "slideKind": "chain",
-        "participants": [
-          "kervin"
-        ],
-        "leadSpeaker": "kervin",
-        "tag": "EVOLUCIÓN DEL PROCESO",
-        "title": "La reacción en cadena: de deslizamiento planar a flujo de detritos",
-        "lead": "La falla inicial incorporó agua, bloques y sedimentos, aumentando rápidamente su movilidad y capacidad destructiva.",
-        "slideData": {
-          "steps": [
-            [
-              "1. FALLA INICIAL",
-              "Deslizamiento planar rápido · inicio ~20:40"
-            ],
-            [
-              "2. SATURACIÓN Y CARGA",
-              "Incorporación de bloques métricos y sedimentos"
-            ],
-            [
-              "3. IMPACTO URBANO",
-              "Transición a flujo de detritos/lodo denso"
-            ]
-          ],
-          "stats": [
-            [
-              "3",
-              "fallecidos"
-            ],
-            [
-              ">500",
-              "afectados"
-            ],
-            [
-              "223",
-              "polígonos inventariados"
-            ]
-          ]
-        },
-        "talkingPoints": [
-          "Explicar la transición de mecanismo: desprendimiento/deslizamiento → flujo canalizado.",
-          "La incorporación de agua y material aumenta energía y alcance.",
-          "Usar las cifras humanas solo después de explicar el mecanismo físico."
-        ],
-        "producerCue": "90 s. Mantén la secuencia causal. No conviertas esta lámina en recuento de daños.",
-        "bridge": "El siguiente punto es clave: el proceso natural encontró una infraestructura que amplificó sus efectos.",
-        "deckId": "pinas2025",
-        "assetUrl": "https://drive.google.com/thumbnail?id=135dO8yJ8GpQ8TLn-tfsisMnPLW5kSV7f&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/135dO8yJ8GpQ8TLn-tfsisMnPLW5kSV7f/preview",
-        "blockId": "d1b",
-        "segmentId": "d1b",
-        "segmentTitle": "Base técnica y evidencia",
-        "segmentDurationSec": 1620,
-        "durationSec": 180
-      },
-      {
-        "id": "k-pinas-07",
-        "layout": "presentation",
-        "slideNo": 7,
-        "slideKind": "infrastructure",
-        "participants": [
-          "kervin"
-        ],
-        "leadSpeaker": "kervin",
-        "tag": "INFRAESTRUCTURA Y EFECTO CASCADA",
-        "title": "La infraestructura amplificó el peligro hidrológico",
-        "lead": "El box-duct obstruido y superado hidráulicamente actuó como multiplicador del daño aguas abajo.",
-        "slideData": {
-          "stages": [
-            [
-              "OBSTRUCCIÓN",
-              "Carga sólida: sedimentos y bloques métricos"
-            ],
-            [
-              "CAPACIDAD",
-              "El flujo denso supera la capacidad hidráulica"
-            ],
-            [
-              "EFECTO CASCADA",
-              "Desbordamiento y mayor destrucción aguas abajo"
-            ]
-          ],
-          "footer": "La infraestructura no origina la falla de ladera, pero puede agravar la magnitud del desastre."
-        },
-        "talkingPoints": [
-          "Separar causa geotécnica de amplificación hidráulica.",
-          "Explicar el taponamiento por carga sólida y la insuficiencia del conducto para escenarios extremos.",
-          "Conectar con diseño, mantenimiento y expansión urbana."
-        ],
-        "producerCue": "90 s. Frase clave: infraestructura como multiplicador, no como causa única.",
-        "bridge": "Si entendemos mecanismo y amplificadores, ya podemos evaluar una solución integrada.",
-        "deckId": "pinas2025",
-        "assetUrl": "https://drive.google.com/thumbnail?id=15JhcxNpftd5W1G28qj2NvX1hHKtstuwT&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/15JhcxNpftd5W1G28qj2NvX1hHKtstuwT/preview",
-        "blockId": "d1b",
-        "segmentId": "d1b",
-        "segmentTitle": "Base técnica y evidencia",
-        "segmentDurationSec": 1620,
-        "durationSec": 180
-      },
-      {
-        "id": "k-pinas-08",
-        "layout": "presentation",
-        "slideNo": 8,
-        "slideKind": "mitigation",
-        "participants": [
-          "kervin"
-        ],
-        "leadSpeaker": "kervin",
-        "tag": "MITIGACIÓN GEOTÉCNICA",
-        "title": "La solución geotécnica: perfilado, refuerzo y drenaje",
-        "lead": "La estabilización propuesta actúa sobre geometría, resistencia y presión de agua.",
-        "slideData": {
-          "before": "FS post-falla saturado = 0.727",
-          "after": "FS mitigado ≈ 1.65–1.71",
-          "axes": [
-            [
-              "1. GEOMETRÍA",
-              "11 bermas para reducir fuerzas impulsoras"
-            ],
-            [
-              "2. REFUERZO",
-              "Anclajes nominales de 100 kN"
-            ],
-            [
-              "3. PRESIÓN",
-              "Drenaje superficial y profundo para controlar saturación"
-            ]
-          ],
-          "note": "El manuscrito reporta configuraciones modeladas con FS ~1.65 y un resumen de estabilidad ~1.71."
-        },
-        "talkingPoints": [
-          "No vender una obra única: explicar que la estabilidad mejora por combinación de medidas.",
-          "Geometría reduce fuerzas impulsoras; anclajes aumentan resistencia; drenaje ataca el disparador hidrológico.",
-          "Aclarar que el valor mitigado depende de la configuración modelada; el estudio reporta valores alrededor de 1.65–1.71."
-        ],
-        "producerCue": "2 min. Esta lámina conecta diagnóstico con diseño. Destaca que el drenaje es parte estructural de la solución.",
-        "bridge": "La lección ya no es solo geotécnica; obliga a diseñar ciudad e infraestructura para extremos integrados.",
-        "deckId": "pinas2025",
-        "assetUrl": "https://drive.google.com/thumbnail?id=1Q2B4GZXLwrjHn_xUTG-5JGtR_woMiJpL&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1Q2B4GZXLwrjHn_xUTG-5JGtR_woMiJpL/preview",
-        "blockId": "d1b",
-        "segmentId": "d1b",
-        "segmentTitle": "Base técnica y evidencia",
-        "segmentDurationSec": 1620,
-        "durationSec": 180
-      },
-      {
-        "id": "k-pinas-09",
-        "layout": "presentation",
-        "slideNo": 9,
-        "slideKind": "synthesis",
-        "participants": [
-          "kervin"
-        ],
-        "leadSpeaker": "kervin",
-        "tag": "SÍNTESIS PARA GESTIÓN",
-        "title": "Síntesis: Piñas obliga a diseñar para extremos integrados",
-        "lead": "La reducción del riesgo requiere actuar simultáneamente sobre agua, ladera, infraestructura y ciudad.",
-        "slideData": {
-          "columns": [
-            [
-              "CLIMA & AGUA",
-              [
-                "Criterios de lluvia extrema",
-                "Control y mantenimiento de drenajes"
-              ]
-            ],
-            [
-              "GEOTECNIA",
-              [
-                "Estabilización post-falla",
-                "Monitoreo de ladera y agua subterránea"
-              ]
-            ],
-            [
-              "HIDRÁULICA",
-              [
-                "Check dams / diques",
-                "Disipadores de energía"
-              ]
-            ],
-            [
-              "CIUDAD",
-              [
-                "Uso de suelo adaptativo",
-                "Mantenimiento preventivo"
-              ]
-            ]
-          ],
-          "footer": "Retener la montaña no basta si no controlamos también la energía y las rutas del flujo."
-        },
-        "talkingPoints": [
-          "Convertir el caso en una lección transferible: no basta con estabilizar el talud.",
-          "Diseño hidráulico, mantenimiento, monitoreo y uso del suelo forman parte de la misma estrategia.",
-          "Preparar el puente hacia la gestión: la ciencia ya ofrece un diagnóstico y opciones."
-        ],
-        "producerCue": "90 s. Cierra la parte técnica con cuatro dominios de acción y deja abierta la pregunta de implementación.",
-        "bridge": "Y aquí aparece la pregunta que ya no es solo geológica: ¿por qué, si sabemos tanto, cuesta convertirlo en acción?",
-        "deckId": "pinas2025",
-        "assetUrl": "https://drive.google.com/thumbnail?id=1Xt9VfFTtgl-X87FHzXc2gHiuElN_2OAZ&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1Xt9VfFTtgl-X87FHzXc2gHiuElN_2OAZ/preview",
-        "blockId": "d1b",
-        "segmentId": "d1b",
-        "segmentTitle": "Base técnica y evidencia",
-        "segmentDurationSec": 1620,
-        "durationSec": 180
-      },
-      {
-        "id": "k-pinas-10",
-        "layout": "presentation",
-        "slideNo": 10,
-        "slideKind": "question",
-        "participants": [
-          "kervin"
-        ],
-        "leadSpeaker": "kervin",
-        "tag": "PREGUNTA PUENTE",
-        "title": "¿Qué impide que este conocimiento se convierta en decisión y acción?",
-        "lead": "",
-        "slideData": {
-          "pre": "Si ya sabemos dónde falló, por qué falló y qué medidas elevan la estabilidad…",
-          "question": "¿Qué impide que este conocimiento se convierta en decisión y acción?"
-        },
-        "talkingPoints": [
-          "No responder inmediatamente. Dejar 2–3 segundos de silencio.",
-          "Kervin responde desde la evidencia: qué necesita una institución para no perder el valor técnico del estudio.",
-          "Cerrar entregando la conversación a Diego y Daniel: evidencia → decisión → responsabilidad → implementación."
-        ],
-        "producerCue": "Pregunta de transición. Pausa. Respuesta breve de Kervin (60–90 s) y entrega al moderador.",
-        "bridge": "Diego toma la palabra y abre el diálogo con Daniel.",
-        "questionFlow": [
-          {
-            "to": "kervin",
-            "prompt": "Si ya sabemos dónde falló, por qué falló y qué medidas elevan la estabilidad, ¿qué impide que este conocimiento se convierta en decisión y acción?",
-            "transition": "Diego recoge la respuesta de Kervin y deriva a Daniel: ¿qué dato y qué proceso convierten evidencia en decisión institucional?"
-          }
-        ],
-        "deckId": "pinas2025",
-        "assetUrl": "https://drive.google.com/thumbnail?id=1DUaJJJqwzxob6GjCBjpZqT8QsOk_YTOc&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1DUaJJJqwzxob6GjCBjpZqT8QsOk_YTOc/preview",
-        "blockId": "d1b",
-        "segmentId": "d1b",
-        "segmentTitle": "Base técnica y evidencia",
-        "segmentDurationSec": 1620,
-        "durationSec": 180
-      },
-      {
-        "id": "d1-dialogue-trio",
-        "layout": "trio",
-        "tag": "DIÁLOGO TÉCNICO",
-        "title": "De la evidencia a la decisión",
-        "lead": "Tres voces conectadas en una sola pantalla: moderación, evidencia y decisión.",
-        "participants": [
-          "diego",
-          "kervin",
           "daniel"
         ],
-        "leadSpeaker": "diego",
-        "producerCue": "Diego conduce. Mantén respuestas breves y usa RESUELTA → SIGUIENTE para avanzar el hilo.",
+        "leadSpeaker": "daniel",
+        "lead": "Dos herramientas piloto para registrar, orientar la siguiente gestión y verificar lo ocurrido.",
+        "producerCue": "Daniel abre. Hoy entregamos y explicamos; mañana contrastamos su utilidad con Xavier y Camilo."
+      },
+      {
+        "id": "piloto-q01",
+        "blockId": "d1a",
+        "segmentId": "d1a",
+        "segmentTitle": "Apertura y pregunta al público",
+        "segmentDurationSec": 480,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "question",
+        "tag": "DÍA 1",
+        "title": "Pregunta 1 · Apertura / público",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "Cuando termina una visita de campo, ¿qué información suele perderse antes de llegar a quien debe actuar?",
+        "lead": "Cuando termina una visita de campo, ¿qué información suele perderse antes de llegar a quien debe actuar?",
+        "producerCue": "Recoger dos respuestas concretas. Volver a ellas en el cierre; no realizar una encuesta nominal improvisada.",
+        "talkingPoints": [
+          "¿Se pierde el dato, el contexto, el responsable o el seguimiento?"
+        ],
+        "bridge": "¿Se pierde el dato, el contexto, el responsable o el seguimiento?",
         "questionFlow": [
           {
-            "to": "kervin",
-            "prompt": "Si mañana este estudio entra a una institución, ¿qué información no debería perderse?",
-            "transition": "Diego recoge la idea técnica y deriva la pregunta a Daniel."
-          },
-          {
             "to": "daniel",
-            "prompt": "¿Qué dato necesitas para convertir esa evidencia en una decisión institucional defendible?",
-            "transition": "Diego cierra el puente: evidencia → decisión → responsable."
-          },
-          {
-            "to": "diego",
-            "prompt": "Cierra el bloque en una frase: ¿qué debe existir para que el estudio no termine como un documento más?",
-            "transition": "Da paso al bloque de Daniel: DECIDIR."
+            "prompt": "Cuando termina una visita de campo, ¿qué información suele perderse antes de llegar a quien debe actuar?",
+            "transition": "Repregunta: ¿Se pierde el dato, el contexto, el responsable o el seguimiento?",
+            "durationSec": 90
           }
+        ]
+      },
+      {
+        "id": "piloto-alcance",
+        "blockId": "d1b",
+        "segmentId": "d1b",
+        "segmentTitle": "Alcance y entrega de insumos",
+        "segmentDurationSec": 600,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "question",
+        "tag": "DÍA 1",
+        "title": "Qué entregamos y para qué sirve",
+        "participants": [
+          "daniel"
         ],
+        "leadSpeaker": "daniel",
+        "question": "¿Qué podemos orientar desde la primera jornada y qué queda pendiente de revisión?",
+        "producerCue": "Presentar formularios y guías. Fotos y oficina opcionales. Envío no equivale a validación, aval ni aviso a una autoridad."
+      },
+      {
+        "id": "piloto-q02",
         "blockId": "d1c",
         "segmentId": "d1c",
-        "segmentTitle": "Diálogo técnico",
-        "segmentDurationSec": 600,
-        "durationSec": 600
-      },
-      {
-        "id": "d-mit-01",
-        "layout": "presentation",
-        "tag": "DANIEL · DECIDIR",
-        "title": "Piñas 2025 en cifras",
-        "lead": "Piñas 2025 en cifras",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "question",
+        "tag": "DÍA 1",
+        "title": "Pregunta 2 · A Kervin o al referente técnico",
         "participants": [
           "daniel"
         ],
         "leadSpeaker": "daniel",
-        "slideNo": 1,
-        "deckId": "daniel-mitigacion-gad",
-        "producerCue": "3 min. Usa la lámina como puente: del caso técnico de Kervin a la responsabilidad municipal.",
+        "question": "¿Qué debe quedar bien observado y registrado para que un reconocimiento preliminar sea útil desde la primera salida?",
+        "lead": "¿Qué debe quedar bien observado y registrado para que un reconocimiento preliminar sea útil desde la primera salida?",
+        "producerCue": "[G] láminas 2-4. Ubicación y precisión; terreno y geometría; discontinuidades, agua e indicios. El experto prioriza según el caso. Dirigir al referente si participa; en su ausencia, Daniel demuestra y consulta al público. No atribuir respuestas.",
         "talkingPoints": [
-          "Conecta 588 mm, ≈120 mm/4 h, 3 fallecidos, >500 afectados y 223 polígonos con la necesidad de decidir.",
-          "No repitas el caso de Kervin: tradúcelo a gestión municipal.",
-          "Cierra con la secuencia monitorear → priorizar → intervenir → reordenar → prevenir."
+          "Si solo pudiéramos mejorar tres datos del registro habitual, ¿cuáles elegirías y para qué decisión servirían?"
         ],
-        "bridge": "El dato solo tiene valor si entra a un flujo de decisión.",
-        "blockId": "d1d",
-        "segmentId": "d1d",
-        "segmentTitle": "Del dato técnico a la decisión",
-        "segmentDurationSec": 2100,
-        "durationSec": 180,
-        "assetUrl": "https://drive.google.com/thumbnail?id=1hqQz0t5QTt8BT11vrwe-7qtujPuXbkAa&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1hqQz0t5QTt8BT11vrwe-7qtujPuXbkAa/preview"
-      },
-      {
-        "id": "d-mit-02",
-        "layout": "presentation",
-        "tag": "DANIEL · DECIDIR",
-        "title": "Flujo de información para la toma de decisiones en el GAD",
-        "lead": "Flujo de información para la toma de decisiones en el GAD",
-        "participants": [
-          "daniel"
-        ],
-        "leadSpeaker": "daniel",
-        "slideNo": 2,
-        "deckId": "daniel-mitigacion-gad",
-        "producerCue": "4 min. Recorre las cinco etapas de izquierda a derecha y marca dónde suele romperse la cadena.",
-        "talkingPoints": [
-          "Monitoreo y alerta no son todavía una decisión.",
-          "UGR + SIG/Catastro + Obras Públicas validan y territorializan.",
-          "Alcaldía/COE-M decide; las unidades ejecutan; la retroalimentación actualiza el sistema."
-        ],
-        "bridge": "Con un flujo claro, el siguiente problema es ordenar acciones por plazo.",
-        "blockId": "d1d",
-        "segmentId": "d1d",
-        "segmentTitle": "Del dato técnico a la decisión",
-        "segmentDurationSec": 2100,
-        "durationSec": 240,
-        "assetUrl": "https://drive.google.com/thumbnail?id=1FRU5iqzmgOlyUlSSIzPGTZ3-sl_fcJQS&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1FRU5iqzmgOlyUlSSIzPGTZ3-sl_fcJQS/preview"
-      },
-      {
-        "id": "d-mit-03",
-        "layout": "presentation",
-        "tag": "DANIEL · DECIDIR",
-        "title": "Hoja de ruta de mitigación por plazos",
-        "lead": "Hoja de ruta de mitigación por plazos",
-        "participants": [
-          "daniel"
-        ],
-        "leadSpeaker": "daniel",
-        "slideNo": 3,
-        "deckId": "daniel-mitigacion-gad",
-        "producerCue": "5 min. Usa el tiempo como criterio operativo: qué hago hoy, esta semana, este mes y en años.",
-        "talkingPoints": [
-          "0–6 h: activar, verificar, alertar/evacuar.",
-          "24–72 h y 3–30 días: daños, mapas, estudios y estabilización temporal.",
-          "1–12 meses y 1–5 años: obras, protocolos, ordenamiento y reubicación."
-        ],
-        "bridge": "Cada plazo exige una combinación distinta de responsables.",
-        "blockId": "d1d",
-        "segmentId": "d1d",
-        "segmentTitle": "Del dato técnico a la decisión",
-        "segmentDurationSec": 2100,
-        "durationSec": 300,
-        "assetUrl": "https://drive.google.com/thumbnail?id=1vyycX_n8Lm6qPWH3McTPZcyHFOAgU-UE&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1vyycX_n8Lm6qPWH3McTPZcyHFOAgU-UE/preview"
-      },
-      {
-        "id": "d-mit-04",
-        "layout": "presentation",
-        "tag": "DANIEL · DECIDIR",
-        "title": "Matriz de actores departamentales",
-        "lead": "Matriz de actores departamentales",
-        "participants": [
-          "daniel"
-        ],
-        "leadSpeaker": "daniel",
-        "slideNo": 4,
-        "deckId": "daniel-mitigacion-gad",
-        "producerCue": "5 min. Explica liderazgo, apoyo y coordinación; no leas celda por celda.",
-        "talkingPoints": [
-          "Gestión de Riesgos lidera alerta y seguimiento, pero no ejecuta todo.",
-          "Alcaldía/COE-M lidera respuesta inmediata; Obras Públicas y Agua lideran obras.",
-          "Planificación/PUGS lidera el ordenamiento territorial."
-        ],
-        "bridge": "La articulación necesita umbrales claros para decidir cuándo escalar.",
-        "blockId": "d1d",
-        "segmentId": "d1d",
-        "segmentTitle": "Del dato técnico a la decisión",
-        "segmentDurationSec": 2100,
-        "durationSec": 300,
-        "assetUrl": "https://drive.google.com/thumbnail?id=1VVJq6-RqyLAQ5lDPQz75X-s38o8Dbd8l&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1VVJq6-RqyLAQ5lDPQz75X-s38o8Dbd8l/preview"
-      },
-      {
-        "id": "d-mit-05",
-        "layout": "presentation",
-        "tag": "DANIEL · DECIDIR",
-        "title": "Semáforo de decisión para intervención municipal",
-        "lead": "Semáforo de decisión para intervención municipal",
-        "participants": [
-          "daniel"
-        ],
-        "leadSpeaker": "daniel",
-        "slideNo": 5,
-        "deckId": "daniel-mitigacion-gad",
-        "producerCue": "4 min. Trátalo como regla de decisión basada en evidencia, no como percepción.",
-        "talkingPoints": [
-          "Verde: monitoreo reforzado.",
-          "Amarillo: inspección, preposicionamiento y vigilancia 24/7.",
-          "Naranja/Rojo: evacuación, cierres, estabilización, aislamiento y respuesta interinstitucional."
-        ],
-        "bridge": "Una vez definido el nivel, hay que seleccionar una cartera de medidas.",
-        "blockId": "d1d",
-        "segmentId": "d1d",
-        "segmentTitle": "Del dato técnico a la decisión",
-        "segmentDurationSec": 2100,
-        "durationSec": 240,
-        "assetUrl": "https://drive.google.com/thumbnail?id=1AxnfosExa60ln6uZyNqFEOZr4jgP0Aju&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1AxnfosExa60ln6uZyNqFEOZr4jgP0Aju/preview"
-      },
-      {
-        "id": "d-mit-06",
-        "layout": "presentation",
-        "tag": "DANIEL · DECIDIR",
-        "title": "Medidas estratégicas en una ladera urbana",
-        "lead": "Medidas estratégicas en una ladera urbana",
-        "participants": [
-          "daniel"
-        ],
-        "leadSpeaker": "daniel",
-        "slideNo": 6,
-        "deckId": "daniel-mitigacion-gad",
-        "producerCue": "5 min. Recorre la ladera por horizontes: corto, mediano y largo plazo.",
-        "talkingPoints": [
-          "Corto: monitoreo, evacuación, limpieza de drenajes, revegetación.",
-          "Mediano: cunetas, canales, bermas, subdrenes, check dams y disipación.",
-          "Largo: anclajes, zonas no edificables y reubicación."
-        ],
-        "bridge": "Las medidas requieren competencias, normativa y planificación territorial.",
-        "blockId": "d1d",
-        "segmentId": "d1d",
-        "segmentTitle": "Del dato técnico a la decisión",
-        "segmentDurationSec": 2100,
-        "durationSec": 300,
-        "assetUrl": "https://drive.google.com/thumbnail?id=1Hh62yD8n5xFOI_WEthOdIGY1UJGVkeek&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1Hh62yD8n5xFOI_WEthOdIGY1UJGVkeek/preview"
-      },
-      {
-        "id": "d-mit-07",
-        "layout": "presentation",
-        "tag": "DANIEL · DECIDIR",
-        "title": "Marco normativo y de gobernanza",
-        "lead": "Marco normativo y de gobernanza",
-        "participants": [
-          "daniel"
-        ],
-        "leadSpeaker": "daniel",
-        "slideNo": 7,
-        "deckId": "daniel-mitigacion-gad",
-        "producerCue": "5 min. Vincula cada norma con una obligación concreta de actuar, coordinar y ordenar.",
-        "talkingPoints": [
-          "Constitución, COOTAD y ley de gestión del riesgo sostienen competencias nacionales/locales.",
-          "LOOTUGS/PDOT/PUGS conectan riesgo con uso y ocupación del suelo.",
-          "Sendai e ISO aportan gobernanza, continuidad, respuesta y recuperación."
-        ],
-        "bridge": "La gestión debe poder medirse; si no hay indicadores, la intervención se diluye.",
-        "blockId": "d1d",
-        "segmentId": "d1d",
-        "segmentTitle": "Del dato técnico a la decisión",
-        "segmentDurationSec": 2100,
-        "durationSec": 300,
-        "assetUrl": "https://drive.google.com/thumbnail?id=1Fefiv1xQ6K3fLY1gKYJKp6lFw-kiTVCh&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1Fefiv1xQ6K3fLY1gKYJKp6lFw-kiTVCh/preview"
-      },
-      {
-        "id": "d-mit-08",
-        "layout": "presentation",
-        "tag": "DANIEL · DECIDIR",
-        "title": "Indicadores de seguimiento para el GAD",
-        "lead": "Indicadores de seguimiento para el GAD",
-        "participants": [
-          "daniel"
-        ],
-        "leadSpeaker": "daniel",
-        "slideNo": 8,
-        "deckId": "daniel-mitigacion-gad",
-        "producerCue": "4 min. Cierra mostrando que una intervención estratégica se administra con indicadores.",
-        "talkingPoints": [
-          "Vigilancia: cobertura y tiempos de validación.",
-          "Respuesta y obras: tiempos, familias atendidas, vías y obras ejecutadas.",
-          "Ordenamiento/social: SIG, restricciones, reubicación, simulacros y alertas."
-        ],
-        "bridge": "Cierre: lo que no se mide no se sostiene; lo que no se comunica no se legitima.",
-        "blockId": "d1d",
-        "segmentId": "d1d",
-        "segmentTitle": "Del dato técnico a la decisión",
-        "segmentDurationSec": 2100,
-        "durationSec": 240,
-        "assetUrl": "https://drive.google.com/thumbnail?id=1YtbKUtVuablA4YJXtH5E0CFSZsc5P4dx&sz=w2000",
-        "previewUrl": "https://drive.google.com/file/d/1YtbKUtVuablA4YJXtH5E0CFSZsc5P4dx/preview"
-      },
-      {
-        "id": "d1-finance-trio",
-        "layout": "trio",
-        "tag": "INFORMES · PROYECTOS · FINANCIAMIENTO",
-        "title": "¿Qué falta para convertir un informe en intervención?",
-        "lead": "La conversación conecta calidad técnica, decisión y viabilidad de implementación.",
-        "participants": [
-          "diego",
-          "kervin",
-          "daniel"
-        ],
-        "leadSpeaker": "diego",
-        "producerCue": "Diego reparte la pregunta por capas: evidencia, decisión y salida operativa.",
+        "bridge": "Si solo pudiéramos mejorar tres datos del registro habitual, ¿cuáles elegirías y para qué decisión servirían?",
         "questionFlow": [
           {
-            "to": "kervin",
-            "prompt": "¿Cuál es la brecha técnica que más debilita un informe cuando debe sostener una inversión?",
-            "transition": "Conecta el problema técnico con la toma de decisión."
-          },
+            "to": "daniel",
+            "prompt": "¿Qué debe quedar bien observado y registrado para que un reconocimiento preliminar sea útil desde la primera salida?",
+            "transition": "Repregunta: Si solo pudiéramos mejorar tres datos del registro habitual, ¿cuáles elegirías y para qué decisión servirían?",
+            "durationSec": 90
+          }
+        ]
+      },
+      {
+        "id": "piloto-geotecnia-01",
+        "blockId": "d1c",
+        "segmentId": "d1c",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Reconocimiento geológico y geotécnico preliminar · 1",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-geotecnia",
+        "slideNo": 1,
+        "assetUrl": "./assets/decks/piloto-geotecnia/01.webp",
+        "producerCue": "Mostrar lámina original 1. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-geotecnia-02",
+        "blockId": "d1c",
+        "segmentId": "d1c",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Reconocimiento geológico y geotécnico preliminar · 2",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-geotecnia",
+        "slideNo": 2,
+        "assetUrl": "./assets/decks/piloto-geotecnia/02.webp",
+        "producerCue": "Mostrar lámina original 2. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-geotecnia-03",
+        "blockId": "d1c",
+        "segmentId": "d1c",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Reconocimiento geológico y geotécnico preliminar · 3",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-geotecnia",
+        "slideNo": 3,
+        "assetUrl": "./assets/decks/piloto-geotecnia/03.webp",
+        "producerCue": "Mostrar lámina original 3. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-geotecnia-04",
+        "blockId": "d1c",
+        "segmentId": "d1c",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Reconocimiento geológico y geotécnico preliminar · 4",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-geotecnia",
+        "slideNo": 4,
+        "assetUrl": "./assets/decks/piloto-geotecnia/04.webp",
+        "producerCue": "Mostrar lámina original 4. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-geotecnia-05",
+        "blockId": "d1c",
+        "segmentId": "d1c",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Reconocimiento geológico y geotécnico preliminar · 5",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-geotecnia",
+        "slideNo": 5,
+        "assetUrl": "./assets/decks/piloto-geotecnia/05.webp",
+        "producerCue": "Mostrar lámina original 5. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-geotecnia-06",
+        "blockId": "d1c",
+        "segmentId": "d1c",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Reconocimiento geológico y geotécnico preliminar · 6",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-geotecnia",
+        "slideNo": 6,
+        "assetUrl": "./assets/decks/piloto-geotecnia/06.webp",
+        "producerCue": "Mostrar lámina original 6. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-geotecnia-07",
+        "blockId": "d1c",
+        "segmentId": "d1c",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Reconocimiento geológico y geotécnico preliminar · 7",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-geotecnia",
+        "slideNo": 7,
+        "assetUrl": "./assets/decks/piloto-geotecnia/07.webp",
+        "producerCue": "Mostrar lámina original 7. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-geotecnia-08",
+        "blockId": "d1c",
+        "segmentId": "d1c",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Reconocimiento geológico y geotécnico preliminar · 8",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-geotecnia",
+        "slideNo": 8,
+        "assetUrl": "./assets/decks/piloto-geotecnia/08.webp",
+        "producerCue": "Mostrar lámina original 8. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-geotecnia-09",
+        "blockId": "d1c",
+        "segmentId": "d1c",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Reconocimiento geológico y geotécnico preliminar · 9",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-geotecnia",
+        "slideNo": 9,
+        "assetUrl": "./assets/decks/piloto-geotecnia/09.webp",
+        "producerCue": "Mostrar lámina original 9. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-geotecnia-10",
+        "blockId": "d1c",
+        "segmentId": "d1c",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Reconocimiento geológico y geotécnico preliminar · 10",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-geotecnia",
+        "slideNo": 10,
+        "assetUrl": "./assets/decks/piloto-geotecnia/10.webp",
+        "producerCue": "Mostrar lámina original 10. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-q03",
+        "blockId": "d1c",
+        "segmentId": "d1c",
+        "segmentTitle": "Reconocimiento geológico y geotécnico preliminar",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "question",
+        "tag": "DÍA 1",
+        "title": "Pregunta 3 · Durante la demostración",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "¿Qué podemos orientar hoy con este registro y qué exige todavía verificación o un estudio más profundo?",
+        "lead": "¿Qué podemos orientar hoy con este registro y qué exige todavía verificación o un estudio más profundo?",
+        "producerCue": "[G] láminas 5-8. Mostrar el cierre: verificar, derivar/profundizar o programar seguimiento. No presentar la ficha como estudio de estabilidad ni derivar FS de RMR/SMR.",
+        "talkingPoints": [
+          "Muéstranos un dato faltante que cambie la atención propuesta."
+        ],
+        "bridge": "Muéstranos un dato faltante que cambie la atención propuesta.",
+        "questionFlow": [
           {
             "to": "daniel",
-            "prompt": "¿Qué transforma un reporte técnico en una intervención priorizada, presupuestable y defendible?",
-            "transition": "Resume en responsables, medidas, plazos y evidencia."
-          },
-          {
-            "to": "diego",
-            "prompt": "Cierre: ¿qué debería llevarse hoy una institución que reconoce esa brecha?",
-            "transition": "Abre preguntas del público."
+            "prompt": "¿Qué podemos orientar hoy con este registro y qué exige todavía verificación o un estudio más profundo?",
+            "transition": "Repregunta: Muéstranos un dato faltante que cambie la atención propuesta.",
+            "durationSec": 90
           }
+        ]
+      },
+      {
+        "id": "piloto-q04",
+        "blockId": "d1d",
+        "segmentId": "d1d",
+        "segmentTitle": "Del hallazgo a la comunidad",
+        "segmentDurationSec": 600,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "question",
+        "tag": "DÍA 1",
+        "title": "Pregunta 4 · Puente hacia la comunidad",
+        "participants": [
+          "daniel"
         ],
+        "leadSpeaker": "daniel",
+        "question": "Ya tenemos un hallazgo localizable. ¿Quién necesita comprenderlo y qué debe ocurrir para que no se quede guardado en un informe?",
+        "lead": "Ya tenemos un hallazgo localizable. ¿Quién necesita comprenderlo y qué debe ocurrir para que no se quede guardado en un informe?",
+        "producerCue": "Cerrar el tramo técnico y abrir [C] láminas 1-2. Separar observación, interpretación y comunicación.",
+        "talkingPoints": [
+          "¿Cómo lo explicaríamos en lenguaje sencillo sin minimizarlo ni generar alarma sin fundamento?"
+        ],
+        "bridge": "¿Cómo lo explicaríamos en lenguaje sencillo sin minimizarlo ni generar alarma sin fundamento?",
+        "questionFlow": [
+          {
+            "to": "daniel",
+            "prompt": "Ya tenemos un hallazgo localizable. ¿Quién necesita comprenderlo y qué debe ocurrir para que no se quede guardado en un informe?",
+            "transition": "Repregunta: ¿Cómo lo explicaríamos en lenguaje sencillo sin minimizarlo ni generar alarma sin fundamento?",
+            "durationSec": 90
+          }
+        ]
+      },
+      {
+        "id": "piloto-q05",
         "blockId": "d1e",
         "segmentId": "d1e",
-        "segmentTitle": "Informes, proyectos y financiamiento",
-        "segmentDurationSec": 1320,
-        "durationSec": 1320
-      },
-      {
-        "id": "d1-public-questions",
-        "layout": "trio",
-        "tag": "PREGUNTAS DEL PÚBLICO",
-        "title": "Preguntas del público",
-        "lead": "Diego recibe, ordena y dirige cada pregunta al panelista correspondiente.",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "question",
+        "tag": "DÍA 1",
+        "title": "Pregunta 5 · A Patricio o al referente comunitario",
         "participants": [
-          "diego",
-          "kervin",
           "daniel"
         ],
-        "leadSpeaker": "diego",
-        "producerCue": "10 min. Agrupa preguntas similares y protege respuestas de máximo 2 min.",
-        "questionFlow": [
-          {
-            "to": "diego",
-            "prompt": "Selecciona una pregunta del público y define a quién corresponde responder.",
-            "transition": "Dirige la pregunta al panelista y limita la respuesta a 2 minutos."
-          }
+        "leadSpeaker": "daniel",
+        "question": "Al terminar una jornada comunitaria, ¿qué evidencia muestra un avance real, además de una lista de asistencia?",
+        "lead": "Al terminar una jornada comunitaria, ¿qué evidencia muestra un avance real, además de una lista de asistencia?",
+        "producerCue": "[C] láminas 3-4 y 7. Acuerdo, responsable, plazo acordado y evidencia. La herramienta registra; la autoridad conserva sus competencias. Dirigir al referente si participa; en su ausencia, Daniel demuestra y consulta al público. No atribuir respuestas.",
+        "talkingPoints": [
+          "¿Qué diferencia hay entre reunir personas, elegir una estructura y lograr que funcione?"
         ],
-        "blockId": "d1f",
-        "segmentId": "d1f",
-        "segmentTitle": "Preguntas del público",
-        "segmentDurationSec": 600,
-        "durationSec": 600
-      },
-      {
-        "id": "d1-close",
-        "layout": "moderator",
-        "tag": "CIERRE · DÍA 1",
-        "title": "Lo que conocemos condiciona lo que podemos decidir",
-        "lead": "Diego cierra el día 1 y deja preparado el puente hacia capacidad y gobernanza.",
-        "participants": [
-          "diego",
-          "daniel"
-        ],
-        "leadSpeaker": "diego",
-        "producerCue": "8 min. Síntesis + 1 idea final de Daniel + invitación al día 2.",
+        "bridge": "¿Qué diferencia hay entre reunir personas, elegir una estructura y lograr que funcione?",
         "questionFlow": [
           {
             "to": "daniel",
-            "prompt": "En una frase: ¿qué debe cambiar para que la evidencia termine en una decisión ejecutable?",
-            "transition": "Diego sintetiza y anuncia el eje del día 2."
+            "prompt": "Al terminar una jornada comunitaria, ¿qué evidencia muestra un avance real, además de una lista de asistencia?",
+            "transition": "Repregunta: ¿Qué diferencia hay entre reunir personas, elegir una estructura y lograr que funcione?",
+            "durationSec": 90
           }
-        ],
-        "blockId": "d1g",
-        "segmentId": "d1g",
-        "segmentTitle": "Cierre día 1",
-        "segmentDurationSec": 480,
-        "durationSec": 480
+        ]
       },
       {
-        "id": "d2-open-moderator",
-        "layout": "moderator",
-        "tag": "APERTURA · DÍA 2",
-        "title": "De la decisión a la capacidad y la gobernanza",
-        "lead": "Diego retoma el hilo del día anterior y lo baja al territorio y la articulación.",
+        "id": "piloto-comunidad-01",
+        "blockId": "d1e",
+        "segmentId": "d1e",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Herramienta piloto de decisiones comunitarias · 1",
         "participants": [
-          "diego"
+          "daniel"
         ],
-        "leadSpeaker": "diego",
-        "producerCue": "Recapitula en 60 segundos y da paso a Patricio.",
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-comunidad",
+        "slideNo": 1,
+        "assetUrl": "./assets/decks/piloto-comunidad/01.webp",
+        "producerCue": "Mostrar lámina original 1. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-comunidad-02",
+        "blockId": "d1e",
+        "segmentId": "d1e",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Herramienta piloto de decisiones comunitarias · 2",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-comunidad",
+        "slideNo": 2,
+        "assetUrl": "./assets/decks/piloto-comunidad/02.webp",
+        "producerCue": "Mostrar lámina original 2. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-comunidad-03",
+        "blockId": "d1e",
+        "segmentId": "d1e",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Herramienta piloto de decisiones comunitarias · 3",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-comunidad",
+        "slideNo": 3,
+        "assetUrl": "./assets/decks/piloto-comunidad/03.webp",
+        "producerCue": "Mostrar lámina original 3. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-comunidad-04",
+        "blockId": "d1e",
+        "segmentId": "d1e",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Herramienta piloto de decisiones comunitarias · 4",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-comunidad",
+        "slideNo": 4,
+        "assetUrl": "./assets/decks/piloto-comunidad/04.webp",
+        "producerCue": "Mostrar lámina original 4. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-comunidad-05",
+        "blockId": "d1e",
+        "segmentId": "d1e",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Herramienta piloto de decisiones comunitarias · 5",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-comunidad",
+        "slideNo": 5,
+        "assetUrl": "./assets/decks/piloto-comunidad/05.webp",
+        "producerCue": "Mostrar lámina original 5. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-comunidad-06",
+        "blockId": "d1e",
+        "segmentId": "d1e",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Herramienta piloto de decisiones comunitarias · 6",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-comunidad",
+        "slideNo": 6,
+        "assetUrl": "./assets/decks/piloto-comunidad/06.webp",
+        "producerCue": "Mostrar lámina original 6. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-comunidad-07",
+        "blockId": "d1e",
+        "segmentId": "d1e",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Herramienta piloto de decisiones comunitarias · 7",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-comunidad",
+        "slideNo": 7,
+        "assetUrl": "./assets/decks/piloto-comunidad/07.webp",
+        "producerCue": "Mostrar lámina original 7. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-comunidad-08",
+        "blockId": "d1e",
+        "segmentId": "d1e",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Herramienta piloto de decisiones comunitarias · 8",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-comunidad",
+        "slideNo": 8,
+        "assetUrl": "./assets/decks/piloto-comunidad/08.webp",
+        "producerCue": "Mostrar lámina original 8. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-comunidad-09",
+        "blockId": "d1e",
+        "segmentId": "d1e",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Herramienta piloto de decisiones comunitarias · 9",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-comunidad",
+        "slideNo": 9,
+        "assetUrl": "./assets/decks/piloto-comunidad/09.webp",
+        "producerCue": "Mostrar lámina original 9. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-comunidad-10",
+        "blockId": "d1e",
+        "segmentId": "d1e",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "presentation",
+        "tag": "DÍA 1",
+        "title": "Herramienta piloto de decisiones comunitarias · 10",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "deckId": "piloto-comunidad",
+        "slideNo": 10,
+        "assetUrl": "./assets/decks/piloto-comunidad/10.webp",
+        "producerCue": "Mostrar lámina original 10. Explicar brevemente, sin leerla completa.",
+        "talkingPoints": [
+          "Fotos y oficina opcionales. Resultados preliminares sujetos a revisión."
+        ]
+      },
+      {
+        "id": "piloto-q06",
+        "blockId": "d1e",
+        "segmentId": "d1e",
+        "segmentTitle": "Herramienta de acompañamiento comunitario",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "question",
+        "tag": "DÍA 1",
+        "title": "Pregunta 6 · Durante el ejemplo comunitario",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "Si la asamblea se realizó pero el acta está incompleta, ¿qué conviene registrar y cuál sería el siguiente paso?",
+        "lead": "Si la asamblea se realizó pero el acta está incompleta, ¿qué conviene registrar y cuál sería el siguiente paso?",
+        "producerCue": "[C] láminas 5-7. Explicar orientaciones, revisión documental y campo/ oficina opcionales. Sin fotografía también puede registrarse el avance.",
+        "talkingPoints": [
+          "¿Cómo enviamos ese avance sin presentarlo como un proceso ya concluido?"
+        ],
+        "bridge": "¿Cómo enviamos ese avance sin presentarlo como un proceso ya concluido?",
         "questionFlow": [
           {
-            "to": "diego",
-            "prompt": "Ayer cerramos con evidencia y decisión. Hoy la pregunta es: ¿cómo se convierte eso en capacidad real?",
-            "transition": "Presenta a Patricio y abre el eje ACTUAR."
+            "to": "daniel",
+            "prompt": "Si la asamblea se realizó pero el acta está incompleta, ¿qué conviene registrar y cuál sería el siguiente paso?",
+            "transition": "Repregunta: ¿Cómo enviamos ese avance sin presentarlo como un proceso ya concluido?",
+            "durationSec": 90
           }
+        ]
+      },
+      {
+        "id": "piloto-q07",
+        "blockId": "d1f",
+        "segmentId": "d1f",
+        "segmentTitle": "Caso común y observaciones",
+        "segmentDurationSec": 1620,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "question",
+        "tag": "DÍA 1",
+        "title": "Pregunta 7 · Cruce técnico-comunitario",
+        "participants": [
+          "daniel"
         ],
+        "leadSpeaker": "daniel",
+        "question": "Si se observan grietas y presencia de agua cerca de viviendas, ¿qué registra cada herramienta y qué debe revisarse antes de proponer una ruta de evacuación?",
+        "lead": "Si se observan grietas y presencia de agua cerca de viviendas, ¿qué registra cada herramienta y qué debe revisarse antes de proponer una ruta de evacuación?",
+        "producerCue": "Caso hipotético para discusión: no afirmar inestabilidad demostrada ni declarar un sitio seguro con solo dibujarlo. Conectar [G] 4 y 6 con [C] 3-5.",
+        "talkingPoints": [
+          "¿Qué dato cambia la prioridad y quién debe valorar técnicamente la propuesta?"
+        ],
+        "bridge": "¿Qué dato cambia la prioridad y quién debe valorar técnicamente la propuesta?",
+        "questionFlow": [
+          {
+            "to": "daniel",
+            "prompt": "Si se observan grietas y presencia de agua cerca de viviendas, ¿qué registra cada herramienta y qué debe revisarse antes de proponer una ruta de evacuación?",
+            "transition": "Repregunta: ¿Qué dato cambia la prioridad y quién debe valorar técnicamente la propuesta?",
+            "durationSec": 90
+          }
+        ]
+      },
+      {
+        "id": "piloto-q08",
+        "blockId": "d1g",
+        "segmentId": "d1g",
+        "segmentTitle": "Entrega, piloto y puente al día 2",
+        "segmentDurationSec": 900,
+        "durationSec": 90,
+        "day": "Día 1",
+        "layout": "question",
+        "tag": "DÍA 1",
+        "title": "Pregunta 8 · Cierre del día 1",
+        "participants": [
+          "daniel"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "¿Qué tendría que pasar después del envío para que este registro produzca una acción verificable?",
+        "lead": "¿Qué tendría que pasar después del envío para que este registro produzca una acción verificable?",
+        "producerCue": "[C] 9-10 y [G] 8-10. Integraciones futuras no se presentan como activas. Recoger los pendientes para el día 2.",
+        "talkingPoints": [
+          "¿Qué debe recibir el técnico o la unidad responsable, y cómo sabemos que atendió el pendiente?"
+        ],
+        "bridge": "¿Qué debe recibir el técnico o la unidad responsable, y cómo sabemos que atendió el pendiente?",
+        "questionFlow": [
+          {
+            "to": "daniel",
+            "prompt": "¿Qué tendría que pasar después del envío para que este registro produzca una acción verificable?",
+            "transition": "Repregunta: ¿Qué debe recibir el técnico o la unidad responsable, y cómo sabemos que atendió el pendiente?",
+            "durationSec": 90
+          }
+        ]
+      },
+      {
+        "id": "piloto-recapitulacion",
         "blockId": "d2a",
         "segmentId": "d2a",
         "segmentTitle": "Recapitulación",
-        "segmentDurationSec": 420,
-        "durationSec": 420
-      },
-      {
-        "id": "d2-patricio-placeholder",
-        "layout": "cards",
-        "tag": "ACTUAR",
-        "title": "Preparación y comunidad",
-        "lead": "Bloque de Patricio: comités, SAT, capacitación, ejercicios y respuesta.",
+        "segmentDurationSec": 600,
+        "durationSec": 90,
+        "day": "Día 2",
+        "layout": "moderator",
+        "tag": "DÍA 2",
+        "title": "Una observación, un acuerdo y dos pendientes",
         "participants": [
-          "patricio"
-        ],
-        "leadSpeaker": "patricio",
-        "producerCue": "25 min. Placeholder hasta integrar el deck de Patricio.",
-        "cards": [
-          [
-            "Capacidad",
-            "Un plan debe convertirse en capacidad instalada."
-          ],
-          [
-            "Preparación",
-            "Comités, SAT, ejercicios y retroalimentación."
-          ],
-          [
-            "Territorio",
-            "La respuesta debe poder ejecutarse por actores reales."
-          ]
-        ],
-        "blockId": "d2b",
-        "segmentId": "d2b",
-        "segmentTitle": "Preparación y comunidad",
-        "segmentDurationSec": 1500,
-        "durationSec": 1500
-      },
-      {
-        "id": "d2-territory-trio",
-        "layout": "trio",
-        "tag": "DIÁLOGO TERRITORIO",
-        "title": "Del documento a la capacidad instalada",
-        "lead": "Moderación, acción territorial y gestión institucional en una sola conversación.",
-        "participants": [
-          "diego",
-          "patricio",
           "daniel"
-        ],
-        "leadSpeaker": "diego",
-        "producerCue": "Conduce en secuencia: comunidad → gestión → síntesis.",
-        "questionFlow": [
-          {
-            "to": "patricio",
-            "prompt": "¿Qué información debe llegar a la comunidad y cuál debe permanecer como insumo técnico?",
-            "transition": "Diego conecta la respuesta con gestión institucional."
-          },
-          {
-            "to": "daniel",
-            "prompt": "¿Cómo se conecta esa capacidad comunitaria con decisiones y responsabilidades institucionales?",
-            "transition": "Cierra con la idea de capacidad instalada."
-          },
-          {
-            "to": "diego",
-            "prompt": "Síntesis: ¿cómo sabemos que un plan dejó de ser papel y se convirtió en capacidad?",
-            "transition": "Da paso a Xavier y al eje ARTICULAR."
-          }
-        ],
-        "blockId": "d2c",
-        "segmentId": "d2c",
-        "segmentTitle": "Diálogo territorio",
-        "segmentDurationSec": 900,
-        "durationSec": 900
-      },
-      {
-        "id": "d2-xavier",
-        "layout": "cards",
-        "tag": "ARTICULAR",
-        "title": "Gobernanza del riesgo",
-        "lead": "Competencias, coordinación, responsabilidades y continuidad.",
-        "participants": [
-          "xavier"
-        ],
-        "leadSpeaker": "xavier",
-        "producerCue": "30 min. Xavier desarrolla gobernanza y articulación institucional.",
-        "cards": [
-          [
-            "Competencias",
-            "Quién decide, quién ejecuta y con qué recursos."
-          ],
-          [
-            "Coordinación",
-            "Articular no es reunirse: es asegurar continuidad."
-          ],
-          [
-            "Gobernanza",
-            "Responsabilidad y seguimiento más allá de las personas."
-          ]
-        ],
-        "blockId": "d2d",
-        "segmentId": "d2d",
-        "segmentTitle": "Gobernanza del riesgo",
-        "segmentDurationSec": 1800,
-        "durationSec": 1800
-      },
-      {
-        "id": "d2-transversal-trio",
-        "layout": "trio",
-        "tag": "PREGUNTA TRANSVERSAL",
-        "title": "Si ya conocemos el riesgo, ¿qué nos falta para actuar?",
-        "lead": "Tres perspectivas en pantalla y una misma pregunta de continuidad.",
-        "participants": [
-          "kervin",
-          "daniel",
-          "patricio"
         ],
         "leadSpeaker": "daniel",
-        "producerCue": "Respuestas de máximo 90 segundos. Mantén la pregunta visible.",
-        "questionFlow": [
-          {
-            "to": "kervin",
-            "prompt": "Desde la evidencia: ¿qué nos falta para actuar realmente sobre un riesgo ya conocido?",
-            "transition": "Pasa de conocimiento a decisión."
-          },
-          {
-            "to": "daniel",
-            "prompt": "Desde la gestión: ¿qué convierte el conocimiento en una decisión ejecutable?",
-            "transition": "Pasa de decisión a capacidad territorial."
-          },
-          {
-            "to": "patricio",
-            "prompt": "Desde el territorio: ¿qué hace que esa decisión se convierta en capacidad real para la comunidad?",
-            "transition": "Diego retoma y prepara gobernanza/caso integrador."
-          }
-        ],
-        "blockId": "d2e",
-        "segmentId": "d2e",
-        "segmentTitle": "Pregunta transversal",
-        "segmentDurationSec": 1200,
-        "durationSec": 1200
+        "lead": "Retomar el mismo caso del día 1.",
+        "producerCue": "Daniel: quién recibe, cómo tramita y cómo comprobamos que sirve a las personas."
       },
       {
-        "id": "d2-case-trio",
+        "id": "piloto-q09",
+        "blockId": "d2b",
+        "segmentId": "d2b",
+        "segmentTitle": "Xavier: recepción, coordinación y continuidad",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 2",
         "layout": "trio",
-        "tag": "CASO INTEGRADOR",
-        "title": "Intervención sustentada técnicamente, pero que no avanza",
-        "lead": "Un mismo caso, tres responsabilidades complementarias.",
+        "tag": "DÍA 2",
+        "title": "Pregunta 9 · A Xavier",
         "participants": [
-          "diego",
+          "daniel",
           "xavier",
-          "daniel"
+          "camilo"
         ],
-        "leadSpeaker": "diego",
-        "producerCue": "Diego plantea el caso. Xavier responde gobernanza; Daniel cierra con ruta de decisión.",
+        "leadSpeaker": "daniel",
+        "question": "Si una unidad de un GAD recibe un registro preliminar, ¿qué información mínima necesita para asignarle una revisión o una acción?",
+        "lead": "Si una unidad de un GAD recibe un registro preliminar, ¿qué información mínima necesita para asignarle una revisión o una acción?",
+        "producerCue": "Buscar un requisito común aplicable al expediente: receptor, fuente, localización, alcance, responsable y siguiente gestión, según su respuesta. No anticipar su criterio.",
+        "talkingPoints": [
+          "¿Qué requisito es indispensable y cuál podríamos estar pidiendo sin que ayude a decidir?"
+        ],
+        "bridge": "¿Qué requisito es indispensable y cuál podríamos estar pidiendo sin que ayude a decidir?",
         "questionFlow": [
           {
             "to": "xavier",
-            "prompt": "¿Qué destraba una intervención cuando el sustento técnico existe, pero la articulación institucional falla?",
-            "transition": "Conecta gobernanza con responsabilidades y continuidad."
-          },
-          {
-            "to": "daniel",
-            "prompt": "¿Cuál sería la secuencia mínima para pasar de ese bloqueo a una ruta ejecutable?",
-            "transition": "Conecta diagnóstico → decisión → responsable → seguimiento."
-          },
-          {
-            "to": "diego",
-            "prompt": "Cierra el caso con una frase que conecte conocer, decidir, actuar y articular.",
-            "transition": "Da paso a la ruta de soluciones y cierre final."
+            "prompt": "Si una unidad de un GAD recibe un registro preliminar, ¿qué información mínima necesita para asignarle una revisión o una acción?",
+            "transition": "Repregunta: ¿Qué requisito es indispensable y cuál podríamos estar pidiendo sin que ayude a decidir?",
+            "durationSec": 90
           }
-        ],
-        "blockId": "d2f",
-        "segmentId": "d2f",
-        "segmentTitle": "Caso integrador",
-        "segmentDurationSec": 600,
-        "durationSec": 600
+        ]
       },
       {
-        "id": "d2-route-solutions",
-        "layout": "cards",
-        "tag": "RUTA DE SOLUCIONES",
-        "title": "Del diagnóstico a la implementación",
-        "lead": "Daniel organiza la salida: diagnóstico → asesoría → capacitación → implementación → seguimiento.",
+        "id": "piloto-q10",
+        "blockId": "d2b",
+        "segmentId": "d2b",
+        "segmentTitle": "Xavier: recepción, coordinación y continuidad",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 2",
+        "layout": "trio",
+        "tag": "DÍA 2",
+        "title": "Pregunta 10 · A Xavier",
         "participants": [
-          "daniel"
+          "daniel",
+          "xavier",
+          "camilo"
         ],
         "leadSpeaker": "daniel",
-        "producerCue": "7 min. Cierra con una ruta concreta, no con venta genérica.",
-        "cards": [
-          [
-            "Diagnóstico",
-            "Definir la brecha."
-          ],
-          [
-            "Intervención",
-            "Asignar responsable, medida y plazo."
-          ],
-          [
-            "Seguimiento",
-            "Medir resultado y ajustar."
-          ]
+        "question": "¿En qué parte del procedimiento puede incorporarse esta información sin crear otra base paralela ni duplicar trabajo?",
+        "lead": "¿En qué parte del procedimiento puede incorporarse esta información sin crear otra base paralela ni duplicar trabajo?",
+        "producerCue": "Preguntar por el procedimiento que él conozca y distinguir propuesta de requisito nacional.",
+        "talkingPoints": [
+          "¿Qué documento o estado deja constancia de recepción, revisión y respuesta?"
         ],
-        "blockId": "d2g",
-        "segmentId": "d2g",
-        "segmentTitle": "Ruta de soluciones",
-        "segmentDurationSec": 420,
-        "durationSec": 420
-      },
-      {
-        "id": "d2-close-moderator",
-        "layout": "moderator",
-        "tag": "CIERRE FINAL",
-        "title": "Conocer · decidir · actuar · articular",
-        "lead": "Diego cierra el hilo y deja una ruta clara de seguimiento.",
-        "participants": [
-          "diego"
-        ],
-        "leadSpeaker": "diego",
-        "producerCue": "Cierre de 60–90 segundos. Agradece y deja la ruta de seguimiento.",
+        "bridge": "¿Qué documento o estado deja constancia de recepción, revisión y respuesta?",
         "questionFlow": [
           {
-            "to": "diego",
-            "prompt": "¿Qué idea debe quedarse el público al terminar este conversatorio?",
-            "transition": "Agradece a panelistas, CRIGMPAL, SAMBIES y público."
+            "to": "xavier",
+            "prompt": "¿En qué parte del procedimiento puede incorporarse esta información sin crear otra base paralela ni duplicar trabajo?",
+            "transition": "Repregunta: ¿Qué documento o estado deja constancia de recepción, revisión y respuesta?",
+            "durationSec": 90
           }
+        ]
+      },
+      {
+        "id": "piloto-q11",
+        "blockId": "d2b",
+        "segmentId": "d2b",
+        "segmentTitle": "Xavier: recepción, coordinación y continuidad",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 2",
+        "layout": "trio",
+        "tag": "DÍA 2",
+        "title": "Pregunta 11 · A Xavier",
+        "participants": [
+          "daniel",
+          "xavier",
+          "camilo"
         ],
-        "blockId": "d2h",
-        "segmentId": "d2h",
-        "segmentTitle": "Cierre final",
-        "segmentDurationSec": 360,
-        "durationSec": 360
+        "leadSpeaker": "daniel",
+        "question": "¿Cómo se conserva la continuidad cuando cambia el técnico, la autoridad o el equipo que acompañaba el proceso?",
+        "lead": "¿Cómo se conserva la continuidad cuando cambia el técnico, la autoridad o el equipo que acompañaba el proceso?",
+        "producerCue": "Historial y evidencia; no reducir la continuidad a un usuario de plataforma.",
+        "talkingPoints": [
+          "¿Qué debería poder reconstruir el siguiente responsable sin llamar al anterior?"
+        ],
+        "bridge": "¿Qué debería poder reconstruir el siguiente responsable sin llamar al anterior?",
+        "questionFlow": [
+          {
+            "to": "xavier",
+            "prompt": "¿Cómo se conserva la continuidad cuando cambia el técnico, la autoridad o el equipo que acompañaba el proceso?",
+            "transition": "Repregunta: ¿Qué debería poder reconstruir el siguiente responsable sin llamar al anterior?",
+            "durationSec": 90
+          }
+        ]
+      },
+      {
+        "id": "piloto-q12",
+        "blockId": "d2c",
+        "segmentId": "d2c",
+        "segmentTitle": "Camilo: pertinencia, protección y participación",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 2",
+        "layout": "trio",
+        "tag": "DÍA 2",
+        "title": "Pregunta 12 · Puente de Xavier a Camilo",
+        "participants": [
+          "daniel",
+          "xavier",
+          "camilo"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "Podemos tener un expediente completo y aun así una respuesta poco útil. ¿Cómo comprobamos si lo decidido corresponde a lo que necesitan las personas?",
+        "lead": "Podemos tener un expediente completo y aun así una respuesta poco útil. ¿Cómo comprobamos si lo decidido corresponde a lo que necesitan las personas?",
+        "producerCue": "Entregar la palabra a Camilo. Su intervención revisa aplicabilidad; no se presenta como certificación Esfera de los formularios.",
+        "talkingPoints": [
+          "Camilo, ¿qué mirarías primero desde el enfoque del Manual Esfera?"
+        ],
+        "bridge": "Camilo, ¿qué mirarías primero desde el enfoque del Manual Esfera?",
+        "questionFlow": [
+          {
+            "to": "camilo",
+            "prompt": "Podemos tener un expediente completo y aun así una respuesta poco útil. ¿Cómo comprobamos si lo decidido corresponde a lo que necesitan las personas?",
+            "transition": "Repregunta: Camilo, ¿qué mirarías primero desde el enfoque del Manual Esfera?",
+            "durationSec": 90
+          }
+        ]
+      },
+      {
+        "id": "piloto-q13",
+        "blockId": "d2c",
+        "segmentId": "d2c",
+        "segmentTitle": "Camilo: pertinencia, protección y participación",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 2",
+        "layout": "trio",
+        "tag": "DÍA 2",
+        "title": "Pregunta 13 · A Camilo",
+        "participants": [
+          "daniel",
+          "xavier",
+          "camilo"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "¿Qué deberíamos preguntar o comprobar para que el registro represente las necesidades y capacidades de la comunidad, y no solo la mirada del técnico?",
+        "lead": "¿Qué deberíamos preguntar o comprobar para que el registro represente las necesidades y capacidades de la comunidad, y no solo la mirada del técnico?",
+        "producerCue": "Pedir un ejemplo observable, sin solicitar historias personales identificables.",
+        "talkingPoints": [
+          "¿Cómo incluimos a quienes no pueden asistir a la reunión o necesitan apoyos para participar?"
+        ],
+        "bridge": "¿Cómo incluimos a quienes no pueden asistir a la reunión o necesitan apoyos para participar?",
+        "questionFlow": [
+          {
+            "to": "camilo",
+            "prompt": "¿Qué deberíamos preguntar o comprobar para que el registro represente las necesidades y capacidades de la comunidad, y no solo la mirada del técnico?",
+            "transition": "Repregunta: ¿Cómo incluimos a quienes no pueden asistir a la reunión o necesitan apoyos para participar?",
+            "durationSec": 90
+          }
+        ]
+      },
+      {
+        "id": "piloto-q14",
+        "blockId": "d2c",
+        "segmentId": "d2c",
+        "segmentTitle": "Camilo: pertinencia, protección y participación",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 2",
+        "layout": "trio",
+        "tag": "DÍA 2",
+        "title": "Pregunta 14 · A Camilo",
+        "participants": [
+          "daniel",
+          "xavier",
+          "camilo"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "¿Cómo distinguimos un comité conformado de una comunidad que realmente puede prepararse y actuar con seguridad?",
+        "lead": "¿Cómo distinguimos un comité conformado de una comunidad que realmente puede prepararse y actuar con seguridad?",
+        "producerCue": "Retomar recepción y comprensión de avisos, apoyos y límites de actuación, sin inventar resultados de un simulacro.",
+        "talkingPoints": [
+          "¿Qué comprobarías en un ejercicio, además de contar asistentes y tomar fotografías?"
+        ],
+        "bridge": "¿Qué comprobarías en un ejercicio, además de contar asistentes y tomar fotografías?",
+        "questionFlow": [
+          {
+            "to": "camilo",
+            "prompt": "¿Cómo distinguimos un comité conformado de una comunidad que realmente puede prepararse y actuar con seguridad?",
+            "transition": "Repregunta: ¿Qué comprobarías en un ejercicio, además de contar asistentes y tomar fotografías?",
+            "durationSec": 90
+          }
+        ]
+      },
+      {
+        "id": "piloto-q15",
+        "blockId": "d2c",
+        "segmentId": "d2c",
+        "segmentTitle": "Camilo: pertinencia, protección y participación",
+        "segmentDurationSec": 1500,
+        "durationSec": 90,
+        "day": "Día 2",
+        "layout": "trio",
+        "tag": "DÍA 2",
+        "title": "Pregunta 15 · A Camilo",
+        "participants": [
+          "daniel",
+          "xavier",
+          "camilo"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "¿Qué información necesitamos para organizar apoyos y cuál sería riesgoso recopilar o mostrar sin una finalidad y protección claras?",
+        "lead": "¿Qué información necesitamos para organizar apoyos y cuál sería riesgoso recopilar o mostrar sin una finalidad y protección claras?",
+        "producerCue": "[C] lámina 8. Evitar afirmar anonimato o seguridad técnica por usar códigos.",
+        "talkingPoints": [
+          "¿Qué dejarías en una ficha operativa y qué reservarías al expediente protegido?"
+        ],
+        "bridge": "¿Qué dejarías en una ficha operativa y qué reservarías al expediente protegido?",
+        "questionFlow": [
+          {
+            "to": "camilo",
+            "prompt": "¿Qué información necesitamos para organizar apoyos y cuál sería riesgoso recopilar o mostrar sin una finalidad y protección claras?",
+            "transition": "Repregunta: ¿Qué dejarías en una ficha operativa y qué reservarías al expediente protegido?",
+            "durationSec": 90
+          }
+        ]
+      },
+      {
+        "id": "piloto-q16",
+        "blockId": "d2d",
+        "segmentId": "d2d",
+        "segmentTitle": "Caso compartido",
+        "segmentDurationSec": 1800,
+        "durationSec": 90,
+        "day": "Día 2",
+        "layout": "trio",
+        "tag": "DÍA 2",
+        "title": "Pregunta 16 · A ambos / mismo caso",
+        "participants": [
+          "daniel",
+          "xavier",
+          "camilo"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "Con un hallazgo de campo preliminar y un acuerdo comunitario, ¿cuál sería la primera acción coordinada y qué impediría ejecutarla?",
+        "lead": "Con un hallazgo de campo preliminar y un acuerdo comunitario, ¿cuál sería la primera acción coordinada y qué impediría ejecutarla?",
+        "producerCue": "Usar el mismo caso hipotético del día 1. Dejar que identifiquen brechas; no convertirlo en un diagnóstico de un lugar real.",
+        "talkingPoints": [
+          "Xavier: ¿quién recibe y tramita? Camilo: ¿quién podría quedar sin apoyo o no ser escuchado?"
+        ],
+        "bridge": "Xavier: ¿quién recibe y tramita? Camilo: ¿quién podría quedar sin apoyo o no ser escuchado?",
+        "questionFlow": [
+          {
+            "to": "xavier",
+            "prompt": "Con un hallazgo de campo preliminar y un acuerdo comunitario, ¿cuál sería la primera acción coordinada y qué impediría ejecutarla?",
+            "transition": "Xavier: ¿quién recibe y tramita? Camilo: ¿quién podría quedar sin apoyo o no ser escuchado?",
+            "durationSec": 90
+          },
+          {
+            "to": "camilo",
+            "prompt": "Con un hallazgo de campo preliminar y un acuerdo comunitario, ¿cuál sería la primera acción coordinada y qué impediría ejecutarla?",
+            "transition": "Xavier: ¿quién recibe y tramita? Camilo: ¿quién podría quedar sin apoyo o no ser escuchado?",
+            "durationSec": 90
+          }
+        ]
+      },
+      {
+        "id": "piloto-publico",
+        "blockId": "d2e",
+        "segmentId": "d2e",
+        "segmentTitle": "Preguntas del público",
+        "segmentDurationSec": 1200,
+        "durationSec": 90,
+        "day": "Día 2",
+        "layout": "trio",
+        "tag": "DÍA 2",
+        "title": "Preguntas del público",
+        "participants": [
+          "daniel",
+          "xavier",
+          "camilo"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "¿Qué ajuste concreto haría más útil la herramienta en tu trabajo?",
+        "producerCue": "Seleccionar preguntas útiles para el piloto. Registrar propuesta, motivo y cómo probarla."
+      },
+      {
+        "id": "piloto-q17",
+        "blockId": "d2f",
+        "segmentId": "d2f",
+        "segmentTitle": "Ajustes prioritarios y cierre",
+        "segmentDurationSec": 600,
+        "durationSec": 90,
+        "day": "Día 2",
+        "layout": "trio",
+        "tag": "DÍA 2",
+        "title": "Pregunta 17 · Cierre de mejora / a ambos",
+        "participants": [
+          "daniel",
+          "xavier",
+          "camilo"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "Si solo pudiéramos corregir una cosa de estas herramientas antes de ampliar el piloto, ¿cuál cambiarían y cómo comprobarían que mejoró?",
+        "lead": "Si solo pudiéramos corregir una cosa de estas herramientas antes de ampliar el piloto, ¿cuál cambiarían y cómo comprobarían que mejoró?",
+        "producerCue": "Anotar propuesta, motivo, comprobación y responsable por acordar. La opinión del panel es un insumo, no una validación metodológica formal.",
+        "talkingPoints": [
+          "¿Qué observaríamos en la siguiente jornada para aceptar o descartar ese ajuste?"
+        ],
+        "bridge": "¿Qué observaríamos en la siguiente jornada para aceptar o descartar ese ajuste?",
+        "questionFlow": [
+          {
+            "to": "xavier",
+            "prompt": "Si solo pudiéramos corregir una cosa de estas herramientas antes de ampliar el piloto, ¿cuál cambiarían y cómo comprobarían que mejoró?",
+            "transition": "¿Qué observaríamos en la siguiente jornada para aceptar o descartar ese ajuste?",
+            "durationSec": 90
+          },
+          {
+            "to": "camilo",
+            "prompt": "Si solo pudiéramos corregir una cosa de estas herramientas antes de ampliar el piloto, ¿cuál cambiarían y cómo comprobarían que mejoró?",
+            "transition": "¿Qué observaríamos en la siguiente jornada para aceptar o descartar ese ajuste?",
+            "durationSec": 90
+          }
+        ]
+      },
+      {
+        "id": "piloto-cierre",
+        "blockId": "d2f",
+        "segmentId": "d2f",
+        "segmentTitle": "Ajustes prioritarios y cierre",
+        "segmentDurationSec": 600,
+        "durationSec": 90,
+        "day": "Día 2",
+        "layout": "trio",
+        "tag": "DÍA 2",
+        "title": "Tres ajustes para poner a prueba",
+        "participants": [
+          "daniel",
+          "xavier",
+          "camilo"
+        ],
+        "leadSpeaker": "daniel",
+        "question": "¿Qué cambiar, quién lo probará y con qué evidencia?",
+        "producerCue": "Acordar tres prioridades. Opiniones del panel son insumos; no validación metodológica formal."
       }
     ],
-    "moderatorId": "diego",
+    "moderatorId": "daniel",
     "productionLogic": {
       "maxVisiblePanelists": 3,
       "questionAdvanceLabel": "RESUELTA → SIGUIENTE",
-      "moderatorId": "diego",
+      "moderatorId": "daniel",
       "behavior": "Cada escena puede definir participants, leadSpeaker y questionFlow. CONTROL avanza questionIndex; Panelista/Moderador reciben la pregunta activa por MQTT."
     },
     "presentationDecks": {
@@ -1786,6 +1689,134 @@
         "renderMode": "persistent-image-with-preview-fallback",
         "runtimeUploadRequired": false,
         "status": "ready"
+      },
+      "piloto-geotecnia": {
+        "id": "piloto-geotecnia",
+        "title": "Reconocimiento geológico y geotécnico preliminar",
+        "speaker": "daniel",
+        "slideCount": 10,
+        "sourceType": "pdf-rendered-static-images",
+        "sourcePdf": "Reconocimiento_Geológico_y_Geotécnico_Preliminar.pdf",
+        "slides": [
+          {
+            "page": 1,
+            "assetUrl": "./assets/decks/piloto-geotecnia/01.webp"
+          },
+          {
+            "page": 2,
+            "assetUrl": "./assets/decks/piloto-geotecnia/02.webp"
+          },
+          {
+            "page": 3,
+            "assetUrl": "./assets/decks/piloto-geotecnia/03.webp"
+          },
+          {
+            "page": 4,
+            "assetUrl": "./assets/decks/piloto-geotecnia/04.webp"
+          },
+          {
+            "page": 5,
+            "assetUrl": "./assets/decks/piloto-geotecnia/05.webp"
+          },
+          {
+            "page": 6,
+            "assetUrl": "./assets/decks/piloto-geotecnia/06.webp"
+          },
+          {
+            "page": 7,
+            "assetUrl": "./assets/decks/piloto-geotecnia/07.webp"
+          },
+          {
+            "page": 8,
+            "assetUrl": "./assets/decks/piloto-geotecnia/08.webp"
+          },
+          {
+            "page": 9,
+            "assetUrl": "./assets/decks/piloto-geotecnia/09.webp"
+          },
+          {
+            "page": 10,
+            "assetUrl": "./assets/decks/piloto-geotecnia/10.webp"
+          }
+        ],
+        "sceneIds": [
+          "piloto-geotecnia-01",
+          "piloto-geotecnia-02",
+          "piloto-geotecnia-03",
+          "piloto-geotecnia-04",
+          "piloto-geotecnia-05",
+          "piloto-geotecnia-06",
+          "piloto-geotecnia-07",
+          "piloto-geotecnia-08",
+          "piloto-geotecnia-09",
+          "piloto-geotecnia-10"
+        ],
+        "runtimeUploadRequired": false,
+        "status": "ready"
+      },
+      "piloto-comunidad": {
+        "id": "piloto-comunidad",
+        "title": "Herramienta piloto de decisiones comunitarias",
+        "speaker": "daniel",
+        "slideCount": 10,
+        "sourceType": "pdf-rendered-static-images",
+        "sourcePdf": "Herramienta_Piloto_de_Decisiones_Comunitarias.pdf",
+        "slides": [
+          {
+            "page": 1,
+            "assetUrl": "./assets/decks/piloto-comunidad/01.webp"
+          },
+          {
+            "page": 2,
+            "assetUrl": "./assets/decks/piloto-comunidad/02.webp"
+          },
+          {
+            "page": 3,
+            "assetUrl": "./assets/decks/piloto-comunidad/03.webp"
+          },
+          {
+            "page": 4,
+            "assetUrl": "./assets/decks/piloto-comunidad/04.webp"
+          },
+          {
+            "page": 5,
+            "assetUrl": "./assets/decks/piloto-comunidad/05.webp"
+          },
+          {
+            "page": 6,
+            "assetUrl": "./assets/decks/piloto-comunidad/06.webp"
+          },
+          {
+            "page": 7,
+            "assetUrl": "./assets/decks/piloto-comunidad/07.webp"
+          },
+          {
+            "page": 8,
+            "assetUrl": "./assets/decks/piloto-comunidad/08.webp"
+          },
+          {
+            "page": 9,
+            "assetUrl": "./assets/decks/piloto-comunidad/09.webp"
+          },
+          {
+            "page": 10,
+            "assetUrl": "./assets/decks/piloto-comunidad/10.webp"
+          }
+        ],
+        "sceneIds": [
+          "piloto-comunidad-01",
+          "piloto-comunidad-02",
+          "piloto-comunidad-03",
+          "piloto-comunidad-04",
+          "piloto-comunidad-05",
+          "piloto-comunidad-06",
+          "piloto-comunidad-07",
+          "piloto-comunidad-08",
+          "piloto-comunidad-09",
+          "piloto-comunidad-10"
+        ],
+        "runtimeUploadRequired": false,
+        "status": "ready"
       }
     },
     "deckMethodology": {
@@ -1884,7 +1915,8 @@
         8,
         14
       ]
-    }
+    },
+    "scheduleStatus": "Fechas y hora de inicio por confirmar; duración propuesta: 120 minutos por jornada."
   },
   "realtime": {
     "transport": "mqtt-wss",
