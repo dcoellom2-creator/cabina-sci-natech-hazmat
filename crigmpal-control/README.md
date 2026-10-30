@@ -257,3 +257,11 @@ La diapositiva pública se conserva tal cual. El guion privado y las transicione
 - PROGRAM interpreta el estado `surface` para alternar presentación/pizarra sin requerir escenas board dedicadas.
 - Panelistas y moderador comparten el estado global, pero los controles de diapositiva permanecen bloqueados fuera del turno propio.
 - QA E2E realizado sobre CONTROL, Panelista Daniel, Moderador Diego y PROGRAM; TAKE, temporizadores, PREVIEW, bloqueo por rol y salida pública resultaron concordantes.
+
+
+## Identidad GeoPro.ec
+- Tema compartido: `assets/geopro-theme.css`.
+- GeoPro.ec como marca principal y logo CRIGMPAL existente como marca relacionada.
+- Azul marino, cian y ámbar; se conservan colores semánticos de alertas y diapositivas originales.
+- Vistas activas y alias estables usan los mismos activos. No se alteró la lógica de producción.
+- Prompt de continuidad: `Prompt_Maestro_Promter_Risk.md`.
