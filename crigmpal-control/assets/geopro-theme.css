@@ -29,3 +29,8 @@ button:focus-visible,a:focus-visible,select:focus-visible,textarea:focus-visible
 .speaker-bottom small{color:#9edee3}.axis{border:1px solid rgba(0,184,196,.4);background:rgba(0,127,138,.18)}
 .notice{border-color:#b8dbe0;background:#eaf7f8}
 @media(max-width:600px){header{padding-left:12px;padding-right:12px;gap:8px}.brand img.geopro-logo{width:42px;height:42px}.brand img.crigmpal-logo{width:30px;height:30px}.brand b{font-size:13px}.brand small,.brand .muted{font-size:10px}.geopro-home-brand{gap:10px}.geopro-home-brand>span{font-size:18px}.geopro-home-brand img.geopro-logo{width:60px;height:60px}.geopro-home-brand img.crigmpal-logo{width:36px;height:36px}}
+/* Multi-camera/moderator scenes hide the single-speaker rail; retain both brands there. */
+#multiStage::before,#multiStage::after{content:"";position:absolute;z-index:8;top:2.8vh;width:4.2vw;height:4.2vw;max-width:66px;max-height:66px;min-width:36px;min-height:36px;border-radius:50%;background:white url('./geopro-logo.webp') center/contain no-repeat;pointer-events:none}
+#multiStage::before{right:2.5vw}
+#multiStage::after{right:7.6vw;width:3.1vw;height:3.1vw;max-width:48px;max-height:48px;min-width:30px;min-height:30px;top:3.3vh;background-image:url('./crigmpal-logo.webp')}
+#multiStage .multi-top{padding-right:12vw;min-height:5vw}
