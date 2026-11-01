@@ -27,3 +27,7 @@ La cámara dedicada es un servicio independiente. No abrirla durante pruebas ais
 El canal compartido público es un prototipo sin autenticación fuerte. No enviar datos personales o contenidos confidenciales. La presencia de canal no demuestra recepción de audio/video ni mide calidad, latencia o pérdida de paquetes.
 
 Queda por ensayar con personas reales: cámaras, permisos de dispositivos, audio de Zoom, captura en el estudio y salida a redes. PROGRAM por sí solo no inicia una transmisión en Facebook.
+
+## Verificación visual en el navegador
+
+Ensayo aislado en GitHub Pages: entrada sin TAKE, toma de control, preparación de lámina conservando PROGRAM, TAKE, pausa con placa y retirada de cámaras, cambio de jornada conservando la pausa, conversación de dos participantes sin el ausente, apertura de segunda cabina en observación sin reemplazar la salida, inserción de material público como herramienta. Las fuentes de cámara no tenían emisores activos: esta revisión no acredita calidad audiovisual ni prueba de micrófonos.

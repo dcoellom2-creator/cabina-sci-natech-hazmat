@@ -10,6 +10,7 @@
     if(layout==='trio')participants=participants.slice(0,3);
     const flow=sc.questionFlow||[],qi=Math.max(0,Math.min(flow.length-1,Number(options.questionIndex)||0)),q=flow[qi]||{};
     const speaker=participants.includes(sc.leadSpeaker)?sc.leadSpeaker:(participants[0]||event.moderatorId);
+    if(['tool','presentation','fullspeaker'].includes(layout))participants=participants.includes(speaker)?[speaker]:[];
     return {protocol:2,eventId:event.id,sceneIndex:i,sceneId:sc.id,speakerId:speaker,participants,layoutOverride:layout,
       questionIndex:qi,targetSpeakerId:participants.includes(q.to)?q.to:speaker,question:options.question||q.prompt||sc.question||'',
       sceneTitle:options.title||sc.title||'',producerCue:sc.producerCue||'',transition:q.transition||sc.bridge||'',
