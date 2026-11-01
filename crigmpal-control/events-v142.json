@@ -1,6 +1,6 @@
 {
   "version": "0.14.2",
-  "updatedAt": "2026-10-30T12:00:00-05:00",
+  "updatedAt": "2026-10-31T22:30:00-05:00",
   "event": {
     "id": "crigmpal-2026-10",
     "name": "Del registro de campo a la acción",
@@ -1867,14 +1867,14 @@
       "enabled": true,
       "slideAdvance": "own-presentation-only",
       "commandTopic": "command",
-      "autoTakeOnAdvance": true,
+      "autoTakeOnAdvance": false,
       "thresholdsSec": {
         "attention": 120,
         "closing": 60,
         "critical": 30
       },
       "cameraMode": "dedicated-phone-page",
-      "note": "El panelista controla únicamente sus diapositivas durante su turno. El productor conserva control maestro."
+      "note": "Las solicitudes se preparan en PREVIA. Realización puede permitir avance de diapositivas del participante activo."
     },
     "panelistConsole": {
       "publicMirror": true,
@@ -1921,7 +1921,7 @@
   "realtime": {
     "transport": "mqtt-wss",
     "broker": "wss://broker.emqx.io:8084/mqtt",
-    "topicBase": "promter-risk/crigmpal-2026-10/a7c91d4e",
+    "topicBase": "promter-risk/crigmpal-2026-10/a7c91d4e/realization-20261031",
     "media": "Zoom",
     "notes": "MQTT public broker transports only event state, presence, alerts and whiteboard. No private notes or audio/video."
   },
