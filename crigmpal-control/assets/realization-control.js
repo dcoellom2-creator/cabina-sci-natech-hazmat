@@ -130,18 +130,18 @@ async function initTransport(){
   }catch(_){$('rtText').textContent='No se pudo cargar el canal. Revisa conexión o usa ensayo aislado.';ready=false;updateStatus()}
 }
 function updateLinks(){const p=event.speakers[$('speaker').value]?$('speaker').value:event.moderatorId;const extra=rehearsal?'&ensayo=1&sala='+encodeURIComponent(rehearsalId):'';
-  $('moderatorLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(event.moderatorId)+extra;
+  $('moderatorLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(event.moderatorId)+'&build=20261031c'+extra;
   $('moderatorLink').textContent='Moderador · '+event.speakers[event.moderatorId].name;
-  $('panelistLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(p)+extra;$('panelistLink').textContent='Espacio · '+event.speakers[p].name;
+  $('panelistLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(p)+'&build=20261031c'+extra;$('panelistLink').textContent='Espacio · '+event.speakers[p].name;
   $('cameraSender').href='./camera-v142.html?panelista='+encodeURIComponent(p);
 }
 async function init(){try{
   data=await(await fetch('./events-v142.json?v='+now(),{cache:'no-store'})).json();event=data.event;day=event.blocks[0]?.day||'Día 1';
   $('modeBadge').textContent=rehearsal?'ENSAYO AISLADO':'EVENTO';
   const suffix=rehearsal?'&ensayo=1&sala='+encodeURIComponent(rehearsalId):'';
-  $('preview').src='./program-v142.html?preview=1'+suffix;$('programMonitor').src='./program-v142.html?monitor=1'+suffix;
-  $('openProgram').href='./program-v142.html'+(rehearsal?'?ensayo=1&sala='+encodeURIComponent(rehearsalId):'');
-  $('openRehearsal').href='./control-v142.html?ensayo=1&sala='+encodeURIComponent('ensayo-'+Math.random().toString(16).slice(2,10));
+  $('preview').src='./program-v142.html?preview=1&build=20261031c'+suffix;$('programMonitor').src='./program-v142.html?monitor=1&build=20261031c'+suffix;
+  $('openProgram').href='./program-v142.html?build=20261031c'+(rehearsal?'&ensayo=1&sala='+encodeURIComponent(rehearsalId):'');
+  $('openRehearsal').href='./control-v142.html?build=20261031c&ensayo=1&sala='+encodeURIComponent('ensayo-'+Math.random().toString(16).slice(2,10));
   [...new Set(event.blocks.map(b=>b.day))].forEach(d=>{const o=document.createElement('option');o.value=o.textContent=d;$('day').appendChild(o)});
   let o=document.createElement('option');o.value='all';o.textContent='Todos · programa de la jornada';$('speaker').appendChild(o);
   Object.entries(event.speakers).forEach(([id,p])=>{const o=document.createElement('option');o.value=id;o.textContent=p.name;$('speaker').appendChild(o)});
