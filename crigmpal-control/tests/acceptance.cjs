@@ -44,3 +44,13 @@ test('preparing return does not unpause',()=>{const n=messages.length;vm.runInCo
 test('TAKE explicitly resumes',()=>{vm.runInContext('take()',ctx);assert.equal(messages.at(-1).value.paused,false)});
 test('disconnected controller cannot publish',()=>{const n=messages.length;vm.runInContext('ready=false;take();pause()',ctx);assert.equal(messages.length,n)});
 console.log(`${count} acceptance checks passed; all transports mocked, no public channel used.`);
+
+// Regressions from the moderator walkthrough.
+test('solo host resets stale conversation participants',()=>{vm.runInContext("ready=true;hidden.clear();layout='trio';customPeople=['kervin','patricio'];hidden=new Set(Object.keys(event.speakers).filter(id=>id!==event.moderatorId));setLayout('moderator')",ctx);const d=vm.runInContext('draft()',ctx);assert.deepEqual(Array.from(d.participants),['daniel'])});
+test('Kervin filter includes his optional technical question',()=>assert.ok(event.productionScenes.some(s=>s.id==='piloto-q02'&&s.relatedSpeakers.includes('kervin'))));
+const panelHtml=fs.readFileSync(__dirname+'/../panelist-live-v142.html','utf8'),panelScript=[...panelHtml.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].at(-1)[1];
+const panelNodes={};const noop=()=>{};const drawingContext={drawImage:noop,fillRect:noop};
+function panelEl(id){return panelNodes[id]||(panelNodes[id]={value:'',textContent:'',innerHTML:'',className:'',classList:{add:noop,remove:noop,toggle:noop},firstElementChild:{},contentWindow:{postMessage:noop},replaceChildren:noop,appendChild:noop,getContext:()=>drawingContext,getBoundingClientRect:()=>({width:800,height:500})})}
+const panelContext=vm.createContext({document:{getElementById:panelEl,querySelector:()=>panelEl('brand'),querySelectorAll:()=>[],createElement:()=>panelEl('temp'),addEventListener:noop},window:{addEventListener:noop},location:{search:'?panelista=daniel&ensayo=1&sala=check',origin:'https://example.invalid'},URLSearchParams,Date,Math,JSON,console,devicePixelRatio:1,setInterval:noop,setTimeout:noop,localStorage:{getItem:()=>null},BroadcastChannel:class{postMessage(){}},fetch:async()=>({json:async()=>({event,realtime:{topicBase:'TEST'}})})});
+vm.runInContext(panelScript,panelContext);
+(async()=>{await vm.runInContext('init()',panelContext);assert.equal(panelNodes.speakerName.textContent,event.speakers.daniel.name);assert.equal(panelNodes.brand.textContent,'Promter Risk · Moderador');assert.ok(panelNodes.hiloTrack.innerHTML);console.log('PASS moderator initializes, renders identity and agenda in isolated rehearsal');})().catch(e=>{console.error(e);process.exitCode=1});
