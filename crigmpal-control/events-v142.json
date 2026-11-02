@@ -420,6 +420,9 @@
             "transition": "Repregunta: Si solo pudiéramos mejorar tres datos del registro habitual, ¿cuáles elegirías y para qué decisión servirían?",
             "durationSec": 90
           }
+        ],
+        "relatedSpeakers": [
+          "kervin"
         ]
       },
       {
@@ -743,6 +746,9 @@
             "transition": "Repregunta: ¿Qué diferencia hay entre reunir personas, elegir una estructura y lograr que funcione?",
             "durationSec": 90
           }
+        ],
+        "relatedSpeakers": [
+          "patricio"
         ]
       },
       {
