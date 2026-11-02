@@ -111,6 +111,8 @@ function panelistCommand(cmd){
   }
 }
 function incoming(type,obj){
+  if(type.startsWith('floor/')&&event.speakers[obj?.speakerId]){if(obj.pending)notice('✋ Solicitud de intervención: '+event.speakers[obj.speakerId].name+' · coordina el turno; no se ha cambiado PROGRAM.');return}
+
   if(type==='state'){receiveState(obj);return}
   if(type==='control'){
     if(obj?.sessionId&&obj.sessionId!==sessionId){if(obj.online){owner=obj;if(owns){owns=false;notice('Otra cabina tomó el control. Ahora estás en observación.')}}else if(owner?.sessionId===obj.sessionId)owner=obj}updateStatus();return;
