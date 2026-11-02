@@ -48,7 +48,7 @@ function sendPreview(){
 }
 function sceneOptions(){
   const select=$('scene');select.replaceChildren();
-  scenes().forEach((s,i)=>{const b=event.blocks.find(b=>b.id===s.blockId);if(day&&b?.day!==day)return;if(filter!=='all'&&!(s.participants||[]).includes(filter)&&s.leadSpeaker!==filter&&!(s.questionFlow||[]).some(q=>q.to===filter))return;
+  scenes().forEach((s,i)=>{const b=event.blocks.find(b=>b.id===s.blockId);if(day&&b?.day!==day)return;if(filter!=='all'&&!(s.participants||[]).includes(filter)&&s.leadSpeaker!==filter&&!(s.questionFlow||[]).some(q=>q.to===filter)&&!(s.relatedSpeakers||[]).includes(filter))return;
     const o=document.createElement('option');o.value=String(i);o.textContent=s.title;select.appendChild(o)});
   if(!select.options.length){const o=document.createElement('option');o.textContent='Sin escenas para este filtro';o.value='';select.appendChild(o);notice('No hay escenas con ese filtro. Selecciona Todos para continuar.');return}
   if(![...select.options].some(o=>Number(o.value)===idx))idx=Number(select.options[0].value);
@@ -158,7 +158,7 @@ async function init(){try{
   $('board').onclick=()=>{surface='board';sendPreview();notice('Pizarra en PREVIA. Si no hay trazos del participante activo, verás una pizarra vacía.')};
   $('original').onclick=()=>selectScene(idx);$('tool').onclick=()=>{$('toolSettings').open=true;$('externalUrl').focus()};
   $('applyTool').onclick=()=>{const url=C.safeUrl($('externalUrl').value);if(!url){notice('Usa un enlace público HTTPS válido, sin usuario ni contraseña.');return}layout='tool';surface='scene';externalUrl=url;externalTitle=$('externalTitle').value.trim()||'Demostración';sendPreview();notice('Herramienta en PREVIA. Comprueba que cargue antes de enviar al aire.')};
-  $('allPeople').onclick=()=>{hidden.clear();if(layout==='trio')customPeople=activeDayPeople();renderPeople();sendPreview()};$('onlyHost').onclick=()=>{hidden=new Set(Object.keys(event.speakers).filter(id=>id!==event.moderatorId));renderPeople();sendPreview()};
+  $('allPeople').onclick=()=>{hidden.clear();if(layout==='trio')customPeople=activeDayPeople();renderPeople();sendPreview()};$('onlyHost').onclick=()=>{hidden=new Set(Object.keys(event.speakers).filter(id=>id!==event.moderatorId));renderPeople();setLayout('moderator')};
   $('claim').onclick=claim;$('take').onclick=take;$('pause').onclick=pause;
   document.querySelectorAll('[data-alert]').forEach(b=>b.onclick=()=>alertLive(b.dataset.alert));
   $('preview').onload=sendPreview;$('programMonitor').onload=()=>{if(live)$('programMonitor').contentWindow?.postMessage({type:'PR_PROGRAM_STATE',state:live},location.origin)};
@@ -170,3 +170,4 @@ async function init(){try{
   window.addEventListener('beforeunload',()=>{if(owns)transport('control',{online:false,sessionId,updatedAt:now()})});
 }catch(err){$('rtText').textContent='Error al cargar el evento';notice('Recarga la página y comprueba la conexión. No se ha enviado ninguna escena.');console.error(err)}}
 document.addEventListener('DOMContentLoaded',init);
+
