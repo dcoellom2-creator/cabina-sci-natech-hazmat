@@ -111,7 +111,7 @@ function panelistCommand(cmd){
     day=event.blocks.find(b=>b.id===active.blockId)?.day||day;$('day').value=day;filter='all';$('speaker').value='all';
     selectScene(live.sceneIndex);qi=Number(live.questionIndex)||0;layout=live.layoutOverride||'';customPeople=[...live.participants];
     surface=cmd.type==='SHOW_BOARD'?'board':'scene';boardSpeakerId=surface==='board'?cmd.speakerId:'';
-    sendPreview();acknowledge(cmd,false,'preview');notice(surface==='board'?'Pizarra de '+event.speakers[cmd.speakerId].name+' recibida en PREVIA. Confirma ENVIAR AL AIRE.':'Regreso a la escena preparado en PREVIA. Confirma ENVIAR AL AIRE.');
+    sendPreview();if($('allowSlides').checked){take();acknowledge(cmd,true,'applied');return}acknowledge(cmd,false,'preview');notice(surface==='board'?'Pizarra de '+event.speakers[cmd.speakerId].name+' recibida en PREVIA. Confirma ENVIAR AL AIRE.':'Regreso a la escena preparado en PREVIA. Confirma ENVIAR AL AIRE.');
   }
 }
 function incoming(type,obj){
