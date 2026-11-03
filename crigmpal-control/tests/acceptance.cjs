@@ -50,7 +50,27 @@ test('solo host resets stale conversation participants',()=>{vm.runInContext("re
 test('Kervin filter includes his optional technical question',()=>assert.ok(event.productionScenes.some(s=>s.id==='piloto-q02'&&s.relatedSpeakers.includes('kervin'))));
 const panelHtml=fs.readFileSync(__dirname+'/../panelist-live-v142.html','utf8'),panelScript=[...panelHtml.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].at(-1)[1];
 const panelNodes={};const noop=()=>{};const drawingContext={drawImage:noop,fillRect:noop};
-function panelEl(id){return panelNodes[id]||(panelNodes[id]={value:'',textContent:'',innerHTML:'',className:'',classList:{add:noop,remove:noop,toggle:noop},firstElementChild:{},contentWindow:{postMessage:noop},replaceChildren:noop,appendChild:noop,getContext:()=>drawingContext,getBoundingClientRect:()=>({width:800,height:500})})}
+function panelEl(id){return panelNodes[id]||(panelNodes[id]={value:'',textContent:'',innerHTML:'',className:'',classList:{add:noop,remove:noop,toggle:noop},firstElementChild:{},contentWindow:{postMessage:noop},replaceChildren:noop,appendChild:noop,append:noop,getContext:()=>drawingContext,getBoundingClientRect:()=>({width:800,height:500})})}
 const panelContext=vm.createContext({document:{getElementById:panelEl,querySelector:()=>panelEl('brand'),querySelectorAll:()=>[],createElement:()=>panelEl('temp'),addEventListener:noop},window:{addEventListener:noop},location:{search:'?panelista=daniel&ensayo=1&sala=check',origin:'https://example.invalid'},URLSearchParams,Date,Math,JSON,console,devicePixelRatio:1,setInterval:noop,setTimeout:noop,localStorage:{getItem:()=>null},BroadcastChannel:class{postMessage(){}},fetch:async()=>({json:async()=>({event,realtime:{topicBase:'TEST'}})})});
 vm.runInContext(panelScript,panelContext);
 (async()=>{await vm.runInContext('init()',panelContext);assert.equal(panelNodes.speakerName.textContent,event.speakers.daniel.name);assert.equal(panelNodes.brand.textContent,'Promter Risk · Moderador');assert.ok(panelNodes.hiloTrack.innerHTML);console.log('PASS moderator initializes, renders identity and agenda in isolated rehearsal');})().catch(e=>{console.error(e);process.exitCode=1});
+
+
+// Whiteboard owner must be independent of the current question target.
+const drawingA='data:image/jpeg;base64,/9j/AQ==',drawingB='data:image/jpeg;base64,/9j/Ag==';
+ctx.drawingA=drawingA;ctx.drawingB=drawingB;
+test('moderator board is bound to the drawer instead of Xavier',()=>{
+ vm.runInContext("ready=true;owns=true;hidden.clear();filter='all';selectScene(event.productionScenes.findIndex(s=>s.id==='piloto-q09'));take();boardImages.daniel=drawingA",ctx);
+ const n=messages.filter(m=>m.type==='state').length;
+ vm.runInContext("panelistCommand({type:'SHOW_BOARD',speakerId:'daniel',sceneIndex:live.sceneIndex,updatedAt:Date.now()})",ctx);
+ const d=vm.runInContext('draft()',ctx);assert.equal(d.boardSpeakerId,'daniel');assert.equal(d.targetSpeakerId,'xavier');assert.equal(d.boardImage,drawingA);assert.equal(messages.filter(m=>m.type==='state').length,n);
+});
+test('TAKE commits the exact board snapshot',()=>{vm.runInContext('take()',ctx);const state=messages.filter(m=>m.type==='state').at(-1).value;assert.equal(state.boardSpeakerId,'daniel');assert.equal(state.boardImage,drawingA);assert.equal(state.surface,'board')});
+test('later drawing receipt stays in preview and cannot replace committed drawing',()=>{const n=messages.filter(m=>m.type==='state').length;vm.runInContext("incoming('board/daniel',{speakerId:'daniel',data:drawingB,updatedAt:Date.now()})",ctx);assert.equal(messages.filter(m=>m.type==='state').length,n);assert.equal(vm.runInContext('live.boardImage',ctx),drawingA);assert.equal(vm.runInContext('draft().boardImage',ctx),drawingB)});
+test('second question and Camilo owner survive board preparation',()=>{vm.runInContext("selectScene(event.productionScenes.findIndex(s=>s.id==='piloto-q17'));qi=1;take();boardImages.camilo=drawingB;panelistCommand({type:'SHOW_BOARD',speakerId:'camilo',sceneIndex:live.sceneIndex,updatedAt:Date.now()})",ctx);const d=vm.runInContext('draft()',ctx);assert.equal(d.questionIndex,1);assert.equal(d.boardSpeakerId,'camilo');assert.equal(d.targetSpeakerId,'camilo')});
+test('return to scene clears board without automatic emission',()=>{vm.runInContext('take()',ctx);const n=messages.filter(m=>m.type==='state').length;vm.runInContext("panelistCommand({type:'SHOW_SCENE',speakerId:'camilo',sceneIndex:live.sceneIndex,updatedAt:Date.now()})",ctx);const d=vm.runInContext('draft()',ctx);assert.equal(d.surface,'scene');assert.equal(d.boardSpeakerId,'');assert.equal(d.questionIndex,1);assert.equal(messages.filter(m=>m.type==='state').length,n)});
+test('non-visible sender cannot prepare board',()=>{const n=messages.filter(m=>m.type==='state').length;vm.runInContext("panelistCommand({type:'SHOW_BOARD',speakerId:'kervin',sceneIndex:live.sceneIndex,updatedAt:Date.now()})",ctx);assert.equal(messages.at(-1).value.reason,'locked');assert.equal(messages.filter(m=>m.type==='state').length,n)});
+test('missing board is refused explicitly',()=>{vm.runInContext("delete boardImages.camilo;panelistCommand({type:'SHOW_BOARD',speakerId:'camilo',sceneIndex:live.sceneIndex,updatedAt:Date.now()})",ctx);assert.equal(messages.at(-1).value.reason,'no-board')});
+test('TAKE refuses blank board',()=>{const n=messages.filter(m=>m.type==='state').length;vm.runInContext("surface='board';boardSpeakerId='camilo';take()",ctx);assert.equal(messages.filter(m=>m.type==='state').length,n)});
+test('invalid image data rejected by draft model',()=>{assert.equal(C.makeDraft(event,0,{boardSpeakerId:'daniel',boardImage:'data:text/html,test'}).boardImage,'')});
+console.log('Whiteboard regression checks passed without network.');

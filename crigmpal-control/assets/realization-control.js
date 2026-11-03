@@ -3,10 +3,10 @@ const $=id=>document.getElementById(id),C=window.PRCore;
 const query=new URLSearchParams(location.search),rehearsal=query.get('ensayo')==='1';
 const rehearsalId=(query.get('sala')||'local').replace(/[^a-zA-Z0-9_-]/g,'').slice(0,40)||'local';
 const sessionId='real_'+Math.random().toString(16).slice(2),storeKey='pr_program_state'+(rehearsal?'_ensayo_'+rehearsalId:'');
-let data,event,client,channel,ready=false,owns=false,owner=null,live=null,idx=0,qi=0,seq=0,hidden=new Set(),layout='',surface='scene',externalUrl='',externalTitle='',customPeople=null,boardImages={},presence={},day='',filter='all',manualAlertUntil=0;
+let data,event,client,channel,ready=false,owns=false,owner=null,live=null,idx=0,qi=0,seq=0,hidden=new Set(),layout='',surface='scene',externalUrl='',externalTitle='',customPeople=null,boardImages={},presence={},day='',filter='all',manualAlertUntil=0,boardSpeakerId='';
 const now=()=>Date.now(),scenes=()=>event.productionScenes||[],scene=()=>scenes()[idx]||{},base=()=>data.realtime.topicBase;
 function notice(text){$('notice').textContent=text}
-function draft(){return C.makeDraft(event,idx,{questionIndex:qi,hidden:[...hidden],layout,surface,participants:customPeople||undefined,externalUrl,title:externalTitle||undefined})}
+function draft(){return C.makeDraft(event,idx,{questionIndex:qi,hidden:[...hidden],layout,surface,boardSpeakerId,boardImage:surface==='board'?boardImages[boardSpeakerId]||'':'',participants:customPeople||undefined,externalUrl,title:externalTitle||undefined})}
 function storageSet(value){try{localStorage.setItem(storeKey,JSON.stringify(value))}catch(_){notice('No se pudo guardar el respaldo local. Conserva PROGRAM abierto.')}}
 function transport(type,obj,retain=true){
   if(rehearsal){channel?.postMessage({kind:type,payload:obj});return true}
@@ -54,7 +54,7 @@ function sceneOptions(){
   if(![...select.options].some(o=>Number(o.value)===idx))idx=Number(select.options[0].value);
   select.value=String(idx);
 }
-function selectScene(i){idx=Math.max(0,Math.min(scenes().length-1,Number(i)||0));qi=0;layout='';surface='scene';externalUrl='';externalTitle='';customPeople=null;sceneOptions();updateLinks();sendPreview();notice('Escena preparada en PREVIA. AL AIRE conserva su estado.')}
+function selectScene(i){idx=Math.max(0,Math.min(scenes().length-1,Number(i)||0));qi=0;layout='';surface='scene';boardSpeakerId='';externalUrl='';externalTitle='';customPeople=null;sceneOptions();updateLinks();sendPreview();notice('Escena preparada en PREVIA. AL AIRE conserva su estado.')}
 function renderPeople(){
   $('participants').replaceChildren();Object.entries(event.speakers).forEach(([id,p])=>{
     const row=document.createElement('div');row.className='person';const l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.checked=!hidden.has(id);c.dataset.person=id;c.setAttribute('aria-label','Mostrar '+p.name);l.append(c,document.createTextNode(' '+p.name));
@@ -64,10 +64,11 @@ function renderPeople(){
 }
 function renderPresence(){if(!event)return;for(const id of Object.keys(event.speakers)){const p=presence[id],online=p?.online&&now()-p.updatedAt<45000;$('presence_'+id).textContent=(online?'Canal conectado':'Sin presencia reciente')+' · cámara/audio sin comprobar'}}
 function activeDayPeople(){return (day==='Día 2'?['daniel','xavier','camilo']:['daniel','kervin','patricio']).filter(id=>event.speakers[id]&&!hidden.has(id))}
-function setLayout(value){layout=value;surface='scene';externalTitle='';externalUrl='';customPeople=value==='trio'?activeDayPeople():null;sendPreview();notice('Composición preparada en PREVIA. Revisa antes de enviar al aire.')}
+function setLayout(value){layout=value;surface='scene';boardSpeakerId='';externalTitle='';externalUrl='';customPeople=value==='trio'?activeDayPeople():null;sendPreview();notice('Composición preparada en PREVIA. Revisa antes de enviar al aire.')}
 function take(){
   const d=draft();if(!d.participants.length){notice('No hay participantes visibles. Muestra al menos uno o utiliza PAUSA.');return}
   if(d.layoutOverride==='tool'&&!d.externalUrl){notice('Introduce un enlace público HTTPS válido y revisa PREVIA.');return}
+  if(d.surface==='board'&&(!d.boardSpeakerId||!d.boardImage)){notice('Pizarra no disponible. Solicita que el participante la envíe de nuevo antes de confirmar TAKE.');return}
   const st=C.commitDraft(d,live,now(),sessionId,++seq);manualAlertUntil=0;
   if(sendCommitted(st))notice('AL AIRE: '+st.sceneTitle+'. La transmisión a redes se inicia desde el estudio.');
 }
@@ -107,7 +108,10 @@ function panelistCommand(cmd){
     if($('allowSlides').checked){take();acknowledge(cmd,true,'applied')}else{acknowledge(cmd,false,'preview');notice('Solicitud del panelista preparada en PREVIA. Revisa y pulsa ENVIAR AL AIRE.')}
   }else if(cmd.type==='SHOW_BOARD'||cmd.type==='SHOW_SCENE'){
     if(cmd.type==='SHOW_BOARD'&&!boardImages[cmd.speakerId]){acknowledge(cmd,false,'no-board');return}
-    day=event.blocks.find(b=>b.id===active.blockId)?.day||day;$('day').value=day;filter='all';$('speaker').value='all';selectScene(live.sceneIndex);surface=cmd.type==='SHOW_BOARD'?'board':'scene';sendPreview();acknowledge(cmd,false,'preview');notice('Solicitud de '+(surface==='board'?'pizarra':'regreso a escena')+' en PREVIA. Revisa y confirma la salida.');
+    day=event.blocks.find(b=>b.id===active.blockId)?.day||day;$('day').value=day;filter='all';$('speaker').value='all';
+    selectScene(live.sceneIndex);qi=Number(live.questionIndex)||0;layout=live.layoutOverride||'';customPeople=[...live.participants];
+    surface=cmd.type==='SHOW_BOARD'?'board':'scene';boardSpeakerId=surface==='board'?cmd.speakerId:'';
+    sendPreview();acknowledge(cmd,false,'preview');notice(surface==='board'?'Pizarra de '+event.speakers[cmd.speakerId].name+' recibida en PREVIA. Confirma ENVIAR AL AIRE.':'Regreso a la escena preparado en PREVIA. Confirma ENVIAR AL AIRE.');
   }
 }
 function incoming(type,obj){
@@ -132,18 +136,18 @@ async function initTransport(){
   }catch(_){$('rtText').textContent='No se pudo cargar el canal. Revisa conexión o usa ensayo aislado.';ready=false;updateStatus()}
 }
 function updateLinks(){const p=event.speakers[$('speaker').value]?$('speaker').value:event.moderatorId;const extra=rehearsal?'&ensayo=1&sala='+encodeURIComponent(rehearsalId):'';
-  $('moderatorLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(event.moderatorId)+'&build=20261031c'+extra;
+  $('moderatorLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(event.moderatorId)+'&build=20261102pizarra1'+extra;
   $('moderatorLink').textContent='Moderador · '+event.speakers[event.moderatorId].name;
-  $('panelistLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(p)+'&build=20261031c'+extra;$('panelistLink').textContent='Espacio · '+event.speakers[p].name;
+  $('panelistLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(p)+'&build=20261102pizarra1'+extra;$('panelistLink').textContent='Espacio · '+event.speakers[p].name;
   $('cameraSender').href='./camera-v142.html?panelista='+encodeURIComponent(p);
 }
 async function init(){try{
   data=await(await fetch('./events-v142.json?v='+now(),{cache:'no-store'})).json();event=data.event;day=event.blocks[0]?.day||'Día 1';
   $('modeBadge').textContent=rehearsal?'ENSAYO AISLADO':'EVENTO';
   const suffix=rehearsal?'&ensayo=1&sala='+encodeURIComponent(rehearsalId):'';
-  $('preview').src='./program-v142.html?preview=1&build=20261031c'+suffix;$('programMonitor').src='./program-v142.html?monitor=1&build=20261031c'+suffix;
-  $('openProgram').href='./program-v142.html?build=20261031c'+(rehearsal?'&ensayo=1&sala='+encodeURIComponent(rehearsalId):'');
-  $('openRehearsal').href='./control-v142.html?build=20261031c&ensayo=1&sala='+encodeURIComponent('ensayo-'+Math.random().toString(16).slice(2,10));
+  $('preview').src='./program-v142.html?preview=1&build=20261102pizarra1'+suffix;$('programMonitor').src='./program-v142.html?monitor=1&build=20261102pizarra1'+suffix;
+  $('openProgram').href='./program-v142.html?build=20261102pizarra1'+(rehearsal?'&ensayo=1&sala='+encodeURIComponent(rehearsalId):'');
+  $('openRehearsal').href='./control-v142.html?build=20261102pizarra1&ensayo=1&sala='+encodeURIComponent('ensayo-'+Math.random().toString(16).slice(2,10));
   [...new Set(event.blocks.map(b=>b.day))].forEach(d=>{const o=document.createElement('option');o.value=o.textContent=d;$('day').appendChild(o)});
   let o=document.createElement('option');o.value='all';o.textContent='Todos · programa de la jornada';$('speaker').appendChild(o);
   Object.entries(event.speakers).forEach(([id,p])=>{const o=document.createElement('option');o.value=id;o.textContent=p.name;$('speaker').appendChild(o)});
@@ -157,7 +161,7 @@ async function init(){try{
   $('qPrev').onclick=()=>{qi=Math.max(0,qi-1);sendPreview()};$('qNext').onclick=()=>{qi=Math.min((scene().questionFlow||[]).length-1,qi+1);sendPreview()};
   $('moderator').onclick=()=>setLayout('moderator');$('conversation').onclick=()=>setLayout('trio');
   $('presentation').onclick=()=>{if(scene().layout!=='presentation'){const i=scenes().findIndex(s=>s.layout==='presentation'&&event.blocks.find(b=>b.id===s.blockId)?.day===day);if(i<0){notice('Esta jornada no tiene presentación asignada. Usa Herramienta web o Pizarra.');return}filter='all';$('speaker').value='all';selectScene(i)}setLayout('presentation')};
-  $('board').onclick=()=>{surface='board';sendPreview();notice('Pizarra en PREVIA. Si no hay trazos del participante activo, verás una pizarra vacía.')};
+  $('board').onclick=()=>{const d=draft(),who=boardSpeakerId||(filter!=='all'?filter:d.targetSpeakerId);if(!boardImages[who]||!d.participants.includes(who)){notice('No hay pizarra recibida de esa persona. Dale el turno al aire y pídele SOLICITAR PIZARRA.');return}boardSpeakerId=who;surface='board';sendPreview();notice('Pizarra de '+event.speakers[who].name+' en PREVIA. Confirma ENVIAR AL AIRE.')};
   $('original').onclick=()=>selectScene(idx);$('tool').onclick=()=>{$('toolSettings').open=true;$('externalUrl').focus()};
   $('applyTool').onclick=()=>{const url=C.safeUrl($('externalUrl').value);if(!url){notice('Usa un enlace público HTTPS válido, sin usuario ni contraseña.');return}layout='tool';surface='scene';externalUrl=url;externalTitle=$('externalTitle').value.trim()||'Demostración';sendPreview();notice('Herramienta en PREVIA. Comprueba que cargue antes de enviar al aire.')};
   $('allPeople').onclick=()=>{hidden.clear();if(layout==='trio')customPeople=activeDayPeople();renderPeople();sendPreview()};$('onlyHost').onclick=()=>{hidden=new Set(Object.keys(event.speakers).filter(id=>id!==event.moderatorId));renderPeople();setLayout('moderator')};
@@ -172,4 +176,5 @@ async function init(){try{
   window.addEventListener('beforeunload',()=>{if(owns)transport('control',{online:false,sessionId,updatedAt:now()})});
 }catch(err){$('rtText').textContent='Error al cargar el evento';notice('Recarga la página y comprueba la conexión. No se ha enviado ninguna escena.');console.error(err)}}
 document.addEventListener('DOMContentLoaded',init);
+
 

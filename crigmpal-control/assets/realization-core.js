@@ -20,6 +20,8 @@
       scenePosition:scenes.filter(s=>s.segmentId===sc.segmentId).findIndex(s=>s.id===sc.id)+1,
       segmentSceneCount:scenes.filter(s=>s.segmentId===sc.segmentId).length,
       surface:options.surface||'scene',externalUrl:safeUrl(options.externalUrl),
+      boardSpeakerId:participants.includes(options.boardSpeakerId)?options.boardSpeakerId:'',
+      boardImage:typeof options.boardImage==='string'&&/^data:image\/(jpeg|png|webp);base64,/.test(options.boardImage)&&options.boardImage.length<1600000?options.boardImage:'',
       onair:false,black:false,paused:false,alert:'',hiddenParticipants:[...hidden]};
   }
   function validState(st,event){return !!(st&&st.protocol===2&&st.eventId===event.id&&st.committed===true&&Number.isFinite(st.ts)&&(st.paused||((event.productionScenes||[])[st.sceneIndex]?.id===st.sceneId)))}
@@ -33,3 +35,4 @@
   const api={safeUrl,makeDraft,validState,commitDraft,holdState,acceptNewer};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.PRCore=api;
 })(typeof window!=='undefined'?window:this);
+
