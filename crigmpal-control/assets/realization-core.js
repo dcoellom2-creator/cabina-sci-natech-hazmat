@@ -32,7 +32,9 @@
   }
   function holdState(event,previous,now,sessionId,seq){return {...(previous||{}),protocol:2,eventId:event.id,committed:true,onair:false,paused:true,black:false,alert:'',ts:now,sessionId,seq,participants:[]}}
   function acceptNewer(incoming,current){return !current||incoming.ts>current.ts||(incoming.ts===current.ts&&incoming.sessionId===current.sessionId&&Number(incoming.seq)>Number(current.seq))}
-  const api={safeUrl,makeDraft,validState,commitDraft,holdState,acceptNewer};
+  function canDirectBoard(st,id,enabled){return !!(enabled&&st?.onair&&!st.paused&&(st.participants||[]).includes(id)&&(st.speakerId===id||st.targetSpeakerId===id))}
+  const api={canDirectBoard,safeUrl,makeDraft,validState,commitDraft,holdState,acceptNewer};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.PRCore=api;
 })(typeof window!=='undefined'?window:this);
+
 

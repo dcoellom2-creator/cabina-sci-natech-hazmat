@@ -20,7 +20,7 @@ function updateStatus(){
   $('claim').disabled=!ready||owns;
   $('claim').textContent=owns?'Control activo':other?'Tomar control de esta cabina':'Tomar control';
   $('ownerStatus').textContent=owns?'Tú controlas la salida. PREVIA no se emite hasta ENVIAR AL AIRE.':other?'Otra cabina tiene el control. Puedes preparar sin modificar la salida.':'Modo observación. Pulsa Tomar control cuando vayas a realizar.';
-  $('take').disabled=$('pause').disabled=!(owns&&ready);
+  $('take').disabled=$('pause').disabled=!(owns&&ready);$('allowSlides').disabled=!(owns&&ready);
   document.querySelectorAll('[data-alert]').forEach(b=>b.disabled=!(owns&&ready&&live&&!live.paused));
 }
 function receiveState(st){
@@ -76,7 +76,7 @@ function pause(){if(sendCommitted(C.holdState(event,live,now(),sessionId,++seq))
 function claim(){
   if(!ready)return;
   if(controlActive()&&owner.sessionId!==sessionId&&!confirm('Otra cabina tiene el control. ¿Tomar su lugar? Coordina primero con la persona que está realizando.'))return;
-  owns=true;owner={online:true,sessionId,updatedAt:now()};transport('control',owner);updateStatus();notice('Control adquirido. La salida sigue igual hasta ENVIAR AL AIRE o PAUSA.');
+  owns=true;owner={online:true,sessionId,updatedAt:now(),boardDirect:!!$('allowSlides').checked};transport('control',owner);updateStatus();notice('Control adquirido. La salida sigue igual hasta ENVIAR AL AIRE o PAUSA.');
 }
 function alertLive(value,manual=true){
   if(!owns||!ready||!live||live.paused)return;
@@ -108,10 +108,15 @@ function panelistCommand(cmd){
     if($('allowSlides').checked){take();acknowledge(cmd,true,'applied')}else{acknowledge(cmd,false,'preview');notice('Solicitud del panelista preparada en PREVIA. Revisa y pulsa ENVIAR AL AIRE.')}
   }else if(cmd.type==='SHOW_BOARD'||cmd.type==='SHOW_SCENE'){
     if(cmd.type==='SHOW_BOARD'&&!boardImages[cmd.speakerId]){acknowledge(cmd,false,'no-board');return}
+    if(C.canDirectBoard(live,cmd.speakerId,$('allowSlides').checked)){
+      const showing=cmd.type==='SHOW_BOARD';
+      const st={...live,surface:showing?'board':'scene',boardSpeakerId:showing?cmd.speakerId:'',boardImage:showing?boardImages[cmd.speakerId]:'',sessionId,seq:++seq,ts:now()};
+      if(sendCommitted(st)){acknowledge(cmd,true,'applied');notice(showing?'Pizarra directa de '+event.speakers[cmd.speakerId].name+' AL AIRE. El facilitador puede mostrarla y ocultarla.':'El facilitador volvió a la escena sin TAKE adicional.')}return;
+    }
     day=event.blocks.find(b=>b.id===active.blockId)?.day||day;$('day').value=day;filter='all';$('speaker').value='all';
     selectScene(live.sceneIndex);qi=Number(live.questionIndex)||0;layout=live.layoutOverride||'';customPeople=[...live.participants];
     surface=cmd.type==='SHOW_BOARD'?'board':'scene';boardSpeakerId=surface==='board'?cmd.speakerId:'';
-    sendPreview();if($('allowSlides').checked){take();acknowledge(cmd,true,'applied');return}acknowledge(cmd,false,'preview');notice(surface==='board'?'Pizarra de '+event.speakers[cmd.speakerId].name+' recibida en PREVIA. Confirma ENVIAR AL AIRE.':'Regreso a la escena preparado en PREVIA. Confirma ENVIAR AL AIRE.');
+    sendPreview();acknowledge(cmd,false,'preview');notice(surface==='board'?'Pizarra de '+event.speakers[cmd.speakerId].name+' recibida en PREVIA. Confirma ENVIAR AL AIRE.':'Regreso a la escena preparado en PREVIA. Confirma ENVIAR AL AIRE.');
   }
 }
 function incoming(type,obj){
@@ -122,7 +127,13 @@ function incoming(type,obj){
     if(obj?.sessionId&&obj.sessionId!==sessionId){if(obj.online){owner=obj;if(owns){owns=false;notice('Otra cabina tomó el control. Ahora estás en observación.')}}else if(owner?.sessionId===obj.sessionId)owner=obj}updateStatus();return;
   }
   if(type.startsWith('presence/')){if(event.speakers[obj?.speakerId])presence[obj.speakerId]=obj;renderPresence();return}
-  if(type.startsWith('board/')&&obj?.data&&event.speakers[obj.speakerId]&&/^data:image\/(jpeg|png|webp);base64,/.test(obj.data)&&obj.data.length<1600000){boardImages[obj.speakerId]=obj.data;sendPreview();$('programMonitor').contentWindow?.postMessage({type:'PR_REMOTE_BOARD_IMAGE',data:obj.data,speakerId:obj.speakerId},location.origin);return}
+  if(type.startsWith('board/')&&obj?.data&&event.speakers[obj.speakerId]&&/^data:image\/(jpeg|png|webp);base64,/.test(obj.data)&&obj.data.length<1600000){
+    boardImages[obj.speakerId]=obj.data;sendPreview();
+    if(owns&&ready&&live?.surface==='board'&&live.boardSpeakerId===obj.speakerId&&C.canDirectBoard(live,obj.speakerId,$('allowSlides').checked)&&Number.isFinite(obj.updatedAt)&&Math.abs(now()-obj.updatedAt)<15000){
+      sendCommitted({...live,boardImage:obj.data,sessionId,seq:++seq,ts:now()});
+    }
+    return;
+  }
   if(type==='command')panelistCommand(obj);
 }
 async function initTransport(){
@@ -136,18 +147,18 @@ async function initTransport(){
   }catch(_){$('rtText').textContent='No se pudo cargar el canal. Revisa conexión o usa ensayo aislado.';ready=false;updateStatus()}
 }
 function updateLinks(){const p=event.speakers[$('speaker').value]?$('speaker').value:event.moderatorId;const extra=rehearsal?'&ensayo=1&sala='+encodeURIComponent(rehearsalId):'';
-  $('moderatorLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(event.moderatorId)+'&build=20261102pizarra1'+extra;
+  $('moderatorLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(event.moderatorId)+'&build=20261102pizarradirecta1'+extra;
   $('moderatorLink').textContent='Moderador · '+event.speakers[event.moderatorId].name;
-  $('panelistLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(p)+'&build=20261102pizarra1'+extra;$('panelistLink').textContent='Espacio · '+event.speakers[p].name;
+  $('panelistLink').href='./panelist-live-v142.html?panelista='+encodeURIComponent(p)+'&build=20261102pizarradirecta1'+extra;$('panelistLink').textContent='Espacio · '+event.speakers[p].name;
   $('cameraSender').href='./camera-v142.html?panelista='+encodeURIComponent(p);
 }
 async function init(){try{
   data=await(await fetch('./events-v142.json?v='+now(),{cache:'no-store'})).json();event=data.event;day=event.blocks[0]?.day||'Día 1';
   $('modeBadge').textContent=rehearsal?'ENSAYO AISLADO':'EVENTO';
   const suffix=rehearsal?'&ensayo=1&sala='+encodeURIComponent(rehearsalId):'';
-  $('preview').src='./program-v142.html?preview=1&build=20261102pizarra1'+suffix;$('programMonitor').src='./program-v142.html?monitor=1&build=20261102pizarra1'+suffix;
-  $('openProgram').href='./program-v142.html?build=20261102pizarra1'+(rehearsal?'&ensayo=1&sala='+encodeURIComponent(rehearsalId):'');
-  $('openRehearsal').href='./control-v142.html?build=20261102pizarra1&ensayo=1&sala='+encodeURIComponent('ensayo-'+Math.random().toString(16).slice(2,10));
+  $('preview').src='./program-v142.html?preview=1&build=20261102pizarradirecta1'+suffix;$('programMonitor').src='./program-v142.html?monitor=1&build=20261102pizarradirecta1'+suffix;
+  $('openProgram').href='./program-v142.html?build=20261102pizarradirecta1'+(rehearsal?'&ensayo=1&sala='+encodeURIComponent(rehearsalId):'');
+  $('openRehearsal').href='./control-v142.html?build=20261102pizarradirecta1&ensayo=1&sala='+encodeURIComponent('ensayo-'+Math.random().toString(16).slice(2,10));
   [...new Set(event.blocks.map(b=>b.day))].forEach(d=>{const o=document.createElement('option');o.value=o.textContent=d;$('day').appendChild(o)});
   let o=document.createElement('option');o.value='all';o.textContent='Todos · programa de la jornada';$('speaker').appendChild(o);
   Object.entries(event.speakers).forEach(([id,p])=>{const o=document.createElement('option');o.value=id;o.textContent=p.name;$('speaker').appendChild(o)});
@@ -166,15 +177,17 @@ async function init(){try{
   $('applyTool').onclick=()=>{const url=C.safeUrl($('externalUrl').value);if(!url){notice('Usa un enlace público HTTPS válido, sin usuario ni contraseña.');return}layout='tool';surface='scene';externalUrl=url;externalTitle=$('externalTitle').value.trim()||'Demostración';sendPreview();notice('Herramienta en PREVIA. Comprueba que cargue antes de enviar al aire.')};
   $('allPeople').onclick=()=>{hidden.clear();if(layout==='trio')customPeople=activeDayPeople();renderPeople();sendPreview()};$('onlyHost').onclick=()=>{hidden=new Set(Object.keys(event.speakers).filter(id=>id!==event.moderatorId));renderPeople();setLayout('moderator')};
   $('claim').onclick=claim;$('take').onclick=take;$('pause').onclick=pause;
+  $('allowSlides').onchange=()=>{if(!owns||!ready)return;owner={online:true,sessionId,updatedAt:now(),boardDirect:!!$('allowSlides').checked};transport('control',owner);notice($('allowSlides').checked?'Facilitador activo: el participante en turno muestra, oculta y dibuja directamente.':'Modo con revisión: pizarra y regreso esperan confirmación en PREVIA.');};
   document.querySelectorAll('[data-alert]').forEach(b=>b.onclick=()=>alertLive(b.dataset.alert));
   $('preview').onload=sendPreview;$('programMonitor').onload=()=>{if(live)$('programMonitor').contentWindow?.postMessage({type:'PR_PROGRAM_STATE',state:live},location.origin)};
   window.addEventListener('message',e=>{if(e.origin!==location.origin)return;if(e.data?.type==='PR_PREVIEW_READY'&&e.source===$('preview').contentWindow)sendPreview()});
   window.addEventListener('storage',e=>{if(e.key===storeKey&&e.newValue){try{receiveState(JSON.parse(e.newValue))}catch(_){}}});
   try{const stored=JSON.parse(localStorage.getItem(storeKey));if(C.validState(stored,event))receiveState(stored)}catch(_){}
   sendPreview();notice('Listo. Preparar no cambia PROGRAM. Toma control solo cuando vayas a realizar.');await initTransport();
-  setInterval(()=>{$('clock').textContent=new Date().toLocaleTimeString('es-EC',{timeZone:'America/Guayaquil'});if(owns&&ready){owner={online:true,sessionId,updatedAt:now()};transport('control',owner)}renderPresence();updateStatus();renderTiming()},1000);
+  setInterval(()=>{$('clock').textContent=new Date().toLocaleTimeString('es-EC',{timeZone:'America/Guayaquil'});if(owns&&ready){owner={online:true,sessionId,updatedAt:now(),boardDirect:!!$('allowSlides').checked};transport('control',owner)}renderPresence();updateStatus();renderTiming()},1000);
   window.addEventListener('beforeunload',()=>{if(owns)transport('control',{online:false,sessionId,updatedAt:now()})});
 }catch(err){$('rtText').textContent='Error al cargar el evento';notice('Recarga la página y comprueba la conexión. No se ha enviado ninguna escena.');console.error(err)}}
 document.addEventListener('DOMContentLoaded',init);
+
 
 
